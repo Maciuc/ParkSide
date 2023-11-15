@@ -1,4 +1,4 @@
-import {font_family_default,border_default,border_radius_default} from "/index.js";
+import {font_family_default,border_default,border_radius_default} from "../index.js";
 
 const numeEchipa = "CSU Suceava";
 
@@ -27,7 +27,7 @@ class PanouUrmatorulMeci extends HTMLElement {
 
                 .header {
                     color: white;
-                    background-color: F3722C;
+                    background-color: #F3722C;
                     border-radius: ${border_radius_default} 0px ${border_radius_default} 0px;
                     border-bottom: ${border_default};
                     border-right: ${border_default};
@@ -64,7 +64,7 @@ class PanouUrmatorulMeci extends HTMLElement {
                     width: auto;
                     height: 4rem;
                     color: white;
-                    background-color: 4D908E;
+                    background-color: #4D908E;
                     border-radius: 15px;
                     font-size: 1rem;                
                 }

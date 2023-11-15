@@ -1,4 +1,4 @@
-import {font_family_default,border_radius_default} from "../index.js";
+import {font_family_default,border_radius_default} from "./index.js";
 
 class MeniuPrincipal extends HTMLElement {
     render()
@@ -37,7 +37,7 @@ class MeniuPrincipal extends HTMLElement {
 
                 .meniu-stanga > a, .meniu-dreapta > a{
                     display: flex;
-                    background-color: F9C74F;
+                    background-color: #F9C74F;
                     text-decoration: none;
                     border-radius: ${border_radius_default};
                     width: 30%;
@@ -50,7 +50,7 @@ class MeniuPrincipal extends HTMLElement {
                 }      
                 
                 .meniu a:hover{
-                    background-color: 36486b;
+                    background-color: #36486B;
                 }
             </style>
 
@@ -61,7 +61,7 @@ class MeniuPrincipal extends HTMLElement {
                     <a href="">Clasament</a>
                 </div>
                 <div class="logo">
-                    <img src="Images/logo.png">
+                    <img src="./Images/logo.png">
                 </div>
                 <div class="meniu-dreapta">
                     <a href="">Stiri</a>

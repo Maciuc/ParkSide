@@ -1,4 +1,4 @@
-import { font_family_default, border_radius_default } from "/index.js";
+import { font_family_default, border_radius_default } from "./index.js";
 
 let shadow;
 
@@ -20,7 +20,7 @@ class SubsolPrincipal extends HTMLElement {
                     width: fit-content;
                     color: black;
                     font-size: 2rem;
-                    background-color: F9C74F;
+                    background-color: #F9C74F;
                     padding: 2rem 4rem;
                     border-radius: 0 0 ${border_radius_default} 0;
                 }

@@ -1,4 +1,4 @@
-import {font_family_default,border_default,border_radius_default} from "/index.js";
+import {font_family_default,border_default,border_radius_default} from "../index.js";
 
 function stire(caleImagine,rezumatStire) {
     this.caleImagine = caleImagine;
@@ -21,7 +21,7 @@ class PanouStiriPrincipale extends HTMLElement {
                     display: flex;
                     flex-direction: row;
                     align-items: center;
-                    background-color: 90BE6D;
+                    background-color: #90BE6D;
                     border-radius: ${border_radius_default};
                     border: ${border_default};
                     margin: 1% 12rem;
@@ -49,7 +49,7 @@ class PanouStiriPrincipale extends HTMLElement {
                 }
 
                 .button-citeste-stirea {
-                    background-color: fefbd8;
+                    background-color: #FEFBD8;
                     float: right;
                     width: 10rem;
                     height: 4rem;
@@ -119,9 +119,9 @@ class PanouStiriPrincipale extends HTMLElement {
     }
 
     preiaContinutulUtlimelorNStiri() {
-        stiriDeAfisat.push(new stire("Images/stire1_1.jpg","România a încheiat pe locul secund Trofeul Carpați pentru juniori"));
-        stiriDeAfisat.push(new stire("Images/stire2_1.jpg","România va juca astăzi cu Egipt, de la ora 12:30, pentru câștigarea Trofeului Carpați"));
-        stiriDeAfisat.push(new stire("Images/stire3_1.jpg","Handbaliștii de la CSU Suceava au fost protagoniștii primului meci pe care echipa națională a României l-a disputat la Trofeul Carpați pentru juniori"));  
+        stiriDeAfisat.push(new stire("../Images/stire1_1,jpg","România a încheiat pe locul secund Trofeul Carpați pentru juniori"));
+        stiriDeAfisat.push(new stire("../Images/stire2_1.jpg","România va juca astăzi cu Egipt, de la ora 12:30, pentru câștigarea Trofeului Carpați"));
+        stiriDeAfisat.push(new stire("../Images/stire3_1.jpg","Handbaliștii de la CSU Suceava au fost protagoniștii primului meci pe care echipa națională a României l-a disputat la Trofeul Carpați pentru juniori"));  
     }
 
     afiseazaUrmatoareaStire() {

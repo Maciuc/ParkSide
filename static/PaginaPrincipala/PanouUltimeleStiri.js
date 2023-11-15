@@ -1,4 +1,4 @@
-import {font_family_default} from "/index.js";
+import {font_family_default} from "../index.js";
 
 let shadow;
 
@@ -20,7 +20,7 @@ class PanouUltimeleStiri extends HTMLElement {
                 }
 
                 .container-title {
-                    background-color: D62828;
+                    background-color: #D62828;
                     width: fit-content;
                     color: white;
                     margin-bottom: 1rem;
@@ -62,7 +62,7 @@ class PanouUltimeleStiri extends HTMLElement {
 
                 .stire {
                     transition: transform ease-in-out 0.5s;
-                    background-color: 4D908E;
+                    background-color: #4D908E;
                     height: 20rem;
                     border: 0.1rem solid black;
                     border-radius: 0.75rem;
@@ -91,7 +91,7 @@ class PanouUltimeleStiri extends HTMLElement {
                 </div>
                 <div class="panou">
                     <button type="button" class="button-move-left">
-                        <img src="./Images/left-arrow.png">
+                        <img src="../Images/left-arrow.png">
                     </button>
                     <div class="container-stiri">
                         <div class="stire">
@@ -114,7 +114,7 @@ class PanouUltimeleStiri extends HTMLElement {
                         </div>
                     </div>
                     <button type="button"class="button-move-right">
-                        <img src="./Images/right-arrow.png">
+                        <img src="../Images/right-arrow.png">
                     </button>
                 </div>
             </div>
