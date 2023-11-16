@@ -61,7 +61,7 @@ class MeniuPrincipal extends HTMLElement {
                     <a href="">Clasament</a>
                 </div>
                 <div class="logo">
-                    <img src="./Images/logo.png" href="/index.html">
+                    <img src="/static/Images/logo.png" href="/index.html">
                 </div>
                 <div class="meniu-dreapta">
                     <a href="">Stiri</a>
