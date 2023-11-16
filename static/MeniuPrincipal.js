@@ -15,7 +15,7 @@ class MeniuPrincipal extends HTMLElement {
                     flex-direction: row;
                     align-items: center;
                     justify-content: space-around;
-                    height: 10%;
+                    height: 10rem;
                     width: 100%;
                     border-bottom: 5px solid #F9C74F;
                 }
