@@ -39,7 +39,7 @@ class SubsolPrincipal extends HTMLElement {
                     Sponsori și parteneri
                 </div>
                 <div>
-                    <button class="button-contact">
+                    <button class="button-contact" onclick="location.href='/feedback.html'">
                         CONTACTEAZĂ-NE
                     </button>
                     <button class="button-mergi-sus">

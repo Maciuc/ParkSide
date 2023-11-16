@@ -119,7 +119,7 @@ class PanouStiriPrincipale extends HTMLElement {
     }
 
     preiaContinutulUtlimelorNStiri() {
-        stiriDeAfisat.push(new stire("../Images/stire1_1,jpg","România a încheiat pe locul secund Trofeul Carpați pentru juniori"));
+        stiriDeAfisat.push(new stire("../Images/stire1_1.jpg","România a încheiat pe locul secund Trofeul Carpați pentru juniori"));
         stiriDeAfisat.push(new stire("../Images/stire2_1.jpg","România va juca astăzi cu Egipt, de la ora 12:30, pentru câștigarea Trofeului Carpați"));
         stiriDeAfisat.push(new stire("../Images/stire3_1.jpg","Handbaliștii de la CSU Suceava au fost protagoniștii primului meci pe care echipa națională a României l-a disputat la Trofeul Carpați pentru juniori"));  
     }
