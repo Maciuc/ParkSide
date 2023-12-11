@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Parkside.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f78d140f2ade29899cb15b957fb1aa924267de16")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ea0136b9312f52be3dab5a7a81ff06fc19bb88a4")]
 [assembly: System.Reflection.AssemblyProductAttribute("Parkside.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Parkside.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
