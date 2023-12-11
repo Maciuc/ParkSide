@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Parkside.Services")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d848e7fc08ec60f355d73c8b8eaa532b05cfce09")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f78d140f2ade29899cb15b957fb1aa924267de16")]
 [assembly: System.Reflection.AssemblyProductAttribute("Parkside.Services")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Parkside.Services")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
