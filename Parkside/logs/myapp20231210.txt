@@ -1,0 +1,32 @@
+2023-12-10 22:01:01.244 +02:00 [ERR] Unable to resolve service for type 'Parkside.Services.Players.IPlayerService' while attempting to activate 'Parkside.Backend.Controller.PlayersController'.
+System.InvalidOperationException: Unable to resolve service for type 'Parkside.Services.Players.IPlayerService' while attempting to activate 'Parkside.Backend.Controller.PlayersController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method10(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass7_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Parkside.Backend.Helpers.ErrorHandlerMiddleware.Invoke(HttpContext context) in C:\Users\gabri\OneDrive\Desktop\Digital Flower\Parkside.backend\Helpers\ErrorHandlerMidleware.cs:line 21
+2023-12-10 22:05:14.081 +02:00 [ERR] Image format is not valid
+System.ArgumentException: Image format is not valid
+   at exp.NET6.Services.DBServices.GenericService.ExtrageImagBase64(String dataUri) in C:\Users\gabri\OneDrive\Desktop\Digital Flower\Parkside.Services\GenericService.cs:line 16
+   at exp.NET6.Services.DBServices.GenericService.GetImagePath(String newImgBase64, String oldImgUrl, String folderName) in C:\Users\gabri\OneDrive\Desktop\Digital Flower\Parkside.Services\GenericService.cs:line 54
+   at Parkside.Services.Players.PlayerService.AddPlayer(PlayerCreateViewModel model) in C:\Users\gabri\OneDrive\Desktop\Digital Flower\Parkside.Services\Players\PlayerService.cs:line 94
+   at Parkside.Backend.Controller.PlayersController.AddPlayer(PlayerCreateViewModel player) in C:\Users\gabri\OneDrive\Desktop\Digital Flower\Parkside.backend\Controller\PlayerController.cs:line 39
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Parkside.Backend.Helpers.ErrorHandlerMiddleware.Invoke(HttpContext context) in C:\Users\gabri\OneDrive\Desktop\Digital Flower\Parkside.backend\Helpers\ErrorHandlerMidleware.cs:line 21

@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "CMuKsRHzh7TvGKKHdClf9pu1X82UrejknIxJFSCcGQIsDbhDlN2fdnH7Y5A3iz2guFddFBQUvbl5VUxuxm//CA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside\\Parkside.Backend.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\gabri\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.25\\microsoft.windowsdesktop.app.ref.6.0.25.nupkg.sha512",
+    "C:\\Users\\gabri\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.25\\microsoft.netcore.app.ref.6.0.25.nupkg.sha512",
+    "C:\\Users\\gabri\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.25\\microsoft.aspnetcore.app.ref.6.0.25.nupkg.sha512",
+    "C:\\Users\\gabri\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.25\\microsoft.netcore.app.host.win-x64.6.0.25.nupkg.sha512"
+  ],
+  "logs": []
+}

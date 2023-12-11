@@ -1,0 +1,1 @@
+﻿Scaffold-DbContext -Connection "Data Source=(localdb)\Local;Initial Catalog=Parkside;Persist Security Info=True;"-o Entities -Provider "Microsoft.EntityFrameworkCore.SqlServer" -ContextDir Context -Context ParksideContext -force

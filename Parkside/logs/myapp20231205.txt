@@ -1,0 +1,135 @@
+2023-12-05 11:45:48.310 +02:00 [ERR] Could not find a part of the path 'C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.backend\Assets\Partners377c31bc-439c-4075-a45b-c41151645c6c_lachlan-dempsey-6VPEOdpFNAs-unsplash.jpg'.
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.backend\Assets\Partners377c31bc-439c-4075-a45b-c41151645c6c_lachlan-dempsey-6VPEOdpFNAs-unsplash.jpg'.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategy(FileStream fileStream, String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at Parkside.Services.Partners.PartnerService.AddPartner(PartnerCreateViewModel model)
+   at Parkside.Backend.Controller.PartnersController.AddPartner(PartnerCreateViewModel partner) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.backend\Controller\PartnerController.cs:line 39
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Parkside.Backend.Helpers.ErrorHandlerMiddleware.Invoke(HttpContext context) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.backend\Helpers\ErrorHandlerMidleware.cs:line 21
+2023-12-05 11:46:56.800 +02:00 [ERR] Could not find a part of the path 'C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.backend\Assets\Partners\57a2e13b-6fcf-4211-b596-2154dae3e440_lachlan-dempsey-6VPEOdpFNAs-unsplash.jpg'.
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.backend\Assets\Partners\57a2e13b-6fcf-4211-b596-2154dae3e440_lachlan-dempsey-6VPEOdpFNAs-unsplash.jpg'.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategy(FileStream fileStream, String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at Parkside.Services.Partners.PartnerService.AddPartner(PartnerCreateViewModel model) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.Services\Partners\PartnerService.cs:line 97
+   at Parkside.Backend.Controller.PartnersController.AddPartner(PartnerCreateViewModel partner) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.backend\Controller\PartnerController.cs:line 39
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Parkside.Backend.Helpers.ErrorHandlerMiddleware.Invoke(HttpContext context) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.backend\Helpers\ErrorHandlerMidleware.cs:line 21
+2023-12-05 11:57:45.965 +02:00 [ERR] Could not find a part of the path 'C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.backend\Assets\Partners\f55352e3-30b8-44ad-be65-b2c08d26f7fc_download.png'.
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.backend\Assets\Partners\f55352e3-30b8-44ad-be65-b2c08d26f7fc_download.png'.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategy(FileStream fileStream, String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at Parkside.Services.Partners.PartnerService.AddPartner(PartnerCreateViewModel model) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.Services\Partners\PartnerService.cs:line 97
+   at Parkside.Backend.Controller.PartnersController.AddPartner(PartnerCreateViewModel partner) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.backend\Controller\PartnerController.cs:line 39
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Parkside.Backend.Helpers.ErrorHandlerMiddleware.Invoke(HttpContext context) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.backend\Helpers\ErrorHandlerMidleware.cs:line 21
+2023-12-05 13:55:40.851 +02:00 [ERR] Image format is not valid
+System.ArgumentException: Image format is not valid
+   at exp.NET6.Services.DBServices.GenericService.ExtrageImagBase64(String dataUri) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.Services\GenericService.cs:line 16
+   at exp.NET6.Services.DBServices.GenericService.GetImagePath(String newImgBase64, String oldImgUrl, String folderName) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.Services\GenericService.cs:line 53
+   at Parkside.Services.Partners.PartnerService.AddPartner(PartnerCreateViewModel model) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.Services\Partners\PartnerService.cs:line 89
+   at Parkside.Backend.Controller.PartnersController.AddPartner(PartnerCreateViewModel partner) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.backend\Controller\PartnerController.cs:line 39
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Parkside.Backend.Helpers.ErrorHandlerMiddleware.Invoke(HttpContext context) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.backend\Helpers\ErrorHandlerMidleware.cs:line 21
+2023-12-05 14:06:41.866 +02:00 [ERR] Image format is not valid
+System.ArgumentException: Image format is not valid
+   at exp.NET6.Services.DBServices.GenericService.ExtrageImagBase64(String dataUri) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.Services\GenericService.cs:line 16
+   at exp.NET6.Services.DBServices.GenericService.GetImagePath(String newImgBase64, String oldImgUrl, String folderName) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.Services\GenericService.cs:line 53
+   at Parkside.Services.Partners.PartnerService.AddPartner(PartnerCreateViewModel model) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.Services\Partners\PartnerService.cs:line 89
+   at Parkside.Backend.Controller.PartnersController.AddPartner(PartnerCreateViewModel partner) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.backend\Controller\PartnerController.cs:line 39
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Parkside.Backend.Helpers.ErrorHandlerMiddleware.Invoke(HttpContext context) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.backend\Helpers\ErrorHandlerMidleware.cs:line 21
+2023-12-05 14:07:51.035 +02:00 [ERR] The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at exp.NET6.Services.DBServices.GenericService.GetImagePath(String newImgBase64, String oldImgUrl, String folderName) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.Services\GenericService.cs:line 54
+   at Parkside.Services.Partners.PartnerService.UpdatePartner(Int32 id, PartnerUpdateViewModel model) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.Services\Partners\PartnerService.cs:line 126
+   at Parkside.Backend.Controller.PartnersController.UpdatePartner(Int32 partnerId, PartnerUpdateViewModel partner) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.backend\Controller\PartnerController.cs:line 61
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Parkside.Backend.Helpers.ErrorHandlerMiddleware.Invoke(HttpContext context) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.backend\Helpers\ErrorHandlerMidleware.cs:line 21
+2023-12-05 15:17:55.069 +02:00 [ERR] Image format is not valid
+System.ArgumentException: Image format is not valid
+   at exp.NET6.Services.DBServices.GenericService.ExtrageImagBase64(String dataUri) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.Services\GenericService.cs:line 16
+   at exp.NET6.Services.DBServices.GenericService.GetImagePath(String newImgBase64, String oldImgUrl, String folderName) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.Services\GenericService.cs:line 54
+   at Parkside.Services.Members.MemberService.UpdateMember(Int32 id, MemberUpdateViewModel model) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.Services\Members\MemberService.cs:line 144
+   at Parkside.Backend.Controller.MemberController.UpdateMember(Int32 memberId, MemberUpdateViewModel member) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.backend\Controller\MemberController.cs:line 61
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Parkside.Backend.Helpers.ErrorHandlerMiddleware.Invoke(HttpContext context) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.backend\Helpers\ErrorHandlerMidleware.cs:line 21
