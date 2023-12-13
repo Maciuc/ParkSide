@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Backend\\Parkside.Backend.csproj": {}
+    "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Backend\\Parkside.Backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Backend\\Parkside.Backend.csproj": {
+    "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Backend\\Parkside.Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Backend\\Parkside.Backend.csproj",
+        "projectUniqueName": "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Backend\\Parkside.Backend.csproj",
         "projectName": "Parkside.Backend",
-        "projectPath": "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Backend\\Parkside.Backend.csproj",
+        "projectPath": "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Backend\\Parkside.Backend.csproj",
         "packagesPath": "C:\\Users\\gabri\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Backend\\obj\\",
+        "outputPath": "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\gabri\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,11 +28,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Infrastructure\\Parkside.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Infrastructure\\Parkside.Infrastructure.csproj"
+              "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Infrastructure\\Parkside.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Infrastructure\\Parkside.Infrastructure.csproj"
               },
-              "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Services\\Parkside.Services.csproj": {
-                "projectPath": "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Services\\Parkside.Services.csproj"
+              "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Services\\Parkside.Services.csproj": {
+                "projectPath": "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Services\\Parkside.Services.csproj"
               }
             }
           }
@@ -165,12 +165,12 @@
         }
       }
     },
-    "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Infrastructure\\Parkside.Infrastructure.csproj": {
+    "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Infrastructure\\Parkside.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Infrastructure\\Parkside.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Infrastructure\\Parkside.Infrastructure.csproj",
         "projectName": "Parkside.Infrastructure",
-        "projectPath": "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Infrastructure\\Parkside.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Infrastructure\\Parkside.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\gabri\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
@@ -264,12 +264,12 @@
         }
       }
     },
-    "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Models\\Parkside.Models.csproj": {
+    "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Models\\Parkside.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Models\\Parkside.Models.csproj",
+        "projectUniqueName": "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Models\\Parkside.Models.csproj",
         "projectName": "Parkside.Models",
-        "projectPath": "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Models\\Parkside.Models.csproj",
+        "projectPath": "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Models\\Parkside.Models.csproj",
         "packagesPath": "C:\\Users\\gabri\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Models\\obj\\",
         "projectStyle": "PackageReference",
@@ -343,14 +343,14 @@
         }
       }
     },
-    "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Services\\Parkside.Services.csproj": {
+    "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Services\\Parkside.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Services\\Parkside.Services.csproj",
+        "projectUniqueName": "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Services\\Parkside.Services.csproj",
         "projectName": "Parkside.Services",
-        "projectPath": "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Services\\Parkside.Services.csproj",
+        "projectPath": "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Services\\Parkside.Services.csproj",
         "packagesPath": "C:\\Users\\gabri\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Services\\obj\\",
+        "outputPath": "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Services\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\gabri\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -367,11 +367,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Infrastructure\\Parkside.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Infrastructure\\Parkside.Infrastructure.csproj"
+              "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Infrastructure\\Parkside.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Infrastructure\\Parkside.Infrastructure.csproj"
               },
-              "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Models\\Parkside.Models.csproj": {
-                "projectPath": "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Models\\Parkside.Models.csproj"
+              "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Models\\Parkside.Models.csproj": {
+                "projectPath": "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Models\\Parkside.Models.csproj"
               }
             }
           }
