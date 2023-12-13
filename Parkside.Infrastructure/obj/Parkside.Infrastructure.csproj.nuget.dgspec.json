@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Infrastructure\\Parkside.Infrastructure.csproj": {}
+    "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Infrastructure\\Parkside.Infrastructure.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Infrastructure\\Parkside.Infrastructure.csproj": {
+    "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Infrastructure\\Parkside.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Infrastructure\\Parkside.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Infrastructure\\Parkside.Infrastructure.csproj",
         "projectName": "Parkside.Infrastructure",
-        "projectPath": "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Infrastructure\\Parkside.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Infrastructure\\Parkside.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\gabri\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
