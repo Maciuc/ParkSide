@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4bElEvaIcjkXbL12TD5TAQPFq/3H8snL8kgsPO+CEzQ+rFwwlZDXZSIhA1+e+bd4UCHEauADI6tVLCgwRaK0BQ==",
+  "dgSpecHash": "8ZA6AMWcEvWn8pdCxJPeAnA2AO7U4M1A/JoisgeaCaB2tMuYoCSDqS1Zqs1xVF0McTl06GYnJYDP28cKXKS1kg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Models\\Parkside.Models.csproj",
+  "projectFilePath": "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Models\\Parkside.Models.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gabri\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.23\\microsoft.aspnetcore.cryptography.internal.6.0.23.nupkg.sha512",
     "C:\\Users\\gabri\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.23\\microsoft.aspnetcore.cryptography.keyderivation.6.0.23.nupkg.sha512",

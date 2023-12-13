@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ndrl9uzlLylsZ1TBP1+DqAJoy9phttdtQbyUVXQPnqgGU2YDz48f42mvDg+j+otnxXNwYRiB5FLYFMeQbzvF2g==",
+  "dgSpecHash": "s5/23M3jsvRl5rifNf3MJQEYFPmXrHNOUDKISIQrMEY/emzQIxRRXYD2ZAOW/z68GaawXxHCGO8tpYLlEzD6nA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Backend\\Parkside.Backend.csproj",
+  "projectFilePath": "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Backend\\Parkside.Backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gabri\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\gabri\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
