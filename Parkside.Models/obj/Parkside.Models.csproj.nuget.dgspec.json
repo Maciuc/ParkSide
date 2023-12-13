@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Models\\Parkside.Models.csproj": {}
+    "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Models\\Parkside.Models.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Models\\Parkside.Models.csproj": {
+    "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Models\\Parkside.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Models\\Parkside.Models.csproj",
+        "projectUniqueName": "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Models\\Parkside.Models.csproj",
         "projectName": "Parkside.Models",
-        "projectPath": "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Models\\Parkside.Models.csproj",
+        "projectPath": "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Models\\Parkside.Models.csproj",
         "packagesPath": "C:\\Users\\gabri\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Models\\obj\\",
         "projectStyle": "PackageReference",
