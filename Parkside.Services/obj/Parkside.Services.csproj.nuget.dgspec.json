@@ -189,7 +189,7 @@
         "projectName": "Parkside.Services",
         "projectPath": "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Services\\Parkside.Services.csproj",
         "packagesPath": "C:\\Users\\gabri\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gabri\\Source\\Repos\\Parkside\\Parkside.Services\\obj\\",
+        "outputPath": "C:\\Users\\gabri\\source\\repos\\Parkside\\Parkside.Services\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\gabri\\AppData\\Roaming\\NuGet\\NuGet.Config",
