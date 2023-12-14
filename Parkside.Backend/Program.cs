@@ -1,26 +1,19 @@
 using exp.NET6.Services.DBServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Parkside.Backend.Data;
 using Parkside.Backend.Helpers;
 using Parkside.Infrastructure.Context;
 using Parkside.Infrastructure.Repositories.Players;
 using Parkside.Infrastructure.Repositories.Sponsors;
-using Parkside.Infrastructure.Repositories.UsersExtend;
 using Parkside.Models.Helpers;
 using Parkside.Services.Email;
 using Parkside.Services.Players;
 using Parkside.Services.Sponsors;
-using Parkside.Services.UsersExtend;
 using Serilog;
-using System;
 using System.Text;
 using System.Text.Json.Serialization;
 
@@ -110,9 +103,6 @@ builder.Services.AddScoped<IPlayerService, PlayerService>();
 
 builder.Services.AddScoped<ISponsorRepo, SponsorRepo>();
 builder.Services.AddScoped<ISponsorService, SponsorService>();
-
-builder.Services.AddScoped<IUserExtendRepo, UserExtendRepo>();
-builder.Services.AddScoped<IUserExtendService, UserExtendService>();
 
 builder.Services.AddScoped<IGenericService, GenericService>();
 
