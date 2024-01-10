@@ -1,0 +1,311 @@
+@import './base.css';
+
+.header-section {
+  padding-bottom: 32px;
+  border-bottom: 1px solid #0000001a;
+  gap: 8px;
+}
+
+.custom-control .form-control{
+    font-size: 11.5px;
+    letter-spacing: 0.2px;
+    height: 37px;
+    width: 200px;
+    font-family: "Raleway";
+    color: #688088;
+}
+  .button.green {
+    background-color: #2da017;
+  }
+
+  .button.blue {
+    background-color: #3F53EE;
+  }
+  
+  .button.grey {
+    background-color: #688088;
+  }
+  .button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 11px;
+    color: white;
+    border: none;
+    font-family: "Raleway";
+    font-size: 12px;
+    font-weight: 500;
+    height: 37px;
+    width: 175px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+  }
+  .button:hover{
+    transition: background-color 0.3s;
+    background-color: #3242BE;
+  }
+
+  .title-page {
+    font-size: 21px;
+    font-family: "Raleway";
+    line-height: 15px;
+    letter-spacing: 0.04px;
+    font-weight: 600;
+    color: #3e4d52;
+  }
+
+  .new-form .form-control {
+    font-size: 11.5px;
+    height: 37px;
+    width: 100%;
+    font-family: "Raleway";
+  }
+  .new-form .form-label {
+    font-size: 12px;
+    font-family: "Raleway";
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .new-form .textarea{
+    height: auto;
+  }
+  .error-message{
+    font-size: small;
+  }
+  
+  .custom-modal .modal-title {
+    font-size: 17px;
+    font-family: "Raleway";
+    line-height: 15px;
+    letter-spacing: 0.04;
+    font-weight: 600;
+    color: #688088;
+  }
+  
+  .custom-modal .modal-header {
+    border: none;
+  }
+  
+  .custom-modal .modal-body {
+    padding-top: 8px;
+  }
+
+  .custom-modal .modal-dialog {
+    max-width: 402px;
+  }
+
+  .custom-modal .textarea{
+    height: auto;
+  }
+
+  .custom-modal .modal-footer{
+    border-top: none;
+    padding-top: 0px;
+  }
+
+  .cursor-pointer {
+    cursor: pointer;
+  }
+
+  .table-custom td {
+    font-size: 10.5px;
+    font-family: "Raleway";
+    font-weight: 400;
+  }
+  .table-custom th {
+    font-size: 11px;
+    font-weight: 700;
+    font-family: "Raleway";
+    letter-spacing: 0.7px;
+    color: #3E4D52!important;
+  }
+  .table-custom span {
+    font-size: 11px;
+    font-weight: 700;
+    font-family: "Raleway";
+    letter-spacing: 0.6px;
+    color: #3E4D52;
+  }
+  
+  .table-custom .editButtons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .table-custom .button-delete,
+  .table-custom .button-edit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 37px;
+    height: 37px;
+    background-color: white;
+    border: 1px solid #00000033;
+    border-radius: 8px;
+    color: #95a6ac;
+  }
+  .table-custom .button-delete:hover,
+  .table-custom .button-edit:hover {
+    background-color: #e0e3e4;
+    color: black;
+  }
+  
+
+  
+.table-custom {
+    vertical-align: middle!important;
+  }
+
+
+  .image-container {
+    height: 130px;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    color: #95a6ac;
+    font-family: "Raleway";
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    position: relative;
+  }
+  
+  .image-container .button-delete {
+    width: 24px;
+    height: 24px;
+    color: #95a6ac;
+    border: 1px solid #d9dee0;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    border-radius: 3px;
+  }
+  .button-delete:hover {
+    background-color: #f0f2f3;
+    border: 1px solid #00000033;
+    color: #4e4e4e;
+  }
+  .image-container .no-image {
+    width: 50px;
+  }
+  
+  .image-container .image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .icon-avatar {
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 4px;
+  }
+  .img-container-avatar {
+    height: 40px;
+    width: 40px;
+  }
+
+  .custom-date-picker .dp__input{
+    font-family: "Raleway";
+    font-size: 11.5px;
+    height: 37px;
+    color: #3e4d52;
+    /* border-color:#e5e5e5; */
+  }
+
+  .custom-date-picker .dp__input:focus{
+    color: #3e4d52;
+    box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+    
+  }
+  .custom-date-picker .dp__input::placeholder{
+    color: #3e4d52;
+    
+  }
+
+  .custom-date-picker button{
+    font-family: "Raleway";
+    font-size: 11.5px;
+    height: 37px;
+    color: #3e4d52;
+    width: 60px;
+  }
+
+.custom-date-picker .dp__action_select{
+  color: white;
+
+}
+
+.custom-date-picker .dp__menu{
+  font-size: 12px;
+}
+
+
+.invalid-input.custom-date-picker .dp__input{
+  border: 1px solid red;
+}
+
+.custom.dropdown button{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: -webkit-fill-available;
+  background-color: white;
+  color: #3e4d52;
+  font-family: "Raleway";
+  font-size: 11.5px;
+  height: 37px;
+  border-color: #d9dee0;
+}
+
+.custom.dropdown .btn-secondary{
+  --bs-btn-active-color: #3e4d52;
+  --bs-btn-active-border-color:#3e4d52;
+  --bs-btn-active-bg: white;
+  --bs-btn-active-border-color: #d9dee0;
+  
+}
+
+.custom.dropdown button:focus{
+  box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+}
+
+.custom.dropdown button:hover{
+  color: black;
+}
+
+.custom.dropdown .button-close{
+  width: 20px;
+  height: 20px;
+  border: 1px;
+
+}
+
+.custom.dropdown .button-close:focus{
+  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
+}
+
+
+.custom.dropdown  .dropdown-item{
+  color: #3e4d52;
+  font-weight: 700;
+  font-family: "Raleway";
+  font-size: 11.5px;
+  height: 37px;
+}
+
+.custom.dropdown .button-close {
+  padding: 0px;
+}
+
+
+
+
+
+
+
