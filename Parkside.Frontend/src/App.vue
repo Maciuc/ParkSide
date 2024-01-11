@@ -46,11 +46,11 @@ import { RouterLink, RouterView } from "vue-router";
           <router-link
             tag="li"
             class="nav-link d-flex"
-            :to="{ name: 'members' }"
+            :to="{ name: 'players' }"
             exact
           >
             <font-awesome-icon class="img-link" :icon="['fas', 'people-group']"  />
-            <div>Membri</div>
+            <div>Jucatori</div>
           </router-link>
 
           <router-link
@@ -162,5 +162,3 @@ aside {
 
 
 </style>
-
-<style></style>

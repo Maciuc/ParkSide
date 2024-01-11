@@ -2,11 +2,11 @@
   <div>
     <div class="row header-section align-items-center">
       <div class="col">
-        <div class="title-page">Adăugare membru</div>
+        <div class="title-page">Adăugare jucator</div>
       </div>
 
       <div class="col-auto">
-        <button class="button green" type="submit" form="form-add-member">
+        <button class="button green" type="submit" form="form-add-player">
           Salvează
         </button>
       </div>
@@ -14,44 +14,44 @@
   </div>
 
   <Form
-    @submit="AddMember(this.newMember.OrderNumber)"
+    @submit="AddPlayer(this.newPlayer.OrderNumber)"
     :validation-schema="schema"
     v-slot="{ errors }"
-    id="form-add-member"
+    id="form-add-player"
   >
     <div class="new-form">
       <div class="row mt-4">
         <div class="col-4">
           <div class="mb-3">
-            <label for="input-name-add-member" class="form-label"
-              >Nume membru</label
+            <label for="input-name-add-player" class="form-label"
+              >Nume jucator</label
             >
             <Field
               type="text"
               class="form-control"
               :class="{ 'border-danger': errors.name }"
-              id="input-name-add-member"
+              id="input-name-add-player"
               name="name"
-              placeholder="Nume membru"
-              v-model="newMember.Name"
+              placeholder="Nume jucator"
+              v-model="newPlayer.Name"
             />
             <ErrorMessage name="name" class="text-danger error-message" />
           </div>
 
           <div class="mb-3 position-relative">
             <label for="platform" class="form-label"
-              >Funcția în organizație</label
+              >Rol jucator</label
             >
             <Field
-              v-model="newMember.OrganizationFunction"
-              name="function"
+              v-model="newPlayer.Role"
+              name="role"
               as="select"
-              :class="{ 'border-danger': errors.function }"
+              :class="{ 'border-danger': errors.role }"
               class="form-select form-control"
             >
-              <option value="" disabled>Funcția în organizație</option>
+              <option value="" disabled>Rol</option>
               <option
-                v-for="(plat, index) in platforms"
+                v-for="(plat, index) in roles"
                 :key="index"
                 :value="plat.name"
               >
@@ -59,54 +59,55 @@
               </option>
             </Field>
 
-            <ErrorMessage name="function" class="text-danger error-message" />
+            <ErrorMessage name="role" class="text-danger error-message" />
           </div>
 
           <div class="mb-3 position-relative">
-            <label for="input-birth-date-member" class="form-label"
-              >Dată naștere</label
+            <label for="input-number-player" class="form-label"
+              >Numar jucator</label
             >
             <Field
               type="text"
               class="form-control"
-              :class="{ 'border-danger': errors.birthdate }"
-              id="input-birth-date-member"
-              name="birthdate"
-              placeholder="Dată naștere"
-              v-model="newMember.BirthDate"
+              :class="{ 'border-danger': errors.Number }"
+              id="input-number-player"
+              name="Number"
+              placeholder="Numar jucator"
+              v-model="newPlayer.Number"
             />
 
-            <ErrorMessage name="birthdate" class="text-danger error-message" />
+            <ErrorMessage name="Number" class="text-danger error-message" />
+            <div
+              v-if="validNumber === false"
+              class="text-danger error-message"
+            >
+              Numărul este deja ocupat!
+            </div>
           </div>
 
           <div class="mb-3">
-            <label for="input-name-add-member" class="form-label"
-              >Numar ordine</label
+            <label for="input-height-add-player" class="form-label"
+              >Inaltime jucator</label
             >
             <Field
               type="text"
               class="form-control"
-              :class="{ 'border-danger': errors.order }"
-              id="input-name-add-member"
-              name="order"
-              placeholder="Numar ordine"
-              v-model="newMember.OrderNumber"
+              :class="{ 'border-danger': errors.Height }"
+              id="input-height-add-player"
+              name="Height"
+              placeholder="Inaltime"
+              v-model="newPlayer.OrderNumber"
             />
-            <ErrorMessage name="order" class="text-danger error-message" />
-            <div
-              v-if="validOrderNumber === false"
-              class="text-danger error-message"
-            >
-              Numărul de ordine este deja ocupat!
-            </div>
+            <ErrorMessage name="Height" class="text-danger error-message" />
+            
           </div>
         </div>
         <div class="col-4">
-          <div class="d-flex gap-2">
+          <div class="d-flex gap-3">
             <div>
               <label class="form-label">Selectează imagine</label>
               <label
-                for="input-upload-member-image"
+                for="input-upload-player-image"
                 class="button blue"
                 style="width: 140px"
               >
@@ -114,12 +115,12 @@
                 <font-awesome-icon :icon="['fas', 'upload']" />
                 <Field
                   type="file"
-                  id="input-upload-member-image"
+                  id="input-upload-player-image"
                   name="upload"
                   style="display: none"
                   accept="image/*"
                   ref="uploadInput"
-                  @change="UploadImageMember"
+                  @change="UploadImagePlayer"
                 >
                 </Field>
               </label>
@@ -137,16 +138,16 @@
                   <font-awesome-icon :icon="['fas', 'trash']" />
                 </button>
                 <div
-                  v-if="!newMember.ImageBase64"
+                  v-if="!newPlayer.ImageBase64"
                   class="d-flex flex-column justify-content-center align-items-center gap-2"
                 >
                   <img src="@/images/NoImageSelected.png" class="no-image" />
                   <div>Nicio imagine selectată</div>
                 </div>
 
-                <div v-if="newMember.ImageBase64" class="image">
+                <div v-if="newPlayer.ImageBase64" class="image">
                   <img
-                    :src="newMember.ImageBase64"
+                    :src="newPlayer.ImageBase64"
                     alt="Imagine selectată"
                     class="image"
                   />
@@ -172,41 +173,6 @@
           </div>
         </div>
       </div>
-      <div class="row ">
-        <div class="col-8">
-          <div class="form-check form-switch">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="flexSwitchCheckDefault"
-              :checked="newMember.VizibilitySpeech"
-              @click="SelectShowDescription"
-            />
-            <label class="form-label" for="flexSwitchCheckDefault"
-              >Afișare discurs de bun venit</label
-            >
-          </div>
-
-          <div class="mb-3 position-relative">
-            <label for="textarea-description-add-project" class="form-label"
-              >Descriere</label
-            >
-            <Field
-              v-slot="{ field }"
-              v-model="newMember.Speech"
-              name="description"
-            >
-              <textarea
-                v-bind="field"
-                name="description"
-                class="form-control textarea"
-                rows="5"
-                placeholder="Descriere"
-              />
-            </Field>
-          </div>
-        </div>
-      </div>
     </div>
   </Form>
 </template>
@@ -215,7 +181,7 @@
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 export default {
-  name: "MembersAddMemberComponent",
+  name: "PlayersAddPlayerComponent",
   components: {
     Form,
     Field,
@@ -224,23 +190,22 @@ export default {
   data() {
     return {
       photoValidation: null,
-      validOrderNumber: true,
-      newMember: {
-        VizibilitySpeech: false,
-        Name: "",
-        OrganizationFunction: "",
-        BirthDate: "",
-        Speech: "",
-        OrderNumber: "",
+      validNumber: true,
+      newPlayer: {
+        FirstName: "",
+        LastName: "",
+        Number: 0,
+        Role: "",
+        Height: "",
         ImageBase64: null,
       },
-      platforms: [
-        { name: "Director executiv" },
-        { name: "Manager general" },
-        { name: "Manager departament tehnic" },
-        { name: "Administrator" },
-        { name: "Contabil" },
-      ],
+      roles: [
+      { name: "Centrali" },
+        { name: "Pivoti" },
+        { name: "Interi" },
+        { name: "Extreme" },
+        { name: "Portari" },
+    ]
     };
   },
 
@@ -248,32 +213,32 @@ export default {
     schema() {
       return yup.object({
         name: yup.string().required("Acest câmp este obligatoriu"),
-        function: yup.string().required("Acest câmp este obligatoriu"),
-        birthdate: yup.string().required("Acest câmp este obligatoriu"),
-        order: yup.string().required("Acest câmp este obligatoriu"),
+        role: yup.string().required("Acest câmp este obligatoriu"),
+        Number: yup.string().required("Acest câmp este obligatoriu"),
+        Height: yup.string().required("Acest câmp este obligatoriu"),
       });
     },
   },
   methods: {
     SelectShowDescription() {
-      this.newMember.VizibilitySpeech =
-        !this.newMember.VizibilitySpeech;
-      console.log(this.newMember.VizibilitySpeech);
+      this.newPlayer.VizibilitySpeech =
+        !this.newPlayer.VizibilitySpeech;
+      console.log(this.newPlayer.VizibilitySpeech);
     },
-    AddMember(orderNumber) {
+    AddPlayer(orderNumber) {
       this.$axios
-        .get(`/api/Member/getMembers`)
+        .get(`/api/Player/getPlayers`)
         .then((response) => {
           if (response.data.Items.find((x) => x.OrderNumber == orderNumber)) {
             console.log("order number not ok: " + false);
-            this.validOrderNumber = false;
+            this.validNumber = false;
           } else {
             //console.log("order number ok: " + true);
             this.$axios
-              .post(`/api/Member/createMember`, this.newMember)
+              .post(`/api/Player/createPlayer`, this.newPlayer)
               .then((response) => {
                 console.log(response);
-                this.$router.push({ name: "members" });
+                this.$router.push({ name: "players" });
               })
               .catch((error) => {
                 console.error(error);
@@ -284,7 +249,7 @@ export default {
           console.log(error);
         });
     },
-    UploadImageMember(event) {
+    UploadImagePlayer(event) {
       const selectedFile = event.target;
       const file = event.target.files[0];
       const reader = new FileReader();
@@ -293,7 +258,7 @@ export default {
           if (file.size / 1024 < 15360) {
             this.photoValidation = null;
             console.log(reader.result);
-            this.newMember.ImageBase64 = reader.result;
+            this.newPlayer.ImageBase64 = reader.result;
             selectedFile.value = "";
           } else {
             this.photoValidation = true;
@@ -308,7 +273,7 @@ export default {
     },
     DeletePhoto() {
       this.$refs.uploadInput.reset();
-      this.newMember.ImageBase64 = null;
+      this.newPlayer.ImageBase64 = null;
     },
   },
 };

@@ -4,22 +4,22 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/members',
-      name: 'members',
-      component: () => import('../views/Members/MembersView.vue'),
+      path: '/players',
+      name: 'players',
+      component: () => import('../views/Players/PlayersView.vue'),
       meta: { breadcrumb: 'Membri' },
     },
     {
-      path: '/add-member',
-      name: 'add-member',
-      component: () => import('../views/Members/AddMemberView.vue'),
-      meta: { breadcrumb: 'Adăugare membru' },
+      path: '/add-player',
+      name: 'add-player',
+      component: () => import('../views/Players/AddPlayerView.vue'),
+      meta: { breadcrumb: 'Adăugare jucator' },
     },
     {
-      path: '/edit-member/:id',
-      name: 'edit-member',
-      component: () => import('../views/Members/EditMemberView.vue'),
-      meta: { breadcrumb: 'Editare membru' },
+      path: '/edit-player/:id',
+      name: 'edit-player',
+      component: () => import('../views/Players/EditPlayerView.vue'),
+      meta: { breadcrumb: 'Editare jucator' },
     },
     {
       path: '/users',

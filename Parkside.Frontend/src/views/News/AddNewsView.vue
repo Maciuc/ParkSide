@@ -219,7 +219,7 @@ import * as yup from "yup";
 import TextEditor from "../../components/TextEditor.vue";
 
 export default {
-  name: "MembersAddMemberComponent",
+  name: "PlayersAddPlayerComponent",
   components: {
     Form,
     Field,

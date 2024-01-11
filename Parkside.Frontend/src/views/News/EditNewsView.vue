@@ -219,7 +219,7 @@
   import TextEditor from "../../components/TextEditor.vue";
   
   export default {
-    name: "MembersEditMemberComponent",
+    name: "PlayersEditPlayerComponent",
     components: {
       Form,
       Field,
@@ -362,7 +362,7 @@
 
     console.log("1+ "+this.$route)
     console.log("2+ "+this.$route.params.id)
-    //this.GetMemberForEdit(this.$route.params.id);
+    //this.GetPlayerForEdit(this.$route.params.id);
     },
   };
   </script>

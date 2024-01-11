@@ -2,11 +2,11 @@
   <div>
     <div class="row header-section align-items-center">
       <div class="col">
-        <div class="title-page">Editare membru</div>
+        <div class="title-page">Editare jucator</div>
       </div>
 
       <div class="col-auto">
-        <button class="button green" type="submit" form="form-edit-member">
+        <button class="button green" type="submit" form="form-edit-player">
           Salvează
         </button>
       </div>
@@ -14,41 +14,41 @@
   </div>
 
   <Form
-    @submit="SaveEditedMember(this.editedMember.OrderNumber, this.editedMember.Id)"
+    @submit="SaveEditedPlayer(this.editedPlayer.OrderNumber, this.editedPlayer.Id)"
     :validation-schema="schema"
     v-slot="{ errors }"
     class="new-form"
-    id="form-edit-member"
+    id="form-edit-player"
   >
     <div class="row mt-4">
       <div class="col-4">
         <div class="mb-3">
-          <label class="form-label" for="input-name-edit-member"
-            >Nume membru</label
+          <label class="form-label" for="input-name-edit-player"
+            >Nume jucator</label
           >
           <Field
             type="text"
-            id="input-name-edit-member"
+            id="input-name-edit-player"
             name="name"
             :class="{ 'border-danger': errors.name }"
             class="form-control"
-            placeholder="Nume membru"
-            v-model="editedMember.Name"
+            placeholder="Nume jucator"
+            v-model="editedPlayer.Name"
           />
 
           <ErrorMessage name="name" class="text-danger error-message" />
         </div>
         <div class="mb-3">
-          <label class="form-label" for="input-function-edit-member"
+          <label class="form-label" for="input-function-edit-player"
             >Funcția în organizație</label
           >
           <Field
             name="function"
             as="select"
-            id="input-function-edit-member"
+            id="input-function-edit-player"
             :class="{ 'border-danger': errors.function }"
             class="form-select form-control"
-            v-model="editedMember.OrganizationFunction"
+            v-model="editedPlayer.OrganizationFunction"
           >
             <option value="" disabled>Funcția în organizație</option>
             <option
@@ -62,16 +62,16 @@
           <ErrorMessage name="function" class="text-danger error-message" />
         </div>
         <div class="mb-3">
-          <label class="form-label" for="input-birth-date-edit-member"
+          <label class="form-label" for="input-birth-date-edit-player"
             >Data nașterii</label
           >
           <Field
             type="text"
             name="birthdate"
-            id="input-birth-date-edit-member"
+            id="input-birth-date-edit-player"
             class="form-control"
             placeholder="Data nașterii"
-            v-model="editedMember.BirthDate"
+            v-model="editedPlayer.BirthDate"
             :class="{ 'border-danger': errors.birthdate }"
           />
 
@@ -79,17 +79,17 @@
         </div>
 
         <div class="mb-3">
-          <label for="input-order-edit-member" class="form-label"
+          <label for="input-order-edit-player" class="form-label"
             >Numar ordine</label
           >
           <Field
             type="text"
             class="form-control"
             :class="{ 'border-danger': errors.order }"
-            id="input-order-edit-member"
+            id="input-order-edit-player"
             name="order"
             placeholder="Numar ordine"
-            v-model="editedMember.OrderNumber"
+            v-model="editedPlayer.OrderNumber"
           />
           <ErrorMessage name="order" class="text-danger error-message" />
           <div
@@ -107,18 +107,18 @@
             <label
               class="button blue"
               style="width: 140px"
-              for="input-upload-edit-member-image"
+              for="input-upload-edit-player-image"
             >
               Încarcă imagine
               <font-awesome-icon :icon="['fas', 'upload']" />
               <Field
                 type="file"
-                id="input-upload-edit-member-image"
+                id="input-upload-edit-player-image"
                 name="upload"
                 style="display: none"
                 accept="image/*"
                 ref="uploadInput"
-                @change="UploadImageEditMember"
+                @change="UploadImageEditPlayer"
               >
               </Field>
             </label>
@@ -145,15 +145,15 @@
                 <font-awesome-icon :icon="['fas', 'trash']" />
               </button>
               <div
-                v-if="!editedMember.ImageBase64"
+                v-if="!editedPlayer.ImageBase64"
                 class="d-flex flex-column justify-content-center align-items-center gap-2"
               >
                 <img src="@/images/NoImageSelected.png" class="no-image" />
                 <div>Nicio imagine selectată</div>
               </div>
-              <div v-if="editedMember.ImageBase64">
+              <div v-if="editedPlayer.ImageBase64">
                 <img
-                  :src="editedMember.ImageBase64"
+                  :src="editedPlayer.ImageBase64"
                   class="image"
                   alt="Imagine selectată"
                 />
@@ -170,7 +170,7 @@
             class="form-check-input"
             type="checkbox"
             id="flexSwitchCheckDefault"
-            :checked="editedMember.VizibilitySpeech"
+            :checked="editedPlayer.VizibilitySpeech"
             @click="SelectShowDescription"
           />
           <label class="form-label" for="flexSwitchCheckDefault"
@@ -184,7 +184,7 @@
           >
           <Field
             v-slot="{ field }"
-            v-model="editedMember.Speech"
+            v-model="editedPlayer.Speech"
             name="description"
           >
             <textarea
@@ -207,7 +207,7 @@
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 export default {
-  name: "MembersEditMemberView",
+  name: "PlayersEditPlayerView",
   components: {
     Form,
     Field,
@@ -218,7 +218,7 @@ export default {
     return {
       validOrderNumber: true,
       photoValidation: null,
-      editedMember: {
+      editedPlayer: {
         Id: "",
         Name: "",
         OrganizationFunction: "",
@@ -239,12 +239,12 @@ export default {
   },
 
   methods: {
-    GetMemberForEdit(id) {
+    GetPlayerForEdit(id) {
       console.log(id);
       this.$axios
-        .get(`/api/Member/getMember/${id}`)
+        .get(`/api/Player/getPlayer/${id}`)
         .then((response) => {
-          this.editedMember = response.data;
+          this.editedPlayer = response.data;
           console.log(this);
         })
         .catch((error) => {
@@ -252,7 +252,7 @@ export default {
         });
     },
 
-    UploadImageEditMember(event) {
+    UploadImageEditPlayer(event) {
       const selectedFile = event.target;
       const file = event.target.files[0];
       const reader = new FileReader();
@@ -261,7 +261,7 @@ export default {
           if (file.size / 1024 < 15360) {
             this.photoValidation = null;
             console.log(reader.result);
-            this.editedMember.ImageBase64 = reader.result;
+            this.editedPlayer.ImageBase64 = reader.result;
             selectedFile.value = "";
           } else {
             this.photoValidation = true;
@@ -278,11 +278,11 @@ export default {
     },
     DeletePhoto() {
       this.$refs.uploadInput.reset();
-      this.editedMember.ImageBase64 = null;
+      this.editedPlayer.ImageBase64 = null;
     },
-    SaveEditedMember(orderNumber, id) {
+    SaveEditedPlayer(orderNumber, id) {
       this.$axios
-        .get(`/api/Member/getMembers`)
+        .get(`/api/Player/getPlayers`)
         .then((response) => {
           if ((response.data.Items.filter((x) => x.OrderNumber == orderNumber && x.Id != id).length)>0) {
             console.log("order number not ok: " + false);
@@ -291,12 +291,12 @@ export default {
             console.log("order number ok: " + true);
             this.$axios
               .put(
-                `/api/Member/updateMember/${this.editedMember.Id}`,
-                this.editedMember
+                `/api/Player/updatePlayer/${this.editedPlayer.Id}`,
+                this.editedPlayer
               )
               .then((response) => {
                 console.log(response);
-                this.$router.push({ name: "members" });
+                this.$router.push({ name: "players" });
               })
               .catch((error) => {
                 console.error(error);
@@ -308,9 +308,9 @@ export default {
         });
     },
     SelectShowDescription() {
-      this.editedMember.VizibilitySpeech =
-        !this.editedMember.VizibilitySpeech;
-      console.log(this.editedMember.VizibilitySpeech);
+      this.editedPlayer.VizibilitySpeech =
+        !this.editedPlayer.VizibilitySpeech;
+      console.log(this.editedPlayer.VizibilitySpeech);
     },
   },
 
@@ -328,7 +328,7 @@ export default {
   created() {
     // console.log("1+ "+this.$route)
     // console.log("2+ "+this.$route.params.id)
-    this.GetMemberForEdit(this.$route.params.id);
+    this.GetPlayerForEdit(this.$route.params.id);
   },
 };
 </script>

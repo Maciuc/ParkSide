@@ -47,49 +47,7 @@
         </select>
       </div> -->
 
-      
-
-      <div class="col custom-dropdown">
-        <div class="custom dropdown">
-          <button
-            class="btn btn-secondary justify-content-between"
-            type="button"
-            id="dropdownNewsTypesAddNews"
-            aria-expanded="false"
-            @click="OpenDropdown"
-            :class="{ 'dropdown-toggle': !selectedNewsCategory.Name }"
-          >
-            <div>
-              <span v-if="selectedNewsCategory.Name">
-                {{ selectedNewsCategory.Name }}
-              </span>
-              <span v-else>Tip știre</span>
-            </div>
-
-            <button
-              v-if="selectedNewsCategory.Name"
-              @click="CloseAndResetDropdown"
-              class="button-close justify-content-end"
-            >
-              <font-awesome-icon :icon="['fas', 'xmark']" />
-            </button>
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownNewsTypesAddNews">
-            <li
-              v-for="(newsType, index) in newsTypesList"
-              :key="index"
-              :value="newsType.Name"
-            >
-              <a
-                class="dropdown-item"
-                href="#"
-                @click="SelectCategory(newsType)"
-                >{{ newsType.Name }}</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
+    
 
       <div class="col custom-date-picker">
         <VueDatePicker
@@ -244,7 +202,6 @@
             Nume & Avatar
           </th>
           <th scope="25" width="15%">Descriere</th>
-          <th scope="25" width="10%">Tip</th>
           <th
             scope="25"
             width="15%"
@@ -519,9 +476,9 @@ export default {
         });
     },
 
-    DeleteMember(id) {
+    DeletePlayer(id) {
       this.$axios
-        .delete(`/api/Member/deleteMember/${id}`)
+        .delete(`/api/Player/deletePlayer/${id}`)
         .then((response) => {
           this.GetAllNews();
           console.log(`Deleted news with ID ${id}`);
