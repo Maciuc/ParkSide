@@ -1,5 +1,4 @@
 ﻿using Parkside.Models.ViewModels;
-using Microsoft.AspNetCore.Http;
 
 namespace Parkside.Services.Players
 {

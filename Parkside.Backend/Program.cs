@@ -7,11 +7,18 @@ using Microsoft.IdentityModel.Tokens;
 using Parkside.Backend.Data;
 using Parkside.Backend.Helpers;
 using Parkside.Infrastructure.Context;
+using Parkside.Infrastructure.Repositories.Coaches;
+using Parkside.Infrastructure.Repositories.Newses;
 using Parkside.Infrastructure.Repositories.Players;
+using Parkside.Infrastructure.Repositories.SocialMedias;
 using Parkside.Infrastructure.Repositories.Sponsors;
 using Parkside.Models.Helpers;
+using Parkside.Services.Coaches;
+using Parkside.Services.Coachs;
 using Parkside.Services.Email;
+using Parkside.Services.Newss;
 using Parkside.Services.Players;
+using Parkside.Services.SocialMedias;
 using Parkside.Services.Sponsors;
 using Serilog;
 using System.Text;
@@ -100,6 +107,15 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 
 builder.Services.AddScoped<IPlayerRepo, PlayerRepo>();
 builder.Services.AddScoped<IPlayerService, PlayerService>();
+
+builder.Services.AddScoped<ICoachRepo, CoachRepo>();
+builder.Services.AddScoped<ICoachService, CoachService>();
+
+builder.Services.AddScoped<INewsRepo, NewsRepo>();
+builder.Services.AddScoped<INewsService, NewsService>();
+
+builder.Services.AddScoped<ISocialMediaRepo, SocialMediaRepo>();
+builder.Services.AddScoped<ISocialMediaService, SocialMediaService>();
 
 builder.Services.AddScoped<ISponsorRepo, SponsorRepo>();
 builder.Services.AddScoped<ISponsorService, SponsorService>();

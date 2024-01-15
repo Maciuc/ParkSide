@@ -6,12 +6,12 @@ namespace Parkside.Backend.Controller
 {
     [Route("api")]
     [ApiController]
-    public class PlayersController : ControllerBase
+    public class PlayerController : ControllerBase
     {
         private readonly IPlayerService _playerService;
-        private readonly ILogger<PlayersController> _logger;
+        private readonly ILogger<PlayerController> _logger;
 
-        public PlayersController(IPlayerService playeraService, ILogger<PlayersController> logger)
+        public PlayerController(IPlayerService playeraService, ILogger<PlayerController> logger)
         {
             _playerService = playeraService;
             _logger = logger;

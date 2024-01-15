@@ -2,20 +2,18 @@
 
 namespace Parkside.Models.ViewModels
 {
-    public class PlayerViewModel
+    public class CoachViewModel
     {
         public int Id { get; set; }
         public string? TeamName { get; set; }
-        public int? Number { get; set; }
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
         public string? Height { get; set; }
         public DateTime? BirthDate { get; set; }
-        public string? Role { get; set; }
         public string? ImageBase64 { get; set; }
     }
 
-    public class PlayerUpdateViewModel
+    public class CoachUpdateViewModel
     {
         [Required(ErrorMessage = "You should provide a firstname value.")]
         [MaxLength(50)]
@@ -25,14 +23,12 @@ namespace Parkside.Models.ViewModels
         [MaxLength(50)]
         public string LastName { get; set; } = null!;
         public string? TeamName { get; set; }
-        public int? Number { get; set; }
         public string? Height { get; set; }
         public DateTime? BirthDate { get; set; }
-        public string? Role { get; set; }
         public string? ImageBase64 { get; set; }
     }
 
-    public class PlayerCreateViewModel
+    public class CoachCreateViewModel
     {
         [Required(ErrorMessage = "You should provide a firstname value.")]
         [MaxLength(50)]
@@ -42,10 +38,8 @@ namespace Parkside.Models.ViewModels
         [MaxLength(50)]
         public string LastName { get; set; } = null!;
         public string? TeamName { get; set; }
-        public int? Number { get; set; }
         public string? Height { get; set; }
         public DateTime? BirthDate { get; set; }
-        public string? Role { get; set; }
         public string? ImageBase64 { get; set; }
     }
 }

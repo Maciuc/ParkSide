@@ -28,8 +28,11 @@ namespace Parkside.Services.Players
                 Id = player.Id,
                 FirstName = player.FirstName,
                 LastName = player.LastName,
+                TeamName = player.TeamName,
                 Height = player.Height,
                 Number = player.Number,
+                Role = player.Role,
+                BirthDate = player.BirthDate,
                 ImageBase64 = _genericService.GetImgBase64(player.ImageUrl)
             };
 
@@ -72,8 +75,11 @@ namespace Parkside.Services.Players
                   Id = player.Id,
                   FirstName = player.FirstName,
                   LastName = player.LastName,
+                  TeamName = player.TeamName,
                   Height = player.Height,
                   Number = player.Number,
+                  Role = player.Role,
+                  BirthDate = player.BirthDate,
                   ImageBase64 = _genericService.GetImgBase64(player.ImageUrl)
               })
               .ToList();
@@ -95,8 +101,11 @@ namespace Parkside.Services.Players
             {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
+                TeamName = model.TeamName,
                 Height = model.Height,
                 Number = model.Number,
+                Role = model.Role,
+                BirthDate = model.BirthDate,
                 ImageUrl = _genericService.GetImagePath(model.ImageBase64, null, "Players")
             };
 
@@ -132,6 +141,9 @@ namespace Parkside.Services.Players
             player.LastName = model.LastName;
             player.Height = model.Height;
             player.Number = model.Number;
+            player.TeamName = model.TeamName;
+            player.Role = model.Role;
+            player.BirthDate = model.BirthDate;
             player.ImageUrl = _genericService.GetImagePath(model.ImageBase64, null, "Players");
 
             await _playerRepo.Update(player);
