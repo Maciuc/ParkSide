@@ -9,5 +9,6 @@ namespace Parkside.Infrastructure.Entities
         public string Name { get; set; } = null!;
         public string? Link { get; set; }
         public bool IsDeleted { get; set; }
+        public string? Platform { get; set; }
     }
 }

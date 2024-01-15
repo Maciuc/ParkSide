@@ -7,6 +7,7 @@ namespace Parkside.Services.Sponsors
         Task<SponsorViewModel> GetSponsor(int id);
         PagingViewModel<SponsorViewModel> GetSponsors(
             string? nameSearch, string? columnToSort, int pageNumber, int pageSize);
+        IQueryable<SponsorViewModel> GetHomePageSponsors();
         Task AddSponsor(SponsorCreateViewModel model);
         Task DeleteSponsor(int id);
         Task VirtualDeleteSponsor(int id);

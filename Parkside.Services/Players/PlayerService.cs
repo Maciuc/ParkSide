@@ -148,6 +148,26 @@ namespace Parkside.Services.Players
 
             await _playerRepo.Update(player);
         }
+
+        public IQueryable<PlayerViewModel> GetHomePagePlayers()
+        {
+            var players = _playerRepo.GetAllQuerable();
+
+            var finalPlayers = players.Select(player => new PlayerViewModel
+            {
+                Id = player.Id,
+                FirstName = player.FirstName,
+                LastName = player.LastName,
+                TeamName = player.TeamName,
+                Height = player.Height,
+                Number = player.Number,
+                Role = player.Role,
+                BirthDate = player.BirthDate,
+                ImageBase64 = _genericService.GetImgBase64(player.ImageUrl)
+            });
+
+            return finalPlayers;
+        }
     }
 }
 

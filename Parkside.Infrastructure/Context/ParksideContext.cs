@@ -191,6 +191,10 @@ namespace Parkside.Infrastructure.Context
                 entity.Property(e => e.Link).HasMaxLength(300);
 
                 entity.Property(e => e.Name).HasMaxLength(50);
+
+                entity.Property(e => e.Platform)
+                    .HasMaxLength(50)
+                    .IsFixedLength();
             });
 
             modelBuilder.Entity<Sponsor>(entity =>

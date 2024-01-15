@@ -24,34 +24,48 @@ namespace Parkside.Backend.Controller
             return Ok(news);
         }
 
-        [HttpGet("getNewses", Name = "news")]
+        [HttpGet("getNewses")]
         public IActionResult GetNewss(string? nameSearch, string? columnToSort,
             int pageNumber = 1, int pageSize = 10)
         {
-            var newss = _newsService.GetNewses(nameSearch, columnToSort,
+            var newses = _newsService.GetNewses(nameSearch, columnToSort,
                 pageNumber, pageSize);
-            return Ok(newss);
+            return Ok(newses);
+        }
+
+        [HttpGet("getHomePageNewses")]
+        public IActionResult GetHomePageNewses()
+        {
+            var newses = _newsService.GetHomePageNewses();
+            return Ok(newses);
+        }
+
+        [HttpGet("getLatestNewses")]
+        public IActionResult GetLatestNewses()
+        {
+            var newses = _newsService.GetLatestNewses();
+            return Ok(newses);
         }
 
         [HttpPost("createNews")]
         public async Task<IActionResult> AddNews(NewsCreateViewModel news)
         {
             await _newsService.AddNews(news);
-            return CreatedAtRoute("news", news);
+            return Ok(news);
         }
 
         [HttpDelete("physicalDeleteNews/{newsId}")]
         public async Task<IActionResult> DeleteNews(int newsId)
         {
             await _newsService.DeleteNews(newsId);
-            return Ok();
+            return Ok("News deleted successfully");
         }
 
         [HttpDelete("deleteNews/{newsId}")]
         public async Task<IActionResult> VirtualDeleteNews(int newsId)
         {
             await _newsService.VirtualDeleteNews(newsId);
-            return Ok();
+            return Ok("News deleted successfully");
         }
 
         [HttpPut("updateNews/{newsId}")]
@@ -59,7 +73,7 @@ namespace Parkside.Backend.Controller
             NewsUpdateViewModel news)
         {
             await _newsService.UpdateNews(newsId, news);
-            return Ok();
+            return Ok("News updated successfully");
         }
     }
 }

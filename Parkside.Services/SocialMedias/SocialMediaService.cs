@@ -28,6 +28,7 @@ namespace Parkside.Services.SocialMedias
                 Id = socialMedia.Id,
                 Name = socialMedia.Name,
                 Link = socialMedia.Link,
+                Platform = socialMedia.Platform
             };
 
             return finalSocialMedia;
@@ -83,11 +84,16 @@ namespace Parkside.Services.SocialMedias
 
         public async Task AddSocialMedia(SocialMediaCreateViewModel model)
         {
+            if (model.Link != null && model.Platform != null && !model.Link.ToLower().Contains(model.Platform.ToLower()))
+            {
+                throw new Exception("Social media link and platform don't correspond!");
+            }
 
             var finalSocialMedia = new SocialMedia()
             {
                 Name = model.Name,
                 Link = model.Link,
+                Platform = model.Platform
             };
 
             await _socialMediaRepo.Add(finalSocialMedia);
@@ -115,13 +121,39 @@ namespace Parkside.Services.SocialMedias
         public async Task UpdateSocialMedia(int id, SocialMediaUpdateViewModel model)
         {
             var socialMedia = await _socialMediaRepo.GetAsync(id);
+
             if (socialMedia == null)
                 throw new NotFoundException("SocialMedia not found!");
 
+            if (model.Link != null && model.Platform != null && !model.Link.ToLower().Contains(model.Platform.ToLower()))
+            {
+                throw new Exception("Social media link and platform don't correspond!");
+            }
+
             socialMedia.Name = model.Name;
             socialMedia.Link = model.Link;
+            socialMedia.Platform = model.Platform;
 
             await _socialMediaRepo.Update(socialMedia);
+        }
+
+        public IQueryable<string?> GetPlatformsDropDown()
+        {
+            var platforms = _socialMediaRepo.GetAllQuerable().Select(x => x.Platform).Distinct();
+            return platforms;
+        }
+
+        public IQueryable<SocialMediaViewModel> GetHomePageSocialMedia()
+        {
+            var socialMedias = _socialMediaRepo.GetAllQuerable().Select(x => new SocialMediaViewModel
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Link = x.Link,
+                Platform = x.Platform
+            });
+
+            return socialMedias;
         }
     }
 }

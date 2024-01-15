@@ -7,6 +7,8 @@ namespace Parkside.Services.Newss
         Task<NewsViewModel> GetNews(int id);
         PagingViewModel<NewsViewModel> GetNewses(
             string? nameSearch, string? columnToSort, int pageNumber, int pageSize);
+        IQueryable<NewsViewModel> GetHomePageNewses();
+        IQueryable<NewsViewModel> GetLatestNewses();
         Task AddNews(NewsCreateViewModel model);
         Task DeleteNews(int id);
         Task VirtualDeleteNews(int id);

@@ -11,6 +11,7 @@ namespace Parkside.Infrastructure.Context
             modelBuilder.Entity<Sponsor>().HasQueryFilter(x => !x.IsDeleted);
             modelBuilder.Entity<SocialMedia>().HasQueryFilter(x => !x.IsDeleted);
             modelBuilder.Entity<News>().HasQueryFilter(x => !x.IsDeleted);
+            modelBuilder.Entity<Coach>().HasQueryFilter(x => !x.IsDeleted);
         }
     }
 }

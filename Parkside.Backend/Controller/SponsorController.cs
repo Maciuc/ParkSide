@@ -20,16 +20,23 @@ namespace Parkside.Backend.Controller
         [HttpGet("getSponsor/{sponsorId}")]
         public async Task<IActionResult> GetSponsor(int sponsorId)
         {
-            var category = await _sponsorService.GetSponsor(sponsorId);
-            return Ok(category);
+            var sponsor = await _sponsorService.GetSponsor(sponsorId);
+            return Ok(sponsor);
         }
 
-        [HttpGet("getSponsors", Name = "sponsors")]
+        [HttpGet("getSponsors")]
         public IActionResult GetSponsors(string? nameSearch, string? columnToSort,
             int pageNumber = 1, int pageSize = 10)
         {
-            var sponsors = _sponsorService.GetSponsors(nameSearch, columnToSort, 
+            var sponsors = _sponsorService.GetSponsors(nameSearch, columnToSort,
                 pageNumber, pageSize);
+            return Ok(sponsors);
+        }
+
+        [HttpGet("getHomePageSponsors")]
+        public IActionResult GetHomePageSponsors()
+        {
+            var sponsors = _sponsorService.GetHomePageSponsors();
             return Ok(sponsors);
         }
 
@@ -37,21 +44,21 @@ namespace Parkside.Backend.Controller
         public async Task<IActionResult> AddSponsor(SponsorCreateViewModel sponsor)
         {
             await _sponsorService.AddSponsor(sponsor);
-            return CreatedAtRoute("sponsors", sponsor);
+            return Ok(sponsor);
         }
 
         [HttpDelete("physicalDeleteSponsor/{sponsorId}")]
         public async Task<IActionResult> DeleteSponsor(int sponsorId)
         {
             await _sponsorService.DeleteSponsor(sponsorId);
-            return Ok();
+            return Ok("Sponsor deleted successfully");
         }
 
         [HttpDelete("deleteSponsor/{sponsorId}")]
         public async Task<IActionResult> VirtualDeleteSponsor(int sponsorId)
         {
             await _sponsorService.VirtualDeleteSponsor(sponsorId);
-            return Ok();
+            return Ok("Sponsor deleted successfully");
         }
 
         [HttpPut("updateSponsor/{sponsorId}")]
@@ -59,7 +66,7 @@ namespace Parkside.Backend.Controller
             SponsorUpdateViewModel sponsor)
         {
             await _sponsorService.UpdateSponsor(sponsorId, sponsor);
-            return Ok();
+            return Ok("Sponsor updated successfully");
         }
     }
 }

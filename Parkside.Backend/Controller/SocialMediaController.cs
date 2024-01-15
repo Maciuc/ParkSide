@@ -20,11 +20,11 @@ namespace Parkside.Backend.Controller
         [HttpGet("getSocialMedia/{socialMediaId}")]
         public async Task<IActionResult> GetSocialMedia(int socialMediaId)
         {
-            var category = await _socialMediaService.GetSocialMedia(socialMediaId);
-            return Ok(category);
+            var socialMedia = await _socialMediaService.GetSocialMedia(socialMediaId);
+            return Ok(socialMedia);
         }
 
-        [HttpGet("getSocialMedias", Name = "socialMedias")]
+        [HttpGet("getSocialMedias")]
         public IActionResult GetSocialMedias(string? nameSearch, string? columnToSort,
             int pageNumber = 1, int pageSize = 10)
         {
@@ -33,25 +33,39 @@ namespace Parkside.Backend.Controller
             return Ok(socialMedias);
         }
 
+        [HttpGet("getHomePageSocialMedia")]
+        public IActionResult GetHomePageSocialMedia()
+        {
+            var socialMedias = _socialMediaService.GetHomePageSocialMedia();
+            return Ok(socialMedias);
+        }
+
+        [HttpGet("getPlatformsDropDown")]
+        public IActionResult GetPlatformsDropDown()
+        {
+            var socialMedias = _socialMediaService.GetPlatformsDropDown();
+            return Ok(socialMedias);
+        }
+
         [HttpPost("createSocialMedia")]
         public async Task<IActionResult> AddSocialMedia(SocialMediaCreateViewModel socialMedia)
         {
             await _socialMediaService.AddSocialMedia(socialMedia);
-            return CreatedAtRoute("socialMedias", socialMedia);
+            return Ok(socialMedia);
         }
 
         [HttpDelete("physicalDeleteSocialMedia/{socialMediaId}")]
         public async Task<IActionResult> DeleteSocialMedia(int socialMediaId)
         {
             await _socialMediaService.DeleteSocialMedia(socialMediaId);
-            return Ok();
+            return Ok("Soacial media deleted successfully");
         }
 
         [HttpDelete("deleteSocialMedia/{socialMediaId}")]
         public async Task<IActionResult> VirtualDeleteSocialMedia(int socialMediaId)
         {
             await _socialMediaService.VirtualDeleteSocialMedia(socialMediaId);
-            return Ok();
+            return Ok("Social media deleted successfully");
         }
 
         [HttpPut("updateSocialMedia/{socialMediaId}")]
@@ -59,7 +73,7 @@ namespace Parkside.Backend.Controller
             SocialMediaUpdateViewModel socialMedia)
         {
             await _socialMediaService.UpdateSocialMedia(socialMediaId, socialMedia);
-            return Ok();
+            return Ok("Soacial media updated successfully");
         }
     }
 }

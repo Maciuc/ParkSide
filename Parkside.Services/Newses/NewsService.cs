@@ -28,8 +28,8 @@ namespace Parkside.Services.Newss
                 Id = news.Id,
                 Name = news.Name,
                 Description = news.Description,
-                //PublishedDate = news.PublishedDate,
-                //IsPublished = news.IsPublished,
+                PublishedDate = news.PublishedDate,
+                IsPublished = news.IsPublished,
                 ImageBase64 = _genericService.GetImgBase64(news.ImageUrl)
 
             };
@@ -40,48 +40,48 @@ namespace Parkside.Services.Newss
         public PagingViewModel<NewsViewModel> GetNewses(
             string? nameSearch, string? columnToSort, int pageNumber, int pageSize)
         {
-            var newss = _newsRepo.GetAllQuerable();
+            var newses = _newsRepo.GetAllQuerable();
 
             if (!string.IsNullOrWhiteSpace(nameSearch))
             {
                 nameSearch = nameSearch.Trim();
-                newss = newss.Where(c => c.Name.Contains(nameSearch));
+                newses = newses.Where(c => c.Name.Contains(nameSearch));
             }
 
             switch (columnToSort)
             {
 
                 case ("name"):
-                    newss = newss.OrderBy(c => c.Name);
+                    newses = newses.OrderBy(c => c.Name);
                     break;
 
                 case ("name_desc"):
-                    newss = newss.OrderByDescending(c => c.Name);
+                    newses = newses.OrderByDescending(c => c.Name);
                     break;
 
                 case ("publishedDate"):
-                    //newss = newss.OrderBy(c => c.PublishedDate);
+                    newses = newses.OrderBy(c => c.PublishedDate);
                     break;
 
                 case ("publishedDate_desc"):
-                    //newss = newss.OrderByDescending(c => c.PublishedDate);
+                    newses = newses.OrderByDescending(c => c.PublishedDate);
                     break;
 
                 default:
-                    //newss = newss.OrderByDescending(c => c.PublishedDate);
+                    newses = newses.OrderByDescending(c => c.PublishedDate);
                     break;
             }
 
-            var numberOfNewss = newss.Count();
+            var numberOfNewss = newses.Count();
 
-            var newsssPerPage = newss.Skip(pageSize * (pageNumber - 1))
+            var newsesPerPage = newses.Skip(pageSize * (pageNumber - 1))
               .Take(pageSize).Select(news => new NewsViewModel
               {
                   Id = news.Id,
                   Name = news.Name,
                   Description = news.Description,
-                  //PublishedDate = news.PublishedDate,
-                  //IsPublished = news.IsPublished,
+                  PublishedDate = news.PublishedDate,
+                  IsPublished = news.IsPublished,
                   ImageBase64 = _genericService.GetImgBase64(news.ImageUrl)
               })
               .ToList();
@@ -90,7 +90,7 @@ namespace Parkside.Services.Newss
             {
                 Count = numberOfNewss,
                 NumberOfPages = (int)Math.Ceiling(numberOfNewss / (double)pageSize),
-                Items = newsssPerPage
+                Items = newsesPerPage
             };
 
             return paginingList;
@@ -103,8 +103,8 @@ namespace Parkside.Services.Newss
             {
                 Name = model.Name,
                 Description = model.Description,
-                //PublishedDate = model.PublishedDate,
-                //IsPublished = model.IsPublished,
+                PublishedDate = model.PublishedDate,
+                IsPublished = model.IsPublished,
                 ImageUrl = _genericService.GetImagePath(model.ImageBase64, null, "Newses")
             };
 
@@ -138,11 +138,47 @@ namespace Parkside.Services.Newss
 
             news.Name = model.Name;
             news.Description = model.Description;
-            //news.PublishedDate = model.PublishedDate;
-            //news.IsPublished = model.IsPublished;
+            news.PublishedDate = model.PublishedDate;
+            news.IsPublished = model.IsPublished;
             news.ImageUrl = _genericService.GetImagePath(model.ImageBase64, null, "Newses");
 
             await _newsRepo.Update(news);
+        }
+
+        public IQueryable<NewsViewModel> GetHomePageNewses()
+        {
+            var newses = _newsRepo.GetAllQuerable().Where(x => x.IsPublished == true); ;
+
+            var finalNewses = newses.Select(news => new NewsViewModel
+            {
+                Id = news.Id,
+                Name = news.Name,
+                Description = news.Description,
+                PublishedDate = news.PublishedDate,
+                IsPublished = news.IsPublished,
+                ImageBase64 = _genericService.GetImgBase64(news.ImageUrl)
+            });
+
+
+            return finalNewses;
+        }
+
+        public IQueryable<NewsViewModel> GetLatestNewses()
+        {
+            var newses = _newsRepo.GetAllQuerable().Where(x => x.IsPublished == true); ;
+
+            var finalNewses = newses.OrderByDescending(c => c.PublishedDate).Take(6)
+                .Select(news => new NewsViewModel
+                {
+                    Id = news.Id,
+                    Name = news.Name,
+                    Description = news.Description,
+                    PublishedDate = news.PublishedDate,
+                    IsPublished = news.IsPublished,
+                    ImageBase64 = _genericService.GetImgBase64(news.ImageUrl)
+                });
+
+            return finalNewses;
         }
     }
 }

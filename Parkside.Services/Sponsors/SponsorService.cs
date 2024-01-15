@@ -127,6 +127,21 @@ namespace Parkside.Services.Sponsors
 
             await _sponsorRepo.Update(sponsor);
         }
+
+        public IQueryable<SponsorViewModel> GetHomePageSponsors()
+        {
+            var sponsors = _sponsorRepo.GetAllQuerable();
+
+            var finalSponsors = sponsors.Select(sponsor => new SponsorViewModel
+            {
+                Id = sponsor.Id,
+                Name = sponsor.Name,
+                Link = sponsor.Link,
+                ImageBase64 = _genericService.GetImgBase64(sponsor.ImageUrl)
+            });
+
+            return finalSponsors;
+        }
     }
 }
 

@@ -24,7 +24,7 @@ namespace Parkside.Backend.Controller
             return Ok(player);
         }
 
-        [HttpGet("getPlayers", Name = "player")]
+        [HttpGet("getPlayers")]
         public IActionResult GetPlayers(string? nameSearch, string? columnToSort,
             int pageNumber = 1, int pageSize = 10)
         {
@@ -33,25 +33,32 @@ namespace Parkside.Backend.Controller
             return Ok(players);
         }
 
+        [HttpGet("getHomePagePlayers")]
+        public IActionResult GetHomePagePlayers()
+        {
+            var players = _playerService.GetHomePagePlayers();
+            return Ok(players);
+        }
+
         [HttpPost("createPlayer")]
         public async Task<IActionResult> AddPlayer(PlayerCreateViewModel player)
         {
             await _playerService.AddPlayer(player);
-            return CreatedAtRoute("player", player);
+            return Ok(player);
         }
 
         [HttpDelete("physicalDeletePlayer/{playerId}")]
         public async Task<IActionResult> DeletePlayer(int playerId)
         {
             await _playerService.DeletePlayer(playerId);
-            return Ok();
+            return Ok("Player deleted successfully");
         }
 
         [HttpDelete("deletePlayer/{playerId}")]
         public async Task<IActionResult> VirtualDeletePlayer(int playerId)
         {
             await _playerService.VirtualDeletePlayer(playerId);
-            return Ok();
+            return Ok("Player deleted successfully");
         }
 
         [HttpPut("updatePlayer/{playerId}")]
@@ -59,7 +66,7 @@ namespace Parkside.Backend.Controller
             PlayerUpdateViewModel player)
         {
             await _playerService.UpdatePlayer(playerId, player);
-            return Ok();
+            return Ok("Player updated successfully");
         }
     }
 }

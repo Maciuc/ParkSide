@@ -28,30 +28,30 @@ namespace Parkside.Backend.Controller
         public IActionResult GetCoaches(string? nameSearch, string? columnToSort,
             int pageNumber = 1, int pageSize = 10)
         {
-            var coachs = _coachService.GetCoaches(nameSearch, columnToSort,
+            var coaches = _coachService.GetCoaches(nameSearch, columnToSort,
                 pageNumber, pageSize);
-            return Ok(coachs);
+            return Ok(coaches);
         }
 
         [HttpPost("createCoach")]
         public async Task<IActionResult> AddCoach(CoachCreateViewModel coach)
         {
             await _coachService.AddCoach(coach);
-            return CreatedAtRoute("coach", coach);
+            return Ok(coach);
         }
 
         [HttpDelete("physicalDeleteCoach/{coachId}")]
         public async Task<IActionResult> DeleteCoach(int coachId)
         {
             await _coachService.DeleteCoach(coachId);
-            return Ok();
+            return Ok("Coach deleted successfully");
         }
 
         [HttpDelete("deleteCoach/{coachId}")]
         public async Task<IActionResult> VirtualDeleteCoach(int coachId)
         {
             await _coachService.VirtualDeleteCoach(coachId);
-            return Ok();
+            return Ok("Coach deleted successfully");
         }
 
         [HttpPut("updateCoach/{coachId}")]
@@ -59,7 +59,7 @@ namespace Parkside.Backend.Controller
             CoachUpdateViewModel coach)
         {
             await _coachService.UpdateCoach(coachId, coach);
-            return Ok();
+            return Ok("Coach updated successfully");
         }
     }
 }

@@ -7,6 +7,7 @@ namespace Parkside.Services.Players
         Task<PlayerViewModel> GetPlayer(int id);
         PagingViewModel<PlayerViewModel> GetPlayers(
             string? nameSearch, string? columnToSort, int pageNumber, int pageSize);
+        IQueryable<PlayerViewModel> GetHomePagePlayers();
         Task AddPlayer(PlayerCreateViewModel model);
         Task DeletePlayer(int id);
         Task VirtualDeletePlayer(int id);

@@ -7,6 +7,7 @@ namespace Parkside.Models.ViewModels
         public int Id { get; set; }
         public string Name { get; set; } = null!;
         public string? Link { get; set; }
+        public string? Platform { get; set; }
     }
 
     public class SocialMediaUpdateViewModel
@@ -15,6 +16,7 @@ namespace Parkside.Models.ViewModels
         [MaxLength(50)]
         public string Name { get; set; } = null!;
         public string? Link { get; set; }
+        public string? Platform { get; set; }
     }
 
     public class SocialMediaCreateViewModel
@@ -23,5 +25,6 @@ namespace Parkside.Models.ViewModels
         [MaxLength(50)]
         public string Name { get; set; } = null!;
         public string? Link { get; set; }
+        public string? Platform { get; set; }
     }
 }
