@@ -16,14 +16,14 @@ namespace Parkside.Services.Players
             _genericService = genericService;
         }
 
-        public async Task<PlayerViewModel> GetPlayer(int id)
+        public async Task<PlayerDetailsViewModel> GetPlayer(int id)
         {
             var player = await _playerRepo.GetAsync(id);
 
             if (player == null)
                 throw new NotFoundException("Player not found!");
 
-            var finalPlayer = new PlayerViewModel
+            var finalPlayer = new PlayerDetailsViewModel
             {
                 Id = player.Id,
                 FirstName = player.FirstName,
@@ -81,7 +81,7 @@ namespace Parkside.Services.Players
                   Description = player.Description,
                   Number = player.Number,
                   Role = player.Role,
-                  BirthDate = player.BirthDate,
+                  BirthDate = player.BirthDate.HasValue ? player.BirthDate.Value.ToString("dd/MM/yyyy") : null,
                   ImageBase64 = _genericService.GetImgBase64(player.ImageUrl)
               })
               .ToList();
@@ -167,7 +167,7 @@ namespace Parkside.Services.Players
                 Number = player.Number,
                 Description = player.Description,
                 Role = player.Role,
-                BirthDate = player.BirthDate,
+                BirthDate = player.BirthDate.HasValue ? player.BirthDate.Value.ToString("dd/MM/yyyy") : null,
                 ImageBase64 = _genericService.GetImgBase64(player.ImageUrl)
             });
 

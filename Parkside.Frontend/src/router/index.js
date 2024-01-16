@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import template from "../home/acasa.html"; 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -7,7 +6,7 @@ const router = createRouter({
       path: '/players',
       name: 'players',
       component: () => import('../views/Players/PlayersView.vue'),
-      meta: { breadcrumb: 'Membri' },
+      meta: { breadcrumb: 'Jucatori' },
     },
     {
       path: '/add-player',
@@ -53,11 +52,11 @@ const router = createRouter({
       children: [
       ],
     },
-    {
-      path: '/home',
-      name: 'home',
-      component: () => import('../home/acasa.html'),
-    },
+    // {
+    //   path: '/home',
+    //   name: 'home',
+    //   component: () => import('../home/acasa.html'),
+    // },
     
   ]
 })

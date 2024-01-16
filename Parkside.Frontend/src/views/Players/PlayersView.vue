@@ -14,7 +14,7 @@
     </div>
 
     <div class="row d-flex flex-row mt-3 new-form">
-      <div class="col-xxl-4 col-xl-4 col-lg-5 col-md-6 col-sm-8">
+      <div class="col-xxl-4 col-xl-4 col-lg-5 col-md-6  col-sm-6 ">
         <div class="input-group-custom mb-3">
           <div class="d-flex">
             <div class="d-flex justify-content-center align-items-center search-separator">
@@ -28,7 +28,7 @@
           <input
             type="text"
             class="form-control search"
-            placeholder="Caută partener"
+            placeholder="Caută jucator"
             aria-label="Username"
             aria-describedby="basic-addon1"
             v-model="filter.SearchText"
@@ -39,7 +39,7 @@
       </div>
 
 
-      <div class="col-xxl-3 col-xl-4 col-lg-5 col-md-6 col-sm-8 custom-control">
+      <div class="col-xxl-3 col-xl-4 col-lg-5 col-md-6 col-sm-6 custom-control">
         <select
           class="form-select form-control"
           aria-label="Default select example"
@@ -57,7 +57,7 @@
     <table class="table table-custom">
       <thead>
         <tr>
-          <th width="20%" @click="OrderBy('name')" class="cursor-pointer">
+          <th width="15%" @click="OrderBy('name')" class="cursor-pointer">
             <font-awesome-icon
               v-if="filter.OrderBy === 'name'"
               :icon="['fas', 'arrow-up-wide-short']"
@@ -85,8 +85,11 @@
             Nume & Avatar
           </th>
 
-          <th scope="25" width="20%">Numar</th>
-          <th scope="25" width="30%">Inaltime</th>
+          <th scope="15" width="15%">Echipa</th>
+          <th scope="15" width="15%">Numar</th>
+          <th scope="15" width="15%">Rol</th>
+          <th scope="15" width="15%">Data nastere</th>
+          <th scope="15" width="15%">Inaltime</th>
           <th></th>
         </tr>
       </thead>
@@ -101,11 +104,13 @@
                 />
               </div>
 
-              <span>{{ player.Lastname }}</span>
-              <span>{{ player.FirstName }}</span>
+              <span>{{ player.Lastname + " " + player.FirstName}}</span>
             </div>
           </td>
+          <td>{{ player.TeamName }}</td>
           <td>{{ player.Number }}</td>
+          <td>{{ player.Role }}</td>
+          <td>{{ player.BirthDate }}</td>
           <td>{{ player.Height }}</td>
 
           <td>
@@ -189,39 +194,10 @@ export default {
         Role: this.filter.RoleFilter,
       };
       this.$axios
-        .get(`https://jsonplaceholder.typicode.com/posts/1?${new URLSearchParams(searchParams)}`) ///api/Player/getPlayers
+        .get(`/api/Player/getPlayers/?${new URLSearchParams(searchParams)}`)
         .then((response) => {
           console.log(searchParams);
-          //this.PlayersList = response.data;
-          this.PlayersList.Items = [
-            {
-              Id: 1,
-              Lastname: "Ostafe",
-              FirstName: "Rares",
-              Role: "Administrator",
-              Number: 22,
-              Height: 1.83,
-              Image: "",
-            },
-            {
-              Id: 2,
-              Lastname: "Ostafe",
-              FirstName: "Rares",
-              Role: "Administrator",
-              Number: 22,
-              Height: 1.83,
-              Image: "",
-            },
-            {
-              Id: 3,
-              Lastname: "Ostafe",
-              FirstName: "Rares",
-              Role: "Administrator",
-              Number: 22,
-              Height: 1.83,
-              Image: "",
-            },
-          ];
+          this.PlayersList = response.data;
         })
         .catch((error) => {
           console.log(error);

@@ -4,7 +4,7 @@ namespace Parkside.Services.Players
 {
     public interface IPlayerService
     {
-        Task<PlayerViewModel> GetPlayer(int id);
+        Task<PlayerDetailsViewModel> GetPlayer(int id);
         PagingViewModel<PlayerViewModel> GetPlayers(
             string? NameSearch, string? OrderBy, int PageNumber, int PageSize);
         IQueryable<PlayerViewModel> GetHomePagePlayers();

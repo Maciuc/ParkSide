@@ -221,19 +221,18 @@ export default {
       editedPlayer: {
         Id: "",
         Name: "",
-        OrganizationFunction: "",
         BirthDate: "",
-        Speech: "",
-        OrderNumber: "",
+        Role: "",
+        Number: 0,
+        Height: "",
         ImageBase64: null,
-        VizibilitySpeech: false,
       },
-      functions: [
-        { name: "Director general" },
-        { name: "Manager general" },
-        { name: "Manager departament tehnic" },
-        { name: "Administrator" },
-        { name: "Contabil" },
+      Roles: [
+        { name: "Centrali" },
+        { name: "Pivoti" },
+        { name: "Interi" },
+        { name: "Extreme" },
+        { name: "Portari" },
       ],
     };
   },
@@ -318,16 +317,11 @@ export default {
     schema() {
       return yup.object({
         name: yup.string().required("Acest câmp este obligatoriu"),
-        function: yup.string().required("Acest câmp este obligatoriu"),
-        birthdate: yup.string().required("Acest câmp este obligatoriu"),
-        order: yup.string().required("Acest câmp este obligatoriu"),
       });
     },
   },
 
   created() {
-    // console.log("1+ "+this.$route)
-    // console.log("2+ "+this.$route.params.id)
     this.GetPlayerForEdit(this.$route.params.id);
   },
 };
