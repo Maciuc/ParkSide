@@ -62,6 +62,15 @@ import { RouterLink, RouterView } from "vue-router";
             <font-awesome-icon class="img-link" :icon="['fas', 'user-gear']"  />
             <div>Utilizatori</div>
           </router-link>
+
+          <router-link
+            class="nav-link d-flex"
+            :to="{ name: 'home' }"
+            exact
+          >
+            <font-awesome-icon class="img-link" :icon="['far', 'newspaper']"  />
+            <div >Home</div>
+          </router-link>
         </ul>
       </nav>
     </aside>
