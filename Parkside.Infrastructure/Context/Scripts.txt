@@ -7,6 +7,7 @@
 	Number INT,
 	BirthDate DATETIME,
 	Role String,
+	Nationality NVARCHAR(100),
 	ImageURL NVARCHAR(200),
 	IsDeleted BIT NOT NULL DEFAULT(0)
 );
@@ -46,5 +47,31 @@ CREATE TABLE SocialMedias(
 	Name NVARCHAR(50) NOT NULL,
 	Link NVARCHAR(300),
 	Platform NVARCHAR(50),
+	IsDeleted BIT NOT NULL DEFAULT(0)
+);
+
+CREATE TABLE Championships(
+	Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	Name NVARCHAR(50) NOT NULL,
+	ImageURL NVARCHAR(200),
+	IsDeleted BIT NOT NULL DEFAULT(0)
+);
+
+CREATE TABLE Teams(
+	Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	Name NVARCHAR(50) NOT NULL,
+	ImageURL NVARCHAR(200),
+	IsDeleted BIT NOT NULL DEFAULT(0)
+);
+
+CREATE TABLE Matches(
+	Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	ChampionshipId INT REFERENCES Championships(Id) NOT NULL,
+	EnemyTeamId INT REFERENCES Teams(Id) NOT NULL,
+	Location NVARCHAR(200),
+	Date DATETIME,
+	PlayingHome BIT,
+	EnemyTeamPoints INT,
+	MainTeamPoints INT,
 	IsDeleted BIT NOT NULL DEFAULT(0)
 );

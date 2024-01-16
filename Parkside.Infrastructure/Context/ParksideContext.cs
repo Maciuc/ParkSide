@@ -23,11 +23,14 @@ namespace Parkside.Infrastructure.Context
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; } = null!;
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; } = null!;
         public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; } = null!;
+        public virtual DbSet<Championship> Championships { get; set; } = null!;
         public virtual DbSet<Coach> Coaches { get; set; } = null!;
+        public virtual DbSet<Match> Matches { get; set; } = null!;
         public virtual DbSet<News> News { get; set; } = null!;
         public virtual DbSet<Player> Players { get; set; } = null!;
         public virtual DbSet<SocialMedia> SocialMedias { get; set; } = null!;
         public virtual DbSet<Sponsor> Sponsors { get; set; } = null!;
+        public virtual DbSet<Team> Teams { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -127,6 +130,15 @@ namespace Parkside.Infrastructure.Context
                     .HasForeignKey(d => d.UserId);
             });
 
+            modelBuilder.Entity<Championship>(entity =>
+            {
+                entity.Property(e => e.ImageUrl)
+                    .HasMaxLength(200)
+                    .HasColumnName("ImageURL");
+
+                entity.Property(e => e.Name).HasMaxLength(50);
+            });
+
             modelBuilder.Entity<Coach>(entity =>
             {
                 entity.Property(e => e.BirthDate).HasColumnType("datetime");
@@ -146,6 +158,25 @@ namespace Parkside.Infrastructure.Context
                     .HasColumnName("Last_Name");
 
                 entity.Property(e => e.TeamName).HasMaxLength(200);
+            });
+
+            modelBuilder.Entity<Match>(entity =>
+            {
+                entity.Property(e => e.Date).HasColumnType("datetime");
+
+                entity.Property(e => e.Location).HasMaxLength(200);
+
+                entity.HasOne(d => d.Championship)
+                    .WithMany(p => p.Matches)
+                    .HasForeignKey(d => d.ChampionshipId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Matches__Champio__45BE5BA9");
+
+                entity.HasOne(d => d.EnemyTeam)
+                    .WithMany(p => p.Matches)
+                    .HasForeignKey(d => d.EnemyTeamId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Matches__EnemyTe__46B27FE2");
             });
 
             modelBuilder.Entity<News>(entity =>
@@ -181,6 +212,10 @@ namespace Parkside.Infrastructure.Context
                     .HasMaxLength(50)
                     .HasColumnName("Last_Name");
 
+                entity.Property(e => e.Nationality)
+                    .HasMaxLength(100)
+                    .IsFixedLength();
+
                 entity.Property(e => e.Role).HasMaxLength(50);
 
                 entity.Property(e => e.TeamName).HasMaxLength(200);
@@ -198,6 +233,15 @@ namespace Parkside.Infrastructure.Context
             });
 
             modelBuilder.Entity<Sponsor>(entity =>
+            {
+                entity.Property(e => e.ImageUrl)
+                    .HasMaxLength(200)
+                    .HasColumnName("ImageURL");
+
+                entity.Property(e => e.Name).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Team>(entity =>
             {
                 entity.Property(e => e.ImageUrl)
                     .HasMaxLength(200)

@@ -15,5 +15,6 @@ namespace Parkside.Infrastructure.Entities
         public string? Role { get; set; }
         public string? ImageUrl { get; set; }
         public bool IsDeleted { get; set; }
+        public string? Nationality { get; set; }
     }
 }

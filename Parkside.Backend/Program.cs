@@ -7,19 +7,26 @@ using Microsoft.IdentityModel.Tokens;
 using Parkside.Backend.Data;
 using Parkside.Backend.Helpers;
 using Parkside.Infrastructure.Context;
+using Parkside.Infrastructure.Repositories.ChampionShips;
 using Parkside.Infrastructure.Repositories.Coaches;
+using Parkside.Infrastructure.Repositories.Matches;
 using Parkside.Infrastructure.Repositories.Newses;
 using Parkside.Infrastructure.Repositories.Players;
 using Parkside.Infrastructure.Repositories.SocialMedias;
 using Parkside.Infrastructure.Repositories.Sponsors;
+using Parkside.Infrastructure.Repositories.Teams;
 using Parkside.Models.Helpers;
+using Parkside.Services.Championships;
 using Parkside.Services.Coaches;
 using Parkside.Services.Coachs;
 using Parkside.Services.Email;
+using Parkside.Services.Matches;
+using Parkside.Services.Matchs;
 using Parkside.Services.Newss;
 using Parkside.Services.Players;
 using Parkside.Services.SocialMedias;
 using Parkside.Services.Sponsors;
+using Parkside.Services.Teams;
 using Serilog;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -119,6 +126,15 @@ builder.Services.AddScoped<ISocialMediaService, SocialMediaService>();
 
 builder.Services.AddScoped<ISponsorRepo, SponsorRepo>();
 builder.Services.AddScoped<ISponsorService, SponsorService>();
+
+builder.Services.AddScoped<ITeamRepo, TeamRepo>();
+builder.Services.AddScoped<ITeamService, TeamService>();
+
+builder.Services.AddScoped<IChampionshipRepo, ChampionshipRepo>();
+builder.Services.AddScoped<IChampionshipService, ChampionshipService>();
+
+builder.Services.AddScoped<IMatchRepo, MatchRepo>();
+builder.Services.AddScoped<IMatchService, MatchService>();
 
 builder.Services.AddScoped<IGenericService, GenericService>();
 
