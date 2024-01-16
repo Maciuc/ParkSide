@@ -2,7 +2,7 @@
   <!-- Modal -->
   <div
     class="modal fade custom-modal"
-    id="partner-add-modal"
+    id="sponsor-add-modal"
     tabindex="-1"
     aria-labelledby="exampleModalLabel"
     :aria-hidden="true"
@@ -11,7 +11,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title mt-2" >
-            Adaugă partener
+            Adaugă sponsor
           </h5>
           <button
             type="button"
@@ -22,24 +22,24 @@
         </div>
 
         <Form
-          @submit="AddPartner"
+          @submit="AddSponsor"
           :validation-schema="schema"
           v-slot="{ errors }"
-          ref="addPartnerFormRef"
+          ref="addSponsorFormRef"
         >
           <div class="modal-body new-form">
             <div class="mb-3">
-              <label for="input-title-partner-add" class="form-label"
-                >Nume partener</label
+              <label for="input-title-sponsor-add" class="form-label"
+                >Nume sponsor</label
               >
               <Field
                 type="text"
                 class="form-control"
                 :class="{ 'border-danger': errors.name }"
-                id="input-title-partner-add"
+                id="input-title-sponsor-add"
                 name="name"
-                placeholder="Nume partener"
-                v-model="newPartner.Name"
+                placeholder="Nume sponsor"
+                v-model="newSponsor.Name"
               />
               <ErrorMessage name="name" class="text-danger error-message" />
             </div>
@@ -48,7 +48,7 @@
               <div class="col-6 d-flex flex-column justify-content-center">
                 <label class="form-label">Selectează imagine</label>
                 <label
-                  for="input-upload-add-partner"
+                  for="input-upload-add-sponsor"
                   class="button blue"
                   style="width: 140px"
                 >
@@ -56,12 +56,12 @@
                   <font-awesome-icon :icon="['fas', 'upload']" />
                   <Field
                     type="file"
-                    id="input-upload-add-partner"
+                    id="input-upload-add-sponsor"
                     name="upload"
                     style="display: none"
                     accept="image/*"
-                    ref="uploadInputAddPartner"
-                    @change="UploadImagePartner"
+                    ref="uploadInputAddSponsor"
+                    @change="UploadImageSponsor"
                   >
                   </Field>
                 </label>
@@ -72,7 +72,7 @@
                 <div
                   class="image-container d-flex align-items-center justify-content-center"
                 >
-                  <div v-if="!newPartner.LogoBase64">
+                  <div v-if="!newSponsor.ImageBase64">
                     <div
                       class="d-flex flex-column justify-content-center align-items-center gap-2"
                     >
@@ -87,7 +87,7 @@
                     </div>
                   </div>
 
-                  <div v-if="newPartner.LogoBase64" class="image">
+                  <div v-if="newSponsor.ImageBase64" class="image">
                     <button
                       type="button"
                       class="button-delete"
@@ -96,7 +96,7 @@
                       <font-awesome-icon :icon="['fas', 'trash']" />
                     </button>
                     <img
-                      :src="newPartner.LogoBase64"
+                      :src="newSponsor.ImageBase64"
                       alt="Imagine selectată"
                       class="image"
                     />
@@ -140,7 +140,7 @@ import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 
 export default {
-  name: "PartnersAddPartnerComponent",
+  name: "SponsorsAddSponsorComponent",
   components: {
     Form,
     Field,
@@ -150,31 +150,38 @@ export default {
   data() {
     return {
       photoValidation: null,
-      newPartner: {
+      newSponsor: {
         Name: "",
-        LogoBase64: null,
+        ImageBase64: null,
       },
     };
   },
   methods: {
-    AddPartner() {
+    AddSponsor() {
       this.$axios
-        .post(`/api/Partners/createPartner`, this.newPartner)
+        .post(`/api/Sponsor/createSponsor`, this.newSponsor)
         .then((response) => {
           console.log(response);
-          console.log(this.newPartner);
+          console.log(this.newSponsor);
           this.$emit("get-list");
-          $("#partner-add-modal").modal("hide");
+          $("#sponsor-add-modal").modal("hide");
+          this.$swal.fire({
+            title: "Succes",
+            text: "Sponsorul a fost adăugat",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         })
         .catch((error) => {
           console.error(error);
         });
     },
     ClearModal() {
-      this.$refs.addPartnerFormRef.resetForm();
-      this.newPartner.LogoBase64 = null;
+      this.$refs.addSponsorFormRef.resetForm();
+      this.newSponsor.ImageBase64 = null;
     },
-    UploadImagePartner(event) {
+    UploadImageSponsor(event) {
       const selectedFile = event.target;
       const file = event.target.files[0];
       const reader = new FileReader();
@@ -183,7 +190,7 @@ export default {
           if (file.size / 1024 < 15360) {
             this.photoValidation = null;
             console.log(reader.result);
-            this.newPartner.LogoBase64 = reader.result;
+            this.newSponsor.ImageBase64 = reader.result;
             selectedFile.value = "";
           }else{
             this.photoValidation = true;
@@ -197,8 +204,8 @@ export default {
       }
     },
     DeletePhoto(selectedFile) {
-      this.$refs.uploadInputAddPartner.reset();
-      this.newPartner.LogoBase64 = null;
+      this.$refs.uploadInputAddSponsor.reset();
+      this.newSponsor.ImageBase64 = null;
     },
   },
 

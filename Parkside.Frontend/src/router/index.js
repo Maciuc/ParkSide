@@ -46,10 +46,10 @@ const router = createRouter({
       meta: { breadcrumb: 'Editează știre' },
     },
     {
-      path: '/partners',
-      name: 'partners',
-      component: () => import('../views/PartnersView.vue'),
-      meta: { breadcrumb: 'Parteneri' },
+      path: '/sponsors',
+      name: 'sponsors',
+      component: () => import('../views/SponsorsView.vue'),
+      meta: { breadcrumb: 'Sponsori' },
       children: [
       ],
     },

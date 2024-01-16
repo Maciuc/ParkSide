@@ -34,7 +34,7 @@ app.component('VueDatePicker', VueDatePicker);
 
 const axiosInstance = axios.create({
     withCredentials: true,
-    baseURL: 'https://localhost:44386',
+    baseURL: 'https://localhost:7260',
   })
 app.config.globalProperties.$axios = { ...axiosInstance }
 app.use(router)

@@ -34,17 +34,17 @@ namespace Parkside.Services.Championships
         }
 
         public PagingViewModel<ChampionshipViewModel> GetChampionships(
-            string? nameSearch, string? columnToSort, int pageNumber, int pageSize)
+            string? NameSearch, string? OrderBy, int PageNumber, int PageSize)
         {
             var championships = _championshipRepo.GetAllQuerable();
 
-            if (!string.IsNullOrWhiteSpace(nameSearch))
+            if (!string.IsNullOrWhiteSpace(NameSearch))
             {
-                nameSearch = nameSearch.Trim();
-                championships = championships.Where(c => c.Name.Contains(nameSearch));
+                NameSearch = NameSearch.Trim();
+                championships = championships.Where(c => c.Name.Contains(NameSearch));
             }
 
-            switch (columnToSort)
+            switch (OrderBy)
             {
 
                 case ("name"):
@@ -62,8 +62,8 @@ namespace Parkside.Services.Championships
 
             var numberOfChampionships = championships.Count();
 
-            var championshipssPerPage = championships.Skip(pageSize * (pageNumber - 1))
-              .Take(pageSize).Select(championship => new ChampionshipViewModel
+            var championshipssPerPage = championships.Skip(PageSize * (PageNumber - 1))
+              .Take(PageSize).Select(championship => new ChampionshipViewModel
               {
                   Id = championship.Id,
                   Name = championship.Name,
@@ -74,7 +74,7 @@ namespace Parkside.Services.Championships
             var paginingList = new PagingViewModel<ChampionshipViewModel>
             {
                 Count = numberOfChampionships,
-                NumberOfPages = (int)Math.Ceiling(numberOfChampionships / (double)pageSize),
+                NumberOfPages = (int)Math.Ceiling(numberOfChampionships / (double)PageSize),
                 Items = championshipssPerPage
             };
 

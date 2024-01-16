@@ -34,17 +34,17 @@ namespace Parkside.Services.Teams
         }
 
         public PagingViewModel<TeamViewModel> GetTeams(
-            string? nameSearch, string? columnToSort, int pageNumber, int pageSize)
+            string? NameSearch, string? OrderBy, int PageNumber, int PageSize)
         {
             var teams = _teamRepo.GetAllQuerable();
 
-            if (!string.IsNullOrWhiteSpace(nameSearch))
+            if (!string.IsNullOrWhiteSpace(NameSearch))
             {
-                nameSearch = nameSearch.Trim();
-                teams = teams.Where(c => c.Name.Contains(nameSearch));
+                NameSearch = NameSearch.Trim();
+                teams = teams.Where(c => c.Name.Contains(NameSearch));
             }
 
-            switch (columnToSort)
+            switch (OrderBy)
             {
 
                 case ("name"):
@@ -62,8 +62,8 @@ namespace Parkside.Services.Teams
 
             var numberOfTeams = teams.Count();
 
-            var teamssPerPage = teams.Skip(pageSize * (pageNumber - 1))
-              .Take(pageSize).Select(team => new TeamViewModel
+            var teamssPerPage = teams.Skip(PageSize * (PageNumber - 1))
+              .Take(PageSize).Select(team => new TeamViewModel
               {
                   Id = team.Id,
                   Name = team.Name,
@@ -74,7 +74,7 @@ namespace Parkside.Services.Teams
             var paginingList = new PagingViewModel<TeamViewModel>
             {
                 Count = numberOfTeams,
-                NumberOfPages = (int)Math.Ceiling(numberOfTeams / (double)pageSize),
+                NumberOfPages = (int)Math.Ceiling(numberOfTeams / (double)PageSize),
                 Items = teamssPerPage
             };
 

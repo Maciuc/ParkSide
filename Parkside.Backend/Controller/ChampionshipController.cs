@@ -4,7 +4,7 @@ using Parkside.Services.Championships;
 
 namespace Parkside.Backend.Controller
 {
-    [Route("api")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ChampionshipController : ControllerBase
     {
@@ -25,11 +25,11 @@ namespace Parkside.Backend.Controller
         }
 
         [HttpGet("getChampionships")]
-        public IActionResult GetChampionships(string? nameSearch, string? columnToSort,
-            int pageNumber = 1, int pageSize = 10)
+        public IActionResult GetChampionships(string? NameSearch, string? OrderBy,
+            int PageNumber = 1, int PageSize = 10)
         {
-            var championships = _championshipService.GetChampionships(nameSearch, columnToSort,
-                pageNumber, pageSize);
+            var championships = _championshipService.GetChampionships(NameSearch, OrderBy,
+                PageNumber, PageSize);
             return Ok(championships);
         }
 

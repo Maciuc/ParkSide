@@ -163,7 +163,7 @@ import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 
 export default {
-  name: "PartnersAddPartnerComponent",
+  name: "SponsorsAddSponsorComponent",
   components: {
     Form,
     Field,

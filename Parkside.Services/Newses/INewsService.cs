@@ -4,9 +4,10 @@ namespace Parkside.Services.Newss
 {
     public interface INewsService
     {
-        Task<NewsViewModel> GetNews(int id);
+        Task<NewsDetailsViewModel> GetNews(int id);
         PagingViewModel<NewsViewModel> GetNewses(
-            string? nameSearch, string? columnToSort, int pageNumber, int pageSize);
+            string? NameSearch, string? OrderBy, string? PublishedDate, bool? IsPublished,
+            int PageNumber, int PageSize);
         IQueryable<NewsViewModel> GetHomePageNewses();
         IQueryable<NewsViewModel> GetLatestNewses();
         Task AddNews(NewsCreateViewModel model);

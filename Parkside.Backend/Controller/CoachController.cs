@@ -4,7 +4,7 @@ using Parkside.Services.Coaches;
 
 namespace Parkside.Backend.Controller
 {
-    [Route("api")]
+    [Route("api/[controller]")]
     [ApiController]
     public class CoachController : ControllerBase
     {
@@ -25,11 +25,11 @@ namespace Parkside.Backend.Controller
         }
 
         [HttpGet("getCoaches", Name = "coach")]
-        public IActionResult GetCoaches(string? nameSearch, string? columnToSort,
-            int pageNumber = 1, int pageSize = 10)
+        public IActionResult GetCoaches(string? NameSearch, string? OrderBy,
+            int PageNumber = 1, int PageSize = 10)
         {
-            var coaches = _coachService.GetCoaches(nameSearch, columnToSort,
-                pageNumber, pageSize);
+            var coaches = _coachService.GetCoaches(NameSearch, OrderBy,
+                PageNumber, PageSize);
             return Ok(coaches);
         }
 

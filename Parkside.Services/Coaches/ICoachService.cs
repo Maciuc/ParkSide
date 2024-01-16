@@ -6,7 +6,7 @@ namespace Parkside.Services.Coaches
     {
         Task<CoachViewModel> GetCoach(int id);
         PagingViewModel<CoachViewModel> GetCoaches(
-            string? nameSearch, string? columnToSort, int pageNumber, int pageSize);
+            string? NameSearch, string? OrderBy, int PageNumber, int PageSize);
         Task AddCoach(CoachCreateViewModel model);
         Task DeleteCoach(int id);
         Task VirtualDeleteCoach(int id);

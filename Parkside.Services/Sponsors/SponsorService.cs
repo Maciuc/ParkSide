@@ -35,36 +35,21 @@ namespace Parkside.Services.Sponsors
         }
 
         public PagingViewModel<SponsorViewModel> GetSponsors(
-            string? nameSearch, string? columnToSort, int pageNumber, int pageSize)
+            string? NameSearch, int PageNumber, int PageSize)
         {
             var sponsors = _sponsorRepo.GetAllQuerable();
 
-            if (!string.IsNullOrWhiteSpace(nameSearch))
+            if (!string.IsNullOrWhiteSpace(NameSearch))
             {
-                nameSearch = nameSearch.Trim();
-                sponsors = sponsors.Where(c => c.Name.Contains(nameSearch));
+                NameSearch = NameSearch.Trim();
+                sponsors = sponsors.Where(c => c.Name.Contains(NameSearch));
             }
 
-            switch (columnToSort)
-            {
-
-                case ("name"):
-                    sponsors = sponsors.OrderBy(c => c.Name);
-                    break;
-
-                case ("name_desc"):
-                    sponsors = sponsors.OrderByDescending(c => c.Name);
-                    break;
-
-                default:
-                    sponsors = sponsors.OrderBy(c => c.Name);
-                    break;
-            }
 
             var numberOfSponsors = sponsors.Count();
 
-            var sponsorssPerPage = sponsors.Skip(pageSize * (pageNumber - 1))
-              .Take(pageSize).Select(sponsor => new SponsorViewModel
+            var sponsorssPerPage = sponsors.Skip(PageSize * (PageNumber - 1))
+              .Take(PageSize).Select(sponsor => new SponsorViewModel
               {
                   Id = sponsor.Id,
                   Name = sponsor.Name,
@@ -76,7 +61,7 @@ namespace Parkside.Services.Sponsors
             var paginingList = new PagingViewModel<SponsorViewModel>
             {
                 Count = numberOfSponsors,
-                NumberOfPages = (int)Math.Ceiling(numberOfSponsors / (double)pageSize),
+                NumberOfPages = (int)Math.Ceiling(numberOfSponsors / (double)PageSize),
                 Items = sponsorssPerPage
             };
 

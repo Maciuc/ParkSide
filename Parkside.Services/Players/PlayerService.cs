@@ -41,18 +41,18 @@ namespace Parkside.Services.Players
         }
 
         public PagingViewModel<PlayerViewModel> GetPlayers(
-            string? nameSearch, string? columnToSort, int pageNumber, int pageSize)
+            string? NameSearch, string? OrderBy, int PageNumber, int PageSize)
         {
             var players = _playerRepo.GetAllQuerable();
 
-            if (!string.IsNullOrWhiteSpace(nameSearch))
+            if (!string.IsNullOrWhiteSpace(NameSearch))
             {
-                nameSearch = nameSearch.Trim();
-                players = players.Where(c => c.FirstName.Contains(nameSearch) ||
-                c.LastName.Contains(nameSearch));
+                NameSearch = NameSearch.Trim();
+                players = players.Where(c => c.FirstName.Contains(NameSearch) ||
+                c.LastName.Contains(NameSearch));
             }
 
-            switch (columnToSort)
+            switch (OrderBy)
             {
 
                 case ("name"):
@@ -70,8 +70,8 @@ namespace Parkside.Services.Players
 
             var numberOfPlayers = players.Count();
 
-            var playerssPerPage = players.Skip(pageSize * (pageNumber - 1))
-              .Take(pageSize).Select(player => new PlayerViewModel
+            var playerssPerPage = players.Skip(PageSize * (PageNumber - 1))
+              .Take(PageSize).Select(player => new PlayerViewModel
               {
                   Id = player.Id,
                   FirstName = player.FirstName,
@@ -89,7 +89,7 @@ namespace Parkside.Services.Players
             var paginingList = new PagingViewModel<PlayerViewModel>
             {
                 Count = numberOfPlayers,
-                NumberOfPages = (int)Math.Ceiling(numberOfPlayers / (double)pageSize),
+                NumberOfPages = (int)Math.Ceiling(numberOfPlayers / (double)PageSize),
                 Items = playerssPerPage
             };
 

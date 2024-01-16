@@ -4,7 +4,7 @@ using Parkside.Services.Players;
 
 namespace Parkside.Backend.Controller
 {
-    [Route("api")]
+    [Route("api/[controller]")]
     [ApiController]
     public class PlayerController : ControllerBase
     {
@@ -25,11 +25,11 @@ namespace Parkside.Backend.Controller
         }
 
         [HttpGet("getPlayers")]
-        public IActionResult GetPlayers(string? nameSearch, string? columnToSort,
-            int pageNumber = 1, int pageSize = 10)
+        public IActionResult GetPlayers(string? NameSearch, string? OrderBy,
+            int PageNumber = 1, int PageSize = 10)
         {
-            var players = _playerService.GetPlayers(nameSearch, columnToSort,
-                pageNumber, pageSize);
+            var players = _playerService.GetPlayers(NameSearch, OrderBy,
+                PageNumber, PageSize);
             return Ok(players);
         }
 

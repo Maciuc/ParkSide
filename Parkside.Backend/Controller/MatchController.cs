@@ -4,7 +4,7 @@ using Parkside.Services.Matches;
 
 namespace Parkside.Backend.Controller
 {
-    [Route("api")]
+    [Route("api/[controller]")]
     [ApiController]
     public class MatchController : ControllerBase
     {
@@ -25,11 +25,11 @@ namespace Parkside.Backend.Controller
         }
 
         [HttpGet("getMatches")]
-        public IActionResult GetMatchs(string? nameSearch, string? columnToSort,
-            int pageNumber = 1, int pageSize = 10)
+        public IActionResult GetMatchs(string? NameSearch, string? OrderBy,
+            int PageNumber = 1, int PageSize = 10)
         {
-            var matchs = _matchService.GetMatches(nameSearch, columnToSort,
-                pageNumber, pageSize);
+            var matchs = _matchService.GetMatches(NameSearch, OrderBy,
+                PageNumber, PageSize);
             return Ok(matchs);
         }
 

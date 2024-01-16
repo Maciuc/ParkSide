@@ -16,39 +16,52 @@ namespace Parkside.Services.Newss
             _genericService = genericService;
         }
 
-        public async Task<NewsViewModel> GetNews(int id)
+        public async Task<NewsDetailsViewModel> GetNews(int id)
         {
             var news = await _newsRepo.GetAsync(id);
 
             if (news == null)
                 throw new NotFoundException("News not found!");
 
-            var finalNews = new NewsViewModel
+            var finalNews = new NewsDetailsViewModel
             {
                 Id = news.Id,
                 Name = news.Name,
                 Description = news.Description,
                 PublishedDate = news.PublishedDate,
+                Content = news.Content,
                 IsPublished = news.IsPublished,
                 ImageBase64 = _genericService.GetImgBase64(news.ImageUrl)
-
             };
 
             return finalNews;
         }
 
         public PagingViewModel<NewsViewModel> GetNewses(
-            string? nameSearch, string? columnToSort, int pageNumber, int pageSize)
+            string? NameSearch, string? OrderBy, string? PublishedDate, bool? IsPublished,
+            int PageNumber, int PageSize)
         {
             var newses = _newsRepo.GetAllQuerable();
 
-            if (!string.IsNullOrWhiteSpace(nameSearch))
+            if (!string.IsNullOrWhiteSpace(NameSearch))
             {
-                nameSearch = nameSearch.Trim();
-                newses = newses.Where(c => c.Name.Contains(nameSearch));
+                NameSearch = NameSearch.Trim();
+                newses = newses.Where(c => c.Name.Contains(NameSearch));
             }
 
-            switch (columnToSort)
+            if (!string.IsNullOrWhiteSpace(PublishedDate))
+            {
+                PublishedDate = PublishedDate.Trim();
+                newses = newses.Where(n => n.PublishedDate.Value.Date == DateTime.Parse(PublishedDate).Date);
+            }
+
+            if (IsPublished != null)
+            {
+                newses = newses.Where(n => n.IsPublished == IsPublished);
+            }
+
+
+            switch (OrderBy)
             {
 
                 case ("name"):
@@ -59,11 +72,11 @@ namespace Parkside.Services.Newss
                     newses = newses.OrderByDescending(c => c.Name);
                     break;
 
-                case ("publishedDate"):
+                case ("PublishedDate"):
                     newses = newses.OrderBy(c => c.PublishedDate);
                     break;
 
-                case ("publishedDate_desc"):
+                case ("PublishedDate_desc"):
                     newses = newses.OrderByDescending(c => c.PublishedDate);
                     break;
 
@@ -74,13 +87,13 @@ namespace Parkside.Services.Newss
 
             var numberOfNewss = newses.Count();
 
-            var newsesPerPage = newses.Skip(pageSize * (pageNumber - 1))
-              .Take(pageSize).Select(news => new NewsViewModel
+            var newsesPerPage = newses.Skip(PageSize * (PageNumber - 1))
+              .Take(PageSize).Select(news => new NewsViewModel
               {
                   Id = news.Id,
                   Name = news.Name,
                   Description = news.Description,
-                  PublishedDate = news.PublishedDate,
+                  PublishedDate = news.PublishedDate.HasValue ? news.PublishedDate.Value.ToString("dd/MM/yyyy") : null,
                   IsPublished = news.IsPublished,
                   ImageBase64 = _genericService.GetImgBase64(news.ImageUrl)
               })
@@ -89,7 +102,7 @@ namespace Parkside.Services.Newss
             var paginingList = new PagingViewModel<NewsViewModel>
             {
                 Count = numberOfNewss,
-                NumberOfPages = (int)Math.Ceiling(numberOfNewss / (double)pageSize),
+                NumberOfPages = (int)Math.Ceiling(numberOfNewss / (double)PageSize),
                 Items = newsesPerPage
             };
 
@@ -105,6 +118,7 @@ namespace Parkside.Services.Newss
                 Description = model.Description,
                 PublishedDate = model.PublishedDate,
                 IsPublished = model.IsPublished,
+                Content = model.Content,
                 ImageUrl = _genericService.GetImagePath(model.ImageBase64, null, "Newses")
             };
 
@@ -139,6 +153,7 @@ namespace Parkside.Services.Newss
             news.Name = model.Name;
             news.Description = model.Description;
             news.PublishedDate = model.PublishedDate;
+            news.Content = model.Content;
             news.IsPublished = model.IsPublished;
             news.ImageUrl = _genericService.GetImagePath(model.ImageBase64, null, "Newses");
 
@@ -154,7 +169,7 @@ namespace Parkside.Services.Newss
                 Id = news.Id,
                 Name = news.Name,
                 Description = news.Description,
-                PublishedDate = news.PublishedDate,
+                PublishedDate = news.PublishedDate.HasValue ? news.PublishedDate.Value.ToString("dd/MM/yyyy") : null,
                 IsPublished = news.IsPublished,
                 ImageBase64 = _genericService.GetImgBase64(news.ImageUrl)
             });
@@ -173,7 +188,7 @@ namespace Parkside.Services.Newss
                     Id = news.Id,
                     Name = news.Name,
                     Description = news.Description,
-                    PublishedDate = news.PublishedDate,
+                    PublishedDate = news.PublishedDate.HasValue ? news.PublishedDate.Value.ToString("dd/MM/yyyy") : null,
                     IsPublished = news.IsPublished,
                     ImageBase64 = _genericService.GetImgBase64(news.ImageUrl)
                 });

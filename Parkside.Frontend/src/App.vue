@@ -36,11 +36,11 @@ import { RouterLink, RouterView } from "vue-router";
           <router-link
             tag="li"
             class="nav-link d-flex"
-            :to="{ name: 'partners' }"
+            :to="{ name: 'sponsors' }"
             exact
           >
             <font-awesome-icon class="img-link" :icon="['far', 'handshake']"  />
-            <div>Parteneri</div>
+            <div>Sponsori</div>
           </router-link>
 
           <router-link

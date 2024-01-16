@@ -4,7 +4,7 @@ using Parkside.Services.Newss;
 
 namespace Parkside.Backend.Controller
 {
-    [Route("api")]
+    [Route("api/[controller]")]
     [ApiController]
     public class NewsController : ControllerBase
     {
@@ -25,11 +25,12 @@ namespace Parkside.Backend.Controller
         }
 
         [HttpGet("getNewses")]
-        public IActionResult GetNewss(string? nameSearch, string? columnToSort,
-            int pageNumber = 1, int pageSize = 10)
+        public IActionResult GetNewses(string? NameSearch, string? OrderBy,
+            string? PublishedDate, bool? IsPublished,
+            int PageNumber = 1, int PageSize = 10)
         {
-            var newses = _newsService.GetNewses(nameSearch, columnToSort,
-                pageNumber, pageSize);
+            var newses = _newsService.GetNewses(NameSearch, OrderBy, PublishedDate, IsPublished,
+                PageNumber, PageSize);
             return Ok(newses);
         }
 

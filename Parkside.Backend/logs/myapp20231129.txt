@@ -87,12 +87,12 @@ System.MissingMethodException: Attempted to access a missing method.
    at Parkside.Backend.Helpers.ErrorHandlerMiddleware.Invoke(HttpContext context) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.backend\Helpers\ErrorHandlerMidleware.cs:line 21
 2023-11-29 16:30:19.381 +02:00 [ERR] The LINQ expression 'DbSet<NewsCategory>()
     .Where(n => !(n.IsDeleted))
-    .OrderBy(n => n.GetType().GetProperty(__columnToSort_0).GetValue(
+    .OrderBy(n => n.GetType().GetProperty(__OrderBy_0).GetValue(
         obj: n, 
         index: null))' could not be translated. Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to 'AsEnumerable', 'AsAsyncEnumerable', 'ToList', or 'ToListAsync'. See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.
 System.InvalidOperationException: The LINQ expression 'DbSet<NewsCategory>()
     .Where(n => !(n.IsDeleted))
-    .OrderBy(n => n.GetType().GetProperty(__columnToSort_0).GetValue(
+    .OrderBy(n => n.GetType().GetProperty(__OrderBy_0).GetValue(
         obj: n, 
         index: null))' could not be translated. Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to 'AsEnumerable', 'AsAsyncEnumerable', 'ToList', or 'ToListAsync'. See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.
    at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.<VisitMethodCall>g__CheckTranslated|15_0(ShapedQueryExpression translated, <>c__DisplayClass15_0& )
@@ -107,8 +107,8 @@ System.InvalidOperationException: The LINQ expression 'DbSet<NewsCategory>()
    at Microsoft.EntityFrameworkCore.Query.Internal.CompiledQueryCache.GetOrAddQuery[TResult](Object cacheKey, Func`1 compiler)
    at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.Execute[TResult](Expression query)
    at System.Linq.Queryable.Count[TSource](IQueryable`1 source)
-   at Parkside.Services.NewsCategories.NewsCategoryService.GetNewsCategories(String name, String columnToSort, Int32 pageNumber, Int32 pageSize) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.Services\NewsCategories\NewsCategoryService.cs:line 58
-   at Parkside.Backend.Controller.NewsCategoriesController.GetNewsCategories(String name, String columnToSort, Int32 pageNumber, Int32 pageSize) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.backend\Controller\NewsCategoryController.cs:line 30
+   at Parkside.Services.NewsCategories.NewsCategoryService.GetNewsCategories(String name, String OrderBy, Int32 PageNumber, Int32 PageSize) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.Services\NewsCategories\NewsCategoryService.cs:line 58
+   at Parkside.Backend.Controller.NewsCategoriesController.GetNewsCategories(String name, String OrderBy, Int32 PageNumber, Int32 PageSize) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.backend\Controller\NewsCategoryController.cs:line 30
    at lambda_method3(Closure , Object , Object[] )
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
@@ -126,12 +126,12 @@ System.InvalidOperationException: The LINQ expression 'DbSet<NewsCategory>()
    at Parkside.Backend.Helpers.ErrorHandlerMiddleware.Invoke(HttpContext context) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.backend\Helpers\ErrorHandlerMidleware.cs:line 21
 2023-11-29 16:31:13.259 +02:00 [ERR] The LINQ expression 'DbSet<NewsCategory>()
     .Where(n => !(n.IsDeleted))
-    .OrderBy(n => n.GetType().GetProperty(__columnToSort_0).GetValue(
+    .OrderBy(n => n.GetType().GetProperty(__OrderBy_0).GetValue(
         obj: n, 
         index: null))' could not be translated. Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to 'AsEnumerable', 'AsAsyncEnumerable', 'ToList', or 'ToListAsync'. See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.
 System.InvalidOperationException: The LINQ expression 'DbSet<NewsCategory>()
     .Where(n => !(n.IsDeleted))
-    .OrderBy(n => n.GetType().GetProperty(__columnToSort_0).GetValue(
+    .OrderBy(n => n.GetType().GetProperty(__OrderBy_0).GetValue(
         obj: n, 
         index: null))' could not be translated. Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to 'AsEnumerable', 'AsAsyncEnumerable', 'ToList', or 'ToListAsync'. See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.
    at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.<VisitMethodCall>g__CheckTranslated|15_0(ShapedQueryExpression translated, <>c__DisplayClass15_0& )
@@ -146,8 +146,8 @@ System.InvalidOperationException: The LINQ expression 'DbSet<NewsCategory>()
    at Microsoft.EntityFrameworkCore.Query.Internal.CompiledQueryCache.GetOrAddQuery[TResult](Object cacheKey, Func`1 compiler)
    at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.Execute[TResult](Expression query)
    at System.Linq.Queryable.Count[TSource](IQueryable`1 source)
-   at Parkside.Services.NewsCategories.NewsCategoryService.GetNewsCategories(String name, String columnToSort, Int32 pageNumber, Int32 pageSize) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.Services\NewsCategories\NewsCategoryService.cs:line 58
-   at Parkside.Backend.Controller.NewsCategoriesController.GetNewsCategories(String name, String columnToSort, Int32 pageNumber, Int32 pageSize) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.backend\Controller\NewsCategoryController.cs:line 30
+   at Parkside.Services.NewsCategories.NewsCategoryService.GetNewsCategories(String name, String OrderBy, Int32 PageNumber, Int32 PageSize) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.Services\NewsCategories\NewsCategoryService.cs:line 58
+   at Parkside.Backend.Controller.NewsCategoriesController.GetNewsCategories(String name, String OrderBy, Int32 PageNumber, Int32 PageSize) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.backend\Controller\NewsCategoryController.cs:line 30
    at lambda_method3(Closure , Object , Object[] )
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
@@ -165,12 +165,12 @@ System.InvalidOperationException: The LINQ expression 'DbSet<NewsCategory>()
    at Parkside.Backend.Helpers.ErrorHandlerMiddleware.Invoke(HttpContext context) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.backend\Helpers\ErrorHandlerMidleware.cs:line 21
 2023-11-29 16:33:21.095 +02:00 [ERR] The LINQ expression 'DbSet<NewsCategory>()
     .Where(n => !(n.IsDeleted))
-    .OrderBy(n => n.GetType().GetProperty(__columnToSort_0).GetValue(
+    .OrderBy(n => n.GetType().GetProperty(__OrderBy_0).GetValue(
         obj: n, 
         index: null))' could not be translated. Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to 'AsEnumerable', 'AsAsyncEnumerable', 'ToList', or 'ToListAsync'. See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.
 System.InvalidOperationException: The LINQ expression 'DbSet<NewsCategory>()
     .Where(n => !(n.IsDeleted))
-    .OrderBy(n => n.GetType().GetProperty(__columnToSort_0).GetValue(
+    .OrderBy(n => n.GetType().GetProperty(__OrderBy_0).GetValue(
         obj: n, 
         index: null))' could not be translated. Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to 'AsEnumerable', 'AsAsyncEnumerable', 'ToList', or 'ToListAsync'. See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.
    at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.<VisitMethodCall>g__CheckTranslated|15_0(ShapedQueryExpression translated, <>c__DisplayClass15_0& )
@@ -188,8 +188,8 @@ System.InvalidOperationException: The LINQ expression 'DbSet<NewsCategory>()
    at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.Execute[TResult](Expression query)
    at Microsoft.EntityFrameworkCore.Query.Internal.EntityQueryProvider.Execute[TResult](Expression expression)
    at System.Linq.Queryable.Count[TSource](IQueryable`1 source)
-   at Parkside.Services.NewsCategories.NewsCategoryService.GetNewsCategories(String name, String columnToSort, Int32 pageNumber, Int32 pageSize) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.Services\NewsCategories\NewsCategoryService.cs:line 58
-   at Parkside.Backend.Controller.NewsCategoriesController.GetNewsCategories(String name, String columnToSort, Int32 pageNumber, Int32 pageSize) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.backend\Controller\NewsCategoryController.cs:line 30
+   at Parkside.Services.NewsCategories.NewsCategoryService.GetNewsCategories(String name, String OrderBy, Int32 PageNumber, Int32 PageSize) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.Services\NewsCategories\NewsCategoryService.cs:line 58
+   at Parkside.Backend.Controller.NewsCategoriesController.GetNewsCategories(String name, String OrderBy, Int32 PageNumber, Int32 PageSize) in C:\Users\gmaciuc\source\repos\Digital Flower\Parkside.backend\Controller\NewsCategoryController.cs:line 30
    at lambda_method3(Closure , Object , Object[] )
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()

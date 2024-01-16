@@ -41,18 +41,18 @@ namespace Parkside.Services.Coachs
         }
 
         public PagingViewModel<CoachViewModel> GetCoaches(
-            string? nameSearch, string? columnToSort, int pageNumber, int pageSize)
+            string? NameSearch, string? OrderBy, int PageNumber, int PageSize)
         {
             var coachs = _coachRepo.GetAllQuerable();
 
-            if (!string.IsNullOrWhiteSpace(nameSearch))
+            if (!string.IsNullOrWhiteSpace(NameSearch))
             {
-                nameSearch = nameSearch.Trim();
-                coachs = coachs.Where(c => c.FirstName.Contains(nameSearch) ||
-                c.LastName.Contains(nameSearch));
+                NameSearch = NameSearch.Trim();
+                coachs = coachs.Where(c => c.FirstName.Contains(NameSearch) ||
+                c.LastName.Contains(NameSearch));
             }
 
-            switch (columnToSort)
+            switch (OrderBy)
             {
 
                 case ("name"):
@@ -70,8 +70,8 @@ namespace Parkside.Services.Coachs
 
             var numberOfCoachs = coachs.Count();
 
-            var coachssPerPage = coachs.Skip(pageSize * (pageNumber - 1))
-              .Take(pageSize).Select(coach => new CoachViewModel
+            var coachssPerPage = coachs.Skip(PageSize * (PageNumber - 1))
+              .Take(PageSize).Select(coach => new CoachViewModel
               {
                   Id = coach.Id,
                   FirstName = coach.FirstName,
@@ -87,7 +87,7 @@ namespace Parkside.Services.Coachs
             var paginingList = new PagingViewModel<CoachViewModel>
             {
                 Count = numberOfCoachs,
-                NumberOfPages = (int)Math.Ceiling(numberOfCoachs / (double)pageSize),
+                NumberOfPages = (int)Math.Ceiling(numberOfCoachs / (double)PageSize),
                 Items = coachssPerPage
             };
 

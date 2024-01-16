@@ -35,17 +35,17 @@ namespace Parkside.Services.SocialMedias
         }
 
         public PagingViewModel<SocialMediaViewModel> GetSocialMedias(
-            string? nameSearch, string? columnToSort, int pageNumber, int pageSize)
+            string? NameSearch, string? OrderBy, int PageNumber, int PageSize)
         {
             var socialMedias = _socialMediaRepo.GetAllQuerable();
 
-            if (!string.IsNullOrWhiteSpace(nameSearch))
+            if (!string.IsNullOrWhiteSpace(NameSearch))
             {
-                nameSearch = nameSearch.Trim();
-                socialMedias = socialMedias.Where(c => c.Name.Contains(nameSearch));
+                NameSearch = NameSearch.Trim();
+                socialMedias = socialMedias.Where(c => c.Name.Contains(NameSearch));
             }
 
-            switch (columnToSort)
+            switch (OrderBy)
             {
 
                 case ("name"):
@@ -63,8 +63,8 @@ namespace Parkside.Services.SocialMedias
 
             var numberOfSocialMedias = socialMedias.Count();
 
-            var socialMediassPerPage = socialMedias.Skip(pageSize * (pageNumber - 1))
-              .Take(pageSize).Select(socialMedia => new SocialMediaViewModel
+            var socialMediassPerPage = socialMedias.Skip(PageSize * (PageNumber - 1))
+              .Take(PageSize).Select(socialMedia => new SocialMediaViewModel
               {
                   Id = socialMedia.Id,
                   Name = socialMedia.Name,
@@ -75,7 +75,7 @@ namespace Parkside.Services.SocialMedias
             var paginingList = new PagingViewModel<SocialMediaViewModel>
             {
                 Count = numberOfSocialMedias,
-                NumberOfPages = (int)Math.Ceiling(numberOfSocialMedias / (double)pageSize),
+                NumberOfPages = (int)Math.Ceiling(numberOfSocialMedias / (double)PageSize),
                 Items = socialMediassPerPage
             };
 

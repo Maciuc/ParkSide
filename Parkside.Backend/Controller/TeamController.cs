@@ -4,7 +4,7 @@ using Parkside.Services.Teams;
 
 namespace Parkside.Backend.Controller
 {
-    [Route("api")]
+    [Route("api/[controller]")]
     [ApiController]
     public class TeamController : ControllerBase
     {
@@ -25,11 +25,11 @@ namespace Parkside.Backend.Controller
         }
 
         [HttpGet("getTeams")]
-        public IActionResult GetTeams(string? nameSearch, string? columnToSort,
-            int pageNumber = 1, int pageSize = 10)
+        public IActionResult GetTeams(string? NameSearch, string? OrderBy,
+            int PageNumber = 1, int PageSize = 10)
         {
-            var teams = _teamService.GetTeams(nameSearch, columnToSort,
-                pageNumber, pageSize);
+            var teams = _teamService.GetTeams(NameSearch, OrderBy,
+                PageNumber, PageSize);
             return Ok(teams);
         }
 

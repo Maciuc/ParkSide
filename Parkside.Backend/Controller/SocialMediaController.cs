@@ -4,7 +4,7 @@ using Parkside.Services.SocialMedias;
 
 namespace Parkside.Backend.Controller
 {
-    [Route("api")]
+    [Route("api/[controller]")]
     [ApiController]
     public class SocialMediaController : ControllerBase
     {
@@ -25,11 +25,11 @@ namespace Parkside.Backend.Controller
         }
 
         [HttpGet("getSocialMedias")]
-        public IActionResult GetSocialMedias(string? nameSearch, string? columnToSort,
-            int pageNumber = 1, int pageSize = 10)
+        public IActionResult GetSocialMedias(string? NameSearch, string? OrderBy,
+            int PageNumber = 1, int PageSize = 10)
         {
-            var socialMedias = _socialMediaService.GetSocialMedias(nameSearch, columnToSort,
-                pageNumber, pageSize);
+            var socialMedias = _socialMediaService.GetSocialMedias(NameSearch, OrderBy,
+                PageNumber, PageSize);
             return Ok(socialMedias);
         }
 

@@ -14,6 +14,19 @@
     font-family: "Raleway";
     color: #688088;
 }
+.button.empty {
+  background-color: white;
+  color: #688088;
+  border: 1px solid #688088;
+  box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0);
+  font-weight: 600;
+  letter-spacing: 0.4px;
+}
+.button.empty:hover {
+  transition: background-color 0.3s;
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.2);
+}
   .button.green {
     background-color: #2da017;
   }
@@ -49,17 +62,19 @@
   .title-page {
     font-size: 21px;
     font-family: "Raleway";
-    line-height: 15px;
+    line-height: 25px;
     letter-spacing: 0.04px;
     font-weight: 600;
     color: #3e4d52;
   }
+  
 
   .new-form .form-control {
     font-size: 11.5px;
     height: 37px;
     width: 100%;
     font-family: "Raleway";
+
   }
   .new-form .form-label {
     font-size: 12px;
@@ -105,6 +120,23 @@
     padding-top: 0px;
   }
 
+  .custom-modal .modal-header .btn-close{
+    border: 0.5px solid #95A6AC;
+    border-radius: 8px;
+    padding: 12px;
+    margin: 0;
+  
+  }
+  
+  .custom-modal .modal-header .btn-close:hover{
+    border: 0.5px solid #FF4D26;
+    color:#FF4D26;
+    background-color: #FFEDE9;
+    color: #FF4D26;
+    --bs-btn-close-bg:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23FF4D26'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e")
+
+  }
+
   .cursor-pointer {
     cursor: pointer;
   }
@@ -116,10 +148,10 @@
   }
   .table-custom th {
     font-size: 11px;
-    font-weight: 700;
+    font-weight: 600;
     font-family: "Raleway";
     letter-spacing: 0.7px;
-    color: #3E4D52!important;
+    color: #95A6AC!important;
   }
   .table-custom span {
     font-size: 11px;
@@ -127,6 +159,14 @@
     font-family: "Raleway";
     letter-spacing: 0.6px;
     color: #3E4D52;
+  }
+
+  .table-custom .span-inactive {
+    font-size: 11px;
+    font-weight: 700;
+    font-family: "Raleway";
+    letter-spacing: 0.6px;
+    color: #95A6AC;
   }
   
   .table-custom .editButtons {
@@ -171,6 +211,7 @@
     font-weight: 600;
     letter-spacing: 0.4px;
     position: relative;
+    min-width: 100px;
   }
   
   .image-container .button-delete {
@@ -189,7 +230,7 @@
     color: #4e4e4e;
   }
   .image-container .no-image {
-    width: 50px;
+    width: 30px;
   }
   
   .image-container .image {
@@ -303,7 +344,57 @@
   padding: 0px;
 }
 
+.table-custom .draft{
+  color: #3F53EE;
+  font-size: 10px;
+  font-family: 'Raleway';
+}
 
+.table-custom .published{
+  color: #2d9b17;
+  font-size: 10px;
+  font-family: 'Raleway';
+}
+
+.logo {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  max-width: 150px;
+}
+
+.table-custom.table{
+  min-width: 1000px;
+}
+
+
+.new-form
+  .input-group
+  > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(
+    .valid-feedback
+  ):not(.invalid-tooltip):not(.invalid-feedback) {
+  border-top-left-radius: 0.375rem;
+  border-bottom-left-radius: 0.375rem;
+}
+.separator {
+  width: 0.5px;
+  background-color: #688088;
+  height: 15px;
+  margin-left: 10px;
+}
+
+.search-separator{
+  position:absolute;
+  top: 11px;
+  left: 15px;
+}
+
+.new-form .form-control.search{
+  padding-left: 50px;
+}
+
+.input-group-custom{
+  position: relative;
+}
 
 
 

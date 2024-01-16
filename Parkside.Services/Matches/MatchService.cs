@@ -52,18 +52,18 @@ namespace Parkside.Services.Matchs
         }
 
         public PagingViewModel<MatchViewModel> GetMatches(
-            string? nameSearch, string? columnToSort, int pageNumber, int pageSize)
+            string? NameSearch, string? OrderBy, int PageNumber, int PageSize)
         {
             var matches = _matchRepo.GetAllMatches();
 
-            if (!string.IsNullOrWhiteSpace(nameSearch))
+            if (!string.IsNullOrWhiteSpace(NameSearch))
             {
-                nameSearch = nameSearch.Trim();
-                matches = matches.Where(c => c.EnemyTeam.Name.Contains(nameSearch));
+                NameSearch = NameSearch.Trim();
+                matches = matches.Where(c => c.EnemyTeam.Name.Contains(NameSearch));
             }
 
 
-            switch (columnToSort)
+            switch (OrderBy)
             {
                 case ("date"):
                     matches = matches.OrderBy(c => c.Date);
@@ -80,8 +80,8 @@ namespace Parkside.Services.Matchs
 
             var numberOfMatchs = matches.Count();
 
-            var matchessPerPage = matches.Skip(pageSize * (pageNumber - 1))
-              .Take(pageSize).Select(match => new MatchViewModel
+            var matchessPerPage = matches.Skip(PageSize * (PageNumber - 1))
+              .Take(PageSize).Select(match => new MatchViewModel
               {
                   Id = match.Id,
                   ChampionshipName = match.Championship.Name,
@@ -98,7 +98,7 @@ namespace Parkside.Services.Matchs
             var paginingList = new PagingViewModel<MatchViewModel>
             {
                 Count = numberOfMatchs,
-                NumberOfPages = (int)Math.Ceiling(numberOfMatchs / (double)pageSize),
+                NumberOfPages = (int)Math.Ceiling(numberOfMatchs / (double)PageSize),
                 Items = matchessPerPage
             };
 

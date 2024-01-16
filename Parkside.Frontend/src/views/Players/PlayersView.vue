@@ -14,25 +14,31 @@
     </div>
 
     <div class="row d-flex flex-row mt-3 new-form">
-      <div class="col-xxl-3 col-xl-4 col-lg-5 col-md-6 col-sm-8">
-        <div class="input-group mb-3">
-          <span class="input-group-text"
-            ><font-awesome-icon
-              class="search_icon"
-              :icon="['fas', 'magnifying-glass']"
-              style="color: #688088"
-          /></span>
+      <div class="col-xxl-4 col-xl-4 col-lg-5 col-md-6 col-sm-8">
+        <div class="input-group-custom mb-3">
+          <div class="d-flex">
+            <div class="d-flex justify-content-center align-items-center search-separator">
+              <font-awesome-icon
+                class="search_icon"
+                :icon="['fas', 'magnifying-glass']"
+                style="color: #688088"
+              />
+              <div class="separator"></div>
+            </div>
           <input
             type="text"
-            class="form-control"
-            placeholder="Caută nume"
+            class="form-control search"
+            placeholder="Caută partener"
             aria-label="Username"
             aria-describedby="basic-addon1"
             v-model="filter.SearchText"
-            v-on:keyup.enter="GetAllPlayers()"
+            v-on:keyup.enter="GetAllPartners()"
           />
+          </div>
         </div>
       </div>
+
+
       <div class="col-xxl-3 col-xl-4 col-lg-5 col-md-6 col-sm-8 custom-control">
         <select
           class="form-select form-control"

@@ -2,7 +2,7 @@
   <!-- Modal -->
   <div
     class="modal fade custom-modal"
-    id="partner-edit-modal"
+    id="sponsor-edit-modal"
     tabindex="-1"
     aria-labelledby="exampleModalLabel"
     :aria-hidden="true"
@@ -10,7 +10,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title mt-2">Editează partener</h5>
+          <h5 class="modal-title mt-2">Editează sponsor</h5>
 
           <button
             type="button"
@@ -21,24 +21,24 @@
         </div>
 
         <Form
-          @submit="SaveEditedPartner"
+          @submit="SaveEditedSponsor"
           :validation-schema="schema"
           v-slot="{ errors }"
-          ref="editPartnerFormRef"
+          ref="editSponsorFormRef"
         >
           <div class="modal-body new-form">
             <div class="mb-3">
-              <label for="input-title-edit-partner" class="form-label"
-                >Nume partener</label
+              <label for="input-title-edit-sponsor" class="form-label"
+                >Nume sponsor</label
               >
               <Field
                 type="text"
                 class="form-control"
                 :class="{ 'border-danger': errors.name }"
-                id="input-title-edit-partner"
+                id="input-title-edit-sponsor"
                 name="name"
-                placeholder="Nume partener"
-                v-model="editedPartner.Name"
+                placeholder="Nume sponsor"
+                v-model="editedSponsor.Name"
               />
               <ErrorMessage name="name" class="text-danger error-message" />
             </div>
@@ -59,8 +59,8 @@
                     name="upload"
                     style="display: none"
                     accept="image/*"
-                    ref="uploadInputEditPartner"
-                    @change="UploadImagePartnerEdit"
+                    ref="uploadInputEditSponsor"
+                    @change="UploadImageSponsorEdit"
                   >
                   </Field>
                 </label>
@@ -70,7 +70,7 @@
                 <div
                   class="image-container d-flex align-items-center justify-content-center"
                 >
-                  <div v-if="!editedPartner.LogoBase64">
+                  <div v-if="!editedSponsor.ImageBase64">
                     <div
                       class="d-flex flex-column justify-content-center align-items-center gap-2"
                     >
@@ -85,7 +85,7 @@
                     </div>
                   </div>
 
-                  <div v-if="editedPartner.LogoBase64" class="image">
+                  <div v-if="editedSponsor.ImageBase64" class="image">
                     <button
                       type="button"
                       class="button-delete"
@@ -94,7 +94,7 @@
                       <font-awesome-icon :icon="['fas', 'trash']" />
                     </button>
                     <img
-                      :src="editedPartner.LogoBase64"
+                      :src="editedSponsor.ImageBase64"
                       alt="Imagine selectată"
                       class="image"
                     />
@@ -136,7 +136,7 @@ import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 
 export default {
-  name: "PartnersAddPartnerComponent",
+  name: "SponsorsAddSponsorComponent",
   components: {
     Form,
     Field,
@@ -149,21 +149,28 @@ export default {
     };
   },
   props: {
-    editedPartner: {
+    editedSponsor: {
       type: Object,
       default() {
-        return { Name: "", LogoBase64: "", Id: "" , IsVisible};
+        return { Name: "", ImageBase64: "", Id: ""};
       },
     },
   },
   methods: {
-    SaveEditedPartner() {
+    SaveEditedSponsor() {
       this.$axios
-        .put(`/api/Partners/updatePartner/${this.editedPartner.Id}`, this.editedPartner)
+        .put(`/api/Sponsor/updateSponsor/${this.editedSponsor.Id}`, this.editedSponsor)
         .then((response) => {
           console.log(response);
           this.$emit("get-list");
-          $("#partner-edit-modal").modal("hide");
+          $("#sponsor-edit-modal").modal("hide");
+          this.$swal.fire({
+            title: "Succes",
+            text: "Sponsorul a fost editat",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         })
         .catch((error) => {
           console.error(error);
@@ -171,9 +178,9 @@ export default {
     },
 
     ClearModal() {
-      this.$refs.editPartnerFormRef.resetForm();
+      this.$refs.editSponsorFormRef.resetForm();
     },
-    UploadImagePartnerEdit(event) {
+    UploadImageSponsorEdit(event) {
       const selectedFile = event.target;
       const file = event.target.files[0];
       const reader = new FileReader();
@@ -182,7 +189,7 @@ export default {
           if (file.size / 1024 < 15360) {
             this.PhotoValidation = null;
             console.log(reader.result);
-            this.editedPartner.Image = reader.result;
+            this.editedSponsor.Image = reader.result;
             selectedFile.value = "";
           } else {
             this.PhotoValidation = true;
@@ -195,9 +202,9 @@ export default {
         reader.readAsDataURL(file);
       }
     },
-    DeletePhoto(selectedFile) {
-      this.$refs.uploadInputEditPartner.reset();
-      this.editedPartner.Image = null;
+    DeletePhoto() {
+      this.$refs.uploadInputEditSponsor.reset();
+      this.editedSponsor.Image = null;
       this.PhotoValidation = null;
     },
   },

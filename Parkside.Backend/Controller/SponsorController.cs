@@ -4,7 +4,7 @@ using Parkside.Services.Sponsors;
 
 namespace Parkside.Backend.Controller
 {
-    [Route("api")]
+    [Route("api/[controller]")]
     [ApiController]
     public class SponsorController : ControllerBase
     {
@@ -25,11 +25,11 @@ namespace Parkside.Backend.Controller
         }
 
         [HttpGet("getSponsors")]
-        public IActionResult GetSponsors(string? nameSearch, string? columnToSort,
-            int pageNumber = 1, int pageSize = 10)
+        public IActionResult GetSponsors(string? NameSearch,
+            int PageNumber = 1, int PageSize = 10)
         {
-            var sponsors = _sponsorService.GetSponsors(nameSearch, columnToSort,
-                pageNumber, pageSize);
+            var sponsors = _sponsorService.GetSponsors(NameSearch,
+                PageNumber, PageSize);
             return Ok(sponsors);
         }
 

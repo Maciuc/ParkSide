@@ -6,7 +6,7 @@ namespace Parkside.Services.Championships
     {
         Task<ChampionshipViewModel> GetChampionship(int id);
         PagingViewModel<ChampionshipViewModel> GetChampionships(
-            string? nameSearch, string? columnToSort, int pageNumber, int pageSize);
+            string? NameSearch, string? OrderBy, int PageNumber, int PageSize);
         Task AddChampionship(ChampionshipCreateViewModel model);
         Task DeleteChampionship(int id);
         Task VirtualDeleteChampionship(int id);
