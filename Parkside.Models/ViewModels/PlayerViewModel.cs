@@ -10,6 +10,7 @@ namespace Parkside.Models.ViewModels
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
         public string? Height { get; set; }
+        public string? Description { get; set; }
         public DateTime? BirthDate { get; set; }
         public string? Role { get; set; }
         public string? ImageBase64 { get; set; }
@@ -27,6 +28,7 @@ namespace Parkside.Models.ViewModels
         public string? TeamName { get; set; }
         public int? Number { get; set; }
         public string? Height { get; set; }
+        public string? Description { get; set; }
         public DateTime? BirthDate { get; set; }
         public string? Role { get; set; }
         public string? ImageBase64 { get; set; }
@@ -44,6 +46,7 @@ namespace Parkside.Models.ViewModels
         public string? TeamName { get; set; }
         public int? Number { get; set; }
         public string? Height { get; set; }
+        public string? Description { get; set; }
         public DateTime? BirthDate { get; set; }
         public string? Role { get; set; }
         public string? ImageBase64 { get; set; }

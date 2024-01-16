@@ -133,28 +133,30 @@ namespace Parkside.Infrastructure.Context
             modelBuilder.Entity<Championship>(entity =>
             {
                 entity.Property(e => e.ImageUrl)
-                    .HasMaxLength(200)
+                    .HasMaxLength(500)
                     .HasColumnName("ImageURL");
 
-                entity.Property(e => e.Name).HasMaxLength(50);
+                entity.Property(e => e.Name).HasMaxLength(200);
             });
 
             modelBuilder.Entity<Coach>(entity =>
             {
                 entity.Property(e => e.BirthDate).HasColumnType("datetime");
 
+                entity.Property(e => e.Description).HasMaxLength(500);
+
                 entity.Property(e => e.FirstName)
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .HasColumnName("First_Name");
 
-                entity.Property(e => e.Height).HasMaxLength(10);
+                entity.Property(e => e.Height).HasMaxLength(200);
 
                 entity.Property(e => e.ImageUrl)
-                    .HasMaxLength(200)
+                    .HasMaxLength(500)
                     .HasColumnName("ImageURL");
 
                 entity.Property(e => e.LastName)
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .HasColumnName("Last_Name");
 
                 entity.Property(e => e.TeamName).HasMaxLength(200);
@@ -164,32 +166,32 @@ namespace Parkside.Infrastructure.Context
             {
                 entity.Property(e => e.Date).HasColumnType("datetime");
 
-                entity.Property(e => e.Location).HasMaxLength(200);
+                entity.Property(e => e.Location).HasMaxLength(500);
 
                 entity.HasOne(d => d.Championship)
                     .WithMany(p => p.Matches)
                     .HasForeignKey(d => d.ChampionshipId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Matches__Champio__45BE5BA9");
+                    .HasConstraintName("FK__Matches__Champio__6442E2C9");
 
                 entity.HasOne(d => d.EnemyTeam)
                     .WithMany(p => p.Matches)
                     .HasForeignKey(d => d.EnemyTeamId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Matches__EnemyTe__46B27FE2");
+                    .HasConstraintName("FK__Matches__EnemyTe__65370702");
             });
 
             modelBuilder.Entity<News>(entity =>
             {
-                entity.Property(e => e.Description).HasMaxLength(300);
+                entity.Property(e => e.Description).HasMaxLength(500);
 
                 entity.Property(e => e.ImageUrl)
-                    .HasMaxLength(200)
+                    .HasMaxLength(500)
                     .HasColumnName("ImageURL");
 
                 entity.Property(e => e.IsPublished).HasDefaultValueSql("((0))");
 
-                entity.Property(e => e.Name).HasMaxLength(50);
+                entity.Property(e => e.Name).HasMaxLength(200);
 
                 entity.Property(e => e.PublishedDate).HasColumnType("datetime");
             });
@@ -198,23 +200,23 @@ namespace Parkside.Infrastructure.Context
             {
                 entity.Property(e => e.BirthDate).HasColumnType("datetime");
 
+                entity.Property(e => e.Description).HasMaxLength(500);
+
                 entity.Property(e => e.FirstName)
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .HasColumnName("First_Name");
 
                 entity.Property(e => e.Height).HasMaxLength(10);
 
                 entity.Property(e => e.ImageUrl)
-                    .HasMaxLength(200)
+                    .HasMaxLength(500)
                     .HasColumnName("ImageURL");
 
                 entity.Property(e => e.LastName)
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .HasColumnName("Last_Name");
 
-                entity.Property(e => e.Nationality)
-                    .HasMaxLength(100)
-                    .IsFixedLength();
+                entity.Property(e => e.Nationality).HasMaxLength(100);
 
                 entity.Property(e => e.Role).HasMaxLength(50);
 
@@ -223,31 +225,29 @@ namespace Parkside.Infrastructure.Context
 
             modelBuilder.Entity<SocialMedia>(entity =>
             {
-                entity.Property(e => e.Link).HasMaxLength(300);
+                entity.Property(e => e.Link).HasMaxLength(500);
 
-                entity.Property(e => e.Name).HasMaxLength(50);
+                entity.Property(e => e.Name).HasMaxLength(200);
 
-                entity.Property(e => e.Platform)
-                    .HasMaxLength(50)
-                    .IsFixedLength();
+                entity.Property(e => e.Platform).HasMaxLength(200);
             });
 
             modelBuilder.Entity<Sponsor>(entity =>
             {
                 entity.Property(e => e.ImageUrl)
-                    .HasMaxLength(200)
+                    .HasMaxLength(500)
                     .HasColumnName("ImageURL");
 
-                entity.Property(e => e.Name).HasMaxLength(50);
+                entity.Property(e => e.Name).HasMaxLength(200);
             });
 
             modelBuilder.Entity<Team>(entity =>
             {
                 entity.Property(e => e.ImageUrl)
-                    .HasMaxLength(200)
+                    .HasMaxLength(500)
                     .HasColumnName("ImageURL");
 
-                entity.Property(e => e.Name).HasMaxLength(50);
+                entity.Property(e => e.Name).HasMaxLength(200);
             });
 
             OnModelCreatingPartial(modelBuilder);

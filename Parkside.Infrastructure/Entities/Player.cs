@@ -13,8 +13,9 @@ namespace Parkside.Infrastructure.Entities
         public int? Number { get; set; }
         public DateTime? BirthDate { get; set; }
         public string? Role { get; set; }
+        public string? Nationality { get; set; }
+        public string? Description { get; set; }
         public string? ImageUrl { get; set; }
         public bool IsDeleted { get; set; }
-        public string? Nationality { get; set; }
     }
 }

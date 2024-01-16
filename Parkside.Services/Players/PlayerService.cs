@@ -31,6 +31,7 @@ namespace Parkside.Services.Players
                 TeamName = player.TeamName,
                 Height = player.Height,
                 Number = player.Number,
+                Description = player.Description,
                 Role = player.Role,
                 BirthDate = player.BirthDate,
                 ImageBase64 = _genericService.GetImgBase64(player.ImageUrl)
@@ -77,6 +78,7 @@ namespace Parkside.Services.Players
                   LastName = player.LastName,
                   TeamName = player.TeamName,
                   Height = player.Height,
+                  Description = player.Description,
                   Number = player.Number,
                   Role = player.Role,
                   BirthDate = player.BirthDate,
@@ -103,6 +105,7 @@ namespace Parkside.Services.Players
                 LastName = model.LastName,
                 TeamName = model.TeamName,
                 Height = model.Height,
+                Description = model.Description,
                 Number = model.Number,
                 Role = model.Role,
                 BirthDate = model.BirthDate,
@@ -141,6 +144,7 @@ namespace Parkside.Services.Players
             player.LastName = model.LastName;
             player.Height = model.Height;
             player.Number = model.Number;
+            player.Description = model.Description;
             player.TeamName = model.TeamName;
             player.Role = model.Role;
             player.BirthDate = model.BirthDate;
@@ -161,6 +165,7 @@ namespace Parkside.Services.Players
                 TeamName = player.TeamName,
                 Height = player.Height,
                 Number = player.Number,
+                Description = player.Description,
                 Role = player.Role,
                 BirthDate = player.BirthDate,
                 ImageBase64 = _genericService.GetImgBase64(player.ImageUrl)
