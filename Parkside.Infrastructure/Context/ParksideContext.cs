@@ -159,6 +159,8 @@ namespace Parkside.Infrastructure.Context
                     .HasMaxLength(200)
                     .HasColumnName("Last_Name");
 
+                entity.Property(e => e.Nationality).HasMaxLength(100);
+
                 entity.Property(e => e.TeamName).HasMaxLength(200);
             });
 
