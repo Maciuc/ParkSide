@@ -46,6 +46,16 @@ import { RouterLink, RouterView } from "vue-router";
           <router-link
             tag="li"
             class="nav-link d-flex"
+            :to="{ name: 'socialMedia' }"
+            exact
+          >
+            <font-awesome-icon class="img-link" :icon="['far', 'thumbs-up']"  />
+            <div>Social media</div>
+          </router-link>
+
+          <router-link
+            tag="li"
+            class="nav-link d-flex"
             :to="{ name: 'players' }"
             exact
           >
@@ -59,7 +69,7 @@ import { RouterLink, RouterView } from "vue-router";
             :to="{ name: 'coaches' }"
             exact
           >
-            <font-awesome-icon class="img-link" :icon="['fas', 'people-group']"  />
+            <font-awesome-icon class="img-link" :icon="['fas', 'person-military-pointing']"  />
             <div>Antrenori</div>
           </router-link>
 
@@ -69,7 +79,7 @@ import { RouterLink, RouterView } from "vue-router";
             :to="{ name: 'teams' }"
             exact
           >
-            <font-awesome-icon class="img-link" :icon="['fas', 'people-group']"  />
+            <font-awesome-icon class="img-link" :icon="['fas', 'users-between-lines']"  />
             <div>Echipe</div>
           </router-link>
 
@@ -79,7 +89,7 @@ import { RouterLink, RouterView } from "vue-router";
             :to="{ name: 'championships' }"
             exact
           >
-            <font-awesome-icon class="img-link" :icon="['fas', 'people-group']"  />
+            <font-awesome-icon class="img-link" :icon="['fas', 'trophy']"  />
             <div>Campionate</div>
           </router-link>
 
@@ -124,6 +134,9 @@ export default {
 </script>
 
 <style scoped>
+.page{
+  height:910px;
+}
 aside {
   border-right: 1px solid #0000001a;
   padding-left: 7px;

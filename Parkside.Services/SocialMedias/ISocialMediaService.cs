@@ -6,7 +6,7 @@ namespace Parkside.Services.SocialMedias
     {
         Task<SocialMediaViewModel> GetSocialMedia(int id);
         PagingViewModel<SocialMediaViewModel> GetSocialMedias(
-            string? NameSearch, string? OrderBy, int PageNumber, int PageSize);
+            string? NameSearch, string? OrderBy, string? Platform, int PageNumber, int PageSize);
         IQueryable<string?> GetPlatformsDropDown();
         IQueryable<SocialMediaViewModel> GetHomePageSocialMedia();
         Task AddSocialMedia(SocialMediaCreateViewModel model);

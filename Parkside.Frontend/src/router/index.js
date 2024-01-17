@@ -79,6 +79,14 @@ const router = createRouter({
       ],
     },
     {
+      path: '/socialMedia',
+      name: 'socialMedia',
+      component: () => import('../views/SocialMediaView.vue'),
+      meta: { breadcrumb: 'Social media' },
+      children: [
+      ],
+    },
+    {
       path: '/championships',
       name: 'championships',
       component: () => import('../views/ChampionshipView.vue'),

@@ -1,25 +1,25 @@
 <template>
-    <section>
+    <div>
       <div class="row header-section align-items-center">
         <div class="col">
-          <div class="title-page">Echipe</div>
+          <div class="title-page">Linkuri social media</div>
         </div>
   
         <div class="col-auto">
-          <button class="button green" @click="OpenModalAddTeam">
+          <button class="button green" @click="OpenModalAddLinkSocial">
             <font-awesome-icon :icon="['fas', 'plus']" style="color: #ffffff" />
             Adaugă
           </button>
-          <AddTeamModalComponent
-            @get-list="GetAllTeams()"
-            ref="addTeamModal"
-          ></AddTeamModalComponent>
+          <AddSocialLinkComponent
+            @get-list="GetAllLinks()"
+            ref="addSocialLinkModal"
+          ></AddSocialLinkComponent>
         </div>
       </div>
   
-      <div class="row mt-3 new-form">
-        <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6">
-          <div class="input-group-custom mb-3 custom-control">
+      <div class="row d-flex flex-row mt-3 new-form">
+        <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 custom-control">
+          <div class="input-group-custom mb-3">
             <div
                 class="d-flex justify-content-center align-items-center search-separator"
               >
@@ -33,13 +33,27 @@
             <input
               type="text"
               class="form-control search"
-              placeholder="Caută echipa"
+              placeholder="Caută link"
               aria-label="Username"
               aria-describedby="basic-addon1"
               v-model="filter.SearchText"
-              v-on:keyup.enter="GetAllTeams()"
+              v-on:keyup.enter="GetAllLinks()"
             />
           </div>
+        </div>
+        <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 custom-control">
+          <select
+            class="form-select form-control"
+            aria-label="Default select example"
+            placeholder="Toate platformele"
+            v-model="filter.SearchPlatform"
+            @change="GetAllLinks()"
+          >
+            <option selected value="">Toate platformele</option>
+            <option v-for="(plat, index) in platforms" :key="index">
+              {{ plat.name }}
+            </option>
+          </select>
         </div>
       </div>
       <div style="overflow-x: auto">
@@ -64,34 +78,44 @@
                   size="xl"
                   class="me-2"
                 />
-                <span >Nume echipa</span>
+                <font-awesome-icon
+                  v-else
+                  :icon="['fas', 'arrow-up-wide-short']"
+                  rotation="180"
+                  size="xl"
+                  class="me-2"
+                />
+                <span> Nume platformă</span>
+               
               </th>
+  
+              <th scope="25" class="description" width="50%">Link</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(type, index) in teams.Items" :key="index">
-                
-                <td>
-            <div class="d-flex align-items-center">
-              <div class="img-container-avatar me-3">
-                <img
-                  :src="ShowDynamicImage(type.ImageBase64)"
-                  class="me-2 icon-avatar"
-                />
-              </div>
-
-              <span>{{ type.Name}}</span>
-            </div>
-          </td>
+            <tr v-for="(socialLink, index) in socialLinksList.Items" :key="index">
+              <td>
+                <div class="d-flex align-items-center">
+                  <img
+                    :src="`src/images/${ShowDynamicImage(
+                      socialLink.Platform
+                    )}.png`"
+                    class="me-2 icon"
+                  />
+                  <span>{{ socialLink.Name }}</span>
+                </div>
+              </td>
+              <td>{{ socialLink.Link }}</td>
+  
               <td>
                 <div class="editButtons">
                   <button
                     class="button-edit"
                     data-bs-toggle="modal"
                     type="button"
-                    data-bs-target="#team-edit-modal"
-                    @click="GetTeamForEdit(type.Id)"
+                    data-bs-target="#social-link-edit-modal"
+                    @click="GetLinkForEdit(socialLink.Id)"
                   >
                     <font-awesome-icon :icon="['far', 'pen-to-square']" />
                   </button>
@@ -99,7 +123,7 @@
                   <button
                     type="button"
                     class="button-delete"
-                    @click="DeleteTeam(type.Id)"
+                    @click="DeleteSocialLink(socialLink.Id)"
                   >
                     <font-awesome-icon :icon="['fas', 'trash']" />
                   </button>
@@ -111,74 +135,86 @@
       </div>
   
       <Pagination
-        :totalPages="teams.NumberOfPages"
+        :totalPages="socialLinksList.NumberOfPages"
         :currentPage="filter.PageNumber"
-        @pagechanged="GetAllTeams"
+        @pagechanged="GetAllLinks"
       />
   
-      <EditTeamModalComponent
-        :event="selectedTeamForEdit"
-        @get-list="GetAllTeams"
-      /> 
-    </section>
+      <EditSocialLinkComponent
+        :socialLink="selectedLinkForEdit"
+        @get-list="GetAllLinks()"
+      />
+    </div>
   </template>
   
   <script>
-  import AddTeamModalComponent from "../components/Modals/Teams/AddTeamComponent.vue";
-  import EditTeamModalComponent from "../components/Modals/Teams/EditTeamComponent.vue";
+  import AddSocialLinkComponent from "./../components/Modals/SocialMedia/AddSocialLinkComponent.vue";
+  import EditSocialLinkComponent from "./../components/Modals/SocialMedia/EditSocialLinkComponent.vue";
   import Pagination from "../components/Pagination.vue";
   
   export default {
-    name: "Teams",
+    name: "SocialMedia",
     components: {
-      AddTeamModalComponent,
-      EditTeamModalComponent,
+      AddSocialLinkComponent,
+      EditSocialLinkComponent,
       Pagination,
     },
     data() {
       return {
-        selectedTeamForEdit: {
+        selectedLinkForEdit: {
           Id: 0,
           Name: "",
-          ImageBase64: "",
+          Description: "",
         },
   
         filter: {
           SearchText: "",
           PageNumber: 1,
           OrderBy: "name",
+          SearchPlatform: "",
         },
-        teams: {
+        socialLinksList: {
           Items: [],
-          NumberOfPages: 1,
+          NumberOfPages: 0,
         },
+  
+        platforms: [
+          { name: "Facebook" },
+          { name: "WhatsApp" },
+          { name: "Instagram" },
+          { name: "TikTok" },
+        ],
       };
     },
     methods: {
-        ShowDynamicImage(imagePath) {
-      if (!imagePath) {
-        return `src/images/user.png`;
-      }
-      return imagePath;
-    },
-      OpenModalAddTeam() {
-        $("#team-add-modal").modal("show");
-        this.$refs.addTeamModal.ClearModal();
+      ShowDynamicImage(imagePath) {
+        if (!imagePath) {
+          return new URL("@/images/Facebook.png", import.meta.url).href;
+        }
+        return `${imagePath}`;
       },
   
-      GetTeamForEdit(id) {
+      OpenModalAddLinkSocial() {
+        $("#social-link-add-modal").modal("show");
+        this.$refs.addSocialLinkModal.ClearModal();
+      },
+  
+      GetLinkForEdit(id) {
+        console.log(id);
         this.$axios
-          .get(`/api/Team/getTeam/${id}`)
+          .get("/api/SocialMedia/getSocialMedias")
           .then((response) => {
-            this.selectedTeamForEdit = response.data;
-            console.log(this.selectedTeamForEdit);
+            this.selectedLinkForEdit = this.socialLinksList.Items.find(
+              (x) => x.Id == id
+            );
+            console.log(this);
           })
           .catch((error) => {
             console.log(error);
           });
       },
   
-      GetAllTeams(page) {
+      GetAllLinks(page) {
         this.filter.PageNumber = 1;
         if (page) {
           this.filter.PageNumber = page;
@@ -188,29 +224,30 @@
           PageNumber: this.filter.PageNumber,
           PageSize: 4,
           NameSearch: this.filter.SearchText,
+          Platform: this.filter.SearchPlatform,
         };
         this.$axios
           .get(
-            `api/Team/getTeams?${new URLSearchParams(
+            `/api/SocialMedia/getSocialMedias?${new URLSearchParams(
               searchParams
             )}`
           )
           .then((response) => {
-            //this.teams.NumberOfPages = 4;----se rescrie totul in news type la urmatorul rand. nu mai trebuie sa setez acest tip de numberOfPages
             console.log(searchParams);
-            this.teams = response.data;
+            this.socialLinksList = response.data;
           })
           .catch((error) => {
             console.log(error);
           });
       },
   
-      DeleteTeam(id) {
+      DeleteSocialLink(id) {
+        console.log(id + "asta e id-ul din deleteNews");
         this.$axios
-          .delete(`/api/Team/deleteTeam/${id}`)
+          .delete(`/api/SocialMedia/deleteSocialMedia/${id}`)
           .then((response) => {
-            this.GetAllTeams();
-            console.log(`Deleted team with ID ${id}`);
+            this.GetAllLinks();
+            console.log(`Deleted news with ID ${id}`);
           })
           .catch((error) => {
             console.error(error);
@@ -224,13 +261,19 @@
           this.filter.OrderBy = orderBy + "_desc";
         }
   
-        this.GetAllTeams();
+        this.GetAllLinks();
       },
     },
   
     created() {
-      this.GetAllTeams();
+      this.GetAllLinks();
     },
   };
   </script>
+  
+  <style scoped>
+  .icon {
+    width: 20px;
+  }
+  </style>
   

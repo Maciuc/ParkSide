@@ -118,10 +118,9 @@ export default {
       },
       platforms: [
         { name: "Facebook" },
-        { name: "Twitter" },
         { name: "WhatsApp" },
-        { name: "Linkedin" },
         { name: "Instagram" },
+        { name: "TikTok" },
       ],
     };
   },
