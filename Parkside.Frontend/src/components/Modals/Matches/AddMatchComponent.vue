@@ -11,7 +11,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title mt-2" >
-              Adaugă echipa
+              Adaugă meci
             </h5>
             <button
               type="button"
@@ -28,100 +28,110 @@
             ref="addMatchFormRef"
           >
             <div class="modal-body new-form">
+
+              <div
+              :class="{ 'invalid-input': errors.date }"
+              class="col custom-date-picker mb-2"
+            >
+              <label class="form-label">Dată meci</label>
+              <Field
+                v-slot="{ field }"
+                name="date"
+                id="date"
+              >
+                <VueDatePicker
+                  v-bind="field"
+                  v-model="newMatch.Date"
+                  auto-apply
+                  utc
+                  :enable-time-picker="false"
+                  placeholder="Dată meci"
+                ></VueDatePicker>
+              </Field>
+              <ErrorMessage name="date" class="text-danger error-message" />
+            </div>
+
+              <div class="mb-2 position-relative">
+                <label for="championship" class="form-label"
+                  >Alege campionat</label
+                >
+                <Field
+                  v-model="selectedChampionship.Name"
+                  name="championship"
+                  as="select"
+                  @change="updateSelectedChampionshipId"
+                  :class="{ 'border-danger': errors.championship }"
+                  class="form-select form-control"
+                >
+                  <option value="" disabled>Campionate</option>
+                  <option
+                    v-for="(champ, index) in championshipsList"
+                    :key="index"
+                    :value="champ.Id"
+                  >
+                    {{ champ.Name }}
+                  </option>
+                </Field>
+                <ErrorMessage name="championship" class="text-danger error-message" />
+              </div>
+
+
+              <div class="mb-2 position-relative">
+                <label for="team" class="form-label"
+                  >Alege echipa adversa</label
+                >
+                <Field
+                  v-model="selectedTeam.Name"
+                  name="team"
+                  as="select"
+                  @change="updateSelectedTeamId"
+                  :class="{ 'border-danger': errors.team }"
+                  class="form-select form-control"
+                >
+                  <option value="" disabled>Echipe</option>
+                  <option
+                    v-for="(team, index) in teamsList"
+                    :key="index"
+                    :value="team.Id"
+                  >
+                    {{ team.Name }}
+                  </option>
+                </Field>
+                <ErrorMessage name="team" class="text-danger error-message" />
+              </div>
+
+              
+
               <div class="mb-3">
-                <label for="input-title-match-add" class="form-label"
-                  >Nume echipa</label
+                <label for="input-location" class="form-label"
+                  >Locatie</label
                 >
                 <Field
                   type="text"
                   class="form-control"
-                  :class="{ 'border-danger': errors.name }"
-                  id="input-title-match-add"
-                  name="name"
-                  placeholder="Nume echipa"
-                  v-model="newMatch.Name"
+                  id="input-location"
+                  name="location"
+                  placeholder="Locatie"
+                  v-model="newMatch.Location"
                 />
-                <ErrorMessage name="name" class="text-danger error-message" />
               </div>
-  
-              <div class="row">
-                <div class="col-6 d-flex flex-column justify-content-center">
-                  <label class="form-label">Selectează imagine</label>
-                  <label
-                    for="input-upload-add-match"
-                    class="button blue"
-                    style="width: 140px"
-                  >
-                    Încarcă imagine
-                    <font-awesome-icon :icon="['fas', 'upload']" />
-                    <Field
-                      type="file"
-                      id="input-upload-add-match"
-                      name="upload"
-                      style="display: none"
-                      accept="image/*"
-                      ref="uploadInputAddMatch"
-                      @change="UploadImageMatch"
-                    >
-                    </Field>
-                  </label>
-  
-                </div>
-  
-                <div class="col-6">
-                  <div
-                    class="image-container d-flex align-items-center justify-content-center"
-                  >
-                    <div v-if="!newMatch.ImageBase64">
-                      <div
-                        class="d-flex flex-column justify-content-center align-items-center gap-2"
-                      >
-                        <button type="button" class="button-delete">
-                          <font-awesome-icon :icon="['fas', 'trash']" />
-                        </button>
-                        <img
-                          src="@/images/NoImageSelected.png"
-                          class="no-image"
-                        />
-                        <div>Nicio imagine selectată</div>
-                      </div>
-                    </div>
-  
-                    <div v-if="newMatch.ImageBase64" class="image">
-                      <button
-                        type="button"
-                        class="button-delete"
-                        @click="DeletePhoto"
-                      >
-                        <font-awesome-icon :icon="['fas', 'trash']" />
-                      </button>
-                      <img
-                        :src="newMatch.ImageBase64"
-                        alt="Imagine selectată"
-                        class="image"
-                      />
-                    </div>
-                  </div>
-  
-                  <div
-                    v-if="photoValidation===false"
-                    ref="validation-img-type"
-                    class="text-danger error-message"
-                  >
-                    Tipul imaginii selectate nu este valid
-                  </div>
-                  <div
-                    v-else-if="photoValidation===true"
-                    ref="validation-img-type"
-                    class="text-danger error-message"
-                  >
-                    Imaginea selectată este prea mare
-                  </div>
-                  <div v-else>
-                  </div>
-                </div>
-              </div>
+
+              <div class="form-check form-switch">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="flexSwitchCheckDefault"
+                :checked="newMatch.PlayingHome"
+                @click="ToggleHomePlay"
+              />
+              <label class="form-label" for="flexSwitchCheckDefault"
+                >Joaca acasa</label
+              >
             </div>
+        </div>
+
+
+            
   
             <div class="modal-footer justify-content-between">
               <button type="button" class="button grey" data-bs-dismiss="modal">
@@ -135,88 +145,131 @@
     </div>
   </template>
   
-  <script>
-  import { Form, Field, ErrorMessage } from "vee-validate";
-  import * as yup from "yup";
+<script>
+import VueDatePicker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
+import { Form, Field, ErrorMessage } from "vee-validate";
+import * as yup from "yup";
+
+export default {
+  name: "AddMatchComponent",
+  components: {
+    Form,
+    Field,
+    ErrorMessage,
+    VueDatePicker,
+  },
+  emits: ["get-list"],
+  data() {
+    return {
+      championshipsList:[],
+      teamsList:[],
+      selectedChampionship:{},
+      selectedTeam:{},
+      newMatch: {
+        Location: "",
+        Date: "",
+        PlayingHome: true,
+        EnemyTeamPoints: "",
+        MainTeamPoints: "",
+      },
+    };
+  },
+
+  computed: {
+    schema() {
+      return yup.object({
+        championship: yup.string().required("Acest câmp este obligatoriu"),
+        team: yup.string().required("Acest câmp este obligatoriu"),
+      });
+    },
+  },
   
-  export default {
-    name: "AddMatchComponent",
-    components: {
-      Form,
-      Field,
-      ErrorMessage,
+  methods: {
+    AddMatch() {
+      this.$axios
+        .post(`/api/Match/createMatch/${this.selectedTeam.Id}/${this.selectedChampionship.Id}`, this.newMatch)
+        .then((response) => {
+          console.log(response);
+          console.log(this.newMatch);
+          this.$emit("get-list");
+          $("#match-add-modal").modal("hide");
+          this.$swal.fire({
+            title: "Succes",
+            text: "Meciul a fost adăugat",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     },
-    emits: ["get-list"],
-    data() {
-      return {
-        photoValidation: null,
-        newMatch: {
-          Name: "",
-          ImageBase64: null,
-        },
-      };
+    SelectShowDescription() {
+      this.newMatch.PlayingHome =
+        !this.newMatch.PlayingHome;
+      console.log(this.newMatch.PlayingHome);
     },
-    methods: {
-      AddMatch() {
+    ClearModal() {
+      this.$refs.addMatchFormRef.resetForm();
+    },
+    GetChampionshipsList() {
+    this.$axios
+      .get("/api/Championship/getChampionshipsDropDown")
+      .then((response) => {
+        this.championshipsList = response.data;
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+      GetTeamsList() {
         this.$axios
-          .post(`/api/Match/createMatch`, this.newMatch)
+          .get("/api/Team/getTeamsDropDown")
           .then((response) => {
-            console.log(response);
-            console.log(this.newMatch);
-            this.$emit("get-list");
-            $("#match-add-modal").modal("hide");
-            this.$swal.fire({
-              title: "Succes",
-              text: "Meciul a fost adăugat",
-              icon: "success",
-              showConfirmButton: false,
-              timer: 1500,
-            });
+            this.teamsList = response.data;
+            console.log(response.data);
           })
           .catch((error) => {
-            console.error(error);
+            console.log(error);
           });
       },
-      ClearModal() {
-        this.$refs.addMatchFormRef.resetForm();
-        this.newMatch.ImageBase64 = null;
+
+      OpenDropdownChampionships() {
+        $("#dropdownChampionships").dropdown("toggle");
       },
-      UploadImageMatch(event) {
-        const selectedFile = event.target;
-        const file = event.target.files[0];
-        const reader = new FileReader();
-        reader.onload = () => {
-          if (reader.result.includes("image")) {
-            if (file.size / 1024 < 15360) {
-              this.photoValidation = null;
-              console.log(reader.result);
-              this.newMatch.ImageBase64 = reader.result;
-              selectedFile.value = "";
-            }else{
-              this.photoValidation = true;
-            }
-          } else {
-            this.photoValidation = false;
-          }
-        };
-        if (file) {
-          reader.readAsDataURL(file);
-        }
+      OpenDropdownTeams() {
+        $("#dropdownTeams").dropdown("toggle");
       },
-      DeletePhoto(selectedFile) {
-        this.$refs.uploadInputAddMatch.reset();
-        this.newMatch.ImageBase64 = null;
+
+      SelectChampionship(championship) {
+        this.selectedChampionship = championship;
+        $("#dropdownChampionships").dropdown("hide");
       },
+      SelectCategory(team) {
+        this.selectedTeam = team;
+        $("#dropdownTeams").dropdown("hide");
+      },
+      updateSelectedChampionshipId() {
+      const selectedChamp = this.championshipsList.find(
+        (champ) => champ.Id === this.selectedChampionship.Name
+      );
+      this.selectedChampionship.Id = selectedChamp ? selectedChamp.Id : null;
     },
-  
-    computed: {
-      schema() {
-        return yup.object({
-          name: yup.string().required("Denumirea nu este validă"),
-        });
-      },
+    updateSelectedTeamId() {
+      const selectedChamp = this.teamsList.find(
+        (champ) => champ.Id === this.selectedTeam.Name
+      );
+      this.selectedTeam.Id = selectedChamp ? selectedChamp.Id : null;
     },
-  };
-  </script>
-  
+  },
+  created() {
+  this.GetChampionshipsList();
+  this.GetTeamsList();
+},
+};
+</script>
+
   

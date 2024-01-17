@@ -48,7 +48,7 @@
       <table class="table table-custom">
         <thead>
           <tr>
-            <th width="30%" @click="OrderBy('name')" class="cursor-pointer">
+            <th width="20%" @click="OrderBy('name')" class="cursor-pointer">
               <font-awesome-icon
                 v-if="filter.OrderBy === 'name'"
                 :icon="['fas', 'arrow-up-wide-short']"
@@ -70,6 +70,7 @@
             </th>
             <th scope="20" width="20%">Campionat</th>
             <th scope="20" width="20%">Data</th>
+            <th scope="20" width="20%">Locatia</th>
           </tr>
         </thead>
         <tbody>
@@ -88,6 +89,7 @@
         </td>
         <td>{{ match.ChampionshipName }}</td>
         <td>{{ match.Date }}</td>
+        <td>{{ match.Location }}</td>
             <td>
               <div class="editButtons">
                 <button
