@@ -4,7 +4,7 @@
 	First_Name NVARCHAR(200) NOT NULL,
 	Last_Name NVARCHAR(200) NOT NULL,
 	Height NVARCHAR(10),
-	Number INT,
+	Number NVARCHAR(10),
 	BirthDate DATETIME,
 	Role NVARCHAR(50),
 	Nationality NVARCHAR(100),
@@ -20,6 +20,7 @@ CREATE TABLE Coaches(
 	Last_Name NVARCHAR(200) NOT NULL,
 	Height NVARCHAR(200),
 	BirthDate DATETIME,
+	Nationality NVARCHAR(100),
 	ImageURL NVARCHAR(500),
 	Description NVARCHAR(500),
 	IsDeleted BIT NOT NULL DEFAULT(0)
@@ -73,8 +74,8 @@ CREATE TABLE Matches(
 	Location NVARCHAR(500),
 	Date DATETIME,
 	PlayingHome BIT,
-	EnemyTeamPoints INT,
-	MainTeamPoints INT,
+	EnemyTeamPoints NVARCHAR(10),
+	MainTeamPoints NVARCHAR(10),
 	IsDeleted BIT NOT NULL DEFAULT(0)
 );
 -------------------------------------

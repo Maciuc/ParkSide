@@ -9,8 +9,8 @@
         public string? Location { get; set; }
         public DateTime? Date { get; set; }
         public bool? PlayingHome { get; set; }
-        public int? EnemyTeamPoints { get; set; }
-        public int? MainTeamPoints { get; set; }
+        public string? EnemyTeamPoints { get; set; }
+        public string? MainTeamPoints { get; set; }
     }
 
     public class MatchUpdateViewModel
@@ -18,8 +18,8 @@
         public string? Location { get; set; }
         public DateTime? Date { get; set; }
         public bool PlayingHome { get; set; }
-        public int EnemyTeamPoints { get; set; }
-        public int MainTeamPoints { get; set; }
+        public string? EnemyTeamPoints { get; set; }
+        public string? MainTeamPoints { get; set; }
     }
 
     public class MatchCreateViewModel
@@ -27,8 +27,8 @@
         public string? Location { get; set; }
         public DateTime? Date { get; set; }
         public bool PlayingHome { get; set; }
-        public int EnemyTeamPoints { get; set; }
-        public int MainTeamPoints { get; set; }
+        public string? EnemyTeamPoints { get; set; }
+        public string? MainTeamPoints { get; set; }
     }
 
     public class MatchDetailsViewModel
@@ -39,7 +39,7 @@
         public string? Location { get; set; }
         public DateTime? Date { get; set; }
         public bool? PlayingHome { get; set; }
-        public int? EnemyTeamPoints { get; set; }
-        public int? MainTeamPoints { get; set; }
+        public string? EnemyTeamPoints { get; set; }
+        public string? MainTeamPoints { get; set; }
     }
 }

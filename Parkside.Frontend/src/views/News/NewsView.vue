@@ -133,11 +133,11 @@
             <th
               scope="25"
               width="15%"
-              @click="OrderBy('publishedDate')"
+              @click="OrderBy('PublishedDate')"
               class="cursor-pointer"
             >
               <font-awesome-icon
-                v-if="filter.OrderBy === 'publishedDate'"
+                v-if="filter.OrderBy === 'PublishedDate'"
                 :icon="['fas', 'arrow-up-wide-short']"
                 style="color: #29be00"
                 rotation="180"
@@ -146,7 +146,7 @@
               />
 
               <font-awesome-icon
-                v-else-if="filter.OrderBy === 'publishedDate_desc'"
+                v-else-if="filter.OrderBy === 'PublishedDate_desc'"
                 :icon="['fas', 'arrow-up-short-wide']"
                 rotation="180"
                 style="color: #29be00"
@@ -160,7 +160,7 @@
                 size="xl"
                 class="me-2"
               />
-              <span v-if="filter.OrderBy === 'publishedDate' || filter.OrderBy === 'publishedDate_desc'">Data publicării</span>
+              <span v-if="filter.OrderBy === 'PublishedDate' || filter.OrderBy === 'PublishedDate_desc'">Data publicării</span>
               <span v-else class="span-inactive">Data publicării</span>
             </th>
             <th width="10%"></th>
@@ -241,7 +241,7 @@ import { date } from "yup";
 import moment from "moment";
 
 export default {
-  name: "NewsView",
+  name: "News",
   components: {
     VueDatePicker,
     Pagination,
@@ -253,7 +253,7 @@ export default {
       filter: {
         SearchText: "",
         PageNumber: 1,
-        OrderBy: "publishedDate_desc",
+        OrderBy: "PublishedDate_desc",
         PublishedDate: "",
         IsPublished: "",
       },
@@ -295,6 +295,7 @@ export default {
         .get(`/api/News/getNewses?${new URLSearchParams(searchParams)}`)
         .then((response) => {
           console.log(searchParams);
+          console.log(this.filter.PublishedDate)
           this.NewsList = response.data;
         })
         .catch((error) => {

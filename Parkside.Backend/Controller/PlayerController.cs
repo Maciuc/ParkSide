@@ -25,10 +25,10 @@ namespace Parkside.Backend.Controller
         }
 
         [HttpGet("getPlayers")]
-        public IActionResult GetPlayers(string? NameSearch, string? OrderBy,
+        public IActionResult GetPlayers(string? NameSearch, string? Role, string? OrderBy,
             int PageNumber = 1, int PageSize = 10)
         {
-            var players = _playerService.GetPlayers(NameSearch, OrderBy,
+            var players = _playerService.GetPlayers(NameSearch, Role, OrderBy,
                 PageNumber, PageSize);
             return Ok(players);
         }

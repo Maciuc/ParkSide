@@ -166,19 +166,23 @@ namespace Parkside.Infrastructure.Context
             {
                 entity.Property(e => e.Date).HasColumnType("datetime");
 
+                entity.Property(e => e.EnemyTeamPoints).HasMaxLength(10);
+
                 entity.Property(e => e.Location).HasMaxLength(500);
+
+                entity.Property(e => e.MainTeamPoints).HasMaxLength(10);
 
                 entity.HasOne(d => d.Championship)
                     .WithMany(p => p.Matches)
                     .HasForeignKey(d => d.ChampionshipId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Matches__Champio__6442E2C9");
+                    .HasConstraintName("FK__Matches__Champio__7B264821");
 
                 entity.HasOne(d => d.EnemyTeam)
                     .WithMany(p => p.Matches)
                     .HasForeignKey(d => d.EnemyTeamId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Matches__EnemyTe__65370702");
+                    .HasConstraintName("FK__Matches__EnemyTe__7C1A6C5A");
             });
 
             modelBuilder.Entity<News>(entity =>
@@ -217,6 +221,8 @@ namespace Parkside.Infrastructure.Context
                     .HasColumnName("Last_Name");
 
                 entity.Property(e => e.Nationality).HasMaxLength(100);
+
+                entity.Property(e => e.Number).HasMaxLength(10);
 
                 entity.Property(e => e.Role).HasMaxLength(50);
 

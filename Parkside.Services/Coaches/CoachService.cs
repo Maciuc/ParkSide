@@ -5,6 +5,7 @@ using Parkside.Infrastructure.Repositories.Coaches;
 using Parkside.Models.Helpers;
 using Parkside.Models.ViewModels;
 using Parkside.Services.Coaches;
+using System.Numerics;
 
 namespace Parkside.Services.Coachs
 {
@@ -18,14 +19,14 @@ namespace Parkside.Services.Coachs
             _genericService = genericService;
         }
 
-        public async Task<CoachViewModel> GetCoach(int id)
+        public async Task<CoachDetailsViewModel> GetCoach(int id)
         {
             var coach = await _coachRepo.GetAsync(id);
 
             if (coach == null)
                 throw new NotFoundException("Coach not found!");
 
-            var finalCoach = new CoachViewModel
+            var finalCoach = new CoachDetailsViewModel
             {
                 Id = coach.Id,
                 FirstName = coach.FirstName,
@@ -79,7 +80,7 @@ namespace Parkside.Services.Coachs
                   TeamName = coach.TeamName,
                   Height = coach.Height,
                   Description = coach.Description,
-                  BirthDate = coach.BirthDate,
+                  BirthDate = coach.BirthDate.HasValue ? coach.BirthDate.Value.ToString("dd/MM/yyyy") : null,
                   ImageBase64 = _genericService.GetImgBase64(coach.ImageUrl)
               })
               .ToList();

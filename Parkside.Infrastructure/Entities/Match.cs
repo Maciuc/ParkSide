@@ -11,8 +11,8 @@ namespace Parkside.Infrastructure.Entities
         public string? Location { get; set; }
         public DateTime? Date { get; set; }
         public bool? PlayingHome { get; set; }
-        public int? EnemyTeamPoints { get; set; }
-        public int? MainTeamPoints { get; set; }
+        public string? EnemyTeamPoints { get; set; }
+        public string? MainTeamPoints { get; set; }
         public bool IsDeleted { get; set; }
 
         public virtual Championship Championship { get; set; } = null!;

@@ -21,6 +21,24 @@ const router = createRouter({
       meta: { breadcrumb: 'Editare jucator' },
     },
     {
+      path: '/coaches',
+      name: 'coaches',
+      component: () => import('../views/Coaches/CoachesView.vue'),
+      meta: { breadcrumb: 'Antrenori' },
+    },
+    {
+      path: '/add-coach',
+      name: 'add-coach',
+      component: () => import('../views/Coaches/AddCoachView.vue'),
+      meta: { breadcrumb: 'Adăugare antrenor' },
+    },
+    {
+      path: '/edit-coach/:id',
+      name: 'edit-coach',
+      component: () => import('../views/Coaches/EditCoachView.vue'),
+      meta: { breadcrumb: 'Editare antrenor' },
+    },
+    {
       path: '/users',
       name: 'Users',
       component: () => import('../views/UsersView.vue'),

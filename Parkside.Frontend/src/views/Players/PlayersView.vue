@@ -32,7 +32,7 @@
             aria-label="Username"
             aria-describedby="basic-addon1"
             v-model="filter.SearchText"
-            v-on:keyup.enter="GetAllPartners()"
+            v-on:keyup.enter="GetAllPlayers()"
           />
           </div>
         </div>
@@ -104,7 +104,7 @@
                 />
               </div>
 
-              <span>{{ player.Lastname + " " + player.FirstName}}</span>
+              <span>{{ player.LastName + " " + player.FirstName}}</span>
             </div>
           </td>
           <td>{{ player.TeamName }}</td>
@@ -189,7 +189,7 @@ export default {
       const searchParams = {
         OrderBy: this.filter.OrderBy,
         PageNumber: this.filter.PageNumber,
-        PageSize: 1,
+        PageSize: 4,
         NameSearch: this.filter.SearchText,
         Role: this.filter.RoleFilter,
       };

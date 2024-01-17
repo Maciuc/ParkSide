@@ -44,6 +44,18 @@
               <ErrorMessage name="name" class="text-danger error-message" />
             </div>
 
+            <div class="mb-3">
+              <label for="link" class="form-label">Adaugă link</label>
+              <Field
+                type="text"
+                class="form-control"
+                id="input-link-add-link"
+                name="link"
+                placeholder="Link"
+                v-model="newSponsor.Link"
+              />
+            </div>
+
             <div class="row">
               <div class="col-6 d-flex flex-column justify-content-center">
                 <label class="form-label">Selectează imagine</label>
@@ -152,6 +164,7 @@ export default {
       photoValidation: null,
       newSponsor: {
         Name: "",
+        Link: "",
         ImageBase64: null,
       },
     };

@@ -23,19 +23,35 @@
       <div class="row mt-4">
         <div class="col-md-7 col-lg-5 col-12">
           <div class="mb-3">
-            <label for="input-name-add-player" class="form-label"
+            <label for="input-lastname-add-player" class="form-label"
               >Nume jucator</label
             >
             <Field
               type="text"
               class="form-control"
-              :class="{ 'border-danger': errors.name }"
-              id="input-name-add-player"
-              name="name"
+              :class="{ 'border-danger': errors.lastname }"
+              id="input-lastname-add-player"
+              name="lastname"
               placeholder="Nume jucator"
               v-model="newPlayer.LastName"
             />
-            <ErrorMessage name="name" class="text-danger error-message" />
+            <ErrorMessage name="lastname" class="text-danger error-message" />
+          </div>
+
+          <div class="mb-3">
+          <label for="input-firstname-add-player" class="form-label"
+              >Prenume jucator</label
+            >
+            <Field
+              type="text"
+              class="form-control"
+              :class="{ 'border-danger': errors.firstname }"
+              id="input-firstname-add-player"
+              name="firstname"
+              placeholder="Nume jucator"
+              v-model="newPlayer.FirstName"
+            />
+            <ErrorMessage name="firstname" class="text-danger error-message" />
           </div>
 
           <div class="mb-3">
@@ -45,13 +61,13 @@
             <Field
               type="text"
               class="form-control"
-              :class="{ 'border-danger': errors.name }"
+              :class="{ 'border-danger': errors.teamname }"
               id="input-teamname-add-player"
               name="teamname"
               placeholder="Nume echipa"
               v-model="newPlayer.TeamName"
             />
-            <ErrorMessage name="name" class="text-danger error-message" />
+            <ErrorMessage name="teamname" class="text-danger error-message" />
           </div>
 
           <div class="mb-3 position-relative">
@@ -106,27 +122,6 @@
             </div>
           </div>
 
-          <div class="mb-3">
-            <label for="input-number-add-player" class="form-label"
-              >Numar</label
-            >
-            <Field
-              type="text"
-              class="form-control"
-              :class="{ 'border-danger': errors.number }"
-              id="input-number-add-player"
-              name="number"
-              placeholder="Numar"
-              v-model="newPlayer.Number"
-            />
-            <ErrorMessage name="number" class="text-danger error-message" />
-            <div
-              v-if="validNumber === false"
-              class="text-danger error-message"
-            >
-              Numărul este deja ocupat!
-            </div>
-          </div>
         </div>
 
         
@@ -195,8 +190,33 @@
             <div v-else></div>
           </div>
         </div>
-        <!-- <div class="row mt-2"> 
-          <div class="mb-5">
+
+        <div class="row">
+          <div>
+            <label for="input-number-add-player" class="form-label"
+              >Numar</label
+            >
+            <Field
+              type="text"
+              class="form-control"
+              :class="{ 'border-danger': errors.number }"
+              id="input-number-add-player"
+              name="number"
+              placeholder="Numar"
+              v-model="newPlayer.Number"
+            />
+            <ErrorMessage name="number" class="text-danger error-message" />
+            <div
+              v-if="validNumber === false"
+              class="text-danger error-message"
+            >
+              Numărul este deja ocupat!
+            </div>
+          </div>
+        </div>
+
+        <div class="row"> 
+          <div>
             <label for="input-nationality-add-player" class="form-label"
               >Nationalitate</label
             >
@@ -209,10 +229,10 @@
               v-model="newPlayer.Nationality"
             />
           </div>
-        </div> -->
+        </div> 
 
         <div class="row"> 
-          <div class="mb">
+          <div>
             <label for="input-height-add-player" class="form-label"
               >Inaltime</label
             >
@@ -257,6 +277,8 @@
 </template>
 
 <script>
+import VueDatePicker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 export default {
@@ -265,6 +287,7 @@ export default {
     Form,
     Field,
     ErrorMessage,
+    VueDatePicker,
   },
   data() {
     return {
@@ -294,8 +317,11 @@ export default {
   computed: {
     schema() {
       return yup.object({
-        name: yup.string().required("Acest câmp este obligatoriu"),
+        firstname: yup.string().required("Acest câmp este obligatoriu"),
+        lastname: yup.string().required("Acest câmp este obligatoriu"),
         number: yup.string().required("Acest câmp este obligatoriu"),
+        teamname: yup.string().required("Acest câmp este obligatoriu"),
+        birthdate: yup.string().required("Acest câmp este obligatoriu"),
       });
     },
   },
