@@ -28,7 +28,7 @@
   
 
   
-    <div class="new-form mt-4">
+    <div class="new-form mt-4 mb-4">
       <div class="row">
         <div class="col-md-4 col-sm-6">
           <label for="input-add-news-title" class="form-label"
@@ -90,6 +90,9 @@
             </textarea>
           </Field>
         </div>
+
+
+        
         <div class="col-md-7 col-xl-4 row justify-content-start mt-4 gap-1">
           <div class="col">
             <label class="form-label">Selectează imagine</label>

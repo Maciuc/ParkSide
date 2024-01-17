@@ -222,7 +222,7 @@
         const searchParams = {
           OrderBy: this.filter.OrderBy,
           PageNumber: this.filter.PageNumber,
-          PageSize: 4,
+          PageSize: 6,
           NameSearch: this.filter.SearchText,
           Platform: this.filter.SearchPlatform,
         };

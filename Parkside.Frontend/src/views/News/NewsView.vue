@@ -287,7 +287,7 @@ export default {
               ),
             }
           : ""),
-        PageSize: 4,
+        PageSize: 6,
         NameSearch: this.filter.SearchText,
         IsPublished: this.filter.IsPublished,
       };

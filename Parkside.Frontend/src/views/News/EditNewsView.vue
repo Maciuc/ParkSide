@@ -37,7 +37,7 @@
         </div>
       </div>
 
-      <div class="new-form mt-4">
+      <div class="new-form mt-4 mb-4">
         <div class="row">
           <div class="col-md-4 col-sm-6">
             <label for="input-edit-news-title" class="form-label"

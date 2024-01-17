@@ -189,7 +189,7 @@ export default {
       const searchParams = {
         OrderBy: this.filter.OrderBy,
         PageNumber: this.filter.PageNumber,
-        PageSize: 4,
+        PageSize: 6,
         NameSearch: this.filter.SearchText,
         Role: this.filter.RoleFilter,
       };
