@@ -52,6 +52,22 @@ const router = createRouter({
       children: [
       ],
     },
+    {
+      path: '/teams',
+      name: 'teams',
+      component: () => import('../views/TeamsView.vue'),
+      meta: { breadcrumb: 'Echipe' },
+      children: [
+      ],
+    },
+    {
+      path: '/championships',
+      name: 'championships',
+      component: () => import('../views/ChampionshipView.vue'),
+      meta: { breadcrumb: 'Campionate' },
+      children: [
+      ],
+    },
     // {
     //   path: '/home',
     //   name: 'home',

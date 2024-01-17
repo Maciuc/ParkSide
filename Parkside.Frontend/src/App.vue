@@ -56,6 +56,26 @@ import { RouterLink, RouterView } from "vue-router";
           <router-link
             tag="li"
             class="nav-link d-flex"
+            :to="{ name: 'teams' }"
+            exact
+          >
+            <font-awesome-icon class="img-link" :icon="['fas', 'people-group']"  />
+            <div>Echipe</div>
+          </router-link>
+
+          <router-link
+            tag="li"
+            class="nav-link d-flex"
+            :to="{ name: 'championships' }"
+            exact
+          >
+            <font-awesome-icon class="img-link" :icon="['fas', 'people-group']"  />
+            <div>Campionate</div>
+          </router-link>
+
+          <router-link
+            tag="li"
+            class="nav-link d-flex"
             :to="{ name: 'Users' }"
             exact
           >

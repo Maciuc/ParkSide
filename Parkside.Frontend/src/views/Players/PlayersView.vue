@@ -147,7 +147,7 @@
 import Pagination from "../../components/Pagination.vue";
 
 export default {
-  name: "SocialMedia",
+  name: "Players",
   components: {
     Pagination,
   },

@@ -238,7 +238,7 @@
             >
             <Field
               v-slot="{ field }"
-              v-model="newPlayer.Speech"
+              v-model="newPlayer.Description"
               name="description"
             >
               <textarea
@@ -278,7 +278,7 @@ export default {
         Number: "",
         TeamName: "",
         Description: "",
-        //Nationality: "",
+        Nationality: "",
         ImageBase64: null,
       },
       Roles: [
