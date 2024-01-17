@@ -96,6 +96,16 @@ import { RouterLink, RouterView } from "vue-router";
           <router-link
             tag="li"
             class="nav-link d-flex"
+            :to="{ name: 'matches' }"
+            exact
+          >
+            <font-awesome-icon class="img-link" :icon="['fas', 'calendar']"  />
+            <div>Meciuri</div>
+          </router-link>
+
+          <router-link
+            tag="li"
+            class="nav-link d-flex"
             :to="{ name: 'Users' }"
             exact
           >

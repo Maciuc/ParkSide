@@ -7,6 +7,7 @@ namespace Parkside.Services.Teams
         Task<TeamViewModel> GetTeam(int id);
         PagingViewModel<TeamViewModel> GetTeams(
             string? NameSearch, string? OrderBy, int PageNumber, int PageSize);
+        IQueryable<TeamViewModel> GetTeamsDropDown();
         Task AddTeam(TeamCreateViewModel model);
         Task DeleteTeam(int id);
         Task VirtualDeleteTeam(int id);

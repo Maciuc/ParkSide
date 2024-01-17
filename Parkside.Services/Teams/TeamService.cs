@@ -124,6 +124,17 @@ namespace Parkside.Services.Teams
 
             await _teamRepo.Update(team);
         }
+
+        public IQueryable<TeamViewModel> GetTeamsDropDown()
+        {
+            var teams = _teamRepo.GetAllQuerable().Select(x => new TeamViewModel
+            {
+                Id = x.Id,
+                Name = x.Name,
+            });
+
+            return teams;
+        }
     }
 }
 

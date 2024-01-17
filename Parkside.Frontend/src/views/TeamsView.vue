@@ -196,7 +196,6 @@
             )}`
           )
           .then((response) => {
-            //this.teams.NumberOfPages = 4;----se rescrie totul in news type la urmatorul rand. nu mai trebuie sa setez acest tip de numberOfPages
             console.log(searchParams);
             this.teams = response.data;
           })
