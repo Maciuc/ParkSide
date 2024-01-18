@@ -28,21 +28,19 @@ namespace Parkside.Services.Matchs
             _genericService = genericService;
         }
 
-        public async Task<MatchViewModel> GetMatch(int id)
+        public async Task<MatchDetailsViewModel> GetMatch(int id)
         {
             var match = await _matchRepo.GetAllMatches().FirstOrDefaultAsync(x => x.Id == id);
 
             if (match == null)
                 throw new NotFoundException("Match not found!");
 
-            var finalMatch = new MatchViewModel
+            var finalMatch = new MatchDetailsViewModel
             {
                 Id = match.Id,
-                ChampionshipName = match.Championship.Name,
-                EnemyTeamName = match.EnemyTeam.Name,
-                EnemyTeamImageBase64 = _genericService.GetImgBase64(match.EnemyTeam.ImageUrl),
                 Location = match.Location,
-                Date = match.Date,
+                MatchDate = match.MatchDate,
+                MatchHour = match.MatchHour,
                 PlayingHome = match.PlayingHome,
                 EnemyTeamPoints = match.EnemyTeamPoints,
                 MainTeamPoints = match.MainTeamPoints
@@ -66,15 +64,15 @@ namespace Parkside.Services.Matchs
             switch (OrderBy)
             {
                 case ("date"):
-                    matches = matches.OrderBy(c => c.Date);
+                    matches = matches.OrderBy(c => c.MatchDate);
                     break;
 
                 case ("date_desc"):
-                    matches = matches.OrderByDescending(c => c.Date);
+                    matches = matches.OrderByDescending(c => c.MatchDate);
                     break;
 
                 default:
-                    matches = matches.OrderByDescending(c => c.Date);
+                    matches = matches.OrderByDescending(c => c.MatchDate);
                     break;
             }
 
@@ -87,8 +85,10 @@ namespace Parkside.Services.Matchs
                   ChampionshipName = match.Championship.Name,
                   EnemyTeamName = match.EnemyTeam.Name,
                   EnemyTeamImageBase64 = _genericService.GetImgBase64(match.EnemyTeam.ImageUrl),
+                  ChampionshipImageBase64 = _genericService.GetImgBase64(match.Championship.ImageUrl),
                   Location = match.Location,
-                  Date = match.Date,
+                  MatchDate = match.MatchDate.HasValue ? match.MatchDate.Value.ToString("dd/MM/yyyy") : null,
+                  MatchHour = match.MatchHour,
                   PlayingHome = match.PlayingHome,
                   EnemyTeamPoints = match.EnemyTeamPoints,
                   MainTeamPoints = match.MainTeamPoints
@@ -121,7 +121,8 @@ namespace Parkside.Services.Matchs
                 ChampionshipId = championshipId,
                 EnemyTeamId = enemyTeamId,
                 Location = model.Location,
-                Date = model.Date,
+                MatchDate = model.MatchDate,
+                MatchHour = model.MatchHour,
                 PlayingHome = model.PlayingHome,
                 EnemyTeamPoints = model.EnemyTeamPoints,
                 MainTeamPoints = model.MainTeamPoints,
@@ -158,7 +159,8 @@ namespace Parkside.Services.Matchs
             match.ChampionshipId = championshipId;
             match.EnemyTeamId = enemyTeamId;
             match.Location = model.Location;
-            match.Date = model.Date;
+            match.MatchDate = model.MatchDate;
+            match.MatchHour = model.MatchHour;
             match.PlayingHome = model.PlayingHome;
             match.EnemyTeamPoints = model.EnemyTeamPoints;
             match.MainTeamPoints = model.MainTeamPoints;
@@ -176,8 +178,10 @@ namespace Parkside.Services.Matchs
                 ChampionshipName = match.Championship.Name,
                 EnemyTeamName = match.EnemyTeam.Name,
                 EnemyTeamImageBase64 = _genericService.GetImgBase64(match.EnemyTeam.ImageUrl),
+                ChampionshipImageBase64 = _genericService.GetImgBase64(match.Championship.ImageUrl),
                 Location = match.Location,
-                Date = match.Date,
+                MatchDate = match.MatchDate.HasValue ? match.MatchDate.Value.ToString("dd/MM/yyyy") : null,
+                MatchHour = match.MatchHour,
                 PlayingHome = match.PlayingHome,
                 EnemyTeamPoints = match.EnemyTeamPoints,
                 MainTeamPoints = match.MainTeamPoints

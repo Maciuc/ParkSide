@@ -40,7 +40,7 @@
             v-on:keyup.enter="GetAllMatches()"
           />
         </div>
-      </div>
+        </div>
     </div>
 
 
@@ -70,7 +70,9 @@
             </th>
             <th scope="20" width="20%">Campionat</th>
             <th scope="20" width="20%">Data</th>
+            <th scope="20" width="20%">Ora</th>
             <th scope="20" width="20%">Locatia</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -87,8 +89,19 @@
               <span>{{ match.EnemyTeamName}}</span>
           </div>
         </td>
-        <td>{{ match.ChampionshipName }}</td>
-        <td>{{ match.Date }}</td>
+        <td>
+            <div class="d-flex align-items-center">
+                <div class="img-container-avatar me-3">
+                    <img
+                    :src="ShowDynamicImage(match.ChampionshipImageBase64)"
+                    class="me-2 icon-avatar"
+                    />
+                </div>
+                <span>{{ match.ChampionshipName }}</span>
+            </div>
+          </td>
+        <td>{{ match.MatchDate }}</td>
+        <td>{{ match.MatchHour }}</td>
         <td>{{ match.Location }}</td>
             <td>
               <div class="editButtons">
@@ -163,7 +176,7 @@ export default {
   methods: {
       ShowDynamicImage(imagePath) {
     if (!imagePath) {
-      return `src/images/user.png`;
+      return `src/images/NoImageSelected.png`;
     }
     return imagePath;
   },

@@ -65,7 +65,7 @@
                   class="me-2"
                 />
                 <span >Nume echipa</span>
-              </th>
+                </th>
               <th></th>
             </tr>
           </thead>
@@ -157,7 +157,7 @@
     methods: {
         ShowDynamicImage(imagePath) {
       if (!imagePath) {
-        return `src/images/user.png`;
+        return `src/images/NoImageSelected.png`;
       }
       return imagePath;
     },

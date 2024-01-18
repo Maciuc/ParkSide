@@ -72,7 +72,13 @@
           <tbody>
             <tr v-for="(type, index) in championships.Items" :key="index">
               <td>
-                <span>{{ type.Name }}</span>
+                <div class="d-flex align-items-center">
+                  <div class="img-container-avatar me-3">
+                    <img :src="ShowDynamicImage(type.ImageBase64)" class="me-2 icon-avatar" />
+                  </div>
+
+                  <span>{{ type.Name }}</span>
+                </div>
               </td>
               <td>
                 <div class="editButtons">
@@ -130,6 +136,7 @@
         selectedChampionshipForEdit: {
           Id: 0,
           Name: "",
+          ImageBase64: "",
         },
   
         filter: {
@@ -144,6 +151,12 @@
       };
     },
     methods: {
+      ShowDynamicImage(imagePath) {
+        if (!imagePath) {
+          return `src/images/NoImageSelected.png`;
+        }
+        return imagePath;
+      },
       OpenModalAddChampionship() {
         $("#championship-add-modal").modal("show");
         this.$refs.addChampionshipModal.ClearModal();
@@ -182,7 +195,6 @@
             )}`
           )
           .then((response) => {
-            //this.championships.NumberOfPages = 4;----se rescrie totul in news type la urmatorul rand. nu mai trebuie sa setez acest tip de numberOfPages
             console.log(searchParams);
             this.championships = response.data;
           })

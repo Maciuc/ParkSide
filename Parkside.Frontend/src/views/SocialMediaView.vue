@@ -26,14 +26,14 @@
                 <font-awesome-icon
                   class="search_icon"
                   :icon="['fas', 'magnifying-glass']"
-                  style="color: #688088"
+                    style="color: #688088"
                 />
                 <div class="separator"></div>
               </div>
             <input
               type="text"
               class="form-control search"
-              placeholder="Caută link"
+        placeholder="Caută link"
               aria-label="Username"
               aria-describedby="basic-addon1"
               v-model="filter.SearchText"

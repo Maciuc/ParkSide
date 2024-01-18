@@ -267,7 +267,7 @@ export default {
   methods: {
     ShowDynamicImage(imagePath) {
       if (!imagePath) {
-        return `src/images/user.png`;
+        return `src/images/NoImageSelected.png`;
       }
       return imagePath;
     },

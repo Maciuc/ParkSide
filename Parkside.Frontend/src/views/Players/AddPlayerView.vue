@@ -126,7 +126,7 @@
 
         
         <div class="col-md-7 col-lg-6 col-xl-4 col-12 row gap-1">
-          <div class="row mb-5"> 
+          <div class="row mb-4"> 
           <div class="col">
             <label class="form-label">Selectează imagine</label>
             <label

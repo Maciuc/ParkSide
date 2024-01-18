@@ -41,7 +41,7 @@
               >
                 <VueDatePicker
                   v-bind="field"
-                  v-model="newMatch.Date"
+                  v-model="newMatch.MatchDate"
                   auto-apply
                   utc
                   :enable-time-picker="false"
@@ -128,6 +128,22 @@
                 >Joaca acasa</label
               >
             </div>
+                <div class="col">
+                <label for="input-hour" class="form-label">Ora</label>
+                <Field
+                  class="form-control"
+                  id="input-hour"
+                  type="time"
+                  placeholder="Ora"
+                  :class="{ 'border-danger': errors.hour }"
+                  name="hour"
+                  v-model="newMatch.MatchHour"
+                >
+                </Field>
+                <ErrorMessage name="hour" class="text-danger error-message" />
+              </div>
+
+
         </div>
 
 
@@ -172,6 +188,7 @@ export default {
         PlayingHome: true,
         EnemyTeamPoints: "",
         MainTeamPoints: "",
+        MatchHour:"",
       },
     };
   },
