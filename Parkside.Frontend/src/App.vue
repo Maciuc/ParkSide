@@ -123,14 +123,14 @@ import { RouterLink, RouterView } from "vue-router";
             <div>Utilizatori</div>
           </router-link>
 
-          <!-- <router-link
+          <router-link
             class="nav-link d-flex"
             :to="{ name: 'home' }"
             exact
           >
             <font-awesome-icon class="img-link" :icon="['far', 'newspaper']"  />
             <div >Home</div>
-          </router-link> -->
+          </router-link> 
         </ul>
       </nav>
     </aside>
