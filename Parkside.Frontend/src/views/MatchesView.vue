@@ -18,7 +18,7 @@
     </div>
 
     <div class="row mt-3 new-form">
-      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6">
+      <div class="col-xxl-4 col-xl-4 col-lg-3 col-md-4 col-sm-6">
         <div class="input-group-custom mb-3 custom-control">
           <div
               class="d-flex justify-content-center align-items-center search-separator"
@@ -40,6 +40,18 @@
             v-on:keyup.enter="GetAllMatches()"
           />
         </div>
+        </div>
+
+        <div class="col-xl-4 col-md-3 col-sm-4 mb-2 custom-date-picker">
+          <VueDatePicker
+            v-model="filter.MatchDate"
+            format="dd/MM/yyyy"
+            auto-apply
+            utc
+            :enable-time-picker="false"
+            @update:model-value="GetAllMatches()"
+            placeholder="Dată meci"
+          ></VueDatePicker>
         </div>
     </div>
 
@@ -66,10 +78,47 @@
                 size="xl"
                 class="me-2"
               />
+              <font-awesome-icon
+                  v-else
+                  :icon="['fas', 'arrow-up-wide-short']"
+                  rotation="180"
+                  size="xl"
+                  class="me-2"
+                />
               <span >Nume echipa adversa</span>
             </th>
+
+
             <th scope="20" width="20%">Campionat</th>
-            <th scope="20" width="20%">Data</th>
+
+
+            <th width="20%" @click="OrderBy('matchdate')" class="cursor-pointer">
+                <font-awesome-icon
+                  v-if="filter.OrderBy === 'matchdate'"
+                  :icon="['fas', 'arrow-up-wide-short']"
+                  style="color: #29be00"
+                  rotation="180"
+                  size="xl"
+                  class="me-2"
+                />
+
+                <font-awesome-icon
+                  v-else-if="filter.OrderBy === 'matchdate_desc'"
+                  :icon="['fas', 'arrow-up-short-wide']"
+                  rotation="180"
+                  style="color: #29be00"
+                  size="xl"
+                  class="me-2"
+                />
+                <font-awesome-icon
+                  v-else
+                  :icon="['fas', 'arrow-up-wide-short']"
+                  rotation="180"
+                  size="xl"
+                  class="me-2"
+                />
+                <span >Data</span>
+              </th>
             <th scope="20" width="20%">Ora</th>
             <th scope="20" width="20%">Locatia</th>
             <th></th>
@@ -165,7 +214,8 @@ export default {
       filter: {
         SearchText: "",
         PageNumber: 1,
-        OrderBy: "name",
+        OrderBy: "matchdate_desc",
+        MatchDate: "",
       },
       matches: {
         Items: [],
@@ -205,6 +255,7 @@ export default {
       const searchParams = {
         OrderBy: this.filter.OrderBy,
         PageNumber: this.filter.PageNumber,
+        MatchDate: this.filter.MatchDate,
         PageSize: 6,
         NameSearch: this.filter.SearchText,
       };

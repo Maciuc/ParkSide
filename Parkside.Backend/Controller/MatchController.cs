@@ -25,10 +25,10 @@ namespace Parkside.Backend.Controller
         }
 
         [HttpGet("getMatches")]
-        public IActionResult GetMatchs(string? NameSearch, string? OrderBy,
+        public IActionResult GetMatchs(string? NameSearch, string? OrderBy, string? MatchDate,
             int PageNumber = 1, int PageSize = 10)
         {
-            var matchs = _matchService.GetMatches(NameSearch, OrderBy,
+            var matchs = _matchService.GetMatches(NameSearch, OrderBy, MatchDate,
                 PageNumber, PageSize);
             return Ok(matchs);
         }

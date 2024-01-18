@@ -52,7 +52,11 @@ namespace Parkside.Services.Newss
             if (!string.IsNullOrWhiteSpace(PublishedDate))
             {
                 PublishedDate = PublishedDate.Trim();
-                newses = newses.Where(n => n.PublishedDate.Value.Date == DateTime.Parse(PublishedDate).Date);
+
+                if (DateTime.TryParse(PublishedDate, out var publishedDate))
+                {
+                    newses = newses.Where(n => n.PublishedDate != null && n.PublishedDate.Value.Date == publishedDate.Date);
+                }
             }
 
             if (IsPublished != null)

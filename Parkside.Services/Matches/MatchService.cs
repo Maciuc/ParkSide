@@ -50,7 +50,7 @@ namespace Parkside.Services.Matchs
         }
 
         public PagingViewModel<MatchViewModel> GetMatches(
-            string? NameSearch, string? OrderBy, int PageNumber, int PageSize)
+            string? NameSearch, string? OrderBy, string? MatchDate, int PageNumber, int PageSize)
         {
             var matches = _matchRepo.GetAllMatches();
 
@@ -60,14 +60,24 @@ namespace Parkside.Services.Matchs
                 matches = matches.Where(c => c.EnemyTeam.Name.Contains(NameSearch));
             }
 
+            if (!string.IsNullOrWhiteSpace(MatchDate))
+            {
+                MatchDate = MatchDate.Trim();
+
+                if (DateTime.TryParse(MatchDate, out var matchDate))
+                {
+                    matches = matches.Where(n => n.MatchDate != null && n.MatchDate.Value.Date == matchDate.Date);
+                }
+            }
+
 
             switch (OrderBy)
             {
-                case ("date"):
+                case ("matchdate"):
                     matches = matches.OrderBy(c => c.MatchDate);
                     break;
 
-                case ("date_desc"):
+                case ("matchdate_desc"):
                     matches = matches.OrderByDescending(c => c.MatchDate);
                     break;
 

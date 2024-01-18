@@ -280,13 +280,7 @@ export default {
       const searchParams = {
         OrderBy: this.filter.OrderBy,
         PageNumber: this.filter.PageNumber,
-        ...(this.filter.PublishedDate
-          ? {
-              PublishedDate: moment(this.filter.PublishedDate).format(
-                "DD/MM/YYYY"
-              ),
-            }
-          : ""),
+        PublishedDate :this.filter.PublishedDate,
         PageSize: 6,
         NameSearch: this.filter.SearchText,
         IsPublished: this.filter.IsPublished,
