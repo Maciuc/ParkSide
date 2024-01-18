@@ -113,7 +113,7 @@ const router = createRouter({
     {
       path: '/home',
       name: 'home',
-      component: () => import('../home/acasa.html')
+      component: () => import('../home/test.html')
     },
     
   ]

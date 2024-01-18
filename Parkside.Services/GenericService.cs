@@ -54,7 +54,6 @@ namespace exp.NET6.Services.DBServices
                 var (imgType, ImageBase64) = ExtrageImagBase64(newImgBase64);
                 byte[] imageBytes = Convert.FromBase64String(ImageBase64);
                 string input = Path.Combine(Directory.GetCurrentDirectory());
-                //string pattern = @"C:\\Projects\\5.Delicitate\\";
 
                 string pattern = @"C:\\Users\\[^\\]+\\source\\repos\\";
                 Regex regex = new Regex(pattern);
@@ -66,7 +65,6 @@ namespace exp.NET6.Services.DBServices
                     string folder = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("PathForImages")["path"];
                     string baseFolderPath = path + folder;
 
-                    //string baseFolderPath = "C:\\Users\\epentilescu\\source\\repos\\OnlineShop-Administration-App\\exp.net6.backend\\Images";
                     string folderPath = Path.Combine(baseFolderPath, folderName);
 
                     if (!File.Exists(folderPath))
@@ -104,7 +102,7 @@ namespace exp.NET6.Services.DBServices
             {
                 string input = Path.Combine(Directory.GetCurrentDirectory());
                 string pattern = @"C:\\Users\\[^\\]+\\source\\repos\\";
-                //string pattern = @"C:\\Projects\\5.Delicitate\\";
+
                 Regex regex = new Regex(pattern);
                 Match match = regex.Match(input);
 
