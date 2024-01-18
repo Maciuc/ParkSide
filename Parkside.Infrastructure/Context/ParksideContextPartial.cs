@@ -15,6 +15,8 @@ namespace Parkside.Infrastructure.Context
             modelBuilder.Entity<Championship>().HasQueryFilter(x => !x.IsDeleted);
             modelBuilder.Entity<Match>().HasQueryFilter(x => !x.IsDeleted);
             modelBuilder.Entity<Team>().HasQueryFilter(x => !x.IsDeleted);
+            modelBuilder.Entity<Trofee>().HasQueryFilter(x => !x.IsDeleted);
+            modelBuilder.Entity<PlayersTrofee>().HasQueryFilter(x => !x.IsDeleted);
         }
     }
 }

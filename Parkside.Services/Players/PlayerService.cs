@@ -184,6 +184,18 @@ namespace Parkside.Services.Players
 
             return finalPlayers;
         }
+
+        public IQueryable<PlayerBasicViewModel> GetPlayersDropDown()
+        {
+            var players = _playerRepo.GetAllQuerable().Select(x => new PlayerBasicViewModel
+            {
+                Id = x.Id,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+            });
+
+            return players;
+        }
     }
 }
 

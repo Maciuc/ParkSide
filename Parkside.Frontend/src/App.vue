@@ -104,6 +104,16 @@ import { RouterLink, RouterView } from "vue-router";
           </router-link>
 
           <router-link
+              tag="li"
+              class="nav-link d-flex"
+              :to="{ name: 'trofees' }"
+              exact
+            >
+              <font-awesome-icon class="img-link" :icon="['fas', 'award']"  />
+              <div>Trofee</div>
+            </router-link>
+
+          <router-link
             tag="li"
             class="nav-link d-flex"
             :to="{ name: 'Users' }"

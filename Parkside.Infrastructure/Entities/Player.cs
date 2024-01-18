@@ -5,6 +5,11 @@ namespace Parkside.Infrastructure.Entities
 {
     public partial class Player
     {
+        public Player()
+        {
+            PlayersTrofees = new HashSet<PlayersTrofee>();
+        }
+
         public int Id { get; set; }
         public string? TeamName { get; set; }
         public string FirstName { get; set; } = null!;
@@ -17,5 +22,7 @@ namespace Parkside.Infrastructure.Entities
         public string? Description { get; set; }
         public string? ImageUrl { get; set; }
         public bool IsDeleted { get; set; }
+
+        public virtual ICollection<PlayersTrofee> PlayersTrofees { get; set; }
     }
 }

@@ -87,6 +87,14 @@ const router = createRouter({
       ],
     },
     {
+      path: '/trofees',
+      name: 'trofees',
+      component: () => import('../views/TrofeesView.vue'),
+      meta: { breadcrumb: 'Trofee' },
+      children: [
+      ],
+    },
+    {
       path: '/socialMedia',
       name: 'socialMedia',
       component: () => import('../views/SocialMediaView.vue'),

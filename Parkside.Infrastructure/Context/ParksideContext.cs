@@ -28,9 +28,11 @@ namespace Parkside.Infrastructure.Context
         public virtual DbSet<Match> Matches { get; set; } = null!;
         public virtual DbSet<News> News { get; set; } = null!;
         public virtual DbSet<Player> Players { get; set; } = null!;
+        public virtual DbSet<PlayersTrofee> PlayersTrofees { get; set; } = null!;
         public virtual DbSet<SocialMedia> SocialMedias { get; set; } = null!;
         public virtual DbSet<Sponsor> Sponsors { get; set; } = null!;
         public virtual DbSet<Team> Teams { get; set; } = null!;
+        public virtual DbSet<Trofee> Trofees { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -233,6 +235,31 @@ namespace Parkside.Infrastructure.Context
                 entity.Property(e => e.TeamName).HasMaxLength(200);
             });
 
+            modelBuilder.Entity<PlayersTrofee>(entity =>
+            {
+                entity.Property(e => e.PlayerRole).HasMaxLength(50);
+
+                entity.Property(e => e.TrofeeDate).HasColumnType("datetime");
+
+                entity.HasOne(d => d.Championship)
+                    .WithMany(p => p.PlayersTrofees)
+                    .HasForeignKey(d => d.ChampionshipId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__PlayersTr__Champ__1209AD79");
+
+                entity.HasOne(d => d.Player)
+                    .WithMany(p => p.PlayersTrofees)
+                    .HasForeignKey(d => d.PlayerId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__PlayersTr__Playe__10216507");
+
+                entity.HasOne(d => d.Trofee)
+                    .WithMany(p => p.PlayersTrofees)
+                    .HasForeignKey(d => d.TrofeeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__PlayersTr__Trofe__11158940");
+            });
+
             modelBuilder.Entity<SocialMedia>(entity =>
             {
                 entity.Property(e => e.Link).HasMaxLength(500);
@@ -252,6 +279,15 @@ namespace Parkside.Infrastructure.Context
             });
 
             modelBuilder.Entity<Team>(entity =>
+            {
+                entity.Property(e => e.ImageUrl)
+                    .HasMaxLength(500)
+                    .HasColumnName("ImageURL");
+
+                entity.Property(e => e.Name).HasMaxLength(200);
+            });
+
+            modelBuilder.Entity<Trofee>(entity =>
             {
                 entity.Property(e => e.ImageUrl)
                     .HasMaxLength(500)

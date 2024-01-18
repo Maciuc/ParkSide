@@ -33,12 +33,20 @@ namespace Parkside.Backend.Controller
             return Ok(players);
         }
 
+        [HttpGet("getPlayersDropDown")]
+        public IActionResult GetPlayersDropDown()
+        {
+            var players = _playerService.GetPlayersDropDown();
+            return Ok(players);
+        }
+
         [HttpGet("getHomePagePlayers")]
         public IActionResult GetHomePagePlayers()
         {
             var players = _playerService.GetHomePagePlayers();
             return Ok(players);
         }
+
 
         [HttpPost("createPlayer")]
         public async Task<IActionResult> AddPlayer(PlayerCreateViewModel player)

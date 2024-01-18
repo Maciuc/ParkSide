@@ -8,6 +8,7 @@ namespace Parkside.Services.Players
         PagingViewModel<PlayerViewModel> GetPlayers(
             string? NameSearch, string? Role, string? OrderBy, int PageNumber, int PageSize);
         IQueryable<PlayerViewModel> GetHomePagePlayers();
+        IQueryable<PlayerBasicViewModel> GetPlayersDropDown();
         Task AddPlayer(PlayerCreateViewModel model);
         Task DeletePlayer(int id);
         Task VirtualDeletePlayer(int id);

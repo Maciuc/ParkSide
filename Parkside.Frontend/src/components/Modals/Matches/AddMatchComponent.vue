@@ -186,8 +186,8 @@ export default {
         Location: "",
         Date: "",
         PlayingHome: true,
-        EnemyTeamPoints: "",
-        MainTeamPoints: "",
+        EnemyTeamPoints: "10",
+        MainTeamPoints: "10",
         MatchHour:"",
       },
     };

@@ -3,11 +3,10 @@ using System.Collections.Generic;
 
 namespace Parkside.Infrastructure.Entities
 {
-    public partial class Championship
+    public partial class Trofee
     {
-        public Championship()
+        public Trofee()
         {
-            Matches = new HashSet<Match>();
             PlayersTrofees = new HashSet<PlayersTrofee>();
         }
 
@@ -16,7 +15,6 @@ namespace Parkside.Infrastructure.Entities
         public string? ImageUrl { get; set; }
         public bool IsDeleted { get; set; }
 
-        public virtual ICollection<Match> Matches { get; set; }
         public virtual ICollection<PlayersTrofee> PlayersTrofees { get; set; }
     }
 }

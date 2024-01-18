@@ -79,6 +79,23 @@ CREATE TABLE Matches(
 	MainTeamPoints NVARCHAR(10),
 	IsDeleted BIT NOT NULL DEFAULT(0)
 );
+
+CREATE TABLE Trofees(
+	Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	Name NVARCHAR(200) NOT NULL,
+	ImageURL NVARCHAR(500),
+	IsDeleted BIT NOT NULL DEFAULT(0)
+);
+
+CREATE TABLE PlayersTrofees(
+	Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	PlayerId INT REFERENCES Players(Id) NOT NULL,
+	TrofeeId INT REFERENCES Trofees(Id) NOT NULL,
+	ChampionshipId INT REFERENCES Championships(Id) NOT NULL,
+	TrofeeDate DATETIME,
+	PlayerRole NVARCHAR(50),
+	IsDeleted BIT NOT NULL DEFAULT(0)
+);
 -------------------------------------
 DROP TABLE News;
 DROP TABLE Players;
@@ -88,4 +105,6 @@ DROP TABLE SocialMedias;
 DROP TABLE Matches;
 DROP TABLE Championships;
 DROP TABLE Teams;
+DROP TABLE PlayersTrofees;
+DROP TABLE Trofees;
 
