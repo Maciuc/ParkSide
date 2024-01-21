@@ -124,6 +124,7 @@ import { RouterLink, RouterView } from "vue-router";
           </router-link>
 
           <router-link
+            tag="li"
             class="nav-link d-flex"
             :to="{ name: 'home' }"
             exact

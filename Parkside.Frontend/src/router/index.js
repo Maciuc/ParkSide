@@ -110,11 +110,11 @@ const router = createRouter({
       children: [
       ],
     },
-    {
-      path: '/home',
-      name: 'home',
-      component: () => import('../home/test.html')
-    },
+    // {
+    //   path: '/home',
+    //   name: 'home',
+    //   component: () => import('../home/acasa.html')
+    // },
     
   ]
 })
