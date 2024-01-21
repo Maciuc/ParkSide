@@ -4,11 +4,36 @@ using System.Data;
 using Newtonsoft.Json;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json.Linq;
 
 namespace exp.NET6.Services.DBServices
 {
     public class GenericService : IGenericService
     {
+        static string GetColumnName(int index)
+        {
+            switch (index)
+            {
+                case 0: return "Pos";
+                case 1: return "Echipa";
+                case 2: return "Juc";
+                case 3: return "V";
+                case 4: return "E";
+                case 5: return "P";
+                case 6: return "GM";
+                case 7: return "GP";
+                case 8: return "GDif";
+                case 9: return "VA";
+                case 10: return "EA";
+                case 11: return "VD";
+                case 12: return "ED";
+                case 13: return "PtsA";
+                case 14: return "PtsD";
+                case 15: return "Pts";
+                default: return "Unknown";
+            }
+        }
+
         public string GetRankings()
         {
             string url = "https://frh.ro/clasament.php?id=927";
@@ -26,31 +51,41 @@ namespace exp.NET6.Services.DBServices
 
                 if (rows != null)
                 {
-                    List<List<string>> tableData = new List<List<string>>();
+                    List<JObject> tableData = new List<JObject>();
 
-                    foreach (HtmlNode row in rows)
+                    // Iterate through rows starting from the second row (skipping header row)
+                    for (int i = 1; i < rows.Count; i++)
                     {
-                        List<string> rowData = new List<string>();
+                        var row = rows[i];
+                        var rowData = new JObject();
 
                         // Iterate through each cell in the row
-                        foreach (HtmlNode cell in row.SelectNodes("th|td"))
+                        var cells = row.SelectNodes("td");
+                        if (cells != null)
                         {
-                            rowData.Add(cell.InnerText.Trim());
-                        }
+                            for (int j = 0; j < cells.Count; j++)
+                            {
+                                rowData[GetColumnName(j)] = cells[j].InnerText.Trim();
+                            }
 
-                        tableData.Add(rowData);
+                            tableData.Add(rowData);
+                        }
                     }
 
                     // Convert the data to JSON
                     string json = JsonConvert.SerializeObject(tableData, Formatting.Indented);
 
                     return json;
-                    // Save JSON to a file
-
                 }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
                 return null;
             }
-            return null;
         }
 
         private (string, string) ExtrageImagBase64(string dataUri)
