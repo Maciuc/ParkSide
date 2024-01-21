@@ -1,5 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using HtmlAgilityPack;
+using Microsoft.Extensions.Configuration;
 using System.Data;
+using Newtonsoft.Json;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
 
@@ -7,6 +9,50 @@ namespace exp.NET6.Services.DBServices
 {
     public class GenericService : IGenericService
     {
+        public string GetRankings()
+        {
+            string url = "https://frh.ro/clasament.php?id=927";
+
+            HtmlWeb web = new HtmlWeb();
+            HtmlDocument doc = web.Load(url);
+
+            // Assuming the table you want to scrape is the first table on the page
+            HtmlNode table = doc.DocumentNode.SelectSingleNode("//table");
+
+            if (table != null)
+            {
+                // Select all rows directly under the table (not considering nested tables)
+                var rows = table.SelectNodes(".//tr");
+
+                if (rows != null)
+                {
+                    List<List<string>> tableData = new List<List<string>>();
+
+                    foreach (HtmlNode row in rows)
+                    {
+                        List<string> rowData = new List<string>();
+
+                        // Iterate through each cell in the row
+                        foreach (HtmlNode cell in row.SelectNodes("th|td"))
+                        {
+                            rowData.Add(cell.InnerText.Trim());
+                        }
+
+                        tableData.Add(rowData);
+                    }
+
+                    // Convert the data to JSON
+                    string json = JsonConvert.SerializeObject(tableData, Formatting.Indented);
+
+                    return json;
+                    // Save JSON to a file
+
+                }
+                return null;
+            }
+            return null;
+        }
+
         private (string, string) ExtrageImagBase64(string dataUri)
         {
             string delim = ";base64,"; // Delimitatorul dintre tipul de imagine și codificarea Base64

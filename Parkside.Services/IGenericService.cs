@@ -2,6 +2,7 @@
 {
     public interface IGenericService
     {
+        string GetRankings();
         string? GetImagePath(string? newImgBase64, string? oldImgUrl, string folderName);
         string? GetImgBase64(string? filePath);
         bool ValidateEmail(string emailAddress);
