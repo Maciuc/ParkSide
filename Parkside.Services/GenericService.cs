@@ -55,7 +55,7 @@ namespace exp.NET6.Services.DBServices
                 byte[] imageBytes = Convert.FromBase64String(ImageBase64);
                 string input = Path.Combine(Directory.GetCurrentDirectory());
 
-                string pattern = @"C:\\Users\\[^\\]+\\source\\repos\\";
+                string pattern = Regex.Escape(Directory.GetCurrentDirectory());
                 Regex regex = new Regex(pattern);
                 Match match = regex.Match(input);
 
@@ -101,7 +101,7 @@ namespace exp.NET6.Services.DBServices
             if (filePath != null)
             {
                 string input = Path.Combine(Directory.GetCurrentDirectory());
-                string pattern = @"C:\\Users\\[^\\]+\\source\\repos\\";
+                string pattern = Regex.Escape(Directory.GetCurrentDirectory());
 
                 Regex regex = new Regex(pattern);
                 Match match = regex.Match(input);

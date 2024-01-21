@@ -123,7 +123,7 @@ import { RouterLink, RouterView } from "vue-router";
             <div>Utilizatori</div>
           </router-link>
 
-          <router-link
+          <!-- <router-link
             tag="li"
             class="nav-link d-flex"
             :to="{ name: 'home' }"
@@ -131,7 +131,7 @@ import { RouterLink, RouterView } from "vue-router";
           >
             <font-awesome-icon class="img-link" :icon="['far', 'newspaper']"  />
             <div >Home</div>
-          </router-link> 
+          </router-link>  -->
         </ul>
       </nav>
     </aside>
