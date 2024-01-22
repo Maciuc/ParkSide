@@ -117,7 +117,7 @@
       />
   
       <EditTeamModalComponent
-        :event="selectedTeamForEdit"
+        :editedTeam="selectedTeamForEdit"
         @get-list="GetAllTeams"
       /> 
     </section>

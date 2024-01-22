@@ -189,7 +189,7 @@ export default {
           if (file.size / 1024 < 15360) {
             this.PhotoValidation = null;
             console.log(reader.result);
-            this.editedTeam.Image = reader.result;
+            this.editedTeam.ImageBase64 = reader.result;
             selectedFile.value = "";
           } else {
             this.PhotoValidation = true;
@@ -204,7 +204,7 @@ export default {
     },
     DeletePhoto() {
       this.$refs.uploadInputEditTeam.reset();
-      this.editedTeam.Image = null;
+      this.editedTeam.ImageBase64 = null;
       this.PhotoValidation = null;
     },
   },

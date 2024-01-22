@@ -113,7 +113,7 @@
       />
   
       <EditChampionshipModalComponent
-        :event="selectedChampionshipForEdit"
+        :editedChampionship="selectedChampionshipForEdit"
         @get-list="GetAllChampionships"
       /> 
     </section>

@@ -134,7 +134,7 @@ export default {
                     if (file.size / 1024 < 15360) {
                         this.PhotoValidation = null;
                         console.log(reader.result);
-                        this.editedTrofee.Image = reader.result;
+                        this.editedTrofee.ImageBase64 = reader.result;
                         selectedFile.value = "";
                     } else {
                         this.PhotoValidation = true;
@@ -149,7 +149,7 @@ export default {
         },
         DeletePhoto() {
             this.$refs.uploadInputEditTrofee.reset();
-            this.editedTrofee.Image = null;
+            this.editedTrofee.ImageBase64 = null;
             this.PhotoValidation = null;
         },
     },

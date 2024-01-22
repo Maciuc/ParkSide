@@ -197,7 +197,7 @@ export default {
   border-color: #e5e5e5;
   border-radius: 10px;
   position: relative;
-  max-width: 220px;
+  max-width: 240px;
 
   font-family: "Raleway";
   font-size: 11px;

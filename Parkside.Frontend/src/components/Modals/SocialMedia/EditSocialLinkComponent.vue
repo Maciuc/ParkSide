@@ -53,7 +53,7 @@
 
             <div class="mb-3">
               <label for="input-title-edit-link" class="form-label"
-                >Nume link</label
+                >Nume pagina</label
               >
               <Field
                 type="text"

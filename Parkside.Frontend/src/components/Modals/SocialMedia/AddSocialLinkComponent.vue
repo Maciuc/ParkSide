@@ -54,7 +54,7 @@
 
             <div class="mb-3">
               <label for="input-title-add-link" class="form-label"
-                >Nume link</label
+                >Nume pagina</label
               >
               <Field
                 type="text"
@@ -62,7 +62,7 @@
                 :class="{ 'border-danger': errors.name }"
                 id="input-title-add-link"
                 name="name"
-                placeholder="Nume link"
+                placeholder="Nume pagina"
                 v-model="newLink.Name"
               />
               <ErrorMessage name="name" class="text-danger error-message" />

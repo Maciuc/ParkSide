@@ -73,7 +73,7 @@
 
         <Pagination :totalPages="trofees.NumberOfPages" :currentPage="filter.PageNumber" @pagechanged="GetAllTrofees" />
 
-        <EditTrofeeModalComponent :event="selectedTrofeeForEdit" @get-list="GetAllTrofees" />
+        <EditTrofeeModalComponent :editedTrofee="selectedTrofeeForEdit" @get-list="GetAllTrofees" />
     </section>
 </template>
   

@@ -85,7 +85,7 @@
                   size="xl"
                   class="me-2"
                 />
-                <span> Nume platformă</span>
+                <span> Nume pagina</span>
                
               </th>
   
