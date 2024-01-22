@@ -48,6 +48,13 @@ namespace Parkside.Backend.Controller
             return Ok(newses);
         }
 
+        [HttpGet("getPrimaryNewses")]
+        public IActionResult GetPrimaryNewses()
+        {
+            var newses = _newsService.GetPrimaryNewses();
+            return Ok(newses);
+        }
+
         [HttpPost("createNews")]
         public async Task<IActionResult> AddNews(NewsCreateViewModel news)
         {

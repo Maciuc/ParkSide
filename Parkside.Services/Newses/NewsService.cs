@@ -222,6 +222,7 @@ namespace Parkside.Services.Newss
                     Description = news.Description,
                     PublishedDate = news.PublishedDate.HasValue ? news.PublishedDate.Value.ToString("dd/MM/yyyy") : null,
                     IsPublished = news.IsPublished,
+                    IsPrimary = news.IsPrimary,
                     ImageBase64 = _genericService.GetImgBase64(news.ImageUrl)
                 });
 
