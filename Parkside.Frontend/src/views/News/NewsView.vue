@@ -76,6 +76,8 @@
               <font-awesome-icon :icon="['fas', 'xmark']" />
             </button>
           </button>
+
+          
           <ul class="dropdown-menu" aria-labelledby="dropdownNewsTypesAddNews">
             <li>
               <a
@@ -94,8 +96,58 @@
               >
             </li>
           </ul>
+
         </div>
       </div>
+
+
+      <div class="col-xxl col-xl-4 col-md-3 col-sm-4 mb-2">
+          <div class="custom dropdown">
+            <button
+              class="btn btn-secondary justify-content-between"
+              type="button"
+              id="dropdownPrimaryStateNews"
+              aria-expanded="false"
+              @click="OpenDropdownPrimaryState"
+              :class="{ 'dropdown-toggle': !primaryNews }"
+            >
+              <div>
+                <span v-if="filter.IsPrimary === true"> Primare </span>
+                <span v-else-if="filter.IsPrimary === false"> Normale </span>
+                <span v-else>Primare, normale </span>
+              </div>
+
+              <button
+                v-if="primaryNews"
+                @click="CloseAndResetDropdownPrimaryState"
+                class="button-close justify-content-end"
+              >
+                <font-awesome-icon :icon="['fas', 'xmark']" />
+              </button>
+            </button>
+
+          
+            <ul class="dropdown-menu" aria-labelledby="dropdownNewsTypesAddNews">
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="#"
+                  @click="SelectPrimaryStateNews('Primare')"
+                  >Primare</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="#"
+                  @click="SelectPrimaryStateNews('Normale')"
+                  >Normale</a
+                >
+              </li>
+            </ul>
+          
+          </div>
+        </div>
 
     <div style="overflow-x: auto">
       <table class="table table-custom">
@@ -163,6 +215,7 @@
               <span v-if="filter.OrderBy === 'PublishedDate' || filter.OrderBy === 'PublishedDate_desc'">Data publicării</span>
               <span v-else class="span-inactive">Data publicării</span>
             </th>
+            <th scope="25" width="15%">Importanta</th>
             <th width="10%"></th>
           </tr>
         </thead>
@@ -200,6 +253,14 @@
             </td>
 
             <td>{{ news.PublishedDate }}</td>
+            <td>
+                  <span v-if="news.IsPrimary === false" class="draft"
+                      >Normala</span
+                    >
+                    <span v-if="news.IsPrimary === true" class="published"
+                      >Primara</span
+                    >
+            </td>
 
             <td>
               <div class="editButtons">
@@ -256,12 +317,14 @@ export default {
         OrderBy: "PublishedDate_desc",
         PublishedDate: "",
         IsPublished: "",
+        IsPrimary: "",
       },
       NewsList: {
         Items: [],
         NumberOfPages: 0,
       },
       stateNews: null,
+      primaryNews: null,
     };
   },
   methods: {
@@ -284,6 +347,7 @@ export default {
         PageSize: 6,
         NameSearch: this.filter.SearchText,
         IsPublished: this.filter.IsPublished,
+        IsPrimary: this.filter.IsPrimary,
       };
       this.$axios
         .get(`/api/News/getNewses?${new URLSearchParams(searchParams)}`)
@@ -311,6 +375,10 @@ export default {
       $("#dropdownStateNews").dropdown("toggle");
     },
 
+    OpenDropdownPrimaryState() {
+      $("#dropdownPrimaryStateNews").dropdown("toggle");
+    },
+
     SelectStateNews(state) {
       this.stateNews = state;
       if (this.stateNews === "Publicate") {
@@ -319,6 +387,24 @@ export default {
         this.filter.IsPublished = false;
       }
       $("#dropdownStateNews").dropdown("hide");
+      this.GetAllNews();
+    },
+
+    SelectPrimaryStateNews(state) {
+      this.primaryNews = state;
+      if (this.primaryNews === "Primare") {
+        this.filter.IsPrimary = true;
+      } else {
+        this.filter.IsPrimary = false;
+      }
+      $("#dropdownPrimaryStateNews").dropdown("hide");
+      this.GetAllNews();
+    },
+
+    CloseAndResetDropdownPrimaryState() {
+      (this.primaryNews = null),
+        (this.filter.IsPrimary = ""),
+        $("#dropdownPrimaryStateNews").dropdown("toggle");
       this.GetAllNews();
     },
 

@@ -43,7 +43,17 @@ namespace Parkside.Services.Matchs
                 MatchHour = match.MatchHour,
                 PlayingHome = match.PlayingHome,
                 EnemyTeamPoints = match.EnemyTeamPoints,
-                MainTeamPoints = match.MainTeamPoints
+                MainTeamPoints = match.MainTeamPoints,
+                Championship = new ChampionshipViewModel
+                {
+                    Id = match.ChampionshipId,
+                    Name = match.Championship.Name
+                },
+                EnemyTeam = new TeamViewModel
+                {
+                    Id = match.EnemyTeamId,
+                    Name = match.EnemyTeam.Name
+                }
             };
 
             return finalMatch;
@@ -180,7 +190,7 @@ namespace Parkside.Services.Matchs
 
         public IQueryable<MatchViewModel> GetHomePageMatches()
         {
-            var matches = _matchRepo.GetAllMatches();
+            var matches = _matchRepo.GetAllMatches().OrderBy(c => c.MatchDate);
 
             var finalMatchs = matches.Select(match => new MatchViewModel
             {

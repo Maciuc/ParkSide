@@ -26,10 +26,10 @@ namespace Parkside.Backend.Controller
 
         [HttpGet("getNewses")]
         public IActionResult GetNewses(string? NameSearch, string? OrderBy,
-            string? PublishedDate, bool? IsPublished,
+            string? PublishedDate, bool? IsPublished, bool? IsPrimary,
             int PageNumber = 1, int PageSize = 10)
         {
-            var newses = _newsService.GetNewses(NameSearch, OrderBy, PublishedDate, IsPublished,
+            var newses = _newsService.GetNewses(NameSearch, OrderBy, PublishedDate, IsPublished, IsPrimary,
                 PageNumber, PageSize);
             return Ok(newses);
         }

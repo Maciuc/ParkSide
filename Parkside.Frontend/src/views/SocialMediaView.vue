@@ -101,7 +101,7 @@
                     :src="`src/images/${ShowDynamicImage(
                       socialLink.Platform
                     )}.png`"
-                    class="me-2 icon"
+                    class="me-3 icon" 
                   />
                   <span>{{ socialLink.Name }}</span>
                 </div>
@@ -183,13 +183,14 @@
           { name: "WhatsApp" },
           { name: "Instagram" },
           { name: "TikTok" },
+          { name: "Twitter" },
         ],
       };
     },
     methods: {
       ShowDynamicImage(imagePath) {
         if (!imagePath) {
-          return new URL("@/images/Facebook.png", import.meta.url).href;
+          return new URL("@/images/NoImageSelected.png", import.meta.url).href;
         }
         return `${imagePath}`;
       },
@@ -273,7 +274,7 @@
   
   <style scoped>
   .icon {
-    width: 20px;
+    width: 30px;
   }
   </style>
   

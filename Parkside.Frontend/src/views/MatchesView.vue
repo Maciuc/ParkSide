@@ -185,7 +185,7 @@
     />
 
     <EditMatchComponent
-      :event="selectedMatchForEdit"
+      :editedMatch="selectedMatchForEdit"
       @get-list="GetAllMatches"
     /> 
   </section>
@@ -205,11 +205,7 @@ export default {
   },
   data() {
     return {
-      selectedMatchForEdit: {
-        Id: 0,
-        Name: "",
-        ImageBase64: "",
-      },
+      selectedMatchForEdit: {},
 
       filter: {
         SearchText: "",

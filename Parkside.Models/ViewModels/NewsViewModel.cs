@@ -10,6 +10,7 @@ namespace Parkside.Models.ViewModels
         public string? ImageBase64 { get; set; }
         public string? PublishedDate { get; set; }
         public bool? IsPublished { get; set; }
+        public bool? IsPrimary { get; set; }
     }
 
     public class NewsUpdateViewModel
@@ -21,7 +22,8 @@ namespace Parkside.Models.ViewModels
         public string? Content { get; set; }
         public string? ImageBase64 { get; set; }
         public DateTime? PublishedDate { get; set; }
-        public bool? IsPublished { get; set; }
+        public bool IsPublished { get; set; }
+        public bool IsPrimary { get; set; }
     }
 
     public class NewsCreateViewModel
@@ -33,7 +35,8 @@ namespace Parkside.Models.ViewModels
         public string? Content { get; set; }
         public string? ImageBase64 { get; set; }
         public DateTime? PublishedDate { get; set; }
-        public bool? IsPublished { get; set; }
+        public bool IsPublished { get; set; }
+        public bool IsPrimary { get; set; }
     }
     public class NewsDetailsViewModel
     {
@@ -43,6 +46,7 @@ namespace Parkside.Models.ViewModels
         public string? ImageBase64 { get; set; }
         public string? Content { get; set; }
         public DateTime? PublishedDate { get; set; }
-        public bool? IsPublished { get; set; }
+        public bool IsPublished { get; set; }
+        public bool IsPrimary { get; set; }
     }
 }

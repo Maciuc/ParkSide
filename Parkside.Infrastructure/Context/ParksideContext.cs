@@ -199,8 +199,6 @@ namespace Parkside.Infrastructure.Context
                     .HasMaxLength(500)
                     .HasColumnName("ImageURL");
 
-                entity.Property(e => e.IsPublished).HasDefaultValueSql("((0))");
-
                 entity.Property(e => e.Name).HasMaxLength(200);
 
                 entity.Property(e => e.PublishedDate).HasColumnType("datetime");

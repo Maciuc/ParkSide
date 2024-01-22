@@ -15,7 +15,7 @@ namespace Parkside.Infrastructure.Repositories.Matches
 
         public IQueryable<Match> GetAllMatches()
         {
-            var matches = _parksideContext.Matches.Include(x => x.Championship).Include(y => y.EnemyTeam);
+            var matches = _parksideContext.Matches.Where(x => x.IsDeleted != true).Include(x => x.Championship).IgnoreQueryFilters().Include(y => y.EnemyTeam).IgnoreQueryFilters();
             return matches;
         }
 

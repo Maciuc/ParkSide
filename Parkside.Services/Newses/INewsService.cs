@@ -6,7 +6,8 @@ namespace Parkside.Services.Newss
     {
         Task<NewsDetailsViewModel> GetNews(int id);
         PagingViewModel<NewsViewModel> GetNewses(
-            string? NameSearch, string? OrderBy, string? PublishedDate, bool? IsPublished,
+            string? NameSearch, string? OrderBy, string? PublishedDate,
+            bool? IsPublished, bool? IsPrimary,
             int PageNumber, int PageSize);
         IQueryable<NewsViewModel> GetHomePageNewses();
         IQueryable<NewsViewModel> GetLatestNewses();

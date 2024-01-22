@@ -186,8 +186,8 @@ export default {
         Location: "",
         Date: "",
         PlayingHome: true,
-        EnemyTeamPoints: "10",
-        MainTeamPoints: "10",
+        EnemyTeamPoints: null,
+        MainTeamPoints: null,
         MatchHour:"",
       },
     };
@@ -223,7 +223,7 @@ export default {
           console.error(error);
         });
     },
-    SelectShowDescription() {
+    ToggleHomePlay() {
       this.newMatch.PlayingHome =
         !this.newMatch.PlayingHome;
       console.log(this.newMatch.PlayingHome);

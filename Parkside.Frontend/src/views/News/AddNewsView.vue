@@ -68,6 +68,21 @@
           </Field>
           <ErrorMessage name="datepublish" class="text-danger error-message" />
         </div>
+
+        <div class="col-md-4 col-sm-6 d-flex align-items-end justify-content-start">
+        <div class="form-check form-switch">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="flexSwitchCheckDefault"
+                  :checked="newNews.IsPrimary"
+                  @click="TogglePrimaryNews"
+                />
+                <label class="form-label" for="flexSwitchCheckDefault"
+                  >Stire primara</label
+                >
+            </div>
+            </div>
       </div>
 
       <div class="row">
@@ -264,6 +279,12 @@ export default {
         .catch((error) => {
           console.error(error);
         });
+    },
+
+    TogglePrimaryNews() {
+      this.newNews.IsPrimary =
+        !this.newNews.IsPrimary;
+      console.log(this.newNews.IsPrimary);
     },
 
     SaveSketch(){

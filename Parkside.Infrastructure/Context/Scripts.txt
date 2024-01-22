@@ -40,7 +40,8 @@ CREATE TABLE News(
 	Description NVARCHAR(500),
 	Content NVARCHAR(MAX),
 	ImageURL NVARCHAR(500),
-	IsPublished BIT DEFAULT(0),
+	IsPublished BIT NOT NULL DEFAULT(0),
+	IsPrimary BIT NOT NULL DEFAULT(0)
 	PublishedDate DATETIME,
 	IsDeleted BIT NOT NULL DEFAULT(0)
 );

@@ -115,6 +115,7 @@ export default {
         { name: "WhatsApp" },
         { name: "Instagram" },
         { name: "TikTok" },
+        { name: "Twitter" },
       ],
       value: [],
     };
