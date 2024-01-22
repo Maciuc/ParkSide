@@ -82,13 +82,41 @@
               size="xl"
               class="me-2"
             />
-            Nume & Avatar
+            <span v-if="filter.OrderBy === 'name' || filter.OrderBy === 'name_desc'">Nume jucator</span>
+            <span v-else class="span-inactive">Nume jucator</span>
           </th>
 
           <th scope="15" width="15%">Echipa</th>
           <th scope="15" width="15%">Numar</th>
           <th scope="15" width="15%">Rol</th>
-          <th scope="15" width="15%">Data nastere</th>
+          <th width="15%" @click="OrderBy('birthdate')" class="cursor-pointer">
+              <font-awesome-icon
+                v-if="filter.OrderBy === 'birthdate'"
+                :icon="['fas', 'arrow-up-wide-short']"
+                style="color: #29be00"
+                rotation="180"
+                size="xl"
+                class="me-2"
+              />
+
+              <font-awesome-icon
+                v-else-if="filter.OrderBy === 'birthdate_desc'"
+                :icon="['fas', 'arrow-up-short-wide']"
+                rotation="180"
+                style="color: #29be00"
+                size="xl"
+                class="me-2"
+              />
+              <font-awesome-icon
+                v-else
+                :icon="['fas', 'arrow-up-wide-short']"
+                rotation="180"
+                size="xl"
+                class="me-2"
+              />
+              <span v-if="filter.OrderBy === 'birthdate' || filter.OrderBy === 'birthdate_desc'">Data nastere</span>
+              <span v-else class="span-inactive">Data nastere</span>
+            </th>
           <th scope="15" width="15%">Inaltime</th>
           <th></th>
         </tr>

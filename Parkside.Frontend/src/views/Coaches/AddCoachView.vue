@@ -262,7 +262,6 @@
           firstname: yup.string().required("Acest câmp este obligatoriu"),
           lastname: yup.string().required("Acest câmp este obligatoriu"),
           teamname: yup.string().required("Acest câmp este obligatoriu"),
-          birthdate: yup.string().required("Acest câmp este obligatoriu"),
         });
       },
     },
@@ -275,7 +274,7 @@
               this.$router.push({ name: "coaches" });
                   this.$swal.fire({
                     title: "Succes",
-                    text: "Jucatorul a fost adăugat",
+                    text: "Antrenorul a fost adăugat",
                     icon: "success",
                     showConfirmButton: false,
                     timer: 1500,
@@ -310,6 +309,7 @@
       DeletePhoto() {
         this.$refs.uploadInput.reset();
         this.newCoach.ImageBase64 = null;
+        this.photoValidation = null;
       },
     },
   };

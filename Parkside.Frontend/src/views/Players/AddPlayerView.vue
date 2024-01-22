@@ -321,7 +321,6 @@ export default {
         lastname: yup.string().required("Acest câmp este obligatoriu"),
         number: yup.string().required("Acest câmp este obligatoriu"),
         teamname: yup.string().required("Acest câmp este obligatoriu"),
-        birthdate: yup.string().required("Acest câmp este obligatoriu"),
       });
     },
   },

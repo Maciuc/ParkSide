@@ -33,6 +33,7 @@ namespace Parkside.Services.Coachs
                 LastName = coach.LastName,
                 TeamName = coach.TeamName,
                 Height = coach.Height,
+                Nationality = coach.Nationality,
                 Description = coach.Description,
                 BirthDate = coach.BirthDate,
                 ImageBase64 = _genericService.GetImgBase64(coach.ImageUrl)
@@ -79,6 +80,7 @@ namespace Parkside.Services.Coachs
                   LastName = coach.LastName,
                   TeamName = coach.TeamName,
                   Height = coach.Height,
+                  Nationality = coach.Nationality,
                   Description = coach.Description,
                   BirthDate = coach.BirthDate.HasValue ? coach.BirthDate.Value.ToString("dd/MM/yyyy") : null,
                   ImageBase64 = _genericService.GetImgBase64(coach.ImageUrl)
@@ -104,6 +106,7 @@ namespace Parkside.Services.Coachs
                 LastName = model.LastName,
                 TeamName = model.TeamName,
                 Height = model.Height,
+                Nationality= model.Nationality,
                 Description = model.Description,
                 BirthDate = model.BirthDate,
                 ImageUrl = _genericService.GetImagePath(model.ImageBase64, null, "Coachs")
@@ -142,6 +145,7 @@ namespace Parkside.Services.Coachs
             coach.Height = model.Height;
             coach.TeamName = model.TeamName;
             coach.Description = model.Description;
+            coach.Nationality = model.Nationality;
             coach.BirthDate = model.BirthDate;
             coach.ImageUrl = _genericService.GetImagePath(model.ImageBase64, null, "Coachs");
 

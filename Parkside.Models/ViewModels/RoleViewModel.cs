@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-namespace exp.NET6.Models.ViewModel
+namespace Parkisde.Models.ViewModel
 {
     public class RoleViewModel
     {

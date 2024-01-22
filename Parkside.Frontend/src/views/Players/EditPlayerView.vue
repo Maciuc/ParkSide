@@ -2,231 +2,172 @@
   <div>
     <div class="row header-section align-items-center">
       <div class="col">
-        <div class="title-page">Editare jucator</div>
+        <div class="title-page">Editeaza jucator</div>
       </div>
 
       <div class="col-auto">
-        <button class="button green" type="submit" form="form-edit-player">
+        <button class="button green" type="submit" form="form-add-player">
           Salvează
         </button>
       </div>
     </div>
   </div>
 
-  <Form
-    @submit="SaveEditedPlayer(this.editedPlayer.OrderNumber, this.editedPlayer.Id)"
-    :validation-schema="schema"
-    v-slot="{ errors }"
-    class="new-form"
-    id="form-edit-player"
-  >
-    <div class="row mt-4">
-      <div class="col-4">
-        <div class="mb-3">
-          <label class="form-label" for="input-name-edit-player"
-            >Nume jucator</label
-          >
-          <Field
-            type="text"
-            id="input-name-edit-player"
-            name="name"
-            :class="{ 'border-danger': errors.name }"
-            class="form-control"
-            placeholder="Nume jucator"
-            v-model="editedPlayer.Name"
-          />
-
-          <ErrorMessage name="name" class="text-danger error-message" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="input-function-edit-player"
-            >Funcția în organizație</label
-          >
-          <Field
-            name="function"
-            as="select"
-            id="input-function-edit-player"
-            :class="{ 'border-danger': errors.function }"
-            class="form-select form-control"
-            v-model="editedPlayer.OrganizationFunction"
-          >
-            <option value="" disabled>Funcția în organizație</option>
-            <option
-              v-for="(fnct, index) in functions"
-              :key="index"
-              :value="fnct.name"
-            >
-              {{ fnct.name }}
-            </option>
-          </Field>
-          <ErrorMessage name="function" class="text-danger error-message" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="input-birth-date-edit-player"
-            >Data nașterii</label
-          >
-          <Field
-            type="text"
-            name="birthdate"
-            id="input-birth-date-edit-player"
-            class="form-control"
-            placeholder="Data nașterii"
-            v-model="editedPlayer.BirthDate"
-            :class="{ 'border-danger': errors.birthdate }"
-          />
-
-          <ErrorMessage name="birthdate" class="text-danger error-message" />
-        </div>
-
-        <div class="mb-3">
-          <label for="input-order-edit-player" class="form-label"
-            >Numar ordine</label
-          >
-          <Field
-            type="text"
-            class="form-control"
-            :class="{ 'border-danger': errors.order }"
-            id="input-order-edit-player"
-            name="order"
-            placeholder="Numar ordine"
-            v-model="editedPlayer.OrderNumber"
-          />
-          <ErrorMessage name="order" class="text-danger error-message" />
-          <div
-            v-if="validOrderNumber === false"
-            class="text-danger error-message"
-          >
-            Numărul de ordine este deja ocupat!
+  <Form @submit="EditPlayer(this.editedPlayer.Number)" :validation-schema="schema" v-slot="{ errors }" id="form-add-player">
+    <div class="new-form">
+      <div class="row mt-4">
+        <div class="col-md-7 col-lg-5 col-12">
+          <div class="mb-3">
+            <label for="input-lastname-add-player" class="form-label">Nume jucator</label>
+            <Field type="text" class="form-control" :class="{ 'border-danger': errors.lastname }"
+              id="input-lastname-add-player" name="lastname" placeholder="Nume jucator" v-model="editedPlayer.LastName" />
+            <ErrorMessage name="lastname" class="text-danger error-message" />
           </div>
-        </div>
-      </div>
-      <div class="col-4">
-        <div class="d-flex gap-2">
-          <div>
-            <label class="form-label"> Selectează imagine</label>
-            <label
-              class="button blue"
-              style="width: 140px"
-              for="input-upload-edit-player-image"
-            >
-              Încarcă imagine
-              <font-awesome-icon :icon="['fas', 'upload']" />
-              <Field
-                type="file"
-                id="input-upload-edit-player-image"
-                name="upload"
-                style="display: none"
-                accept="image/*"
-                ref="uploadInput"
-                @change="UploadImageEditPlayer"
-              >
+
+          <div class="mb-3">
+            <label for="input-firstname-add-player" class="form-label">Prenume jucator</label>
+            <Field type="text" class="form-control" :class="{ 'border-danger': errors.firstname }"
+              id="input-firstname-add-player" name="firstname" placeholder="Nume jucator" v-model="editedPlayer.FirstName" />
+            <ErrorMessage name="firstname" class="text-danger error-message" />
+          </div>
+
+          <div class="mb-3">
+            <label for="input-teamname-add-player" class="form-label">Nume echipa</label>
+            <Field type="text" class="form-control" :class="{ 'border-danger': errors.teamname }"
+              id="input-teamname-add-player" name="teamname" placeholder="Nume echipa" v-model="editedPlayer.TeamName" />
+            <ErrorMessage name="teamname" class="text-danger error-message" />
+          </div>
+
+          <div class="mb-3 position-relative">
+            <label for="role" class="form-label">Rol</label>
+            <Field v-model="editedPlayer.Role" name="role" as="select" :class="{ 'border-danger': errors.role }"
+              class="form-select form-control">
+              <option value="" disabled>Rol jucator</option>
+              <option v-for="(role, index) in Roles" :key="index" :value="role.name">
+                {{ role.name }}
+              </option>
+            </Field>
+
+            <ErrorMessage name="role" class="text-danger error-message" />
+          </div>
+
+          <div class="mb-3 position-relative">
+            <div :class="{ 'invalid-input': errors.birthdate }" class="col custom-date-picker">
+              <label class="form-label">Dată naștere</label>
+              <Field v-slot="{ field }" name="birthdate" id="birthdate-add-player">
+                <VueDatePicker v-bind="field" v-model="editedPlayer.BirthDate" format="dd/MM/yyyy" auto-apply utc
+                  :enable-time-picker="false" placeholder="Dată naștere"></VueDatePicker>
               </Field>
-            </label>
+              <ErrorMessage name="birthdate" class="text-danger error-message" />
+            </div>
           </div>
-          <div
-            v-if="photoValidation === false"
-            ref="validation-img-type"
-            class="text-danger error-message"
-          >
-            Tipul imaginii selectate nu este valid
-          </div>
-          <div
-            v-else-if="photoValidation === true"
-            ref="validation-img-type"
-            class="text-danger error-message"
-          >
-            Imaginea selectată este prea mare
-          </div>
-          <div v-else></div>
 
-          <div>
-            <div class="image-container d-flex justify-content-center">
-              <button class="button-delete" type="button" @click="DeletePhoto">
-                <font-awesome-icon :icon="['fas', 'trash']" />
-              </button>
-              <div
-                v-if="!editedPlayer.ImageBase64"
-                class="d-flex flex-column justify-content-center align-items-center gap-2"
-              >
-                <img src="@/images/NoImageSelected.png" class="no-image" />
-                <div>Nicio imagine selectată</div>
+        </div>
+
+
+        <div class="col-md-7 col-lg-6 col-xl-4 col-12 row gap-1">
+          <div class="row mb-4">
+            <div class="col">
+              <label class="form-label">Selectează imagine</label>
+              <label for="input-upload-player-image" class="button blue" style="width: 140px">
+                Încarcă imagine
+                <font-awesome-icon :icon="['fas', 'upload']" />
+                <Field type="file" id="input-upload-player-image" name="upload" style="display: none" accept="image/*"
+                  ref="uploadInput" @change="UploadImagePlayer">
+                </Field>
+              </label>
+            </div>
+
+            <div class="col">
+              <div class="image-container d-flex align-items-center justify-content-center">
+                <button type="button" class="button-delete" @click="DeletePhoto">
+                  <font-awesome-icon :icon="['fas', 'trash']" />
+                </button>
+                <div v-if="!editedPlayer.ImageBase64"
+                  class="d-flex flex-column justify-content-center align-items-center gap-2">
+                  <img src="@/images/NoImageSelected.png" class="no-image" />
+                  <div class="text-center">Nicio imagine selectată</div>
+                </div>
+
+                <div v-if="editedPlayer.ImageBase64" class="image">
+                  <img :src="editedPlayer.ImageBase64" alt="Imagine selectată" class="image" />
+                </div>
               </div>
-              <div v-if="editedPlayer.ImageBase64">
-                <img
-                  :src="editedPlayer.ImageBase64"
-                  class="image"
-                  alt="Imagine selectată"
-                />
+
+              <div v-if="photoValidation === false" ref="validation-img-type" class="text-danger error-message">
+                Tipul imaginii selectate nu este valid
+              </div>
+              <div v-else-if="photoValidation === true" ref="validation-img-type" class="text-danger error-message">
+                Imaginea selectată este prea mare
+              </div>
+              <div v-else></div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="input-number-add-player" class="form-label">Numar</label>
+              <Field type="text" class="form-control" :class="{ 'border-danger': errors.number }"
+                id="input-number-add-player" name="number" placeholder="Numar" v-model="editedPlayer.Number" />
+              <ErrorMessage name="number" class="text-danger error-message" />
+              <div v-if="validNumber === false" class="text-danger error-message">
+                Numărul este deja ocupat!
               </div>
             </div>
           </div>
+
+          <div class="row">
+            <div>
+              <label for="input-nationality-add-player" class="form-label">Nationalitate</label>
+              <Field type="text" class="form-control" id="nationality" name="nationality" placeholder="Nationalitate"
+                v-model="editedPlayer.Nationality" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="input-height-add-player" class="form-label">Inaltime</label>
+              <Field type="text" class="form-control" id="input-height-add-player" name="height"
+                placeholder="Inaltime jucator" v-model="editedPlayer.Height" />
+            </div>
+          </div>
+
+
         </div>
       </div>
-    </div>
-    <div class="row custom-modal">
-      <div class="col-8">
-        <div class="form-check form-switch">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            id="flexSwitchCheckDefault"
-            :checked="editedPlayer.VizibilitySpeech"
-            @click="SelectShowDescription"
-          />
-          <label class="form-label" for="flexSwitchCheckDefault"
-            >Afișare discurs de bun venit</label
-          >
-        </div>
-
-        <div class="mb-3 position-relative">
-          <label for="textarea-description-add-project" class="form-label"
-            >Descriere</label
-          >
-          <Field
-            v-slot="{ field }"
-            v-model="editedPlayer.Speech"
-            name="description"
-          >
-            <textarea
-              v-bind="field"
-              name="description"
-              :class="{ 'border-danger': errors.description }"
-              class="form-control textarea"
-              rows="5"
-              placeholder="Descriere"
-            />
-          </Field>
-
-          <ErrorMessage name="description" class="text-danger error-message" />
+      <div class="row">
+        <div class="col-md-7 col-lg-7 col-12">
+          <div class="mb-3 position-relative">
+            <label for="textarea-description-add-project" class="form-label">Descriere</label>
+            <Field v-slot="{ field }" v-model="editedPlayer.Description" name="description">
+              <textarea v-bind="field" name="description" class="form-control textarea" rows="5"
+                placeholder="Descriere" />
+            </Field>
+          </div>
         </div>
       </div>
     </div>
   </Form>
 </template>
+
 <script>
+import VueDatePicker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 export default {
-  name: "PlayersEditPlayerView",
+  name: "PlayersEditPlayerComponent",
   components: {
     Form,
     Field,
     ErrorMessage,
+    VueDatePicker,
   },
-  props: ["event"],
   data() {
     return {
-      validOrderNumber: true,
       photoValidation: null,
-      editedPlayer: {
-        Id: "",
-        Name: "",
-        BirthDate: "",
-        Role: "",
-        Number: 0,
-        Height: "",
-        ImageBase64: null,
-      },
+      validNumber: true,
+      editedPlayer: {},
       Roles: [
         { name: "Centrali" },
         { name: "Pivoti" },
@@ -237,6 +178,16 @@ export default {
     };
   },
 
+  computed: {
+    schema() {
+      return yup.object({
+        firstname: yup.string().required("Acest câmp este obligatoriu"),
+        lastname: yup.string().required("Acest câmp este obligatoriu"),
+        number: yup.string().required("Acest câmp este obligatoriu"),
+        teamname: yup.string().required("Acest câmp este obligatoriu"),
+      });
+    },
+  },
   methods: {
     GetPlayerForEdit(id) {
       console.log(id);
@@ -244,14 +195,46 @@ export default {
         .get(`/api/Player/getPlayer/${id}`)
         .then((response) => {
           this.editedPlayer = response.data;
-          console.log(this);
+          console.log(this.editedPlayer);
         })
         .catch((error) => {
           console.log(error);
         });
     },
 
-    UploadImageEditPlayer(event) {
+
+    EditPlayer(number) {
+      this.$axios
+        .get(`/api/Player/getPlayers`)
+        .then((response) => {
+          console.log(this.editedPlayer);
+          if (response.data.Items.find((x) => x.Number == number && x.Id != this.editedPlayer.Id)) {
+            console.log("Number not ok: " + false);
+            this.validNumber = false;
+          } else {
+            this.$axios
+              .put(`/api/Player/updatePlayer/${this.editedPlayer.Id}`, this.editedPlayer)
+              .then((response) => {
+                console.log(response);
+                this.$router.push({ name: "players" });
+                this.$swal.fire({
+                  title: "Succes",
+                  text: "Jucatorul a fost editat",
+                  icon: "success",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+              })
+              .catch((error) => {
+                console.error(error);
+              });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    UploadImagePlayer(event) {
       const selectedFile = event.target;
       const file = event.target.files[0];
       const reader = new FileReader();
@@ -264,11 +247,9 @@ export default {
             selectedFile.value = "";
           } else {
             this.photoValidation = true;
-            this.DeletePhoto();
           }
         } else {
           this.photoValidation = false;
-          this.DeletePhoto();
         }
       };
       if (file) {
@@ -278,57 +259,13 @@ export default {
     DeletePhoto() {
       this.$refs.uploadInput.reset();
       this.editedPlayer.ImageBase64 = null;
-    },
-    SaveEditedPlayer(orderNumber, id) {
-      this.$axios
-        .get(`/api/Player/getPlayers`)
-        .then((response) => {
-          if ((response.data.Items.filter((x) => x.OrderNumber == orderNumber && x.Id != id).length)>0) {
-            console.log("order number not ok: " + false);
-            this.validOrderNumber = false;
-          } else {
-            console.log("order number ok: " + true);
-            this.$axios
-              .put(
-                `/api/Player/updatePlayer/${this.editedPlayer.Id}`,
-                this.editedPlayer
-              )
-              .then((response) => {
-                console.log(response);
-                this.$router.push({ name: "players" });
-              })
-              .catch((error) => {
-                console.error(error);
-              });
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-    SelectShowDescription() {
-      this.editedPlayer.VizibilitySpeech =
-        !this.editedPlayer.VizibilitySpeech;
-      console.log(this.editedPlayer.VizibilitySpeech);
+      this.photoValidation = null;
     },
   },
-
-  computed: {
-    schema() {
-      return yup.object({
-        name: yup.string().required("Acest câmp este obligatoriu"),
-      });
-    },
-  },
-
-  created() {
+  created(){
     this.GetPlayerForEdit(this.$route.params.id);
-  },
+  }
 };
 </script>
 
-<style>
-.image-container {
-  width: 190px;
-}
-</style>
+<style scoped></style>

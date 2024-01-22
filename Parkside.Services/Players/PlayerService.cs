@@ -70,6 +70,14 @@ namespace Parkside.Services.Players
                     players = players.OrderByDescending(c => c.LastName);
                     break;
 
+                case ("birthdate"):
+                    players = players.OrderBy(c => c.BirthDate);
+                    break;
+
+                case ("birthdate_desc"):
+                    players = players.OrderByDescending(c => c.BirthDate);
+                    break;
+
                 default:
                     players = players.OrderBy(c => c.LastName);
                     break;

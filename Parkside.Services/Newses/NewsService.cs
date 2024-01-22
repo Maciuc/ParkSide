@@ -66,6 +66,11 @@ namespace Parkside.Services.Newss
                 newses = newses.Where(n => n.IsPublished == IsPublished);
             }
 
+            if (IsPrimary != null)
+            {
+                newses = newses.Where(n => n.IsPrimary == IsPrimary);
+            }
+
 
             switch (OrderBy)
             {
