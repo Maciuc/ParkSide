@@ -41,17 +41,17 @@ namespace Parkside.Backend.Controller
             return Ok(newses);
         }
 
-        [HttpGet("getLatestNewses")]
-        public IActionResult GetLatestNewses()
+        [HttpGet("getLatestNormalNewses")]
+        public IActionResult GetLatestNormalNewses()
         {
-            var newses = _newsService.GetLatestNewses();
+            var newses = _newsService.GetLatestNormalNewses();
             return Ok(newses);
         }
 
-        [HttpGet("getPrimaryNewses")]
-        public IActionResult GetPrimaryNewses()
+        [HttpGet("getLatestPrimaryNewses")]
+        public IActionResult GetLatestPrimaryNewses()
         {
-            var newses = _newsService.GetPrimaryNewses();
+            var newses = _newsService.GetLatestPrimaryNewses();
             return Ok(newses);
         }
 

@@ -192,9 +192,9 @@ namespace Parkside.Services.Newss
             return finalNewses;
         }
 
-        public IQueryable<NewsViewModel> GetLatestNewses()
+        public IQueryable<NewsViewModel> GetLatestNormalNewses()
         {
-            var newses = _newsRepo.GetAllQuerable().Where(x => x.IsPublished == true); ;
+            var newses = _newsRepo.GetAllQuerable().Where(x => x.IsPublished == true && x.IsPrimary == false); ;
 
             var finalNewses = newses.OrderByDescending(c => c.PublishedDate).Take(6)
                 .Select(news => new NewsViewModel
@@ -210,11 +210,11 @@ namespace Parkside.Services.Newss
             return finalNewses;
         }
 
-        public IQueryable<NewsViewModel> GetPrimaryNewses()
+        public IQueryable<NewsViewModel> GetLatestPrimaryNewses()
         {
             var newses = _newsRepo.GetAllQuerable().Where(x => x.IsPublished == true && x.IsPrimary == true); ;
 
-            var finalNewses = newses.OrderByDescending(c => c.PublishedDate).Take(6)
+            var finalNewses = newses.OrderByDescending(c => c.PublishedDate).Take(3)
                 .Select(news => new NewsViewModel
                 {
                     Id = news.Id,

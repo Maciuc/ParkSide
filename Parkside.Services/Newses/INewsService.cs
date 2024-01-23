@@ -10,8 +10,8 @@ namespace Parkside.Services.Newss
             bool? IsPublished, bool? IsPrimary,
             int PageNumber, int PageSize);
         IQueryable<NewsViewModel> GetHomePageNewses();
-        IQueryable<NewsViewModel> GetLatestNewses();
-        IQueryable<NewsViewModel> GetPrimaryNewses();
+        IQueryable<NewsViewModel> GetLatestNormalNewses();
+        IQueryable<NewsViewModel> GetLatestPrimaryNewses();
         Task AddNews(NewsCreateViewModel model);
         Task DeleteNews(int id);
         Task VirtualDeleteNews(int id);
