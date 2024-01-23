@@ -3,7 +3,7 @@ describe('Verificarea detaliilor despre jucatori', () => {
     cy.visit('http://127.0.0.1:5500/acasa.html'); // URL-ul generat de Live Server
 
     // Accesam shadow dom-ul prin meniu-principal pentru a avea acces la butonul 'Echipa'
-    cy.get('meniu-principal') 
+    cy.get('meniu-principal') // Replace with the correct selector for your shadow host element
       .shadow()
       .find('a[href="/static/echipa/echipa.html"]')
       .click();
@@ -21,13 +21,16 @@ describe('Verificarea detaliilor despre jucatori', () => {
 	cy.get('a > div > div.top > div > div.img-container > OstafeRareș_c.png').shadow()
 	cy.wait(1000)
 	cy.get('info-card[imagine="/static/imagini/staff/OstafeRares_C.png"]')
-      .shadow() // Accesare Shadow Root
-	.find('.flip-image') // Imaginea e flipped
-	.find('a.referinta-pagina-detalii[href*="personal/personal.html?id=6"]') // Selector
+      .shadow() // Access the shadow root if needed
+	.find('.flip-image') // We assume that the flip has completed and this container is now visible
+	.find('a.referinta-pagina-detalii[href*="personal/personal.html?id=6"]') // The actual selector for the link after the card flip
 	.click();
 
-    // Ne asiguram ca am ajuns pe link-ul corect
+    // After clicking, you may want to assert that the URL has changed
     cy.url().should('include', 'personal/personal.html?id=6');
 
+
+    // Optionally, check that Rares's profile content is visible
+    // cy.contains('h1', 'Ostafe Rares').should('be.visible');
   });
 });
