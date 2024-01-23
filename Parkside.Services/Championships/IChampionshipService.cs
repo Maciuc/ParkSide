@@ -7,6 +7,7 @@ namespace Parkside.Services.Championships
         Task<ChampionshipViewModel> GetChampionship(int id);
         PagingViewModel<ChampionshipViewModel> GetChampionships(
             string? NameSearch, string? OrderBy, int PageNumber, int PageSize);
+        IQueryable<ChampionshipViewModel> GetChampionshipsDropDown();
         Task AddChampionship(ChampionshipCreateViewModel model);
         Task DeleteChampionship(int id);
         Task VirtualDeleteChampionship(int id);

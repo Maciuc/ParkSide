@@ -76,6 +76,8 @@
               <font-awesome-icon :icon="['fas', 'xmark']" />
             </button>
           </button>
+
+          
           <ul class="dropdown-menu" aria-labelledby="dropdownNewsTypesAddNews">
             <li>
               <a
@@ -94,8 +96,58 @@
               >
             </li>
           </ul>
+
         </div>
       </div>
+
+
+      <div class="col-xxl col-xl-4 col-md-3 col-sm-4 mb-2">
+          <div class="custom dropdown">
+            <button
+              class="btn btn-secondary justify-content-between"
+              type="button"
+              id="dropdownPrimaryStateNews"
+              aria-expanded="false"
+              @click="OpenDropdownPrimaryState"
+              :class="{ 'dropdown-toggle': !primaryNews }"
+            >
+              <div>
+                <span v-if="filter.IsPrimary === true"> Primare </span>
+                <span v-else-if="filter.IsPrimary === false"> Normale </span>
+                <span v-else>Primare, normale </span>
+              </div>
+
+              <button
+                v-if="primaryNews"
+                @click="CloseAndResetDropdownPrimaryState"
+                class="button-close justify-content-end"
+              >
+                <font-awesome-icon :icon="['fas', 'xmark']" />
+              </button>
+            </button>
+
+          
+            <ul class="dropdown-menu" aria-labelledby="dropdownNewsTypesAddNews">
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="#"
+                  @click="SelectPrimaryStateNews('Primare')"
+                  >Primare</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="#"
+                  @click="SelectPrimaryStateNews('Normale')"
+                  >Normale</a
+                >
+              </li>
+            </ul>
+          
+          </div>
+        </div>
 
     <div style="overflow-x: auto">
       <table class="table table-custom">
@@ -133,11 +185,11 @@
             <th
               scope="25"
               width="15%"
-              @click="OrderBy('publishedDate')"
+              @click="OrderBy('PublishedDate')"
               class="cursor-pointer"
             >
               <font-awesome-icon
-                v-if="filter.OrderBy === 'publishedDate'"
+                v-if="filter.OrderBy === 'PublishedDate'"
                 :icon="['fas', 'arrow-up-wide-short']"
                 style="color: #29be00"
                 rotation="180"
@@ -146,7 +198,7 @@
               />
 
               <font-awesome-icon
-                v-else-if="filter.OrderBy === 'publishedDate_desc'"
+                v-else-if="filter.OrderBy === 'PublishedDate_desc'"
                 :icon="['fas', 'arrow-up-short-wide']"
                 rotation="180"
                 style="color: #29be00"
@@ -160,9 +212,10 @@
                 size="xl"
                 class="me-2"
               />
-              <span v-if="filter.OrderBy === 'publishedDate' || filter.OrderBy === 'publishedDate_desc'">Data publicării</span>
+              <span v-if="filter.OrderBy === 'PublishedDate' || filter.OrderBy === 'PublishedDate_desc'">Data publicării</span>
               <span v-else class="span-inactive">Data publicării</span>
             </th>
+            <th scope="25" width="15%">Importanta</th>
             <th width="10%"></th>
           </tr>
         </thead>
@@ -200,6 +253,14 @@
             </td>
 
             <td>{{ news.PublishedDate }}</td>
+            <td>
+                  <span v-if="news.IsPrimary === false" class="draft"
+                      >Normala</span
+                    >
+                    <span v-if="news.IsPrimary === true" class="published"
+                      >Primara</span
+                    >
+            </td>
 
             <td>
               <div class="editButtons">
@@ -241,7 +302,7 @@ import { date } from "yup";
 import moment from "moment";
 
 export default {
-  name: "NewsView",
+  name: "News",
   components: {
     VueDatePicker,
     Pagination,
@@ -253,21 +314,23 @@ export default {
       filter: {
         SearchText: "",
         PageNumber: 1,
-        OrderBy: "publishedDate_desc",
+        OrderBy: "PublishedDate_desc",
         PublishedDate: "",
         IsPublished: "",
+        IsPrimary: "",
       },
       NewsList: {
         Items: [],
         NumberOfPages: 0,
       },
       stateNews: null,
+      primaryNews: null,
     };
   },
   methods: {
     ShowDynamicImage(imagePath) {
       if (!imagePath) {
-        return `src/images/user.png`;
+        return `src/images/NoImageSelected.png`;
       }
       return imagePath;
     },
@@ -280,21 +343,17 @@ export default {
       const searchParams = {
         OrderBy: this.filter.OrderBy,
         PageNumber: this.filter.PageNumber,
-        ...(this.filter.PublishedDate
-          ? {
-              PublishedDate: moment(this.filter.PublishedDate).format(
-                "DD/MM/YYYY"
-              ),
-            }
-          : ""),
-        PageSize: 4,
+        PublishedDate :this.filter.PublishedDate,
+        PageSize: 6,
         NameSearch: this.filter.SearchText,
         IsPublished: this.filter.IsPublished,
+        IsPrimary: this.filter.IsPrimary,
       };
       this.$axios
         .get(`/api/News/getNewses?${new URLSearchParams(searchParams)}`)
         .then((response) => {
           console.log(searchParams);
+          console.log(this.filter.PublishedDate)
           this.NewsList = response.data;
         })
         .catch((error) => {
@@ -316,6 +375,10 @@ export default {
       $("#dropdownStateNews").dropdown("toggle");
     },
 
+    OpenDropdownPrimaryState() {
+      $("#dropdownPrimaryStateNews").dropdown("toggle");
+    },
+
     SelectStateNews(state) {
       this.stateNews = state;
       if (this.stateNews === "Publicate") {
@@ -324,6 +387,24 @@ export default {
         this.filter.IsPublished = false;
       }
       $("#dropdownStateNews").dropdown("hide");
+      this.GetAllNews();
+    },
+
+    SelectPrimaryStateNews(state) {
+      this.primaryNews = state;
+      if (this.primaryNews === "Primare") {
+        this.filter.IsPrimary = true;
+      } else {
+        this.filter.IsPrimary = false;
+      }
+      $("#dropdownPrimaryStateNews").dropdown("hide");
+      this.GetAllNews();
+    },
+
+    CloseAndResetDropdownPrimaryState() {
+      (this.primaryNews = null),
+        (this.filter.IsPrimary = ""),
+        $("#dropdownPrimaryStateNews").dropdown("toggle");
       this.GetAllNews();
     },
 

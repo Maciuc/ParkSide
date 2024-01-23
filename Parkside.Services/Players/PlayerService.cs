@@ -31,6 +31,7 @@ namespace Parkside.Services.Players
                 TeamName = player.TeamName,
                 Height = player.Height,
                 Number = player.Number,
+                Nationality = player.Nationality,
                 Description = player.Description,
                 Role = player.Role,
                 BirthDate = player.BirthDate,
@@ -41,7 +42,7 @@ namespace Parkside.Services.Players
         }
 
         public PagingViewModel<PlayerViewModel> GetPlayers(
-            string? NameSearch, string? OrderBy, int PageNumber, int PageSize)
+            string? NameSearch, string? Role, string? OrderBy, int PageNumber, int PageSize)
         {
             var players = _playerRepo.GetAllQuerable();
 
@@ -50,6 +51,12 @@ namespace Parkside.Services.Players
                 NameSearch = NameSearch.Trim();
                 players = players.Where(c => c.FirstName.Contains(NameSearch) ||
                 c.LastName.Contains(NameSearch));
+            }
+
+            if (!string.IsNullOrWhiteSpace(Role))
+            {
+                Role = Role.Trim();
+                players = players.Where(c => c.Role.Contains(Role));
             }
 
             switch (OrderBy)
@@ -61,6 +68,14 @@ namespace Parkside.Services.Players
 
                 case ("name_desc"):
                     players = players.OrderByDescending(c => c.LastName);
+                    break;
+
+                case ("birthdate"):
+                    players = players.OrderBy(c => c.BirthDate);
+                    break;
+
+                case ("birthdate_desc"):
+                    players = players.OrderByDescending(c => c.BirthDate);
                     break;
 
                 default:
@@ -80,6 +95,7 @@ namespace Parkside.Services.Players
                   Height = player.Height,
                   Description = player.Description,
                   Number = player.Number,
+                  Nationality = player.Nationality,
                   Role = player.Role,
                   BirthDate = player.BirthDate.HasValue ? player.BirthDate.Value.ToString("dd/MM/yyyy") : null,
                   ImageBase64 = _genericService.GetImgBase64(player.ImageUrl)
@@ -107,6 +123,7 @@ namespace Parkside.Services.Players
                 Height = model.Height,
                 Description = model.Description,
                 Number = model.Number,
+                Nationality = model.Nationality,
                 Role = model.Role,
                 BirthDate = model.BirthDate,
                 ImageUrl = _genericService.GetImagePath(model.ImageBase64, null, "Players")
@@ -144,6 +161,7 @@ namespace Parkside.Services.Players
             player.LastName = model.LastName;
             player.Height = model.Height;
             player.Number = model.Number;
+            player.Nationality = model.Nationality;
             player.Description = model.Description;
             player.TeamName = model.TeamName;
             player.Role = model.Role;
@@ -165,6 +183,7 @@ namespace Parkside.Services.Players
                 TeamName = player.TeamName,
                 Height = player.Height,
                 Number = player.Number,
+                Nationality = player.Nationality,
                 Description = player.Description,
                 Role = player.Role,
                 BirthDate = player.BirthDate.HasValue ? player.BirthDate.Value.ToString("dd/MM/yyyy") : null,
@@ -172,6 +191,18 @@ namespace Parkside.Services.Players
             });
 
             return finalPlayers;
+        }
+
+        public IQueryable<PlayerBasicViewModel> GetPlayersDropDown()
+        {
+            var players = _playerRepo.GetAllQuerable().Select(x => new PlayerBasicViewModel
+            {
+                Id = x.Id,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+            });
+
+            return players;
         }
     }
 }

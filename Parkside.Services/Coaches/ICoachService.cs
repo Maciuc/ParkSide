@@ -4,7 +4,7 @@ namespace Parkside.Services.Coaches
 {
     public interface ICoachService
     {
-        Task<CoachViewModel> GetCoach(int id);
+        Task<CoachDetailsViewModel> GetCoach(int id);
         PagingViewModel<CoachViewModel> GetCoaches(
             string? NameSearch, string? OrderBy, int PageNumber, int PageSize);
         Task AddCoach(CoachCreateViewModel model);

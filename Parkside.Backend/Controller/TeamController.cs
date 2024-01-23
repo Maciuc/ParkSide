@@ -33,6 +33,13 @@ namespace Parkside.Backend.Controller
             return Ok(teams);
         }
 
+        [HttpGet("getTeamsDropDown")]
+        public IActionResult GetTeamsDropDown()
+        {
+            var teams = _teamService.GetTeamsDropDown();
+            return Ok(teams);
+        }
+
         [HttpPost("createTeam")]
         public async Task<IActionResult> AddTeam(TeamCreateViewModel team)
         {

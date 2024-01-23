@@ -15,6 +15,7 @@ using Parkside.Infrastructure.Repositories.Players;
 using Parkside.Infrastructure.Repositories.SocialMedias;
 using Parkside.Infrastructure.Repositories.Sponsors;
 using Parkside.Infrastructure.Repositories.Teams;
+using Parkside.Infrastructure.Repositories.Trofees;
 using Parkside.Models.Helpers;
 using Parkside.Services.Championships;
 using Parkside.Services.Coaches;
@@ -27,6 +28,7 @@ using Parkside.Services.Players;
 using Parkside.Services.SocialMedias;
 using Parkside.Services.Sponsors;
 using Parkside.Services.Teams;
+using Parkside.Services.Trofees;
 using Serilog;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -129,6 +131,9 @@ builder.Services.AddScoped<ISponsorService, SponsorService>();
 
 builder.Services.AddScoped<ITeamRepo, TeamRepo>();
 builder.Services.AddScoped<ITeamService, TeamService>();
+
+builder.Services.AddScoped<ITrofeeRepo, TrofeeRepo>();
+builder.Services.AddScoped<ITrofeeService, TrofeeService>();
 
 builder.Services.AddScoped<IChampionshipRepo, ChampionshipRepo>();
 builder.Services.AddScoped<IChampionshipService, ChampionshipService>();

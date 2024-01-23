@@ -33,6 +33,13 @@ namespace Parkside.Backend.Controller
             return Ok(championships);
         }
 
+        [HttpGet("getChampionshipsDropDown")]
+        public IActionResult GetChampionshipsDropDown()
+        {
+            var championships = _championshipService.GetChampionshipsDropDown();
+            return Ok(championships);
+        }
+
         [HttpPost("createChampionship")]
         public async Task<IActionResult> AddChampionship(ChampionshipCreateViewModel championship)
         {

@@ -4,9 +4,9 @@ namespace Parkside.Services.Matches
 {
     public interface IMatchService
     {
-        Task<MatchViewModel> GetMatch(int id);
+        Task<MatchDetailsViewModel> GetMatch(int id);
         PagingViewModel<MatchViewModel> GetMatches(
-            string? NameSearch, string? OrderBy, int PageNumber, int PageSize);
+            string? NameSearch, string? OrderBy, string? MatchDate, int PageNumber, int PageSize);
         IQueryable<MatchViewModel> GetHomePageMatches();
         Task AddMatch(int enemyTeamId, int championshipId, MatchCreateViewModel model);
         Task DeleteMatch(int id);

@@ -10,7 +10,8 @@ namespace Parkside.Infrastructure.Entities
         public string? Description { get; set; }
         public string? Content { get; set; }
         public string? ImageUrl { get; set; }
-        public bool? IsPublished { get; set; }
+        public bool IsPublished { get; set; }
+        public bool IsPrimary { get; set; }
         public DateTime? PublishedDate { get; set; }
         public bool IsDeleted { get; set; }
     }

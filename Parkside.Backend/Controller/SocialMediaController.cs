@@ -25,10 +25,10 @@ namespace Parkside.Backend.Controller
         }
 
         [HttpGet("getSocialMedias")]
-        public IActionResult GetSocialMedias(string? NameSearch, string? OrderBy,
+        public IActionResult GetSocialMedias(string? NameSearch, string? OrderBy, string? Platform,
             int PageNumber = 1, int PageSize = 10)
         {
-            var socialMedias = _socialMediaService.GetSocialMedias(NameSearch, OrderBy,
+            var socialMedias = _socialMediaService.GetSocialMedias(NameSearch, OrderBy, Platform,
                 PageNumber, PageSize);
             return Ok(socialMedias);
         }

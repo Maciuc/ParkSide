@@ -46,12 +46,72 @@ import { RouterLink, RouterView } from "vue-router";
           <router-link
             tag="li"
             class="nav-link d-flex"
+            :to="{ name: 'socialMedia' }"
+            exact
+          >
+            <font-awesome-icon class="img-link" :icon="['far', 'thumbs-up']"  />
+            <div>Social media</div>
+          </router-link>
+
+          <router-link
+            tag="li"
+            class="nav-link d-flex"
             :to="{ name: 'players' }"
             exact
           >
             <font-awesome-icon class="img-link" :icon="['fas', 'people-group']"  />
             <div>Jucatori</div>
           </router-link>
+
+          <router-link
+            tag="li"
+            class="nav-link d-flex"
+            :to="{ name: 'coaches' }"
+            exact
+          >
+            <font-awesome-icon class="img-link" :icon="['fas', 'person-military-pointing']"  />
+            <div>Antrenori</div>
+          </router-link>
+
+          <router-link
+            tag="li"
+            class="nav-link d-flex"
+            :to="{ name: 'teams' }"
+            exact
+          >
+            <font-awesome-icon class="img-link" :icon="['fas', 'users-between-lines']"  />
+            <div>Echipe</div>
+          </router-link>
+
+          <router-link
+            tag="li"
+            class="nav-link d-flex"
+            :to="{ name: 'championships' }"
+            exact
+          >
+            <font-awesome-icon class="img-link" :icon="['fas', 'trophy']"  />
+            <div>Campionate</div>
+          </router-link>
+
+          <router-link
+            tag="li"
+            class="nav-link d-flex"
+            :to="{ name: 'matches' }"
+            exact
+          >
+            <font-awesome-icon class="img-link" :icon="['fas', 'calendar']"  />
+            <div>Meciuri</div>
+          </router-link>
+
+          <router-link
+              tag="li"
+              class="nav-link d-flex"
+              :to="{ name: 'trofees' }"
+              exact
+            >
+              <font-awesome-icon class="img-link" :icon="['fas', 'award']"  />
+              <div>Trofee</div>
+            </router-link>
 
           <router-link
             tag="li"
@@ -64,13 +124,14 @@ import { RouterLink, RouterView } from "vue-router";
           </router-link>
 
           <!-- <router-link
+            tag="li"
             class="nav-link d-flex"
             :to="{ name: 'home' }"
             exact
           >
             <font-awesome-icon class="img-link" :icon="['far', 'newspaper']"  />
             <div >Home</div>
-          </router-link> -->
+          </router-link>  -->
         </ul>
       </nav>
     </aside>
@@ -94,6 +155,9 @@ export default {
 </script>
 
 <style scoped>
+.page{
+  height:910px;
+}
 aside {
   border-right: 1px solid #0000001a;
   padding-left: 7px;

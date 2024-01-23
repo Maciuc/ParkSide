@@ -1,7 +1,7 @@
 <template>
   <div class="breadcrumb align-items-center mt-4" aria-label="breadcrumbs">
     <ul class="d-flex flex-start align-items-center">
-      <li><div>Dashboard</div></li>
+      <li><div>Administrare</div></li>
       
       <li v-for="(crumb, index) in breadcrumbs" :key="index">
         <font-awesome-icon

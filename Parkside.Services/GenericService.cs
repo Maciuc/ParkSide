@@ -1,12 +1,93 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using HtmlAgilityPack;
+using Microsoft.Extensions.Configuration;
 using System.Data;
+using Newtonsoft.Json;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json.Linq;
 
 namespace exp.NET6.Services.DBServices
 {
     public class GenericService : IGenericService
     {
+        static string GetColumnName(int index)
+        {
+            switch (index)
+            {
+                case 0: return "Pos";
+                case 1: return "Echipa";
+                case 2: return "Juc";
+                case 3: return "V";
+                case 4: return "E";
+                case 5: return "P";
+                case 6: return "GM";
+                case 7: return "GP";
+                case 8: return "GDif";
+                case 9: return "VA";
+                case 10: return "EA";
+                case 11: return "VD";
+                case 12: return "ED";
+                case 13: return "PtsA";
+                case 14: return "PtsD";
+                case 15: return "Pts";
+                default: return "Unknown";
+            }
+        }
+
+        public string GetRankings()
+        {
+            string url = "https://frh.ro/clasament.php?id=927";
+
+            HtmlWeb web = new HtmlWeb();
+            HtmlDocument doc = web.Load(url);
+
+            // Assuming the table you want to scrape is the first table on the page
+            HtmlNode table = doc.DocumentNode.SelectSingleNode("//table");
+
+            if (table != null)
+            {
+                // Select all rows directly under the table (not considering nested tables)
+                var rows = table.SelectNodes(".//tr");
+
+                if (rows != null)
+                {
+                    List<JObject> tableData = new List<JObject>();
+
+                    // Iterate through rows starting from the second row (skipping header row)
+                    for (int i = 1; i < rows.Count; i++)
+                    {
+                        var row = rows[i];
+                        var rowData = new JObject();
+
+                        // Iterate through each cell in the row
+                        var cells = row.SelectNodes("td");
+                        if (cells != null)
+                        {
+                            for (int j = 0; j < cells.Count; j++)
+                            {
+                                rowData[GetColumnName(j)] = cells[j].InnerText.Trim();
+                            }
+
+                            tableData.Add(rowData);
+                        }
+                    }
+
+                    // Convert the data to JSON
+                    string json = JsonConvert.SerializeObject(tableData, Formatting.Indented);
+
+                    return json;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         private (string, string) ExtrageImagBase64(string dataUri)
         {
             string delim = ";base64,"; // Delimitatorul dintre tipul de imagine și codificarea Base64
@@ -54,9 +135,8 @@ namespace exp.NET6.Services.DBServices
                 var (imgType, ImageBase64) = ExtrageImagBase64(newImgBase64);
                 byte[] imageBytes = Convert.FromBase64String(ImageBase64);
                 string input = Path.Combine(Directory.GetCurrentDirectory());
-                //string pattern = @"C:\\Projects\\5.Delicitate\\";
 
-                string pattern = @"C:\\Users\\[^\\]+\\source\\repos\\";
+                string pattern = Regex.Escape(Directory.GetCurrentDirectory());
                 Regex regex = new Regex(pattern);
                 Match match = regex.Match(input);
 
@@ -66,7 +146,6 @@ namespace exp.NET6.Services.DBServices
                     string folder = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("PathForImages")["path"];
                     string baseFolderPath = path + folder;
 
-                    //string baseFolderPath = "C:\\Users\\epentilescu\\source\\repos\\OnlineShop-Administration-App\\exp.net6.backend\\Images";
                     string folderPath = Path.Combine(baseFolderPath, folderName);
 
                     if (!File.Exists(folderPath))
@@ -103,8 +182,8 @@ namespace exp.NET6.Services.DBServices
             if (filePath != null)
             {
                 string input = Path.Combine(Directory.GetCurrentDirectory());
-                string pattern = @"C:\\Users\\[^\\]+\\source\\repos\\";
-                //string pattern = @"C:\\Projects\\5.Delicitate\\";
+                string pattern = Regex.Escape(Directory.GetCurrentDirectory());
+
                 Regex regex = new Regex(pattern);
                 Match match = regex.Match(input);
 

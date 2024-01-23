@@ -53,7 +53,7 @@
 
             <div class="mb-3">
               <label for="input-title-edit-link" class="form-label"
-                >Nume link</label
+                >Nume pagina</label
               >
               <Field
                 type="text"
@@ -112,10 +112,10 @@ export default {
       platform: this.socialLink.Platform,
       platforms: [
         { name: "Facebook" },
-        { name: "Twitter" },
         { name: "WhatsApp" },
-        { name: "Linkedin" },
         { name: "Instagram" },
+        { name: "TikTok" },
+        { name: "Twitter" },
       ],
       value: [],
     };

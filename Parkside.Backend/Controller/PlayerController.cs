@@ -25,11 +25,18 @@ namespace Parkside.Backend.Controller
         }
 
         [HttpGet("getPlayers")]
-        public IActionResult GetPlayers(string? NameSearch, string? OrderBy,
+        public IActionResult GetPlayers(string? NameSearch, string? Role, string? OrderBy,
             int PageNumber = 1, int PageSize = 10)
         {
-            var players = _playerService.GetPlayers(NameSearch, OrderBy,
+            var players = _playerService.GetPlayers(NameSearch, Role, OrderBy,
                 PageNumber, PageSize);
+            return Ok(players);
+        }
+
+        [HttpGet("getPlayersDropDown")]
+        public IActionResult GetPlayersDropDown()
+        {
+            var players = _playerService.GetPlayersDropDown();
             return Ok(players);
         }
 
@@ -39,6 +46,7 @@ namespace Parkside.Backend.Controller
             var players = _playerService.GetHomePagePlayers();
             return Ok(players);
         }
+
 
         [HttpPost("createPlayer")]
         public async Task<IActionResult> AddPlayer(PlayerCreateViewModel player)

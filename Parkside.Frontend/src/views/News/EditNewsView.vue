@@ -37,7 +37,7 @@
         </div>
       </div>
 
-      <div class="new-form mt-4">
+      <div class="new-form mt-4 mb-4">
         <div class="row">
           <div class="col-md-4 col-sm-6">
             <label for="input-edit-news-title" class="form-label"
@@ -81,6 +81,21 @@
               class="text-danger error-message"
             />
           </div>
+
+          <div class="col-md-4 col-sm-6 d-flex align-items-end justify-content-start">
+          <div class="form-check form-switch">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="flexSwitchCheckDefault"
+                    :checked="editedNews.IsPrimary"
+                    @click="TogglePrimaryNews"
+                  />
+                  <label class="form-label" for="flexSwitchCheckDefault"
+                    >Stire primara</label
+                  >
+              </div>
+              </div>
         </div>
 
         <div class="row">
@@ -252,6 +267,7 @@ export default {
     DeletePhoto() {
       this.$refs.uploadImageEditNews.reset();
       this.editedNews.ImageBase64 = null;
+      this.photoValidation = null;
     },
 
     EditArticle() {
@@ -261,6 +277,7 @@ export default {
           console.log(this.editedNews);
           console.log(response);
           if (this.editedNews.IsPublished === false) {
+            this.$router.push({ name: "news" });
             this.$swal.fire({
               title: "Succes",
               text: "Știrea a fost salvată",
@@ -269,6 +286,7 @@ export default {
               timer: 1500,
             });
           } else {
+            this.$router.push({ name: "news" });
             this.$swal.fire({
               title: "Succes",
               text: "Știrea a fost publicată",
@@ -281,6 +299,12 @@ export default {
         .catch((error) => {
           console.error(error);
         });
+    },
+
+    TogglePrimaryNews() {
+      this.editedNews.IsPrimary =
+        !this.editedNews.IsPrimary;
+      console.log(this.editedNews.IsPrimary);
     },
   },
 

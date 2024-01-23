@@ -1,10 +1,8 @@
-﻿using exp.NET6.Models.ViewModel;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Parkside.Backend.Helpers;
 using Parkside.Services.Email;
-using System.Data.Entity;
 using static Parkside.Backend.Auth.AccountModel;
 
 
@@ -103,43 +101,6 @@ namespace Parkside.Backend.Controller
             }
 
             return BadRequest();
-        }
-
-        [HttpGet]
-        [AllowAnonymous]
-        [Route("createRole")]
-        public async Task<IActionResult> CreateRole(string roleName)
-        {
-            var role = new IdentityRole
-            {
-                Name = roleName
-            };
-            await _roleManager.CreateAsync(role);
-            return Ok();
-        }
-
-        [HttpGet("getRoles")]
-        public async Task<IActionResult> GetRoles()
-        {
-            var roles = await _roleManager.Roles.Select(x => new RoleViewModel
-            {
-                Id = x.Id,
-                Name = x.Name
-            }).ToListAsync();
-            return Ok(roles);
-        }
-
-        [HttpPut("updateUserRole")]
-        public async Task<IActionResult> UpdateUserRole(UpdateRoleViewModel updateRole)
-        {
-            var user = await _userManager.FindByIdAsync(updateRole.UserId);
-            var role = await _roleManager.FindByIdAsync(updateRole.RoleId);
-
-            var roles = await _userManager.GetRolesAsync(user);
-            await _userManager.RemoveFromRolesAsync(user, roles);
-            await _userManager.AddToRoleAsync(user, role.Name);
-
-            return Ok("The user role has been updated successfully");
         }
     }
 }

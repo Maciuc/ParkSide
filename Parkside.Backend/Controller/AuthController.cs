@@ -144,7 +144,6 @@ namespace Parkside.Backend.Controller
 
 
         [HttpPost]
-        [Authorize]
         [Route("logout")]
         public async Task<IActionResult> Logout()
         {

@@ -28,7 +28,7 @@
   
 
   
-    <div class="new-form mt-4">
+    <div class="new-form mt-4 mb-4">
       <div class="row">
         <div class="col-md-4 col-sm-6">
           <label for="input-add-news-title" class="form-label"
@@ -68,6 +68,21 @@
           </Field>
           <ErrorMessage name="datepublish" class="text-danger error-message" />
         </div>
+
+        <div class="col-md-4 col-sm-6 d-flex align-items-end justify-content-start">
+        <div class="form-check form-switch">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="flexSwitchCheckDefault"
+                  :checked="newNews.IsPrimary"
+                  @click="TogglePrimaryNews"
+                />
+                <label class="form-label" for="flexSwitchCheckDefault"
+                  >Stire primara</label
+                >
+            </div>
+            </div>
       </div>
 
       <div class="row">
@@ -90,6 +105,9 @@
             </textarea>
           </Field>
         </div>
+
+
+        
         <div class="col-md-7 col-xl-4 row justify-content-start mt-4 gap-1">
           <div class="col">
             <label class="form-label">Selectează imagine</label>
@@ -261,6 +279,12 @@ export default {
         .catch((error) => {
           console.error(error);
         });
+    },
+
+    TogglePrimaryNews() {
+      this.newNews.IsPrimary =
+        !this.newNews.IsPrimary;
+      console.log(this.newNews.IsPrimary);
     },
 
     SaveSketch(){

@@ -123,6 +123,17 @@ namespace Parkside.Services.Championships
 
             await _championshipRepo.Update(championship);
         }
+
+        public IQueryable<ChampionshipViewModel> GetChampionshipsDropDown()
+        {
+            var championships = _championshipRepo.GetAllQuerable().Select(x => new ChampionshipViewModel
+            {
+                Id = x.Id,
+                Name = x.Name,
+            });
+
+            return championships;
+        }
     }
 }
 

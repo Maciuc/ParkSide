@@ -21,6 +21,24 @@ const router = createRouter({
       meta: { breadcrumb: 'Editare jucator' },
     },
     {
+      path: '/coaches',
+      name: 'coaches',
+      component: () => import('../views/Coaches/CoachesView.vue'),
+      meta: { breadcrumb: 'Antrenori' },
+    },
+    {
+      path: '/add-coach',
+      name: 'add-coach',
+      component: () => import('../views/Coaches/AddCoachView.vue'),
+      meta: { breadcrumb: 'Adăugare antrenor' },
+    },
+    {
+      path: '/edit-coach/:id',
+      name: 'edit-coach',
+      component: () => import('../views/Coaches/EditCoachView.vue'),
+      meta: { breadcrumb: 'Editare antrenor' },
+    },
+    {
       path: '/users',
       name: 'Users',
       component: () => import('../views/UsersView.vue'),
@@ -52,10 +70,50 @@ const router = createRouter({
       children: [
       ],
     },
+    {
+      path: '/teams',
+      name: 'teams',
+      component: () => import('../views/TeamsView.vue'),
+      meta: { breadcrumb: 'Echipe' },
+      children: [
+      ],
+    },
+    {
+      path: '/matches',
+      name: 'matches',
+      component: () => import('../views/MatchesView.vue'),
+      meta: { breadcrumb: 'Meciuri' },
+      children: [
+      ],
+    },
+    {
+      path: '/trofees',
+      name: 'trofees',
+      component: () => import('../views/TrofeesView.vue'),
+      meta: { breadcrumb: 'Trofee' },
+      children: [
+      ],
+    },
+    {
+      path: '/socialMedia',
+      name: 'socialMedia',
+      component: () => import('../views/SocialMediaView.vue'),
+      meta: { breadcrumb: 'Social media' },
+      children: [
+      ],
+    },
+    {
+      path: '/championships',
+      name: 'championships',
+      component: () => import('../views/ChampionshipView.vue'),
+      meta: { breadcrumb: 'Campionate' },
+      children: [
+      ],
+    },
     // {
     //   path: '/home',
     //   name: 'home',
-    //   component: () => import('../home/acasa.html'),
+    //   component: () => import('../home/acasa.html')
     // },
     
   ]
