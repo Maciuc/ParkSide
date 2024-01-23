@@ -116,7 +116,8 @@
                 />
               </div>
 
-              <div class="form-check form-switch">
+              <div class="row ms-4 ">
+              <div class="col form-check form-switch">
               <input
                 class="form-check-input"
                 type="checkbox"
@@ -127,7 +128,22 @@
               <label class="form-label" for="flexSwitchCheckDefault"
                 >Joaca acasa</label
               >
+              </div>
+
+              <div class="col form-check form-switch">
+              <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="flexSwitchCheckDefault"
+                  :checked="newMatch.IsFinished"
+                  @click="ToggleIsFinished"
+                />
+                <label class="form-label" for="flexSwitchCheckDefault"
+                  >Meci terminat</label
+                >
             </div>
+            </div>
+            
                 <div class="col">
                 <label for="input-hour" class="form-label">Ora</label>
                 <Field
@@ -186,8 +202,9 @@ export default {
         Location: "",
         Date: "",
         PlayingHome: true,
-        EnemyTeamPoints: null,
-        MainTeamPoints: null,
+        IsFinished: false,
+        EnemyTeamPoints: "0",
+        MainTeamPoints: "0",
         MatchHour:"",
       },
     };
@@ -227,6 +244,11 @@ export default {
       this.newMatch.PlayingHome =
         !this.newMatch.PlayingHome;
       console.log(this.newMatch.PlayingHome);
+    },
+    ToggleIsFinished() {
+      this.newMatch.IsFinished =
+        !this.newMatch.PlayIsFinished;
+      console.log(this.newMatch.IsFinished);
     },
     ClearModal() {
       this.$refs.addMatchFormRef.resetForm();

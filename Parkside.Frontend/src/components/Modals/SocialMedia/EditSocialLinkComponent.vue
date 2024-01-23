@@ -132,14 +132,31 @@ export default {
   methods: {
     SaveEditedLink() {
       this.$axios
-        .put(`/api/SocialMedia/updateSocialMedia/${this.socialLink.Id}`, this.socialLink)
+        .put(
+          `/api/SocialMedia/updateSocialMedia/${this.socialLink.Id}`,
+          this.socialLink
+        )
         .then((response) => {
           console.log(response);
           this.$emit("get-list");
           $("#social-link-edit-modal").modal("hide");
+          this.$swal.fire({
+            title: "Completed",
+            text: "Link-ul a fost editat",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         })
         .catch((error) => {
           console.error(error);
+          this.$swal.fire({
+            title: "Eroare",
+            text: "Link-ul nu corescpunde cu platforma",
+            icon: "error",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         });
     },
     

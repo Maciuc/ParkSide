@@ -11,7 +11,8 @@ namespace Parkside.Infrastructure.Entities
         public string? Location { get; set; }
         public DateTime? MatchDate { get; set; }
         public string? MatchHour { get; set; }
-        public bool? PlayingHome { get; set; }
+        public bool PlayingHome { get; set; }
+        public bool IsFinished { get; set; }
         public string? EnemyTeamPoints { get; set; }
         public string? MainTeamPoints { get; set; }
         public bool IsDeleted { get; set; }

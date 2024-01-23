@@ -120,7 +120,7 @@
                 <span >Data</span>
               </th>
             <th scope="20" width="20%">Ora</th>
-            <th scope="20" width="20%">Locatia</th>
+            <th scope="20" width="20%">Locatie</th>
             <th></th>
           </tr>
         </thead>

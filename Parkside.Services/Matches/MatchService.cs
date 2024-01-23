@@ -42,6 +42,7 @@ namespace Parkside.Services.Matchs
                 MatchDate = match.MatchDate,
                 MatchHour = match.MatchHour,
                 PlayingHome = match.PlayingHome,
+                IsFinished = match.IsFinished,
                 EnemyTeamPoints = match.EnemyTeamPoints,
                 MainTeamPoints = match.MainTeamPoints,
                 Championship = new ChampionshipViewModel
@@ -110,6 +111,7 @@ namespace Parkside.Services.Matchs
                   MatchDate = match.MatchDate.HasValue ? match.MatchDate.Value.ToString("dd/MM/yyyy") : null,
                   MatchHour = match.MatchHour,
                   PlayingHome = match.PlayingHome,
+                  IsFinished = match.IsFinished,
                   EnemyTeamPoints = match.EnemyTeamPoints,
                   MainTeamPoints = match.MainTeamPoints
               })
@@ -144,6 +146,7 @@ namespace Parkside.Services.Matchs
                 MatchDate = model.MatchDate,
                 MatchHour = model.MatchHour,
                 PlayingHome = model.PlayingHome,
+                IsFinished = model.IsFinished,
                 EnemyTeamPoints = model.EnemyTeamPoints,
                 MainTeamPoints = model.MainTeamPoints,
             };
@@ -182,6 +185,7 @@ namespace Parkside.Services.Matchs
             match.MatchDate = model.MatchDate;
             match.MatchHour = model.MatchHour;
             match.PlayingHome = model.PlayingHome;
+            match.IsFinished = model.IsFinished;
             match.EnemyTeamPoints = model.EnemyTeamPoints;
             match.MainTeamPoints = model.MainTeamPoints;
 
@@ -203,6 +207,7 @@ namespace Parkside.Services.Matchs
                 MatchDate = match.MatchDate.HasValue ? match.MatchDate.Value.ToString("dd/MM/yyyy") : null,
                 MatchHour = match.MatchHour,
                 PlayingHome = match.PlayingHome,
+                IsFinished = match.IsFinished,
                 EnemyTeamPoints = match.EnemyTeamPoints,
                 MainTeamPoints = match.MainTeamPoints
             });

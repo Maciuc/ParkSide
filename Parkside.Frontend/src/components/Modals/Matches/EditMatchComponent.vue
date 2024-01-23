@@ -135,11 +135,35 @@
                 v-model="editedMatch.Location" />
             </div>
 
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" :checked="editedMatch.PlayingHome"
-                @click="ToggleHomePlay" />
-              <label class="form-label" for="flexSwitchCheckDefault">Joaca acasa</label>
-            </div>
+            <div class="row ms-4 ">
+                <div class="col form-check form-switch">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="flexSwitchCheckDefault"
+                  :checked="editedMatch.PlayingHome"
+                  @click="ToggleHomePlay"
+                />
+                <label class="form-label" for="flexSwitchCheckDefault"
+                  >Joaca acasa</label
+                >
+                </div>
+
+                <div class="col form-check form-switch">
+                <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="flexSwitchCheckDefault"
+                    :checked="editedMatch.IsFinished"
+                    @click="ToggleIsFinished"
+                  />
+                  <label class="form-label" for="flexSwitchCheckDefault"
+                    >Meci terminat</label
+                  >
+              </div>
+              </div>
+
+
             <div class="col">
               <label for="input-hour" class="form-label">Ora</label>
               <Field class="form-control" id="input-hour" type="time" placeholder="Ora"
@@ -160,8 +184,6 @@
                     v-model="editedMatch.EnemyTeamPoints" />
                 </div>
           </div>
-
-
 
 
           <div class="modal-footer justify-content-between">
@@ -209,9 +231,11 @@ export default {
           Location: "",
           Date: "",
           PlayingHome: true,
-          EnemyTeamPoints: "",
-          MainTeamPoints: "",
-          MatchHour: "", };
+          IsFinished: false,
+          EnemyTeamPoints: "0",
+          MainTeamPoints: "0",
+          MatchHour: "", 
+        };
       },
     },
   },
@@ -250,6 +274,11 @@ export default {
     ToggleHomePlay() {
       this.editedMatch.PlayingHome =
         !this.editedMatch.PlayingHome;
+      console.log(this.editedMatch);
+    },
+    ToggleIsFinished() {
+      this.editedMatch.IsFinished =
+        !this.editedMatch.IsFinished;
       console.log(this.editedMatch);
     },
     ClearModal() {

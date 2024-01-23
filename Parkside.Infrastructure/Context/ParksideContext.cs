@@ -182,13 +182,13 @@ namespace Parkside.Infrastructure.Context
                     .WithMany(p => p.Matches)
                     .HasForeignKey(d => d.ChampionshipId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Matches__Champio__0880433F");
+                    .HasConstraintName("FK__Matches__Champio__2EA5EC27");
 
                 entity.HasOne(d => d.EnemyTeam)
                     .WithMany(p => p.Matches)
                     .HasForeignKey(d => d.EnemyTeamId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Matches__EnemyTe__09746778");
+                    .HasConstraintName("FK__Matches__EnemyTe__2F9A1060");
             });
 
             modelBuilder.Entity<News>(entity =>

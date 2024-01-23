@@ -75,7 +75,8 @@ CREATE TABLE Matches(
 	Location NVARCHAR(500),
 	MatchDate DATETIME,
 	MatchHour NVARCHAR(20),
-	PlayingHome BIT,
+	PlayingHome BIT NOT NULL DEFAULT(0),
+	IsFinished BIT NOT NULL DEFAULT(0),
 	EnemyTeamPoints NVARCHAR(10),
 	MainTeamPoints NVARCHAR(10),
 	IsDeleted BIT NOT NULL DEFAULT(0)

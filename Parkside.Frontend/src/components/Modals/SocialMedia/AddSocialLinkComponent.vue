@@ -133,9 +133,23 @@ export default {
           console.log(response);
           this.$emit("get-list");
           $("#social-link-add-modal").modal("hide");
+          this.$swal.fire({
+            title: "Succes",
+            text: "Link-ul a fost adăugat",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         })
         .catch((error) => {
           console.error(error);
+          this.$swal.fire({
+            title: "Eroare",
+            text: "Link-ul nu corespunde cu platforma",
+            icon: "error",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         });
     },
     ClearModal() {
