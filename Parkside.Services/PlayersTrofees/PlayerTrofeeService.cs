@@ -40,14 +40,19 @@ namespace Parkside.Services.PlayerTrofees
 
             var finalPlayerTrofee = new PlayerTrofeeDetailsViewModel
             {
-                Id = playerTrofee.Id,
+                /*Id = playerTrofee.Id,
+                PlayerHistory = new PlayerHistoryDropDownViewModel
+                {
+                    HistoryId = playerTrofee.PlayerHistoryId,
+                    HistoryName = playerTrofee.PlayerHistory.
+                }*/
             };
 
             return finalPlayerTrofee;
         }
 
         public PagingViewModel<PlayerTrofeeViewModel> GetPlayerTrofeees(
-            string? NameSearch, string? OrderBy, string? PlayerTrofeeDate, int PageNumber, int PageSize)
+            string? NameSearch, string? OrderBy, int PageNumber, int PageSize)
         {
             var playerTrofeees = _playerTrofeeRepo.GetAllPlayersTrofees();
 
@@ -57,25 +62,14 @@ namespace Parkside.Services.PlayerTrofees
                 playerTrofeees = playerTrofeees.Where(c => c.Trofee.Name.Contains(NameSearch));
             }
 
-            if (!string.IsNullOrWhiteSpace(PlayerTrofeeDate))
-            {
-                PlayerTrofeeDate = PlayerTrofeeDate.Trim();
-
-                if (DateTime.TryParse(PlayerTrofeeDate, out var playerTrofeeDate))
-                {
-                    playerTrofeees = playerTrofeees.Where(n => n.TrofeeDate != null && n.TrofeeDate.Value.Date == playerTrofeeDate.Date);
-                }
-            }
-
-
             switch (OrderBy)
             {
-                case ("playerTrofeedate"):
-                    playerTrofeees = playerTrofeees.OrderBy(c => c.TrofeeDate);
+                case ("playerName"):
+                    playerTrofeees = playerTrofeees.OrderBy(c => c.);
                     break;
 
-                case ("playerTrofeedate_desc"):
-                    playerTrofeees = playerTrofeees.OrderByDescending(c => c.TrofeeDate);
+                case ("playerName_desc"):
+                    playerTrofeees = playerTrofeees.OrderByDescending(c => c.Player.LastName);
                     break;
 
                 default:
@@ -94,7 +88,7 @@ namespace Parkside.Services.PlayerTrofees
                   PlayerLastName = playerTrofee.Player.LastName,
                   ChampionshipName = playerTrofee.Championship.Name,
                   PlayerRole = playerTrofee.PlayerRole,
-                  TrofeeDate = playerTrofee.TrofeeDate.HasValue ? playerTrofee.TrofeeDate.Value.ToString("dd/MM/yyyy") : null,
+                  TrofeeYear = playerTrofee.TrofeeYear,
                   TrofeeImageBase64 = _genericService.GetImgBase64(playerTrofee.Trofee.ImageUrl),
                   PlayerImageBase64 = _genericService.GetImgBase64(playerTrofee.Player.ImageUrl),
                   ChampionshipImageBase64 = _genericService.GetImgBase64(playerTrofee.Championship.ImageUrl),

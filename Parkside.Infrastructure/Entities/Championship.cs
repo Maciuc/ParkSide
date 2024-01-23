@@ -8,7 +8,7 @@ namespace Parkside.Infrastructure.Entities
         public Championship()
         {
             Matches = new HashSet<Match>();
-            PlayersTrofees = new HashSet<PlayersTrofee>();
+            PlayersHistories = new HashSet<PlayersHistory>();
         }
 
         public int Id { get; set; }
@@ -17,6 +17,6 @@ namespace Parkside.Infrastructure.Entities
         public bool IsDeleted { get; set; }
 
         public virtual ICollection<Match> Matches { get; set; }
-        public virtual ICollection<PlayersTrofee> PlayersTrofees { get; set; }
+        public virtual ICollection<PlayersHistory> PlayersHistories { get; set; }
     }
 }

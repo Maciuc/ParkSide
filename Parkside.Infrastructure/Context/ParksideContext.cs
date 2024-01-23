@@ -28,6 +28,7 @@ namespace Parkside.Infrastructure.Context
         public virtual DbSet<Match> Matches { get; set; } = null!;
         public virtual DbSet<News> News { get; set; } = null!;
         public virtual DbSet<Player> Players { get; set; } = null!;
+        public virtual DbSet<PlayersHistory> PlayersHistories { get; set; } = null!;
         public virtual DbSet<PlayersTrofee> PlayersTrofees { get; set; } = null!;
         public virtual DbSet<SocialMedia> SocialMedias { get; set; } = null!;
         public virtual DbSet<Sponsor> Sponsors { get; set; } = null!;
@@ -233,29 +234,43 @@ namespace Parkside.Infrastructure.Context
                 entity.Property(e => e.TeamName).HasMaxLength(200);
             });
 
-            modelBuilder.Entity<PlayersTrofee>(entity =>
+            modelBuilder.Entity<PlayersHistory>(entity =>
             {
+                entity.HasKey(e => e.HistoryId)
+                    .HasName("PK__PlayersH__4D7B4ABD08D7BE41");
+
+                entity.ToTable("PlayersHistory");
+
                 entity.Property(e => e.PlayerRole).HasMaxLength(50);
 
-                entity.Property(e => e.TrofeeDate).HasColumnType("datetime");
+                entity.Property(e => e.Year).HasMaxLength(5);
 
                 entity.HasOne(d => d.Championship)
-                    .WithMany(p => p.PlayersTrofees)
+                    .WithMany(p => p.PlayersHistories)
                     .HasForeignKey(d => d.ChampionshipId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__PlayersTr__Champ__1209AD79");
+                    .HasConstraintName("FK__PlayersHi__Champ__36470DEF");
 
                 entity.HasOne(d => d.Player)
-                    .WithMany(p => p.PlayersTrofees)
+                    .WithMany(p => p.PlayersHistories)
                     .HasForeignKey(d => d.PlayerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__PlayersTr__Playe__10216507");
+                    .HasConstraintName("FK__PlayersHi__Playe__3552E9B6");
+            });
+
+            modelBuilder.Entity<PlayersTrofee>(entity =>
+            {
+                entity.HasOne(d => d.PlayerHistory)
+                    .WithMany(p => p.PlayersTrofees)
+                    .HasForeignKey(d => d.PlayerHistoryId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__PlayersTr__Playe__3CF40B7E");
 
                 entity.HasOne(d => d.Trofee)
                     .WithMany(p => p.PlayersTrofees)
                     .HasForeignKey(d => d.TrofeeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__PlayersTr__Trofe__11158940");
+                    .HasConstraintName("FK__PlayersTr__Trofe__3DE82FB7");
             });
 
             modelBuilder.Entity<SocialMedia>(entity =>

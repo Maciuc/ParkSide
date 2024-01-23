@@ -6,13 +6,12 @@ namespace Parkside.Services.PlayerTrofees
     {
         Task<PlayerTrofeeDetailsViewModel> GetPlayerTrofee(int id);
         PagingViewModel<PlayerTrofeeViewModel> GetPlayerTrofeees(
-            string? NameSearch, string? OrderBy, string? PlayerTrofeeDate, int PageNumber, int PageSize);
+            string? NameSearch, string? OrderBy, int PageNumber, int PageSize);
         IQueryable<PlayerTrofeeViewModel> GetHomePagePlayerTrofeees();
-        Task AddPlayerTrofee(int trofeeId, int playerId, int championshipId, PlayerTrofeeCreateViewModel model);
+        Task AddPlayerTrofee(int playerHistoryId, int trofeeId);
         Task DeletePlayerTrofee(int id);
         Task VirtualDeletePlayerTrofee(int id);
-        Task UpdatePlayerTrofee(int playerTrofeeId, int trofeeId, int playerId, int championshipId,
-            PlayerTrofeeUpdateViewModel model);
+        Task UpdatePlayerTrofee(int playerTrofeeId, int playerHistoryId, int trofeeId);
 
     }
 }

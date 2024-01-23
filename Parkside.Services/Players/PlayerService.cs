@@ -48,9 +48,9 @@ namespace Parkside.Services.Players
 
             if (!string.IsNullOrWhiteSpace(NameSearch))
             {
-                NameSearch = NameSearch.Trim();
-                players = players.Where(c => c.FirstName.Contains(NameSearch) ||
-                c.LastName.Contains(NameSearch));
+                NameSearch = NameSearch.Trim().ToLower();
+                players = players.Where(c => c.FirstName.ToLower().Contains(NameSearch) ||
+                c.LastName.ToLower().Contains(NameSearch));
             }
 
             if (!string.IsNullOrWhiteSpace(Role))

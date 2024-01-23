@@ -7,7 +7,7 @@ namespace Parkside.Infrastructure.Entities
     {
         public Player()
         {
-            PlayersTrofees = new HashSet<PlayersTrofee>();
+            PlayersHistories = new HashSet<PlayersHistory>();
         }
 
         public int Id { get; set; }
@@ -23,6 +23,6 @@ namespace Parkside.Infrastructure.Entities
         public string? ImageUrl { get; set; }
         public bool IsDeleted { get; set; }
 
-        public virtual ICollection<PlayersTrofee> PlayersTrofees { get; set; }
+        public virtual ICollection<PlayersHistory> PlayersHistories { get; set; }
     }
 }

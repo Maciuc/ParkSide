@@ -89,13 +89,19 @@ CREATE TABLE Trofees(
 	IsDeleted BIT NOT NULL DEFAULT(0)
 );
 
+CREATE TABLE PlayersHistory(
+	HistoryId INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	PlayerId INT REFERENCES Players(Id) NOT NULL,
+	ChampionshipId INT REFERENCES Championships(Id) NOT NULL,
+	Year NVARCHAR(5),
+	PlayerRole NVARCHAR(50),
+	IsDeleted BIT NOT NULL DEFAULT(0)
+);
+
 CREATE TABLE PlayersTrofees(
 	Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-	PlayerId INT REFERENCES Players(Id) NOT NULL,
+	PlayerHistoryId INT REFERENCES PlayersHistory(HistoryId) NOT NULL,
 	TrofeeId INT REFERENCES Trofees(Id) NOT NULL,
-	ChampionshipId INT REFERENCES Championships(Id) NOT NULL,
-	TrofeeDate DATETIME,
-	PlayerRole NVARCHAR(50),
 	IsDeleted BIT NOT NULL DEFAULT(0)
 );
 -------------------------------------
@@ -107,6 +113,7 @@ DROP TABLE SocialMedias;
 DROP TABLE Matches;
 DROP TABLE Championships;
 DROP TABLE Teams;
+DROP TABLE PlayersHistory;
 DROP TABLE PlayersTrofees;
 DROP TABLE Trofees;
 
