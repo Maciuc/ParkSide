@@ -28,12 +28,10 @@ namespace Parkside.Services.Players
                 Id = player.Id,
                 FirstName = player.FirstName,
                 LastName = player.LastName,
-                TeamName = player.TeamName,
                 Height = player.Height,
                 Number = player.Number,
                 Nationality = player.Nationality,
                 Description = player.Description,
-                Role = player.Role,
                 BirthDate = player.BirthDate,
                 ImageBase64 = _genericService.GetImgBase64(player.ImageUrl)
             };
@@ -51,12 +49,6 @@ namespace Parkside.Services.Players
                 NameSearch = NameSearch.Trim().ToLower();
                 players = players.Where(c => c.FirstName.ToLower().Contains(NameSearch) ||
                 c.LastName.ToLower().Contains(NameSearch));
-            }
-
-            if (!string.IsNullOrWhiteSpace(Role))
-            {
-                Role = Role.Trim();
-                players = players.Where(c => c.Role.Contains(Role));
             }
 
             switch (OrderBy)
@@ -91,12 +83,10 @@ namespace Parkside.Services.Players
                   Id = player.Id,
                   FirstName = player.FirstName,
                   LastName = player.LastName,
-                  TeamName = player.TeamName,
                   Height = player.Height,
                   Description = player.Description,
                   Number = player.Number,
                   Nationality = player.Nationality,
-                  Role = player.Role,
                   BirthDate = player.BirthDate.HasValue ? player.BirthDate.Value.ToString("dd/MM/yyyy") : null,
                   ImageBase64 = _genericService.GetImgBase64(player.ImageUrl)
               })
@@ -119,12 +109,10 @@ namespace Parkside.Services.Players
             {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                TeamName = model.TeamName,
                 Height = model.Height,
                 Description = model.Description,
                 Number = model.Number,
                 Nationality = model.Nationality,
-                Role = model.Role,
                 BirthDate = model.BirthDate,
                 ImageUrl = _genericService.GetImagePath(model.ImageBase64, null, "Players")
             };
@@ -163,8 +151,6 @@ namespace Parkside.Services.Players
             player.Number = model.Number;
             player.Nationality = model.Nationality;
             player.Description = model.Description;
-            player.TeamName = model.TeamName;
-            player.Role = model.Role;
             player.BirthDate = model.BirthDate;
             player.ImageUrl = _genericService.GetImagePath(model.ImageBase64, null, "Players");
 
@@ -180,12 +166,10 @@ namespace Parkside.Services.Players
                 Id = player.Id,
                 FirstName = player.FirstName,
                 LastName = player.LastName,
-                TeamName = player.TeamName,
                 Height = player.Height,
                 Number = player.Number,
                 Nationality = player.Nationality,
                 Description = player.Description,
-                Role = player.Role,
                 BirthDate = player.BirthDate.HasValue ? player.BirthDate.Value.ToString("dd/MM/yyyy") : null,
                 ImageBase64 = _genericService.GetImgBase64(player.ImageUrl)
             });

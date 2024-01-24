@@ -31,7 +31,7 @@
             <ErrorMessage name="firstname" class="text-danger error-message" />
           </div>
 
-          <div class="mb-3">
+          <!-- <div class="mb-3">
             <label for="input-teamname-add-player" class="form-label">Nume echipa</label>
             <Field type="text" class="form-control" :class="{ 'border-danger': errors.teamname }"
               id="input-teamname-add-player" name="teamname" placeholder="Nume echipa" v-model="editedPlayer.TeamName" />
@@ -49,7 +49,7 @@
             </Field>
 
             <ErrorMessage name="role" class="text-danger error-message" />
-          </div>
+          </div> -->
 
           <div class="mb-3 position-relative">
             <div :class="{ 'invalid-input': errors.birthdate }" class="col custom-date-picker">
@@ -62,6 +62,15 @@
             </div>
           </div>
 
+          <div class="mb-3 position-relative">
+                <label for="input-number-add-player" class="form-label">Numar</label>
+                <Field type="text" class="form-control" :class="{ 'border-danger': errors.number }"
+                  id="input-number-add-player" name="number" placeholder="Numar" v-model="editedPlayer.Number" />
+                <ErrorMessage name="number" class="text-danger error-message" />
+                <div v-if="validNumber === false" class="text-danger error-message">
+                  Numărul este deja ocupat!
+                </div>
+            </div>
         </div>
 
 
@@ -101,18 +110,6 @@
                 Imaginea selectată este prea mare
               </div>
               <div v-else></div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div>
-              <label for="input-number-add-player" class="form-label">Numar</label>
-              <Field type="text" class="form-control" :class="{ 'border-danger': errors.number }"
-                id="input-number-add-player" name="number" placeholder="Numar" v-model="editedPlayer.Number" />
-              <ErrorMessage name="number" class="text-danger error-message" />
-              <div v-if="validNumber === false" class="text-danger error-message">
-                Numărul este deja ocupat!
-              </div>
             </div>
           </div>
 
@@ -168,13 +165,13 @@ export default {
       photoValidation: null,
       validNumber: true,
       editedPlayer: {},
-      Roles: [
-        { name: "Centrali" },
-        { name: "Pivoti" },
-        { name: "Interi" },
-        { name: "Extreme" },
-        { name: "Portari" },
-      ],
+      // Roles: [
+      //   { name: "Centrali" },
+      //   { name: "Pivoti" },
+      //   { name: "Interi" },
+      //   { name: "Extreme" },
+      //   { name: "Portari" },
+      // ],
     };
   },
 
@@ -184,7 +181,6 @@ export default {
         firstname: yup.string().required("Acest câmp este obligatoriu"),
         lastname: yup.string().required("Acest câmp este obligatoriu"),
         number: yup.string().required("Acest câmp este obligatoriu"),
-        teamname: yup.string().required("Acest câmp este obligatoriu"),
       });
     },
   },

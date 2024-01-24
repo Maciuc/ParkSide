@@ -2,12 +2,12 @@
 using Parkside.Infrastructure.Entities;
 using Parkside.Infrastructure.Repositories.Generic;
 
-namespace Parkside.Infrastructure.Repositories.Coaches
+namespace Parkside.Infrastructure.Repositories.Stuffs
 {
-    public class CoachRepo : GenericRepository<Coach>, ICoachRepo
+    public class StuffRepo : GenericRepository<Stuff>, IStuffRepo
     {
         public ParksideContext _parksideContext { get; set; }
-        public CoachRepo(ParksideContext context) : base(context)
+        public StuffRepo(ParksideContext context) : base(context)
         {
             _parksideContext = context;
         }

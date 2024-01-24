@@ -24,7 +24,6 @@ namespace Parkside.Infrastructure.Context
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; } = null!;
         public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; } = null!;
         public virtual DbSet<Championship> Championships { get; set; } = null!;
-        public virtual DbSet<Coach> Coaches { get; set; } = null!;
         public virtual DbSet<Match> Matches { get; set; } = null!;
         public virtual DbSet<News> News { get; set; } = null!;
         public virtual DbSet<Player> Players { get; set; } = null!;
@@ -32,6 +31,8 @@ namespace Parkside.Infrastructure.Context
         public virtual DbSet<PlayersTrofee> PlayersTrofees { get; set; } = null!;
         public virtual DbSet<SocialMedia> SocialMedias { get; set; } = null!;
         public virtual DbSet<Sponsor> Sponsors { get; set; } = null!;
+        public virtual DbSet<Stuff> Stuffs { get; set; } = null!;
+        public virtual DbSet<StuffHistory> StuffHistories { get; set; } = null!;
         public virtual DbSet<Team> Teams { get; set; } = null!;
         public virtual DbSet<Trofee> Trofees { get; set; } = null!;
 
@@ -142,31 +143,6 @@ namespace Parkside.Infrastructure.Context
                 entity.Property(e => e.Name).HasMaxLength(200);
             });
 
-            modelBuilder.Entity<Coach>(entity =>
-            {
-                entity.Property(e => e.BirthDate).HasColumnType("datetime");
-
-                entity.Property(e => e.Description).HasMaxLength(500);
-
-                entity.Property(e => e.FirstName)
-                    .HasMaxLength(200)
-                    .HasColumnName("First_Name");
-
-                entity.Property(e => e.Height).HasMaxLength(200);
-
-                entity.Property(e => e.ImageUrl)
-                    .HasMaxLength(500)
-                    .HasColumnName("ImageURL");
-
-                entity.Property(e => e.LastName)
-                    .HasMaxLength(200)
-                    .HasColumnName("Last_Name");
-
-                entity.Property(e => e.Nationality).HasMaxLength(100);
-
-                entity.Property(e => e.TeamName).HasMaxLength(200);
-            });
-
             modelBuilder.Entity<Match>(entity =>
             {
                 entity.Property(e => e.EnemyTeamPoints).HasMaxLength(10);
@@ -228,20 +204,15 @@ namespace Parkside.Infrastructure.Context
                 entity.Property(e => e.Nationality).HasMaxLength(100);
 
                 entity.Property(e => e.Number).HasMaxLength(10);
-
-                entity.Property(e => e.Role).HasMaxLength(50);
-
-                entity.Property(e => e.TeamName).HasMaxLength(200);
             });
 
             modelBuilder.Entity<PlayersHistory>(entity =>
             {
-                entity.HasKey(e => e.HistoryId)
-                    .HasName("PK__PlayersH__4D7B4ABD08D7BE41");
-
                 entity.ToTable("PlayersHistory");
 
                 entity.Property(e => e.PlayerRole).HasMaxLength(50);
+
+                entity.Property(e => e.TeamName).HasMaxLength(200);
 
                 entity.Property(e => e.Year).HasMaxLength(5);
 
@@ -249,13 +220,13 @@ namespace Parkside.Infrastructure.Context
                     .WithMany(p => p.PlayersHistories)
                     .HasForeignKey(d => d.ChampionshipId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__PlayersHi__Champ__36470DEF");
+                    .HasConstraintName("FK__PlayersHi__Champ__54CB950F");
 
                 entity.HasOne(d => d.Player)
                     .WithMany(p => p.PlayersHistories)
                     .HasForeignKey(d => d.PlayerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__PlayersHi__Playe__3552E9B6");
+                    .HasConstraintName("FK__PlayersHi__Playe__53D770D6");
             });
 
             modelBuilder.Entity<PlayersTrofee>(entity =>
@@ -264,13 +235,13 @@ namespace Parkside.Infrastructure.Context
                     .WithMany(p => p.PlayersTrofees)
                     .HasForeignKey(d => d.PlayerHistoryId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__PlayersTr__Playe__3CF40B7E");
+                    .HasConstraintName("FK__PlayersTr__Playe__589C25F3");
 
                 entity.HasOne(d => d.Trofee)
                     .WithMany(p => p.PlayersTrofees)
                     .HasForeignKey(d => d.TrofeeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__PlayersTr__Trofe__3DE82FB7");
+                    .HasConstraintName("FK__PlayersTr__Trofe__59904A2C");
             });
 
             modelBuilder.Entity<SocialMedia>(entity =>
@@ -289,6 +260,52 @@ namespace Parkside.Infrastructure.Context
                     .HasColumnName("ImageURL");
 
                 entity.Property(e => e.Name).HasMaxLength(200);
+            });
+
+            modelBuilder.Entity<Stuff>(entity =>
+            {
+                entity.ToTable("Stuff");
+
+                entity.Property(e => e.BirthDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Description).HasMaxLength(500);
+
+                entity.Property(e => e.FirstName)
+                    .HasMaxLength(200)
+                    .HasColumnName("First_Name");
+
+                entity.Property(e => e.Height).HasMaxLength(200);
+
+                entity.Property(e => e.ImageUrl)
+                    .HasMaxLength(500)
+                    .HasColumnName("ImageURL");
+
+                entity.Property(e => e.LastName)
+                    .HasMaxLength(200)
+                    .HasColumnName("Last_Name");
+
+                entity.Property(e => e.Nationality).HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<StuffHistory>(entity =>
+            {
+                entity.ToTable("StuffHistory");
+
+                entity.Property(e => e.TeamName).HasMaxLength(200);
+
+                entity.Property(e => e.Year).HasMaxLength(5);
+
+                entity.HasOne(d => d.Championship)
+                    .WithMany(p => p.StuffHistories)
+                    .HasForeignKey(d => d.ChampionshipId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__StuffHist__Champ__6225902D");
+
+                entity.HasOne(d => d.Stuff)
+                    .WithMany(p => p.StuffHistories)
+                    .HasForeignKey(d => d.StuffId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__StuffHist__Stuff__61316BF4");
             });
 
             modelBuilder.Entity<Team>(entity =>

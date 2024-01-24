@@ -2,10 +2,9 @@
 
 namespace Parkside.Models.ViewModels
 {
-    public class CoachViewModel
+    public class StuffViewModel
     {
         public int Id { get; set; }
-        public string? TeamName { get; set; }
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
         public string? Description { get; set; }
@@ -15,7 +14,7 @@ namespace Parkside.Models.ViewModels
         public string? ImageBase64 { get; set; }
     }
 
-    public class CoachUpdateViewModel
+    public class StuffUpdateViewModel
     {
         [Required(ErrorMessage = "You should provide a firstname value.")]
         [MaxLength(50)]
@@ -24,7 +23,6 @@ namespace Parkside.Models.ViewModels
         [Required(ErrorMessage = "You should provide a lastname value.")]
         [MaxLength(50)]
         public string LastName { get; set; } = null!;
-        public string? TeamName { get; set; }
         public string? Nationality { get; set; }
         public string? Description { get; set; }
         public string? Height { get; set; }
@@ -32,7 +30,7 @@ namespace Parkside.Models.ViewModels
         public string? ImageBase64 { get; set; }
     }
 
-    public class CoachCreateViewModel
+    public class StuffCreateViewModel
     {
         [Required(ErrorMessage = "You should provide a firstname value.")]
         [MaxLength(50)]
@@ -41,7 +39,6 @@ namespace Parkside.Models.ViewModels
         [Required(ErrorMessage = "You should provide a lastname value.")]
         [MaxLength(50)]
         public string LastName { get; set; } = null!;
-        public string? TeamName { get; set; }
         public string? Nationality { get; set; }
         public string? Description { get; set; }
         public string? Height { get; set; }
@@ -49,10 +46,9 @@ namespace Parkside.Models.ViewModels
         public string? ImageBase64 { get; set; }
     }
 
-    public class CoachDetailsViewModel
+    public class StuffDetailsViewModel
     {
         public int Id { get; set; }
-        public string? TeamName { get; set; }
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
         public string? Description { get; set; }

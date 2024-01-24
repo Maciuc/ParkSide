@@ -183,7 +183,7 @@
           { name: "WhatsApp" },
           { name: "Instagram" },
           { name: "TikTok" },
-          { name: "Twitter" },
+          { name: "X" },
         ],
       };
     },

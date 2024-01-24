@@ -29,14 +29,14 @@ namespace Parkside.Services.PlayerHistory
 
         public async Task<PlayerHistoryDetailsViewModel> GetPlayerHistory(int id)
         {
-            var playerHistory = await _playerHistoryRepo.GetAllPlayersHistories().FirstOrDefaultAsync(x => x.HistoryId == id);
+            var playerHistory = await _playerHistoryRepo.GetAllPlayersHistories().FirstOrDefaultAsync(x => x.Id == id);
 
             if (playerHistory == null)
                 throw new NotFoundException("PlayerHistory not found!");
 
             var finalPlayerHistory = new PlayerHistoryDetailsViewModel
             {
-                HistoryId = playerHistory.HistoryId,
+                Id = playerHistory.Id,
                 Player = new PlayerBasicViewModel
                 {
                     Id = playerHistory.Player.Id,
@@ -50,6 +50,7 @@ namespace Parkside.Services.PlayerHistory
                     Name = playerHistory.Championship.Name,
 
                 },
+                TeamName = playerHistory.TeamName,
                 PlayerRole = playerHistory.PlayerRole,
                 Year = playerHistory.Year,
             };
@@ -98,12 +99,13 @@ namespace Parkside.Services.PlayerHistory
             var playerHistoriessPerPage = playerHistories.Skip(PageSize * (PageNumber - 1))
               .Take(PageSize).Select(playerHistory => new PlayerHistoryViewModel
               {
-                  HistoryId = playerHistory.HistoryId,
+                  Id = playerHistory.Id,
                   PlayerFirstName = playerHistory.Player.FirstName,
                   PlayerLastName = playerHistory.Player.LastName,
                   ChampionshipName = playerHistory.Championship.Name,
                   PlayerRole = playerHistory.PlayerRole,
                   Year = playerHistory.Year,
+                  TeamName = playerHistory.TeamName,
                   PlayerImageBase64 = _genericService.GetImgBase64(playerHistory.Player.ImageUrl),
                   ChampionshipImageBase64 = _genericService.GetImgBase64(playerHistory.Championship.ImageUrl),
               })
@@ -140,6 +142,7 @@ namespace Parkside.Services.PlayerHistory
             {
                 PlayerId = playerId,
                 ChampionshipId = championshipId,
+                TeamName = model.TeamName,
                 PlayerRole = model.PlayerRole,
                 Year = model.Year,
             };
@@ -194,6 +197,7 @@ namespace Parkside.Services.PlayerHistory
 
             playerHistory.PlayerId = playerId;
             playerHistory.ChampionshipId = championshipId;
+            playerHistory.TeamName = model.TeamName;
             playerHistory.PlayerRole = model.PlayerRole;
             playerHistory.Year = model.Year;
 
@@ -209,6 +213,7 @@ namespace Parkside.Services.PlayerHistory
                 ChampionshipName = playerHistory.Championship.Name,
                 PlayerRole = playerHistory.PlayerRole,
                 Year = playerHistory.Year,
+                TeamName = playerHistory.TeamName,
                 ChampionshipImageBase64 = _genericService.GetImgBase64(playerHistory.Championship.ImageUrl),
             });
 
@@ -220,8 +225,8 @@ namespace Parkside.Services.PlayerHistory
 
             var finalPlayerHistorys = playerHistories.Select(playerHistory => new PlayerHistoryDropDownViewModel
             {
-                HistoryId = playerHistory.HistoryId,
-                HistoryName = playerHistory.Player.LastName + " " + playerHistory.Player.FirstName
+                Id = playerHistory.Id,
+                PlayerHistoryName = playerHistory.Player.LastName + " " + playerHistory.Player.FirstName
                 + " - " + playerHistory.Championship.Name + " - " + playerHistory.Year
             });
 

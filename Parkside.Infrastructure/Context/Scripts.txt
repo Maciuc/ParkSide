@@ -1,21 +1,18 @@
 ﻿CREATE TABLE Players(
 	Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-	TeamName NVARCHAR(200),
 	First_Name NVARCHAR(200) NOT NULL,
 	Last_Name NVARCHAR(200) NOT NULL,
 	Height NVARCHAR(10),
 	Number NVARCHAR(10),
 	BirthDate DATETIME,
-	Role NVARCHAR(50),
 	Nationality NVARCHAR(100),
 	Description NVARCHAR(500),
 	ImageURL NVARCHAR(500),
 	IsDeleted BIT NOT NULL DEFAULT(0)
 );
 
-CREATE TABLE Coaches(
+CREATE TABLE Stuff(
 	Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-	TeamName NVARCHAR(200),
 	First_Name NVARCHAR(200) NOT NULL,
 	Last_Name NVARCHAR(200) NOT NULL,
 	Height NVARCHAR(200),
@@ -90,30 +87,41 @@ CREATE TABLE Trofees(
 );
 
 CREATE TABLE PlayersHistory(
-	HistoryId INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	PlayerId INT REFERENCES Players(Id) NOT NULL,
 	ChampionshipId INT REFERENCES Championships(Id) NOT NULL,
 	Year NVARCHAR(5),
 	PlayerRole NVARCHAR(50),
+	TeamName NVARCHAR(200),
 	IsDeleted BIT NOT NULL DEFAULT(0)
 );
 
 CREATE TABLE PlayersTrofees(
 	Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-	PlayerHistoryId INT REFERENCES PlayersHistory(HistoryId) NOT NULL,
+	PlayerHistoryId INT REFERENCES PlayersHistory(Id) NOT NULL,
 	TrofeeId INT REFERENCES Trofees(Id) NOT NULL,
 	IsDeleted BIT NOT NULL DEFAULT(0)
 );
+
+CREATE TABLE StuffHistory(
+	Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	StuffId INT REFERENCES Stuff(Id) NOT NULL,
+	ChampionshipId INT REFERENCES Championships(Id) NOT NULL,
+	Year NVARCHAR(5),
+	TeamName NVARCHAR(200),
+	IsDeleted BIT NOT NULL DEFAULT(0)
+);
 -------------------------------------
-DROP TABLE News;
+DROP TABLE PlayersTrofees;
+DROP TABLE PlayersHistory;
 DROP TABLE Players;
-DROP TABLE Coaches;
+DROP TABLE StuffHistory;
+DROP TABLE Stuff;
+DROP TABLE News;
 DROP TABLE Sponsors;
 DROP TABLE SocialMedias;
 DROP TABLE Matches;
 DROP TABLE Championships;
 DROP TABLE Teams;
-DROP TABLE PlayersHistory;
-DROP TABLE PlayersTrofees;
 DROP TABLE Trofees;
 

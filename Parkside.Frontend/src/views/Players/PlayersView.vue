@@ -39,7 +39,7 @@
       </div>
 
 
-      <div class="col-xxl-3 col-xl-4 col-lg-5 col-md-6 col-sm-6 custom-control">
+      <!-- <div class="col-xxl-3 col-xl-4 col-lg-5 col-md-6 col-sm-6 custom-control">
         <select
           class="form-select form-control"
           aria-label="Default select example"
@@ -51,7 +51,7 @@
             {{ fnct.name }}
           </option>
         </select>
-      </div>
+      </div> -->
     </div>
 
     <table class="table table-custom">
@@ -86,9 +86,8 @@
             <span v-else class="span-inactive">Nume jucator</span>
           </th>
 
-          <th scope="15" width="15%">Echipa</th>
+          <th scope="20" width="20%">Descriere</th>
           <th scope="15" width="15%">Numar</th>
-          <th scope="15" width="15%">Rol</th>
           <th width="15%" @click="OrderBy('birthdate')" class="cursor-pointer">
               <font-awesome-icon
                 v-if="filter.OrderBy === 'birthdate'"
@@ -117,6 +116,7 @@
               <span v-if="filter.OrderBy === 'birthdate' || filter.OrderBy === 'birthdate_desc'">Data nastere</span>
               <span v-else class="span-inactive">Data nastere</span>
             </th>
+            <th scope="15" width="15%">Nationalitate</th>
           <th scope="15" width="15%">Inaltime</th>
           <th></th>
         </tr>
@@ -135,10 +135,10 @@
               <span>{{ player.LastName + " " + player.FirstName}}</span>
             </div>
           </td>
-          <td>{{ player.TeamName }}</td>
+          <td>{{ player.Description }}</td>
           <td>{{ player.Number }}</td>
-          <td>{{ player.Role }}</td>
           <td>{{ player.BirthDate }}</td>
+          <td>{{ player.Nationality }}</td>
           <td>{{ player.Height }}</td>
 
           <td>
