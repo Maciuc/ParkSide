@@ -14,7 +14,7 @@ namespace Parkside.Infrastructure.Repositories.PlayersTrofees
         }
         public IQueryable<PlayersTrofee> GetAllPlayersTrofees()
         {
-            var playersTrofees = _parksideContext.PlayersTrofees.Include(x => x.Trofee).Include(y => y.Championship).Include(z => z.Player);
+            var playersTrofees = _parksideContext.PlayersTrofees.Include(x => x.PlayerHistory).Include(y => y.Trofee);
             return playersTrofees;
         }
 

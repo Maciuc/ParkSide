@@ -1,7 +1,9 @@
 ﻿using exp.NET6.Services.DBServices;
 using Microsoft.EntityFrameworkCore;
+using Parkside.Infrastructure.Entities;
 using Parkside.Infrastructure.Repositories.ChampionShips;
 using Parkside.Infrastructure.Repositories.Players;
+using Parkside.Infrastructure.Repositories.PlayersHistories;
 using Parkside.Infrastructure.Repositories.PlayersTrofees;
 using Parkside.Infrastructure.Repositories.Teams;
 using Parkside.Infrastructure.Repositories.Trofees;
@@ -14,24 +16,21 @@ namespace Parkside.Services.PlayerTrofees
     public class PlayerTrofeeService : IPlayerTrofeeService
     {
         private readonly IPlayerTrofeeRepo _playerTrofeeRepo;
-        private readonly IChampionshipRepo _championshipRepo;
-        private readonly IPlayerRepo _playerRepo;
+        private readonly IPlayersHistoryRepo _playerHistoryRepo;
         private readonly ITrofeeRepo _trofeeRepo;
         private readonly IGenericService _genericService;
         public PlayerTrofeeService(IPlayerTrofeeRepo playerTrofeeRepo,
-            IPlayerRepo playerRepo,
+            IPlayersHistoryRepo playerHistoryRepo,
             ITrofeeRepo trofeeRepo,
-            IChampionshipRepo championshipRepo,
             IGenericService genericService)
         {
             _playerTrofeeRepo = playerTrofeeRepo;
-            _playerRepo = playerRepo;
+            _playerHistoryRepo = playerHistoryRepo;
             _trofeeRepo = trofeeRepo;
-            _championshipRepo = championshipRepo;
             _genericService = genericService;
         }
 
-        public async Task<PlayerTrofeeDetailsViewModel> GetPlayerTrofee(int id)
+        /*public async Task<PlayerTrofeeDetailsViewModel> GetPlayerTrofee(int id)
         {
             var playerTrofee = await _playerTrofeeRepo.GetAllPlayersTrofees().FirstOrDefaultAsync(x => x.Id == id);
 
@@ -40,18 +39,18 @@ namespace Parkside.Services.PlayerTrofees
 
             var finalPlayerTrofee = new PlayerTrofeeDetailsViewModel
             {
-                /*Id = playerTrofee.Id,
+                *//*Id = playerTrofee.Id,
                 PlayerHistory = new PlayerHistoryDropDownViewModel
                 {
                     HistoryId = playerTrofee.PlayerHistoryId,
                     HistoryName = playerTrofee.PlayerHistory.
-                }*/
+                }*//*
             };
 
             return finalPlayerTrofee;
-        }
+        }*/
 
-        public PagingViewModel<PlayerTrofeeViewModel> GetPlayerTrofeees(
+        public PagingViewModel<PlayerTrofeeViewModel> GetPlayerTrofees(
             string? NameSearch, string? OrderBy, int PageNumber, int PageSize)
         {
             var playerTrofeees = _playerTrofeeRepo.GetAllPlayersTrofees();
@@ -65,15 +64,23 @@ namespace Parkside.Services.PlayerTrofees
             switch (OrderBy)
             {
                 case ("playerName"):
-                    playerTrofeees = playerTrofeees.OrderBy(c => c.);
+                    playerTrofeees = playerTrofeees.OrderBy(c => c.PlayerHistory.Player.LastName);
                     break;
 
                 case ("playerName_desc"):
-                    playerTrofeees = playerTrofeees.OrderByDescending(c => c.Player.LastName);
+                    playerTrofeees = playerTrofeees.OrderByDescending(c => c.PlayerHistory.Player.LastName);
+                    break;
+
+                case ("year"):
+                    playerTrofeees = playerTrofeees.OrderBy(c => c.PlayerHistory.Year);
+                    break;
+
+                case ("year_desc"):
+                    playerTrofeees = playerTrofeees.OrderByDescending(c => c.PlayerHistory.Year);
                     break;
 
                 default:
-                    playerTrofeees = playerTrofeees.OrderByDescending(c => c.TrofeeDate);
+                    playerTrofeees = playerTrofeees.OrderByDescending(c => c.PlayerHistory.Year);
                     break;
             }
 
@@ -84,14 +91,14 @@ namespace Parkside.Services.PlayerTrofees
               {
                   Id = playerTrofee.Id,
                   TrofeeName = playerTrofee.Trofee.Name,
-                  PlayerFirstName = playerTrofee.Player.FirstName,
-                  PlayerLastName = playerTrofee.Player.LastName,
-                  ChampionshipName = playerTrofee.Championship.Name,
-                  PlayerRole = playerTrofee.PlayerRole,
-                  TrofeeYear = playerTrofee.TrofeeYear,
+                  PlayerFirstName = playerTrofee.PlayerHistory.Player.FirstName,
+                  PlayerLastName = playerTrofee.PlayerHistory.Player.LastName,
+                  ChampionshipName = playerTrofee.PlayerHistory.Championship.Name,
+                  PlayerRole = playerTrofee.PlayerHistory.PlayerRole,
+                  Year = playerTrofee.PlayerHistory.Year,
                   TrofeeImageBase64 = _genericService.GetImgBase64(playerTrofee.Trofee.ImageUrl),
-                  PlayerImageBase64 = _genericService.GetImgBase64(playerTrofee.Player.ImageUrl),
-                  ChampionshipImageBase64 = _genericService.GetImgBase64(playerTrofee.Championship.ImageUrl),
+                  PlayerImageBase64 = _genericService.GetImgBase64(playerTrofee.PlayerHistory.Player.ImageUrl),
+                  ChampionshipImageBase64 = _genericService.GetImgBase64(playerTrofee.PlayerHistory.Championship.ImageUrl),
               })
               .ToList();
 
@@ -105,28 +112,21 @@ namespace Parkside.Services.PlayerTrofees
             return paginingList;
         }
 
-        public async Task AddPlayerTrofee(int trofeeId, int playerId, int championshipId, PlayerTrofeeCreateViewModel model)
+        public async Task AddPlayerTrofee(int playerHistoryId, int trofeeId)
         {
             if (await _trofeeRepo.GetAsync(trofeeId) == null)
             {
                 throw new Exception("Trofee not found!");
             }
-            if (await _playerRepo.GetAsync(playerId) == null)
+            if (await _playerHistoryRepo.GetAsync(playerHistoryId) == null)
             {
-                throw new Exception("Player not found!");
-            }
-            if (await _championshipRepo.GetAsync(championshipId) == null)
-            {
-                throw new Exception("Player not found!");
+                throw new Exception("PlayerHistory not found!");
             }
 
-            var finalPlayerTrofee = new Infrastructure.Entities.PlayersTrofee()
+            var finalPlayerTrofee = new PlayersTrofee()
             {
-                TrofeeId = trofeeId,
-                PlayerId = playerId,
-                ChampionshipId = championshipId,
-                TrofeeDate = model.TrofeeDate,
-                PlayerRole = model.PlayerRole
+                PlayerHistoryId = playerHistoryId,
+                TrofeeId = trofeeId
             };
 
             await _playerTrofeeRepo.Add(finalPlayerTrofee);
@@ -134,6 +134,7 @@ namespace Parkside.Services.PlayerTrofees
         public async Task DeletePlayerTrofee(int id)
         {
             var playerTrofee = await _playerTrofeeRepo.GetAsync(id);
+
             if (playerTrofee == null)
                 throw new NotFoundException("PlayerTrofee not found!");
 
@@ -143,6 +144,7 @@ namespace Parkside.Services.PlayerTrofees
         public async Task VirtualDeletePlayerTrofee(int id)
         {
             var playerTrofee = await _playerTrofeeRepo.GetAsync(id);
+
             if (playerTrofee == null)
                 throw new NotFoundException("PlayerTrofee not found!");
 
@@ -151,7 +153,7 @@ namespace Parkside.Services.PlayerTrofees
             await _playerTrofeeRepo.Update(playerTrofee);
         }
 
-        public async Task UpdatePlayerTrofee(int playerTrofeeId, int trofeeId, int playerId, int championshipId,
+        /*public async Task UpdatePlayerTrofee(int playerTrofeeId, int trofeeId, int playerId, int championshipId,
             PlayerTrofeeUpdateViewModel model)
         {
             var playerTrofee = await _playerTrofeeRepo.GetAsync(playerTrofeeId);
@@ -179,24 +181,21 @@ namespace Parkside.Services.PlayerTrofees
             playerTrofee.TrofeeDate = model.TrofeeDate;
 
             await _playerTrofeeRepo.Update(playerTrofee);
-        }
+        }*/
 
-        public IQueryable<PlayerTrofeeViewModel> GetHomePagePlayerTrofeees()
+        public IQueryable<PlayerTrofeeHomeViewModel> GetHomePagePlayerTrofees(int playerId)
         {
-            var playerTrofeees = _playerTrofeeRepo.GetAllPlayersTrofees();
+            var playerTrofeees = _playerTrofeeRepo.GetAllPlayersTrofees().Where(x => x.PlayerHistory.Player.Id == playerId);
 
-            var finalPlayerTrofees = playerTrofeees.Select(playerTrofee => new PlayerTrofeeViewModel
+            var finalPlayerTrofees = playerTrofeees.Select(playerTrofee => new PlayerTrofeeHomeViewModel
             {
                 Id = playerTrofee.Id,
                 TrofeeName = playerTrofee.Trofee.Name,
-                PlayerFirstName = playerTrofee.Player.FirstName,
-                PlayerLastName = playerTrofee.Player.LastName,
-                ChampionshipName = playerTrofee.Championship.Name,
-                PlayerRole = playerTrofee.PlayerRole,
-                TrofeeDate = playerTrofee.TrofeeDate.HasValue ? playerTrofee.TrofeeDate.Value.ToString("dd/MM/yyyy") : null,
+                ChampionshipName = playerTrofee.PlayerHistory.Championship.Name,
+                PlayerRole = playerTrofee.PlayerHistory.PlayerRole,
+                Year = playerTrofee.PlayerHistory.Year,
                 TrofeeImageBase64 = _genericService.GetImgBase64(playerTrofee.Trofee.ImageUrl),
-                PlayerImageBase64 = _genericService.GetImgBase64(playerTrofee.Player.ImageUrl),
-                ChampionshipImageBase64 = _genericService.GetImgBase64(playerTrofee.Championship.ImageUrl),
+                ChampionshipImageBase64 = _genericService.GetImgBase64(playerTrofee.PlayerHistory.Championship.ImageUrl),
             });
 
             return finalPlayerTrofees;

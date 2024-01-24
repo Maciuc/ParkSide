@@ -13,6 +13,7 @@ using Parkside.Infrastructure.Repositories.Matches;
 using Parkside.Infrastructure.Repositories.Newses;
 using Parkside.Infrastructure.Repositories.Players;
 using Parkside.Infrastructure.Repositories.PlayersHistories;
+using Parkside.Infrastructure.Repositories.PlayersTrofees;
 using Parkside.Infrastructure.Repositories.SocialMedias;
 using Parkside.Infrastructure.Repositories.Sponsors;
 using Parkside.Infrastructure.Repositories.Teams;
@@ -27,6 +28,7 @@ using Parkside.Services.Matchs;
 using Parkside.Services.Newss;
 using Parkside.Services.PlayerHistory;
 using Parkside.Services.Players;
+using Parkside.Services.PlayerTrofees;
 using Parkside.Services.SocialMedias;
 using Parkside.Services.Sponsors;
 using Parkside.Services.Teams;
@@ -145,6 +147,9 @@ builder.Services.AddScoped<IMatchService, MatchService>();
 
 builder.Services.AddScoped<IPlayersHistoryRepo, PlayersHistoryRepo>();
 builder.Services.AddScoped<IPlayerHistoryService, PlayerHistoryService>();
+
+builder.Services.AddScoped<IPlayerTrofeeRepo, PlayerTrofeeRepo>();
+builder.Services.AddScoped<IPlayerTrofeeService, PlayerTrofeeService>();
 
 builder.Services.AddScoped<IGenericService, GenericService>();
 

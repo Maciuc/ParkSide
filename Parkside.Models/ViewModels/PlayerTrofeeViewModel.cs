@@ -11,7 +11,17 @@
         public string? ChampionshipImageBase64 { get; set; }
         public string? ChampionshipName { get; set; }
         public string? PlayerRole { get; set; }
-        public string? TrofeeYear { get; set; }
+        public string? Year { get; set; }
+    }
+    public class PlayerTrofeeHomeViewModel
+    {
+        public int Id { get; set; }
+        public string? TrofeeImageBase64 { get; set; }
+        public string? TrofeeName { get; set; }
+        public string? ChampionshipImageBase64 { get; set; }
+        public string? ChampionshipName { get; set; }
+        public string? PlayerRole { get; set; }
+        public string? Year { get; set; }
     }
 
     public class PlayerTrofeeDetailsViewModel
