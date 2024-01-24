@@ -2,11 +2,11 @@
     <div>
       <div class="row header-section align-items-center">
         <div class="col">
-          <div class="title-page">Adăugare antrenor</div>
+          <div class="title-page">Adăugare stuff</div>
         </div>
   
         <div class="col-auto">
-          <button class="button green" type="submit" form="form-add-coach">
+          <button class="button green" type="submit" form="form-add-stuff">
             Salvează
           </button>
         </div>
@@ -14,61 +14,61 @@
     </div> 
   
     <Form
-      @submit="AddCoach(this.newCoach.Number)"
+      @submit="AddStuff(this.newStuff.Number)"
       :validation-schema="schema"
       v-slot="{ errors }"
-      id="form-add-coach"
+      id="form-add-stuff"
     >
       <div class="new-form">
         <div class="row mt-4">
           <div class="col-md-7 col-lg-5 col-12">
             <div class="mb-3">
-              <label for="input-lastname-add-coach" class="form-label"
-                >Nume antrenor</label
+              <label for="input-lastname-add-stuff" class="form-label"
+                >Nume</label
               >
               <Field
                 type="text"
                 class="form-control"
                 :class="{ 'border-danger': errors.lastname }"
-                id="input-lastname-add-coach"
+                id="input-lastname-add-stuff"
                 name="lastname"
                 placeholder="Nume "
-                v-model="newCoach.LastName"
+                v-model="newStuff.LastName"
               />
               <ErrorMessage name="lastname" class="text-danger error-message" />
             </div>
   
             <div class="mb-3">
-            <label for="input-firstname-add-coach" class="form-label"
-                >Prenume antrenor</label
+            <label for="input-firstname-add-stuff" class="form-label"
+                >Prenume</label
               >
               <Field
                 type="text"
                 class="form-control"
                 :class="{ 'border-danger': errors.firstname }"
-                id="input-firstname-add-coach"
+                id="input-firstname-add-stuff"
                 name="firstname"
-                placeholder="Nume antrenor"
-                v-model="newCoach.FirstName"
+                placeholder="Prenume"
+                v-model="newStuff.FirstName"
               />
               <ErrorMessage name="firstname" class="text-danger error-message" />
             </div>
   
-            <div class="mb-3">
-            <label for="input-teamname-add-coach" class="form-label"
+            <!-- <div class="mb-3">
+            <label for="input-teamname-add-stuff" class="form-label"
                 >Nume echipa</label
               >
               <Field
                 type="text"
                 class="form-control"
                 :class="{ 'border-danger': errors.teamname }"
-                id="input-teamname-add-coach"
+                id="input-teamname-add-stuff"
                 name="teamname"
                 placeholder="Nume echipa"
-                v-model="newCoach.TeamName"
+                v-model="newStuff.TeamName"
               />
               <ErrorMessage name="teamname" class="text-danger error-message" />
-            </div>
+            </div> -->
   
             <div class="mb-3 position-relative">
               <div
@@ -79,11 +79,11 @@
                 <Field
                   v-slot="{ field }"
                   name="birthdate"
-                  id="birthdate-add-coach"
+                  id="birthdate-add-stuff"
                 >
                   <VueDatePicker
                     v-bind="field"
-                    v-model="newCoach.BirthDate"
+                    v-model="newStuff.BirthDate"
                     format="dd/MM/yyyy"
                     auto-apply
                     utc
@@ -97,6 +97,34 @@
                 />
               </div>
             </div>
+
+            <div class="mb-3 position-relative">
+                <label for="input-nationality-add-stuff" class="form-label"
+                  >Nationalitate</label
+                >
+                <Field
+                  type="text"
+                  class="form-control"
+                  id="nationality"
+                  name="nationality"
+                  placeholder="Nationalitate"
+                  v-model="newStuff.Nationality"
+                />
+              </div>
+
+              <div class="mb-3 position-relative">
+                <label for="input-height-add-stuff" class="form-label"
+                  >Inaltime</label
+                >
+                <Field
+                  type="text"
+                  class="form-control"
+                  id="input-height-add-stuff"
+                  name="height"
+                  placeholder="Inaltime"
+                  v-model="newStuff.Height"
+                />
+              </div>
           </div>
   
           
@@ -105,7 +133,7 @@
             <div class="col">
               <label class="form-label">Selectează imagine</label>
               <label
-                for="input-upload-coach-image"
+                for="input-upload-stuff-image"
                 class="button blue"
                 style="width: 140px"
               >
@@ -113,12 +141,12 @@
                 <font-awesome-icon :icon="['fas', 'upload']" />
                 <Field
                   type="file"
-                  id="input-upload-coach-image"
+                  id="input-upload-stuff-image"
                   name="upload"
                   style="display: none"
                   accept="image/*"
                   ref="uploadInput"
-                  @change="UploadImageCoach"
+                  @change="UploadImageStuff"
                 >
                 </Field>
               </label>
@@ -132,16 +160,16 @@
                   <font-awesome-icon :icon="['fas', 'trash']" />
                 </button>
                 <div
-                  v-if="!newCoach.ImageBase64"
+                  v-if="!newStuff.ImageBase64"
                   class="d-flex flex-column justify-content-center align-items-center gap-2"
                 >
                   <img src="@/images/NoImageSelected.png" class="no-image" />
                   <div class="text-center">Nicio imagine selectată</div>
                 </div>
   
-                <div v-if="newCoach.ImageBase64" class="image">
+                <div v-if="newStuff.ImageBase64" class="image">
                   <img
-                    :src="newCoach.ImageBase64"
+                    :src="newStuff.ImageBase64"
                     alt="Imagine selectată"
                     class="image"
                   />
@@ -165,39 +193,6 @@
               <div v-else></div>
             </div>
           </div>
-
-          <div class="row"> 
-            <div>
-              <label for="input-nationality-add-coach" class="form-label"
-                >Nationalitate</label
-              >
-              <Field
-                type="text"
-                class="form-control"
-                id="nationality"
-                name="nationality"
-                placeholder="Nationalitate"
-                v-model="newCoach.Nationality"
-              />
-            </div>
-          </div> 
-  
-          <div class="row"> 
-            <div class="mb">
-              <label for="input-height-add-coach" class="form-label"
-                >Inaltime</label
-              >
-              <Field
-                type="text"
-                class="form-control"
-                id="input-height-add-coach"
-                name="height"
-                placeholder="Inaltime antrenor"
-                v-model="newCoach.Height"
-              />
-            </div>
-          </div>
-  
   
           </div>
         </div>
@@ -209,7 +204,7 @@
               >
               <Field
                 v-slot="{ field }"
-                v-model="newCoach.Description"
+                v-model="newStuff.Description"
                 name="description"
               >
                 <textarea
@@ -233,7 +228,7 @@
   import { Form, Field, ErrorMessage } from "vee-validate";
   import * as yup from "yup";
   export default {
-    name: "CoachesAddCoachComponent",
+    name: "StuffesAddStuffComponent",
     components: {
       Form,
       Field,
@@ -244,11 +239,10 @@
       return {
         photoValidation: null,
         validNumber: true,
-        newCoach: {
+        newStuff: {
           FirstName: "",
           LastName: "",
           BirthDate: "",
-          TeamName: "",
           Description: "",
           Nationality: "",
           ImageBase64: null,
@@ -261,17 +255,16 @@
         return yup.object({
           firstname: yup.string().required("Acest câmp este obligatoriu"),
           lastname: yup.string().required("Acest câmp este obligatoriu"),
-          teamname: yup.string().required("Acest câmp este obligatoriu"),
         });
       },
     },
     methods: {
-      AddCoach() {
+      AddStuff() {
         this.$axios
-          .post(`/api/Coach/createCoach`, this.newCoach)
+          .post(`/api/Stuff/createStuff`, this.newStuff)
             .then((response) => {
               console.log(response);
-              this.$router.push({ name: "coaches" });
+              this.$router.push({ name: "stuff" });
                   this.$swal.fire({
                     title: "Succes",
                     text: "Antrenorul a fost adăugat",
@@ -284,7 +277,7 @@
                   console.error(error);
                 });
         },
-      UploadImageCoach(event) {
+      UploadImageStuff(event) {
         const selectedFile = event.target;
         const file = event.target.files[0];
         const reader = new FileReader();
@@ -293,7 +286,7 @@
             if (file.size / 1024 < 15360) {
               this.photoValidation = null;
               console.log(reader.result);
-              this.newCoach.ImageBase64 = reader.result;
+              this.newStuff.ImageBase64 = reader.result;
               selectedFile.value = "";
             } else {
               this.photoValidation = true;
@@ -308,7 +301,7 @@
       },
       DeletePhoto() {
         this.$refs.uploadInput.reset();
-        this.newCoach.ImageBase64 = null;
+        this.newStuff.ImageBase64 = null;
         this.photoValidation = null;
       },
     },

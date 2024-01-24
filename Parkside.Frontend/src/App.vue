@@ -66,11 +66,11 @@ import { RouterLink, RouterView } from "vue-router";
           <router-link
             tag="li"
             class="nav-link d-flex"
-            :to="{ name: 'coaches' }"
+            :to="{ name: 'stuff' }"
             exact
           >
             <font-awesome-icon class="img-link" :icon="['fas', 'person-military-pointing']"  />
-            <div>Antrenori</div>
+            <div>Stuff</div>
           </router-link>
 
           <router-link

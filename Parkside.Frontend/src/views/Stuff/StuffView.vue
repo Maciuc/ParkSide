@@ -5,7 +5,7 @@
         </div>
   
         <div class="col-auto">
-          <router-link :to="{ name: 'add-coach' }" class="button green">
+          <router-link :to="{ name: 'add-stuff' }" class="button green">
             Adaugă
             <font-awesome-icon :icon="['fas', 'plus']" style="color: #ffffff" />
           </router-link>
@@ -31,7 +31,7 @@
               aria-label="Username"
               aria-describedby="basic-addon1"
               v-model="filter.SearchText"
-              v-on:keyup.enter="GetAllCoaches()"
+              v-on:keyup.enter="GetAllStuffes()"
             />
             </div>
           </div>
@@ -68,7 +68,7 @@
               Nume & Avatar
             </th>
   
-            <th scope="20" width="20%">Echipa</th>
+            <th scope="20" width="20%">Descriere</th>
             <th scope="20" width="20%">Data nastere</th>
             <th scope="20" width="20%">Inaltime</th>
             <th scope="20" width="20%">Nationalitate</th>
@@ -76,28 +76,28 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(coach, index) in CoachesList.Items" :key="index">
+          <tr v-for="(stuff, index) in StuffesList.Items" :key="index">
             <td>
               <div class="d-flex align-items-center">
                 <div class="img-container-avatar me-2">
                   <img
-                    :src="ShowDynamicImage(coach.ImageBase64)"
+                    :src="ShowDynamicImage(stuff.ImageBase64)"
                     class="me-2 icon-avatar"
                   />
                 </div>
   
-                <span>{{ coach.LastName + " " + coach.FirstName}}</span>
+                <span>{{ stuff.LastName + " " + stuff.FirstName}}</span>
               </div>
             </td>
-            <td>{{ coach.TeamName }}</td>
-            <td>{{ coach.BirthDate }}</td>
-            <td>{{ coach.Height }}</td>
-            <td>{{ coach.Nationality }}</td>
+            <td>{{ stuff.Description }}</td>
+            <td>{{ stuff.BirthDate }}</td>
+            <td>{{ stuff.Height }}</td>
+            <td>{{ stuff.Nationality }}</td>
   
             <td>
               <div class="editButtons">
                 <router-link
-                  :to="{ name: 'edit-coach', params: { id: coach.Id } }"
+                  :to="{ name: 'edit-stuff', params: { id: stuff.Id } }"
                   class="button-edit"
                 >
                   <font-awesome-icon :icon="['far', 'pen-to-square']" />
@@ -106,7 +106,7 @@
                 <button
                   type="button"
                   class="button-delete"
-                  @click="DeleteCoach(coach.Id)"
+                  @click="DeleteStuff(stuff.Id)"
                 >
                   <font-awesome-icon :icon="['fas', 'trash']" />
                 </button>
@@ -117,9 +117,9 @@
       </table>
   
       <Pagination
-        :totalPages="CoachesList.NumberOfPages"
+        :totalPages="StuffesList.NumberOfPages"
         :currentPage="filter.PageNumber"
-        @pagechanged="GetAllCoaches"
+        @pagechanged="GetAllStuffes"
       />
     </div>
   </template>
@@ -128,7 +128,7 @@
   import Pagination from "../../components/Pagination.vue";
   
   export default {
-    name: "Coaches",
+    name: "Stuffes",
     components: {
       Pagination,
     },
@@ -139,7 +139,7 @@
           PageNumber: 1,
           OrderBy: "name",
         },
-        CoachesList: {
+        StuffesList: {
           Items: [],
           NumberOfPages: 0,
         },
@@ -154,7 +154,7 @@
         return imagePath;
       },
   
-      GetAllCoaches(page) {
+      GetAllStuffes(page) {
         this.filter.PageNumber = 1;
         if (page) {
           this.filter.PageNumber = page;
@@ -166,21 +166,21 @@
           NameSearch: this.filter.SearchText,
         };
         this.$axios
-          .get(`/api/Coach/getCoaches/?${new URLSearchParams(searchParams)}`)
+          .get(`/api/Stuff/getStuffs/?${new URLSearchParams(searchParams)}`)
           .then((response) => {
             console.log(searchParams);
-            this.CoachesList = response.data;
+            this.StuffesList = response.data;
           })
           .catch((error) => {
             console.log(error);
           });
       },
   
-      DeleteCoach(id) {
+      DeleteStuff(id) {
         this.$axios
-          .delete(`/api/Coach/deleteCoach/${id}`)
+          .delete(`/api/Stuff/deleteStuff/${id}`)
           .then((response) => {
-            this.GetAllCoaches();
+            this.GetAllStuffes();
             console.log(`Deleted news with ID ${id}`);
           })
           .catch((error) => {
@@ -195,12 +195,12 @@
           this.filter.OrderBy = orderBy + "_desc";
         }
   
-        this.GetAllCoaches();
+        this.GetAllStuffes();
       },
     },
   
     created() {
-      this.GetAllCoaches();
+      this.GetAllStuffes();
     },
   };
   </script>
