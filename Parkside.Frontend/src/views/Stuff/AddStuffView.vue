@@ -2,7 +2,7 @@
     <div>
       <div class="row header-section align-items-center">
         <div class="col">
-          <div class="title-page">Adăugare stuff</div>
+          <div class="title-page">Adăugare staff</div>
         </div>
   
         <div class="col-auto">
@@ -267,7 +267,7 @@
               this.$router.push({ name: "stuff" });
                   this.$swal.fire({
                     title: "Succes",
-                    text: "Antrenorul a fost adăugat",
+                    text: "Staff-ul a fost adăugat",
                     icon: "success",
                     showConfirmButton: false,
                     timer: 1500,

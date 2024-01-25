@@ -7,6 +7,7 @@ namespace Parkside.Services.Stuffes
         Task<StuffDetailsViewModel> GetStuff(int id);
         PagingViewModel<StuffViewModel> GetStuffs(
             string? NameSearch, string? OrderBy, int PageNumber, int PageSize);
+        IQueryable<StuffBasicViewModel> GetStuffsDropDown();
         Task AddStuff(StuffCreateViewModel model);
         Task DeleteStuff(int id);
         Task VirtualDeleteStuff(int id);

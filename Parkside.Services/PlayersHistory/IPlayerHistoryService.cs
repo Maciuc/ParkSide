@@ -6,7 +6,8 @@ namespace Parkside.Services.PlayerHistory
     {
         Task<PlayerHistoryDetailsViewModel> GetPlayerHistory(int id);
         PagingViewModel<PlayerHistoryViewModel> GetPlayerHistories(
-            string? NameSearch, string? OrderBy, int PageNumber, int PageSize);
+            string? NameSearch, string? OrderBy, string? Year, string? PlayerRole, string? TeamName,
+            int PageNumber, int PageSize);
         IQueryable<PlayerHistoryChampionshipsViewModel> GetHomePagePlayerHistory(int playerId);
         IQueryable<PlayerHistoryDropDownViewModel> GetPlayerHistoryDropDown();
         Task AddPlayerHistory(int playerId, int championshipId, PlayerHistoryCreateViewModel model);

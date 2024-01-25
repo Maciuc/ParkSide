@@ -25,10 +25,10 @@ namespace Parkside.Backend.Controller
         }
 
         [HttpGet("getPlayerHistories")]
-        public IActionResult GetPlayerHistorys(string? NameSearch, string? OrderBy,
+        public IActionResult GetPlayerHistorys(string? NameSearch, string? OrderBy, string? Year, string? PlayerRole, string? TeamName,
             int PageNumber = 1, int PageSize = 10)
         {
-            var playerHistorys = _playerHistoryService.GetPlayerHistories(NameSearch, OrderBy,
+            var playerHistorys = _playerHistoryService.GetPlayerHistories(NameSearch, OrderBy, Year, PlayerRole, TeamName,
                 PageNumber, PageSize);
             return Ok(playerHistorys);
         }

@@ -57,4 +57,10 @@ namespace Parkside.Models.ViewModels
         public DateTime? BirthDate { get; set; }
         public string? ImageBase64 { get; set; }
     }
+
+    public class StuffBasicViewModel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = null!;
+    }
 }

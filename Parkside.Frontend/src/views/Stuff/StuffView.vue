@@ -1,7 +1,7 @@
 <template>
       <div class="row header-section align-items-center">
         <div class="col">
-          <div class="title-page">Antrenori</div>
+          <div class="title-page">Staff</div>
         </div>
   
         <div class="col-auto">
@@ -27,7 +27,7 @@
             <input
               type="text"
               class="form-control search"
-              placeholder="Caută antrenor"
+              placeholder="Caută staff"
               aria-label="Username"
               aria-describedby="basic-addon1"
               v-model="filter.SearchText"
@@ -65,7 +65,7 @@
                 size="xl"
                 class="me-2"
               />
-              Nume & Avatar
+              Nume
             </th>
   
             <th scope="20" width="20%">Descriere</th>

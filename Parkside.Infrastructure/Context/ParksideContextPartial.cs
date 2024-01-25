@@ -12,6 +12,7 @@ namespace Parkside.Infrastructure.Context
             modelBuilder.Entity<SocialMedia>().HasQueryFilter(x => !x.IsDeleted);
             modelBuilder.Entity<News>().HasQueryFilter(x => !x.IsDeleted);
             modelBuilder.Entity<Stuff>().HasQueryFilter(x => !x.IsDeleted);
+            modelBuilder.Entity<StuffHistory>().HasQueryFilter(x => !x.IsDeleted);
             modelBuilder.Entity<Championship>().HasQueryFilter(x => !x.IsDeleted);
             modelBuilder.Entity<Match>().HasQueryFilter(x => !x.IsDeleted);
             modelBuilder.Entity<Team>().HasQueryFilter(x => !x.IsDeleted);

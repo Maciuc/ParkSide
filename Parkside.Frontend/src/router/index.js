@@ -3,6 +3,12 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      path: '/',
+      name: 'start',
+      component: () => import('../views/Players/PlayersView.vue'),
+      meta: { breadcrumb: 'Jucatori' },
+    },
+    {
       path: '/players',
       name: 'players',
       component: () => import('../views/Players/PlayersView.vue'),
@@ -24,19 +30,19 @@ const router = createRouter({
       path: '/stuff',
       name: 'stuff',
       component: () => import('../views/Stuff/StuffView.vue'),
-      meta: { breadcrumb: 'Stuff' },
+      meta: { breadcrumb: 'Staff' },
     },
     {
       path: '/add-stuff',
       name: 'add-stuff',
       component: () => import('../views/Stuff/AddStuffView.vue'),
-      meta: { breadcrumb: 'Adăugare Stuff' },
+      meta: { breadcrumb: 'Adăugare staff' },
     },
     {
       path: '/edit-stuff/:id',
       name: 'edit-stuff',
       component: () => import('../views/Stuff/EditStuffView.vue'),
-      meta: { breadcrumb: 'Editare Stuff' },
+      meta: { breadcrumb: 'Editare staff' },
     },
     {
       path: '/users',
@@ -110,6 +116,23 @@ const router = createRouter({
       children: [
       ],
     },
+    {
+      path: '/playerHistory',
+      name: 'playerHistory',
+      component: () => import('../views/PlayerHistoryView.vue'),
+      meta: { breadcrumb: 'Participari jucatori' },
+      children: [
+      ],
+    },
+    {
+      path: '/stuffHistory',
+      name: 'stuffHistory',
+      component: () => import('../views/StuffHistoryView.vue'),
+      meta: { breadcrumb: 'Participari staff' },
+      children: [
+      ],
+    },
+    
     // {
     //   path: '/home',
     //   name: 'home',

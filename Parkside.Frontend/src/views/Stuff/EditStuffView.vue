@@ -2,7 +2,7 @@
   <div>
     <div class="row header-section align-items-center">
       <div class="col">
-        <div class="title-page">Editare stuff</div>
+        <div class="title-page">Editare staff</div>
       </div>
 
       <div class="col-auto">
@@ -171,7 +171,7 @@ export default {
           this.$router.push({ name: "stuff" });
           this.$swal.fire({
             title: "Succes",
-            text: "Antrenorul a fost editat",
+            text: "Staff-ul a fost editat",
             icon: "success",
             showConfirmButton: false,
             timer: 1500,

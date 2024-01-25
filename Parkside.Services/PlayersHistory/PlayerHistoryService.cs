@@ -40,8 +40,7 @@ namespace Parkside.Services.PlayerHistory
                 Player = new PlayerBasicViewModel
                 {
                     Id = playerHistory.Player.Id,
-                    FirstName = playerHistory.Player.FirstName,
-                    LastName = playerHistory.Player.LastName,
+
 
                 },
                 Championship = new ChampionshipViewModel
@@ -59,7 +58,8 @@ namespace Parkside.Services.PlayerHistory
         }
 
         public PagingViewModel<PlayerHistoryViewModel> GetPlayerHistories(
-            string? NameSearch, string? OrderBy, int PageNumber, int PageSize)
+            string? NameSearch, string? OrderBy, string? Year, string? PlayerRole, string? TeamName,
+            int PageNumber, int PageSize)
         {
             var playerHistories = _playerHistoryRepo.GetAllPlayersHistories();
 
@@ -67,7 +67,25 @@ namespace Parkside.Services.PlayerHistory
             {
                 NameSearch = NameSearch.Trim().ToLower();
                 playerHistories = playerHistories.Where(c => c.Player.FirstName.ToLower().Contains(NameSearch)
-                || c.Player.LastName.ToLower().Contains(NameSearch));
+                || c.Player.LastName.ToLower().Contains(NameSearch) || c.Championship.Name.ToLower().Contains(NameSearch));
+            }
+
+            if (!string.IsNullOrWhiteSpace(Year))
+            {
+                Year = Year.Trim().ToLower();
+                playerHistories = playerHistories.Where(c => c.Year.Contains(Year));
+            }
+
+            if (!string.IsNullOrWhiteSpace(PlayerRole))
+            {
+                PlayerRole = PlayerRole.Trim().ToLower();
+                playerHistories = playerHistories.Where(c => c.PlayerRole.Contains(PlayerRole));
+            }
+
+            if (!string.IsNullOrWhiteSpace(TeamName))
+            {
+                TeamName = TeamName.Trim().ToLower();
+                playerHistories = playerHistories.Where(c => c.TeamName.Contains(TeamName));
             }
 
 
@@ -132,7 +150,7 @@ namespace Parkside.Services.PlayerHistory
                 throw new Exception("Championship not found!");
             }
 
-            var championshipExist = await _playerHistoryRepo.GetAllPlayersHistories().FirstOrDefaultAsync(x => x.ChampionshipId == championshipId);
+            var championshipExist = await _playerHistoryRepo.GetAllPlayersHistories().FirstOrDefaultAsync(x => x.ChampionshipId == championshipId && x.PlayerId == playerId);
             if (championshipExist != null)
             {
                 throw new Exception("Championship already used!");
@@ -189,7 +207,7 @@ namespace Parkside.Services.PlayerHistory
                 throw new Exception("Championship not found!");
             }
 
-            var championshipExist = await _playerHistoryRepo.GetAllPlayersHistories().FirstOrDefaultAsync(x => x.ChampionshipId == championshipId);
+            var championshipExist = await _playerHistoryRepo.GetAllPlayersHistories().FirstOrDefaultAsync(x => x.ChampionshipId == championshipId && x.PlayerId == playerId);
             if (championshipExist != null)
             {
                 throw new Exception("Championship already used!");

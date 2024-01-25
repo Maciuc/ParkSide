@@ -145,6 +145,18 @@ namespace Parkside.Services.Stuffs
 
             await _stuffRepo.Update(stuff);
         }
+
+        public IQueryable<StuffBasicViewModel> GetStuffsDropDown()
+        {
+            var stuffs = _stuffRepo.GetAllQuerable().Select(x => new StuffBasicViewModel
+            {
+                Id = x.Id,
+                Name = x.LastName + " " + x.FirstName,
+
+            });
+
+            return stuffs;
+        }
     }
 }
 

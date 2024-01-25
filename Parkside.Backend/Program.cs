@@ -16,6 +16,7 @@ using Parkside.Infrastructure.Repositories.PlayersTrofees;
 using Parkside.Infrastructure.Repositories.SocialMedias;
 using Parkside.Infrastructure.Repositories.Sponsors;
 using Parkside.Infrastructure.Repositories.Stuffs;
+using Parkside.Infrastructure.Repositories.StuffsHistories;
 using Parkside.Infrastructure.Repositories.Teams;
 using Parkside.Infrastructure.Repositories.Trofees;
 using Parkside.Models.Helpers;
@@ -30,6 +31,7 @@ using Parkside.Services.PlayerTrofees;
 using Parkside.Services.SocialMedias;
 using Parkside.Services.Sponsors;
 using Parkside.Services.Stuffes;
+using Parkside.Services.StuffHistory;
 using Parkside.Services.Stuffs;
 using Parkside.Services.Teams;
 using Parkside.Services.Trofees;
@@ -123,6 +125,9 @@ builder.Services.AddScoped<IPlayerService, PlayerService>();
 
 builder.Services.AddScoped<IStuffRepo, StuffRepo>();
 builder.Services.AddScoped<IStuffService, StuffService>();
+
+builder.Services.AddScoped<IStuffsHistoryRepo, StuffsHistoryRepo>();
+builder.Services.AddScoped<IStuffHistoryService, StuffHistoryService>();
 
 builder.Services.AddScoped<INewsRepo, NewsRepo>();
 builder.Services.AddScoped<INewsService, NewsService>();

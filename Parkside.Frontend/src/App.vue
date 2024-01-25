@@ -69,8 +69,8 @@ import { RouterLink, RouterView } from "vue-router";
             :to="{ name: 'stuff' }"
             exact
           >
-            <font-awesome-icon class="img-link" :icon="['fas', 'person-military-pointing']"  />
-            <div>Stuff</div>
+            <font-awesome-icon class="img-link" :icon="['fas', 'staff-snake']"  />
+            <div>Staff</div>
           </router-link>
 
           <router-link
@@ -112,6 +112,26 @@ import { RouterLink, RouterView } from "vue-router";
               <font-awesome-icon class="img-link" :icon="['fas', 'award']"  />
               <div>Trofee</div>
             </router-link>
+
+            <router-link
+                tag="li"
+                class="nav-link d-flex"
+                :to="{ name: 'playerHistory' }"
+                exact
+              >
+                <font-awesome-icon class="img-link" :icon="['fas', 'newspaper']"  />
+                <div>Participari jucatori</div>
+              </router-link>
+
+              <router-link
+                  tag="li"
+                  class="nav-link d-flex"
+                  :to="{ name: 'stuffHistory' }"
+                  exact
+                >
+                  <font-awesome-icon class="img-link" :icon="['fas', 'newspaper']"  />
+                  <div>Participari staff</div>
+                </router-link>
 
           <router-link
             tag="li"
@@ -165,7 +185,8 @@ aside {
   justify-content: flex-start;
   background-color: #fafafe;
   width: 14%;
-  min-width: 160px;
+  min-width: 140px;
+  max-width: 190px;
 }
 
 .main-section {

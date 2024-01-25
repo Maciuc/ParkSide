@@ -303,11 +303,11 @@ export default {
         ImageBase64: null,
       },
       Roles: [
-        { name: "Centrali" },
-        { name: "Pivoti" },
-        { name: "Interi" },
-        { name: "Extreme" },
-        { name: "Portari" },
+        { name: "Central" },
+        { name: "Pivot" },
+        { name: "Inter" },
+        { name: "Extrema" },
+        { name: "Portar" },
       ],
     };
   },
