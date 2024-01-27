@@ -62,6 +62,30 @@
                             <ErrorMessage name="year" class="text-danger error-message" />
                         </div>
 
+                        <div class="mb-3 position-relative">
+                                  <label for="role" class="form-label"
+                                    >Alege rolul</label
+                                  >
+                                  <Field
+                                    v-model="newStaffHistory.Role"
+                                    name="role"
+                                    as="select"
+                                    :class="{ 'border-danger': errors.role }"
+                                    class="form-select form-control"
+                                  >
+                                    <option value="" disabled>Roluri</option>
+                                    <option
+                                      v-for="(role, index) in Roles"
+                                      :key="index"
+                                      :value="role.name"
+                                    >
+                                      {{ role.name }}
+                                    </option>
+                                  </Field>
+
+                                  <ErrorMessage name="role" class="text-danger error-message" />
+                                </div>
+
 
                         <div class="mb-3 position-relative">
                             <label for="team" class="form-label">Alege echipa</label>
@@ -75,8 +99,6 @@
 
                             <ErrorMessage name="team" class="text-danger error-message" />
                         </div>
-
-
 
                     </div>
 
@@ -119,6 +141,7 @@ export default {
             newStaffHistory: {
                 Year: "",
                 TeamName: "",
+                Role: "",
             },
             Years: [
                 { year: "2024" },
@@ -132,11 +155,8 @@ export default {
                 { year: "2016" },
             ],
             Roles: [
-                { name: "Central" },
-                { name: "Pivot" },
-                { name: "Inter" },
-                { name: "Extrema" },
-                { name: "Portar" },
+                { name: "Antrenor" },
+                { name: "Kinetoterapeut" },
             ],
             TeamNames: [
                 { name: "CSU Suceava Juniori" },
@@ -152,6 +172,7 @@ export default {
                 stuff: yup.string().required("Acest câmp este obligatoriu"),
                 year: yup.string().required("Acest câmp este obligatoriu"),
                 team: yup.string().required("Acest câmp este obligatoriu"),
+                role: yup.string().required("Acest câmp este obligatoriu"),
             });
         },
     },

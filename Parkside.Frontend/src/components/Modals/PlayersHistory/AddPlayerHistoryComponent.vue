@@ -179,9 +179,11 @@ export default {
             Roles: [
                 { name: "Central" },
                 { name: "Pivot" },
-                { name: "Inter" },
-                { name: "Extrema" },
                 { name: "Portar" },
+                { name: "Inter stanga" },
+                { name: "Inter dreapta" },
+                { name: "Extrema stanga" },
+                { name: "Extrema dreapta" },
             ],
             TeamNames: [
                 { name: "CSU Suceava Juniori" },

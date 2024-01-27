@@ -42,7 +42,6 @@ namespace Parkside.Services.StuffHistory
                 {
                     Id = stuffHistory.Stuff.Id,
 
-
                 },
                 Championship = new ChampionshipViewModel
                 {
@@ -52,6 +51,7 @@ namespace Parkside.Services.StuffHistory
                 },
                 TeamName = stuffHistory.TeamName,
                 Year = stuffHistory.Year,
+                Role = stuffHistory.Role,
             };
 
             return finalStuffHistory;
@@ -117,6 +117,7 @@ namespace Parkside.Services.StuffHistory
                   ChampionshipName = stuffHistory.Championship.Name,
                   Year = stuffHistory.Year,
                   TeamName = stuffHistory.TeamName,
+                  Role = stuffHistory.Role,
                   StuffImageBase64 = _genericService.GetImgBase64(stuffHistory.Stuff.ImageUrl),
                   ChampionshipImageBase64 = _genericService.GetImgBase64(stuffHistory.Championship.ImageUrl),
               })
@@ -143,7 +144,8 @@ namespace Parkside.Services.StuffHistory
                 throw new Exception("Championship not found!");
             }
 
-            var championshipExist = await _stuffHistoryRepo.GetAllStuffsHistories().FirstOrDefaultAsync(x => x.ChampionshipId == championshipId && x.StuffId == stuffId);
+            var championshipExist = await _stuffHistoryRepo.GetAllStuffsHistories().FirstOrDefaultAsync(
+                x => x.ChampionshipId == championshipId && x.StuffId == stuffId && x.Year == model.Year);
             if (championshipExist != null)
             {
                 throw new Exception("Championship already used!");
@@ -155,6 +157,7 @@ namespace Parkside.Services.StuffHistory
                 ChampionshipId = championshipId,
                 TeamName = model.TeamName,
                 Year = model.Year,
+                Role = model.Role,
             };
 
             await _stuffHistoryRepo.Add(finalStuffHistory);
@@ -199,7 +202,8 @@ namespace Parkside.Services.StuffHistory
                 throw new Exception("Championship not found!");
             }
 
-            var championshipExist = await _stuffHistoryRepo.GetAllStuffsHistories().FirstOrDefaultAsync(x => x.ChampionshipId == championshipId && x.StuffId == stuffId);
+            var championshipExist = await _stuffHistoryRepo.GetAllStuffsHistories().FirstOrDefaultAsync(
+                x => x.ChampionshipId == championshipId && x.StuffId == stuffId && x.Year == model.Year);
             if (championshipExist != null)
             {
                 throw new Exception("Championship already used!");
@@ -209,6 +213,7 @@ namespace Parkside.Services.StuffHistory
             stuffHistory.ChampionshipId = championshipId;
             stuffHistory.TeamName = model.TeamName;
             stuffHistory.Year = model.Year;
+            stuffHistory.Role = model.Role;
 
             await _stuffHistoryRepo.Update(stuffHistory);
         }

@@ -291,6 +291,8 @@ namespace Parkside.Infrastructure.Context
             {
                 entity.ToTable("StuffHistory");
 
+                entity.Property(e => e.Role).HasMaxLength(200);
+
                 entity.Property(e => e.TeamName).HasMaxLength(200);
 
                 entity.Property(e => e.Year).HasMaxLength(5);
@@ -299,13 +301,13 @@ namespace Parkside.Infrastructure.Context
                     .WithMany(p => p.StuffHistories)
                     .HasForeignKey(d => d.ChampionshipId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__StuffHist__Champ__6225902D");
+                    .HasConstraintName("FK__StuffHist__Champ__68D28DBC");
 
                 entity.HasOne(d => d.Stuff)
                     .WithMany(p => p.StuffHistories)
                     .HasForeignKey(d => d.StuffId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__StuffHist__Stuff__61316BF4");
+                    .HasConstraintName("FK__StuffHist__Stuff__67DE6983");
             });
 
             modelBuilder.Entity<Team>(entity =>

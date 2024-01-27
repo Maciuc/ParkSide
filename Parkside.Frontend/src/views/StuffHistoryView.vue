@@ -57,7 +57,7 @@
                                 class="me-2" />
                             <font-awesome-icon v-else :icon="['fas', 'arrow-up-wide-short']" rotation="180" size="xl"
                                 class="me-2" />
-                            <span>Nume jucator</span>
+                            <span>Nume staff</span>
                         </th>
 
 
@@ -76,6 +76,7 @@
                             <span>An</span>
                         </th>
                         <th scope="20" width="20%">Echipa</th>
+                        <th scope="20" width="20%">Rol</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -102,6 +103,7 @@
                         </td>
                         <td>{{ stuffHistory.Year }}</td>
                         <td>{{ stuffHistory.TeamName }}</td>
+                        <td>{{ stuffHistory.Role }}</td>
                         <td>
                             <div class="editButtons">
                                 <button class="button-edit" data-bs-toggle="modal" type="button"
@@ -170,13 +172,6 @@ export default {
                 { year: "2017" },
                 { year: "2016" },
             ],
-            Roles: [
-                { name: "Central" },
-                { name: "Pivot" },
-                { name: "Inter" },
-                { name: "Extrema" },
-                { name: "Portar" },
-            ],
             TeamNames: [
                 { name: "CSU Suceava Juniori" },
                 { name: "CSU Suceava Seniori" },
@@ -218,7 +213,7 @@ export default {
                 PageSize: 6,
                 NameSearch: this.filter.SearchText,
                 Year: this.filter.Year,
-                StuffRole: this.filter.Role,
+                Role : this.filter.Role,
                 TeamName: this.filter.TeamName,
             };
             this.$axios
@@ -230,6 +225,7 @@ export default {
                 .then((response) => {
                     console.log(searchParams);
                     this.stuffHistories = response.data;
+                    console.log(this.stuffHistories);
                 })
                 .catch((error) => {
                     console.log(error);

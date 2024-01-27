@@ -150,7 +150,8 @@ namespace Parkside.Services.PlayerHistory
                 throw new Exception("Championship not found!");
             }
 
-            var championshipExist = await _playerHistoryRepo.GetAllPlayersHistories().FirstOrDefaultAsync(x => x.ChampionshipId == championshipId && x.PlayerId == playerId);
+            var championshipExist = await _playerHistoryRepo.GetAllPlayersHistories().FirstOrDefaultAsync(
+                x => x.ChampionshipId == championshipId && x.PlayerId == playerId && x.Year == model.Year);
             if (championshipExist != null)
             {
                 throw new Exception("Championship already used!");
@@ -207,7 +208,8 @@ namespace Parkside.Services.PlayerHistory
                 throw new Exception("Championship not found!");
             }
 
-            var championshipExist = await _playerHistoryRepo.GetAllPlayersHistories().FirstOrDefaultAsync(x => x.ChampionshipId == championshipId && x.PlayerId == playerId);
+            var championshipExist = await _playerHistoryRepo.GetAllPlayersHistories().FirstOrDefaultAsync(
+                x => x.ChampionshipId == championshipId && x.PlayerId == playerId && x.Year == model.Year);
             if (championshipExist != null)
             {
                 throw new Exception("Championship already used!");

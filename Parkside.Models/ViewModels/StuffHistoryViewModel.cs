@@ -10,18 +10,21 @@
         public string? ChampionshipName { get; set; }
         public string? TeamName { get; set; }
         public string? Year { get; set; }
+        public string? Role { get; set; }
 
     }
     public class StuffHistoryUpdateViewModel
     {
         public string? TeamName { get; set; }
         public string? Year { get; set; }
+        public string? Role { get; set; }
 
     }
     public class StuffHistoryCreateViewModel
     {
         public string? TeamName { get; set; }
         public string? Year { get; set; }
+        public string? Role { get; set; }
 
     }
 
@@ -32,6 +35,7 @@
         public ChampionshipViewModel? Championship { get; set; }
         public string? TeamName { get; set; }
         public string? Year { get; set; }
+        public string? Role { get; set; }
 
     }
     public class StuffHistoryChampionshipsViewModel
@@ -40,6 +44,7 @@
         public string? ChampionshipName { get; set; }
         public string? TeamName { get; set; }
         public string? Year { get; set; }
+        public string? Role { get; set; }
 
     }
 

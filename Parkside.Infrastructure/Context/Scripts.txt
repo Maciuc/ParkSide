@@ -109,6 +109,7 @@ CREATE TABLE StuffHistory(
 	ChampionshipId INT REFERENCES Championships(Id) NOT NULL,
 	Year NVARCHAR(5),
 	TeamName NVARCHAR(200),
+	Role NVARCHAR(200),
 	IsDeleted BIT NOT NULL DEFAULT(0)
 );
 -------------------------------------
