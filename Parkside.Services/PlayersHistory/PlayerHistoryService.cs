@@ -7,6 +7,7 @@ using Parkside.Infrastructure.Repositories.PlayersHistories;
 using Parkside.Models.Helpers;
 using Parkside.Models.ViewModels;
 using System.Data;
+using System.Numerics;
 
 namespace Parkside.Services.PlayerHistory
 {
@@ -118,12 +119,18 @@ namespace Parkside.Services.PlayerHistory
               .Take(PageSize).Select(playerHistory => new PlayerHistoryViewModel
               {
                   Id = playerHistory.Id,
+                  PlayerId = playerHistory.Player.Id,
                   PlayerFirstName = playerHistory.Player.FirstName,
                   PlayerLastName = playerHistory.Player.LastName,
                   ChampionshipName = playerHistory.Championship.Name,
                   PlayerRole = playerHistory.PlayerRole,
                   Year = playerHistory.Year,
                   TeamName = playerHistory.TeamName,
+                  Height = playerHistory.Player.Height,
+                  Description = playerHistory.Player.Description,
+                  Number = playerHistory.Player.Number,
+                  Nationality = playerHistory.Player.Nationality,
+                  BirthDate = playerHistory.Player.BirthDate.HasValue ? playerHistory.Player.BirthDate.Value.ToString("dd/MM/yyyy") : null,
                   PlayerImageBase64 = _genericService.GetImgBase64(playerHistory.Player.ImageUrl),
                   ChampionshipImageBase64 = _genericService.GetImgBase64(playerHistory.Championship.ImageUrl),
               })
