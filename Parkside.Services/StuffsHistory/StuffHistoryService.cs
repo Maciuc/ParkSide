@@ -112,12 +112,17 @@ namespace Parkside.Services.StuffHistory
               .Take(PageSize).Select(stuffHistory => new StuffHistoryViewModel
               {
                   Id = stuffHistory.Id,
+                  StuffId = stuffHistory.Stuff.Id,
                   StuffFirstName = stuffHistory.Stuff.FirstName,
                   StuffLastName = stuffHistory.Stuff.LastName,
                   ChampionshipName = stuffHistory.Championship.Name,
                   Year = stuffHistory.Year,
                   TeamName = stuffHistory.TeamName,
                   Role = stuffHistory.Role,
+                  Height = stuffHistory.Stuff.Height,
+                  Description = stuffHistory.Stuff.Description,
+                  Nationality = stuffHistory.Stuff.Nationality,
+                  BirthDate = stuffHistory.Stuff.BirthDate.HasValue ? stuffHistory.Stuff.BirthDate.Value.ToString("dd/MM/yyyy") : null,
                   StuffImageBase64 = _genericService.GetImgBase64(stuffHistory.Stuff.ImageUrl),
                   ChampionshipImageBase64 = _genericService.GetImgBase64(stuffHistory.Championship.ImageUrl),
               })

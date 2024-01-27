@@ -3,6 +3,7 @@
     public class StuffHistoryViewModel
     {
         public int Id { get; set; }
+        public int StuffId { get; set; }
         public string? StuffImageBase64 { get; set; }
         public string? StuffFirstName { get; set; }
         public string? StuffLastName { get; set; }
@@ -11,6 +12,10 @@
         public string? TeamName { get; set; }
         public string? Year { get; set; }
         public string? Role { get; set; }
+        public string? Height { get; set; }
+        public string? Description { get; set; }
+        public string? BirthDate { get; set; }
+        public string? Nationality { get; set; }
 
     }
     public class StuffHistoryUpdateViewModel
