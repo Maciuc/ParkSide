@@ -174,16 +174,16 @@ namespace Parkside.Services.Newss
             await _newsRepo.Update(news);
         }
 
-        public IQueryable<NewsViewModel> GetHomePageNewses()
+        public IQueryable<NewsDetailsViewModel> GetHomePageNewses()
         {
             var newses = _newsRepo.GetAllQuerable().Where(x => x.IsPublished == true); ;
 
-            var finalNewses = newses.Select(news => new NewsViewModel
+            var finalNewses = newses.Select(news => new NewsDetailsViewModel
             {
                 Id = news.Id,
                 Name = news.Name,
                 Description = news.Description,
-                PublishedDate = news.PublishedDate.HasValue ? news.PublishedDate.Value.ToString("dd/MM/yyyy") : null,
+                PublishedDate = news.PublishedDate,
                 IsPublished = news.IsPublished,
                 ImageBase64 = _genericService.GetImgBase64(news.ImageUrl)
             });

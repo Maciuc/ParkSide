@@ -9,7 +9,7 @@ namespace Parkside.Services.Newss
             string? NameSearch, string? OrderBy, string? PublishedDate,
             bool? IsPublished, bool? IsPrimary,
             int PageNumber, int PageSize);
-        IQueryable<NewsViewModel> GetHomePageNewses();
+        IQueryable<NewsDetailsViewModel> GetHomePageNewses();
         IQueryable<NewsViewModel> GetLatestNormalNewses();
         IQueryable<NewsViewModel> GetLatestPrimaryNewses();
         Task AddNews(NewsCreateViewModel model);
