@@ -16,7 +16,7 @@ namespace Parkside.Models.ViewModels
     public class NewsUpdateViewModel
     {
         [Required(ErrorMessage = "You should provide a name value.")]
-        [MaxLength(50)]
+        [MaxLength(200)]
         public string Name { get; set; } = null!;
         public string? Description { get; set; }
         public string? Content { get; set; }
@@ -29,7 +29,7 @@ namespace Parkside.Models.ViewModels
     public class NewsCreateViewModel
     {
         [Required(ErrorMessage = "You should provide a name value.")]
-        [MaxLength(50)]
+        [MaxLength(200)]
         public string Name { get; set; } = null!;
         public string? Description { get; set; }
         public string? Content { get; set; }

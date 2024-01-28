@@ -18,11 +18,11 @@ namespace Parkside.Models.ViewModels
     public class PlayerUpdateViewModel
     {
         [Required(ErrorMessage = "You should provide a firstname value.")]
-        [MaxLength(50)]
+        [MaxLength(200)]
         public string FirstName { get; set; } = null!;
 
         [Required(ErrorMessage = "You should provide a lastname value.")]
-        [MaxLength(50)]
+        [MaxLength(200)]
         public string LastName { get; set; } = null!;
         public string? Number { get; set; }
         public string? Height { get; set; }
@@ -35,11 +35,11 @@ namespace Parkside.Models.ViewModels
     public class PlayerCreateViewModel
     {
         [Required(ErrorMessage = "You should provide a firstname value.")]
-        [MaxLength(50)]
+        [MaxLength(200)]
         public string FirstName { get; set; } = null!;
 
         [Required(ErrorMessage = "You should provide a lastname value.")]
-        [MaxLength(50)]
+        [MaxLength(200)]
         public string LastName { get; set; } = null!;
         public string? Number { get; set; }
         public string? Height { get; set; }

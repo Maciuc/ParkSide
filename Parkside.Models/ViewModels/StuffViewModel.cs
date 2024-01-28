@@ -17,11 +17,11 @@ namespace Parkside.Models.ViewModels
     public class StuffUpdateViewModel
     {
         [Required(ErrorMessage = "You should provide a firstname value.")]
-        [MaxLength(50)]
+        [MaxLength(200)]
         public string FirstName { get; set; } = null!;
 
         [Required(ErrorMessage = "You should provide a lastname value.")]
-        [MaxLength(50)]
+        [MaxLength(200)]
         public string LastName { get; set; } = null!;
         public string? Nationality { get; set; }
         public string? Description { get; set; }
@@ -33,11 +33,11 @@ namespace Parkside.Models.ViewModels
     public class StuffCreateViewModel
     {
         [Required(ErrorMessage = "You should provide a firstname value.")]
-        [MaxLength(50)]
+        [MaxLength(200)]
         public string FirstName { get; set; } = null!;
 
         [Required(ErrorMessage = "You should provide a lastname value.")]
-        [MaxLength(50)]
+        [MaxLength(200)]
         public string LastName { get; set; } = null!;
         public string? Nationality { get; set; }
         public string? Description { get; set; }

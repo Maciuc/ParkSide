@@ -13,7 +13,7 @@ namespace Parkside.Models.ViewModels
     public class SponsorUpdateViewModel
     {
         [Required(ErrorMessage = "You should provide a name value.")]
-        [MaxLength(50)]
+        [MaxLength(200)]
         public string Name { get; set; } = null!;
         public string? Link { get; set; }
         public string? ImageBase64 { get; set; }
@@ -22,7 +22,7 @@ namespace Parkside.Models.ViewModels
     public class SponsorCreateViewModel
     {
         [Required(ErrorMessage = "You should provide a name value.")]
-        [MaxLength(50)]
+        [MaxLength(200)]
         public string Name { get; set; } = null!;
         public string? Link { get; set; }
         public string? ImageBase64 { get; set; }

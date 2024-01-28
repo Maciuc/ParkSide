@@ -12,7 +12,7 @@ namespace Parkside.Models.ViewModels
     public class TeamUpdateViewModel
     {
         [Required(ErrorMessage = "You should provide a name value.")]
-        [MaxLength(50)]
+        [MaxLength(200)]
         public string Name { get; set; } = null!;
         public string? ImageBase64 { get; set; }
     }
@@ -20,7 +20,7 @@ namespace Parkside.Models.ViewModels
     public class TeamCreateViewModel
     {
         [Required(ErrorMessage = "You should provide a name value.")]
-        [MaxLength(50)]
+        [MaxLength(200)]
         public string Name { get; set; } = null!;
         public string? ImageBase64 { get; set; }
     }
