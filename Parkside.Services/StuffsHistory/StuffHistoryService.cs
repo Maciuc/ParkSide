@@ -232,6 +232,7 @@ namespace Parkside.Services.StuffHistory
                 ChampionshipName = stuffHistory.Championship.Name,
                 Year = stuffHistory.Year,
                 TeamName = stuffHistory.TeamName,
+                Role = stuffHistory.Role,
                 ChampionshipImageBase64 = _genericService.GetImgBase64(stuffHistory.Championship.ImageUrl),
             });
 
