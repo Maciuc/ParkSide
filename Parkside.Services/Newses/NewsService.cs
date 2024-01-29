@@ -185,6 +185,7 @@ namespace Parkside.Services.Newss
                 Description = news.Description,
                 PublishedDate = news.PublishedDate,
                 IsPublished = news.IsPublished,
+                Content = news.Content,
                 ImageBase64 = _genericService.GetImgBase64(news.ImageUrl)
             });
 
