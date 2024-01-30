@@ -349,7 +349,7 @@ export default {
         OrderBy: this.filter.OrderBy,
         PageNumber: this.filter.PageNumber,
         PublishedDate: this.filter.PublishedDate,
-        PageSize: 6,
+        PageSize: 9,
         NameSearch: this.filter.SearchText,
         IsPublished: this.filter.IsPublished,
         IsPrimary: this.filter.IsPrimary,

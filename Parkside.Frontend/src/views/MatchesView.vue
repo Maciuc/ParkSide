@@ -252,7 +252,7 @@ export default {
         OrderBy: this.filter.OrderBy,
         PageNumber: this.filter.PageNumber,
         MatchDate: this.filter.MatchDate,
-        PageSize: 6,
+        PageSize: 9,
         NameSearch: this.filter.SearchText,
       };
       this.$axios
