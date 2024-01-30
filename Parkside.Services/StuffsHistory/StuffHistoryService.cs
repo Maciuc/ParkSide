@@ -37,6 +37,7 @@ namespace Parkside.Services.StuffHistory
                 Stuff = new StuffBasicViewModel
                 {
                     Id = stuffHistory.Stuff.Id,
+                    Name = stuffHistory.Stuff.LastName + " " + stuffHistory.Stuff.FirstName,
 
                 },
                 TeamName = stuffHistory.TeamName,

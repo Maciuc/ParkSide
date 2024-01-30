@@ -152,7 +152,7 @@ export default {
     editedTeam: {
       type: Object,
       default() {
-        return { Name: "", ImageBase64: "", Id: ""};
+        return { Name: "", ImageBase64: "", Id: "" };
       },
     },
   },
@@ -214,10 +214,13 @@ export default {
   computed: {
     schema() {
       return yup.object({
-        name: yup.string().required("Denumirea nu este validă"),
+        name: yup
+          .string()
+          .required("Acest câmp este obligatoriu")
+          .min(3, "Minim 3 caractere!")
+          .max(200, "Maxim 200 de caractere!"),
       });
     },
   },
 };
 </script>
-

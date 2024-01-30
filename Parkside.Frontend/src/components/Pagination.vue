@@ -1,28 +1,18 @@
 <template>
   <ul class="pagination">
-
-
     <li class="pagination-item">
-      <button
-        type="button"
-        @click="OnClickFirstPage"
-        :disabled="IsInFirstPage"
-      >
-      <font-awesome-icon :icon="['fas', 'angles-left']" />
+      <button type="button" @click="OnClickFirstPage" :disabled="IsInFirstPage">
+        <font-awesome-icon :icon="['fas', 'angles-left']" />
       </button>
     </li>
 
     <li class="pagination-item">
       <button
-        
         type="button"
         @click="OnClickPreviousPage"
         :disabled="IsInFirstPage"
       >
-      <font-awesome-icon
-      :icon="['fas', 'chevron-right']"
-      rotation="180"
-    />
+        <font-awesome-icon :icon="['fas', 'chevron-right']" rotation="180" />
       </button>
     </li>
 
@@ -43,22 +33,15 @@
 
     <li class="pagination-item">
       <button type="button" @click="OnClickNextPage" :disabled="IsInLastPage">
-        <font-awesome-icon
-      :icon="['fas', 'chevron-right']"
-    />
+        <font-awesome-icon :icon="['fas', 'chevron-right']" />
       </button>
     </li>
 
     <li class="pagination-item">
-      <button
-        type="button"
-        @click="OnClickLastPage"
-        :disabled="IsInLastPage"
-      >
-      <font-awesome-icon :icon="['fas', 'angles-left']" rotation=180 />
+      <button type="button" @click="OnClickLastPage" :disabled="IsInLastPage">
+        <font-awesome-icon :icon="['fas', 'angles-left']" rotation="180" />
       </button>
     </li>
-
   </ul>
 </template>
 
@@ -74,41 +57,39 @@ export default {
       required: true,
     },
   },
-  data(){
-    return{
-      perPage:4,
-    }
+  data() {
+    return {
+      perPage: 4,
+    };
   },
-  methods:{
-
+  methods: {
     OnClickFirstPage() {
-      this.$emit('pagechanged', 1);
+      this.$emit("pagechanged", 1);
     },
-    
+
     OnClickPreviousPage() {
-      this.$emit('pagechanged', this.currentPage - 1);
+      this.$emit("pagechanged", this.currentPage - 1);
     },
     OnClickPage(page) {
-      this.$emit('pagechanged', page);
+      this.$emit("pagechanged", page);
     },
     OnClickNextPage() {
-      this.$emit('pagechanged', this.currentPage + 1);
+      this.$emit("pagechanged", this.currentPage + 1);
     },
 
     OnClickLastPage() {
-      this.$emit('pagechanged', this.totalPages);
+      this.$emit("pagechanged", this.totalPages);
     },
-    
+
     IsPageActive(page) {
       return this.currentPage === page;
-    }
+    },
   },
   computed: {
-
-    maxVisibleButtons(){
-      if(this.totalPages===2){
+    maxVisibleButtons() {
+      if (this.totalPages === 2) {
         return 2;
-      }else{
+      } else {
         return 3;
       }
     },
@@ -121,7 +102,7 @@ export default {
 
       // When on the last page
       if (this.currentPage === this.totalPages) {
-        return this.totalPages - (this.maxVisibleButtons-1);
+        return this.totalPages - (this.maxVisibleButtons - 1);
       }
 
       // When inbetween
@@ -151,17 +132,14 @@ export default {
       return this.currentPage === this.totalPages;
     },
   },
-
 };
 </script>
-
 
 <style>
 .pagination {
   list-style-type: none;
   padding-top: 50px;
   justify-content: center;
-
 }
 
 .pagination-item {
@@ -173,19 +151,16 @@ export default {
   color: #ffffff;
 }
 
-button{
-    border-radius: 5px;
-    width: 30px;
-    height: 30px;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    background-color: #ffffff;
-    font-size: 12px;
-    font-weight: 600;
-    font-family: 'Raleway';
+button {
+  border-radius: 5px;
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: "Raleway";
 }
-
-
-
 </style>

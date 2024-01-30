@@ -21,7 +21,9 @@
       <div class="col-xxl-4 col-xl-4 col-lg-5 col-md-6 col-sm-8">
         <div class="input-group-custom mb-3">
           <div class="d-flex">
-            <div class="d-flex justify-content-center align-items-center search-separator">
+            <div
+              class="d-flex justify-content-center align-items-center search-separator"
+            >
               <font-awesome-icon
                 class="search_icon"
                 :icon="['fas', 'magnifying-glass']"
@@ -29,15 +31,15 @@
               />
               <div class="separator"></div>
             </div>
-          <input
-            type="text"
-            class="form-control search"
-            placeholder="Caută sponsor"
-            aria-label="Username"
-            aria-describedby="basic-addon1"
-            v-model="filter.SearchText"
-            v-on:keyup.enter="GetAllSponsors()"
-          />
+            <input
+              type="text"
+              class="form-control search"
+              placeholder="Caută sponsor"
+              aria-label="Username"
+              aria-describedby="basic-addon1"
+              v-model="filter.SearchText"
+              v-on:keyup.enter="GetAllSponsors()"
+            />
           </div>
         </div>
       </div>
@@ -78,8 +80,14 @@
                 class="card-img-top"
               />
             </div>
-            <div class="card-body border-top ps-3 d-flex justify-content-between">
-              {{ sponsor.Name.length>50 ? sponsor.Name.substring(0, 50)+ "..." : sponsor.Name}}
+            <div
+              class="card-body border-top ps-3 d-flex justify-content-between"
+            >
+              {{
+                sponsor.Name.length > 50
+                  ? sponsor.Name.substring(0, 50) + "..."
+                  : sponsor.Name
+              }}
             </div>
           </div>
         </div>
@@ -123,7 +131,6 @@ export default {
         Items: [],
         NumberOfPages: 0,
       },
-
     };
   },
   methods: {

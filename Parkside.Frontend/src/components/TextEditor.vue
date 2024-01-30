@@ -1,7 +1,5 @@
 <template>
-
-  <div v-if="editor" class="d-flex flex-column justify-content-center" >
-    
+  <div v-if="editor" class="d-flex flex-column justify-content-center">
     <div class="page-header editor-height">
       <div class="row justify-content-center custom-border">
         <!-- <div class="col mb-3 mb-xxl-0">
@@ -124,10 +122,6 @@
               />
             </div>
 
-            
-
-            
-
             <div class="col">
               <font-awesome-icon
                 :icon="['fas', 'align-left']"
@@ -203,12 +197,12 @@ export default {
   props: {
     modelValue: {
       type: String,
-      default: '',
+      default: "",
     },
     showTitle: Boolean,
   },
 
-  emits: ['update:modelValue'],
+  emits: ["update:modelValue"],
 
   data() {
     return {
@@ -361,17 +355,15 @@ export default {
   outline-color: transparent;
 }
 
-.custom-border{
+.custom-border {
   border-bottom: 1px solid #0000001a;
-  
 }
 
-.subtitle{
-  font-family: 'Raleway';
+.subtitle {
+  font-family: "Raleway";
   font-weight: 600;
   font-size: 17px;
 }
-.page-header{
-
+.page-header {
 }
 </style>

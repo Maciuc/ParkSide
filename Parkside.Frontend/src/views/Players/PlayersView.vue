@@ -14,10 +14,12 @@
     </div>
 
     <div class="row d-flex flex-row mt-3 new-form">
-      <div class="col-xxl-4 col-xl-4 col-lg-5 col-md-6  col-sm-6 ">
+      <div class="col-xxl-4 col-xl-4 col-lg-5 col-md-6 col-sm-6">
         <div class="input-group-custom mb-3">
           <div class="d-flex">
-            <div class="d-flex justify-content-center align-items-center search-separator">
+            <div
+              class="d-flex justify-content-center align-items-center search-separator"
+            >
               <font-awesome-icon
                 class="search_icon"
                 :icon="['fas', 'magnifying-glass']"
@@ -25,33 +27,18 @@
               />
               <div class="separator"></div>
             </div>
-          <input
-            type="text"
-            class="form-control search"
-            placeholder="Caută jucator"
-            aria-label="Username"
-            aria-describedby="basic-addon1"
-            v-model="filter.SearchText"
-            v-on:keyup.enter="GetAllPlayers()"
-          />
+            <input
+              type="text"
+              class="form-control search"
+              placeholder="Caută jucator"
+              aria-label="Username"
+              aria-describedby="basic-addon1"
+              v-model="filter.SearchText"
+              v-on:keyup.enter="GetAllPlayers()"
+            />
           </div>
         </div>
       </div>
-
-
-      <!-- <div class="col-xxl-3 col-xl-4 col-lg-5 col-md-6 col-sm-6 custom-control">
-        <select
-          class="form-select form-control"
-          aria-label="Default select example"
-          v-model="filter.RoleFilter"
-          @change="GetAllPlayers()"
-        >
-          <option value="" selected>Rol</option>
-          <option v-for="(fnct, index) in Roles" :key="index">
-            {{ fnct.name }}
-          </option>
-        </select>
-      </div> -->
     </div>
 
     <table class="table table-custom">
@@ -82,41 +69,50 @@
               size="xl"
               class="me-2"
             />
-            <span v-if="filter.OrderBy === 'name' || filter.OrderBy === 'name_desc'">Nume jucator</span>
+            <span
+              v-if="filter.OrderBy === 'name' || filter.OrderBy === 'name_desc'"
+              >Nume jucator</span
+            >
             <span v-else class="span-inactive">Nume jucator</span>
           </th>
 
           <th scope="20" width="20%">Descriere</th>
           <th scope="15" width="15%">Numar</th>
           <th width="15%" @click="OrderBy('birthdate')" class="cursor-pointer">
-              <font-awesome-icon
-                v-if="filter.OrderBy === 'birthdate'"
-                :icon="['fas', 'arrow-up-wide-short']"
-                style="color: #29be00"
-                rotation="180"
-                size="xl"
-                class="me-2"
-              />
+            <font-awesome-icon
+              v-if="filter.OrderBy === 'birthdate'"
+              :icon="['fas', 'arrow-up-wide-short']"
+              style="color: #29be00"
+              rotation="180"
+              size="xl"
+              class="me-2"
+            />
 
-              <font-awesome-icon
-                v-else-if="filter.OrderBy === 'birthdate_desc'"
-                :icon="['fas', 'arrow-up-short-wide']"
-                rotation="180"
-                style="color: #29be00"
-                size="xl"
-                class="me-2"
-              />
-              <font-awesome-icon
-                v-else
-                :icon="['fas', 'arrow-up-wide-short']"
-                rotation="180"
-                size="xl"
-                class="me-2"
-              />
-              <span v-if="filter.OrderBy === 'birthdate' || filter.OrderBy === 'birthdate_desc'">Data nastere</span>
-              <span v-else class="span-inactive">Data nastere</span>
-            </th>
-            <th scope="15" width="15%">Nationalitate</th>
+            <font-awesome-icon
+              v-else-if="filter.OrderBy === 'birthdate_desc'"
+              :icon="['fas', 'arrow-up-short-wide']"
+              rotation="180"
+              style="color: #29be00"
+              size="xl"
+              class="me-2"
+            />
+            <font-awesome-icon
+              v-else
+              :icon="['fas', 'arrow-up-wide-short']"
+              rotation="180"
+              size="xl"
+              class="me-2"
+            />
+            <span
+              v-if="
+                filter.OrderBy === 'birthdate' ||
+                filter.OrderBy === 'birthdate_desc'
+              "
+              >Data nastere</span
+            >
+            <span v-else class="span-inactive">Data nastere</span>
+          </th>
+          <th scope="15" width="15%">Nationalitate</th>
           <th scope="15" width="15%">Inaltime</th>
           <th></th>
         </tr>
@@ -132,7 +128,7 @@
                 />
               </div>
 
-              <span>{{ player.LastName + " " + player.FirstName}}</span>
+              <span>{{ player.LastName + " " + player.FirstName }}</span>
             </div>
           </td>
           <td>{{ player.Description }}</td>

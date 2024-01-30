@@ -82,20 +82,22 @@
             />
           </div>
 
-          <div class="col-md-4 col-sm-6 d-flex align-items-end justify-content-start">
-          <div class="form-check form-switch">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    id="flexSwitchCheckDefault"
-                    :checked="editedNews.IsPrimary"
-                    @click="TogglePrimaryNews"
-                  />
-                  <label class="form-label" for="flexSwitchCheckDefault"
-                    >Stire primara</label
-                  >
-              </div>
-              </div>
+          <div
+            class="col-md-4 col-sm-6 d-flex align-items-end justify-content-start"
+          >
+            <div class="form-check form-switch">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="flexSwitchCheckDefault"
+                :checked="editedNews.IsPrimary"
+                @click="TogglePrimaryNews"
+              />
+              <label class="form-label" for="flexSwitchCheckDefault"
+                >Stire primara</label
+              >
+            </div>
+          </div>
         </div>
 
         <div class="row">
@@ -199,7 +201,6 @@ import "@vuepic/vue-datepicker/dist/main.css";
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 import TextEditor from "../../components/TextEditor.vue";
-import moment from "moment";
 
 export default {
   name: "MembersEditMemberComponent",
@@ -222,7 +223,11 @@ export default {
   computed: {
     schema() {
       return yup.object({
-        title: yup.string().required("Acest câmp este obligatoriu"),
+        title: yup
+          .string()
+          .required("Acest câmp este obligatoriu")
+          .min(3, "Minim 3 caractere!")
+          .max(200, "Maxim 200 de caractere!"),
         datepublish: yup.string().required("Acest câmp este obligatoriu"),
       });
     },
@@ -302,8 +307,7 @@ export default {
     },
 
     TogglePrimaryNews() {
-      this.editedNews.IsPrimary =
-        !this.editedNews.IsPrimary;
+      this.editedNews.IsPrimary = !this.editedNews.IsPrimary;
       console.log(this.editedNews.IsPrimary);
     },
   },

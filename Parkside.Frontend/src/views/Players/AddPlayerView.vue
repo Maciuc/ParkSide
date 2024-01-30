@@ -39,7 +39,7 @@
           </div>
 
           <div class="mb-3">
-          <label for="input-firstname-add-player" class="form-label"
+            <label for="input-firstname-add-player" class="form-label"
               >Prenume jucator</label
             >
             <Field
@@ -53,46 +53,6 @@
             />
             <ErrorMessage name="firstname" class="text-danger error-message" />
           </div>
-
-          <!-- <div class="mb-3">
-          <label for="input-teamname-add-player" class="form-label"
-              >Nume echipa</label
-            >
-            <Field
-              type="text"
-              class="form-control"
-              :class="{ 'border-danger': errors.teamname }"
-              id="input-teamname-add-player"
-              name="teamname"
-              placeholder="Nume echipa"
-              v-model="newPlayer.TeamName"
-            />
-            <ErrorMessage name="teamname" class="text-danger error-message" />
-          </div> -->
-
-          <!-- <div class="mb-3 position-relative">
-            <label for="role" class="form-label"
-              >Rol</label
-            >
-            <Field
-              v-model="newPlayer.Role"
-              name="role"
-              as="select"
-              :class="{ 'border-danger': errors.role }"
-              class="form-select form-control"
-            >
-              <option value="" disabled>Rol jucator</option>
-              <option
-                v-for="(role, index) in Roles"
-                :key="index"
-                :value="role.name"
-              >
-                {{ role.name }}
-              </option>
-            </Field>
-
-            <ErrorMessage name="role" class="text-danger error-message" />
-          </div> -->
 
           <div class="mb-3 position-relative">
             <div
@@ -123,129 +83,126 @@
           </div>
 
           <div class="mb-3 position-relative">
-              <label for="input-number-add-player" class="form-label"
-                >Numar</label
+            <label for="input-number-add-player" class="form-label"
+              >Numar</label
+            >
+            <Field
+              type="text"
+              class="form-control"
+              :class="{ 'border-danger': errors.number }"
+              id="input-number-add-player"
+              name="number"
+              placeholder="Numar"
+              v-model="newPlayer.Number"
+            />
+            <ErrorMessage name="number" class="text-danger error-message" />
+            <div v-if="validNumber === false" class="text-danger error-message">
+              Numărul este deja ocupat!
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-7 col-lg-6 col-xl-4 col-12 row gap-1">
+          <div class="row mb-4">
+            <div class="col">
+              <label class="form-label">Selectează imagine</label>
+              <label
+                for="input-upload-player-image"
+                class="button blue"
+                style="width: 140px"
+              >
+                Încarcă imagine
+                <font-awesome-icon :icon="['fas', 'upload']" />
+                <Field
+                  type="file"
+                  id="input-upload-player-image"
+                  name="upload"
+                  style="display: none"
+                  accept="image/*"
+                  ref="uploadInput"
+                  @change="UploadImagePlayer"
+                >
+                </Field>
+              </label>
+            </div>
+
+            <div class="col">
+              <div
+                class="image-container d-flex align-items-center justify-content-center"
+              >
+                <button
+                  type="button"
+                  class="button-delete"
+                  @click="DeletePhoto"
+                >
+                  <font-awesome-icon :icon="['fas', 'trash']" />
+                </button>
+                <div
+                  v-if="!newPlayer.ImageBase64"
+                  class="d-flex flex-column justify-content-center align-items-center gap-2"
+                >
+                  <img src="@/images/NoImageSelected.png" class="no-image" />
+                  <div class="text-center">Nicio imagine selectată</div>
+                </div>
+
+                <div v-if="newPlayer.ImageBase64" class="image">
+                  <img
+                    :src="newPlayer.ImageBase64"
+                    alt="Imagine selectată"
+                    class="image"
+                  />
+                </div>
+              </div>
+
+              <div
+                v-if="photoValidation === false"
+                ref="validation-img-type"
+                class="text-danger error-message"
+              >
+                Tipul imaginii selectate nu este valid
+              </div>
+              <div
+                v-else-if="photoValidation === true"
+                ref="validation-img-type"
+                class="text-danger error-message"
+              >
+                Imaginea selectată este prea mare
+              </div>
+              <div v-else></div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="input-nationality-add-player" class="form-label"
+                >Nationalitate</label
               >
               <Field
                 type="text"
                 class="form-control"
-                :class="{ 'border-danger': errors.number }"
-                id="input-number-add-player"
-                name="number"
-                placeholder="Numar"
-                v-model="newPlayer.Number"
+                id="nationality"
+                name="nationality"
+                placeholder="Nationalitate"
+                v-model="newPlayer.Nationality"
               />
-              <ErrorMessage name="number" class="text-danger error-message" />
-              <div
-                v-if="validNumber === false"
-                class="text-danger error-message"
-              >
-                Numărul este deja ocupat!
-              </div>
             </div>
+          </div>
 
-        </div>
-
-        
-        <div class="col-md-7 col-lg-6 col-xl-4 col-12 row gap-1">
-          <div class="row mb-4"> 
-          <div class="col">
-            <label class="form-label">Selectează imagine</label>
-            <label
-              for="input-upload-player-image"
-              class="button blue"
-              style="width: 140px"
-            >
-              Încarcă imagine
-              <font-awesome-icon :icon="['fas', 'upload']" />
+          <div class="row">
+            <div>
+              <label for="input-height-add-player" class="form-label"
+                >Inaltime</label
+              >
               <Field
-                type="file"
-                id="input-upload-player-image"
-                name="upload"
-                style="display: none"
-                accept="image/*"
-                ref="uploadInput"
-                @change="UploadImagePlayer"
-              >
-              </Field>
-            </label>
-          </div>
-
-          <div class="col">
-            <div
-              class="image-container d-flex align-items-center justify-content-center"
-            >
-              <button type="button" class="button-delete" @click="DeletePhoto">
-                <font-awesome-icon :icon="['fas', 'trash']" />
-              </button>
-              <div
-                v-if="!newPlayer.ImageBase64"
-                class="d-flex flex-column justify-content-center align-items-center gap-2"
-              >
-                <img src="@/images/NoImageSelected.png" class="no-image" />
-                <div class="text-center">Nicio imagine selectată</div>
-              </div>
-
-              <div v-if="newPlayer.ImageBase64" class="image">
-                <img
-                  :src="newPlayer.ImageBase64"
-                  alt="Imagine selectată"
-                  class="image"
-                />
-              </div>
+                type="text"
+                class="form-control"
+                id="input-height-add-player"
+                name="height"
+                placeholder="Inaltime jucator"
+                v-model="newPlayer.Height"
+              />
             </div>
-
-            <div
-              v-if="photoValidation === false"
-              ref="validation-img-type"
-              class="text-danger error-message"
-            >
-              Tipul imaginii selectate nu este valid
-            </div>
-            <div
-              v-else-if="photoValidation === true"
-              ref="validation-img-type"
-              class="text-danger error-message"
-            >
-              Imaginea selectată este prea mare
-            </div>
-            <div v-else></div>
           </div>
-        </div>
-
-        <div class="row"> 
-          <div>
-            <label for="input-nationality-add-player" class="form-label"
-              >Nationalitate</label
-            >
-            <Field
-              type="text"
-              class="form-control"
-              id="nationality"
-              name="nationality"
-              placeholder="Nationalitate"
-              v-model="newPlayer.Nationality"
-            />
-          </div>
-        </div> 
-
-        <div class="row"> 
-          <div>
-            <label for="input-height-add-player" class="form-label"
-              >Inaltime</label
-            >
-            <Field
-              type="text"
-              class="form-control"
-              id="input-height-add-player"
-              name="height"
-              placeholder="Inaltime jucator"
-              v-model="newPlayer.Height"
-            />
-          </div>
-        </div>
-
-
         </div>
       </div>
       <div class="row">
@@ -315,9 +272,18 @@ export default {
   computed: {
     schema() {
       return yup.object({
-        firstname: yup.string().required("Acest câmp este obligatoriu"),
-        lastname: yup.string().required("Acest câmp este obligatoriu"),
+        firstname: yup
+          .string()
+          .required("Acest câmp este obligatoriu")
+          .min(3, "Minim 3 caractere!")
+          .max(200, "Maxim 200 de caractere!"),
+        lastname: yup
+          .string()
+          .required("Acest câmp este obligatoriu")
+          .min(3, "Minim 3 caractere!")
+          .max(200, "Maxim 200 de caractere!"),
         number: yup.string().required("Acest câmp este obligatoriu"),
+        birthdate: yup.string().required("Acest câmp este obligatoriu"),
       });
     },
   },

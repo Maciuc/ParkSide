@@ -1,183 +1,193 @@
 <template>
   <div>
     <Form
-    @submit="AddArticle()"
-    :validation-schema="schema"
-    v-slot="{ errors }"
-    id="form-add-news"
-  >
-    <div class="row header-section align-items-center justify-content-between">
-      
-      <div class="col-auto ">
-        <div class="title-page">Adăugare știre</div>
+      @submit="AddArticle()"
+      :validation-schema="schema"
+      v-slot="{ errors }"
+      id="form-add-news"
+    >
+      <div
+        class="row header-section align-items-center justify-content-between"
+      >
+        <div class="col-auto">
+          <div class="title-page">Adăugare știre</div>
+        </div>
+
+        <div class="col-auto row gap-1 mt-2 mt-lg-0">
+          <div class="col-md-auto d-flex justify-content-sm-end">
+            <button
+              class="button grey"
+              type="submit"
+              form="form-add-news"
+              @click="newNews.IsPublished = false"
+            >
+              Salvează schița
+            </button>
+          </div>
+          <div class="col-md-auto d-flex justify-content-sm-end">
+            <button class="button green" type="submit" form="form-add-news">
+              Publică
+            </button>
+          </div>
+        </div>
       </div>
 
-      <div class=" col-auto row gap-1 mt-2 mt-lg-0">
-        <div class="col-md-auto d-flex justify-content-sm-end">
-          <button class="button grey" type="submit" form="form-add-news" @click="newNews.IsPublished=false">
-            Salvează schița
-          </button>
-        </div>
-        <div class="col-md-auto d-flex justify-content-sm-end ">
-          <button class="button green" type="submit" form="form-add-news">
-            Publică
-          </button>
-        </div>
-      </div>
-    </div>
-  
+      <div class="new-form mt-4 mb-4">
+        <div class="row">
+          <div class="col-md-4 col-sm-6">
+            <label for="input-add-news-title" class="form-label"
+              >Titlu știre</label
+            >
+            <Field
+              class="form-control"
+              id="input-add-news-title"
+              placeholder="Titlu știre"
+              :class="{ 'border-danger': errors.title }"
+              name="title"
+              v-model="newNews.Name"
+            >
+            </Field>
+            <ErrorMessage name="title" class="text-danger error-message" />
+          </div>
 
-  
-    <div class="new-form mt-4 mb-4">
-      <div class="row">
-        <div class="col-md-4 col-sm-6">
-          <label for="input-add-news-title" class="form-label"
-            >Titlu știre</label
+          <div
+            :class="{ 'invalid-input': errors.datepublish }"
+            class="col-md-4 col-sm-6 custom-date-picker"
           >
-          <Field
-            class="form-control"
-            id="input-add-news-title"
-            placeholder="Titlu știre"
-            :class="{ 'border-danger': errors.title }"
-            name="title"
-            v-model="newNews.Name"
+            <label class="form-label">Dată publicare</label>
+            <Field
+              v-slot="{ field }"
+              name="datepublish"
+              id="date-publish-add-news"
+            >
+              <VueDatePicker
+                v-bind="field"
+                v-model="newNews.PublishedDate"
+                format="dd/MM/yyyy"
+                auto-apply
+                utc
+                :enable-time-picker="false"
+                placeholder="Dată publicare"
+              ></VueDatePicker>
+            </Field>
+            <ErrorMessage
+              name="datepublish"
+              class="text-danger error-message"
+            />
+          </div>
+
+          <div
+            class="col-md-4 col-sm-6 d-flex align-items-end justify-content-start"
           >
-          </Field>
-          <ErrorMessage name="title" class="text-danger error-message" />
+            <div class="form-check form-switch">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="flexSwitchCheckDefault"
+                :checked="newNews.IsPrimary"
+                @click="TogglePrimaryNews"
+              />
+              <label class="form-label" for="flexSwitchCheckDefault"
+                >Stire primara</label
+              >
+            </div>
+          </div>
         </div>
 
-        <div
-          :class="{ 'invalid-input': errors.datepublish }"
-          class="col-md-4 col-sm-6 custom-date-picker"
-        >
-          <label class="form-label">Dată publicare</label>
-          <Field
-            v-slot="{ field }"
-            name="datepublish"
-            id="date-publish-add-news"
-          >
-            <VueDatePicker
-              v-bind="field"
-              v-model="newNews.PublishedDate"
-              format="dd/MM/yyyy"
-              auto-apply
-              utc
-              :enable-time-picker="false"
-              placeholder="Dată publicare"
-            ></VueDatePicker>
-          </Field>
-          <ErrorMessage name="datepublish" class="text-danger error-message" />
-        </div>
+        <div class="row">
+          <div class="col-md-5 col-xl-8">
+            <label for="input-description-add-news" class="form-label"
+              >Descriere</label
+            >
+            <Field
+              name="descriptionNews"
+              id="input-description-add-news"
+              v-model="newNews.Description"
+              v-slot="{ field }"
+            >
+              <textarea
+                v-bind="field"
+                class="form-control textarea"
+                placeholder="Descriere"
+                rows="6"
+              >
+              </textarea>
+            </Field>
+          </div>
 
-        <div class="col-md-4 col-sm-6 d-flex align-items-end justify-content-start">
-        <div class="form-check form-switch">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  id="flexSwitchCheckDefault"
-                  :checked="newNews.IsPrimary"
-                  @click="TogglePrimaryNews"
-                />
-                <label class="form-label" for="flexSwitchCheckDefault"
-                  >Stire primara</label
+          <div class="col-md-7 col-xl-4 row justify-content-start mt-4 gap-1">
+            <div class="col">
+              <label class="form-label">Selectează imagine</label>
+              <label
+                class="button blue cursor-pointer"
+                style="width: 140px"
+                for="input-upload-image-add-news"
+              >
+                <Field
+                  name="uploadImage"
+                  type="file"
+                  id="input-upload-image-add-news"
+                  style="display: none"
+                  accept="image/*"
+                  ref="uploadImageAddNews"
+                  @change="UploadImageAddNews"
                 >
+                </Field>
+                Încarcă imagine
+                <font-awesome-icon :icon="['fas', 'upload']" />
+              </label>
             </div>
-            </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-5 col-xl-8">
-          <label for="input-description-add-news" class="form-label"
-            >Descriere</label
-          >
-          <Field
-            name="descriptionNews"
-            id="input-description-add-news"
-            v-model="newNews.Description"
-            v-slot="{ field }"
-          >
-            <textarea
-              v-bind="field"
-              class="form-control textarea"
-              placeholder="Descriere"
-              rows="6"
-            >
-            </textarea>
-          </Field>
-        </div>
-
-
-        
-        <div class="col-md-7 col-xl-4 row justify-content-start mt-4 gap-1">
-          <div class="col">
-            <label class="form-label">Selectează imagine</label>
-            <label
-              class="button blue cursor-pointer"
-              style="width: 140px"
-              for="input-upload-image-add-news"
-            >
-              <Field
-                name="uploadImage"
-                type="file"
-                id="input-upload-image-add-news"
-                style="display: none"
-                accept="image/*"
-                ref="uploadImageAddNews"
-                @change="UploadImageAddNews"
-              >
-              </Field>
-              Încarcă imagine
-              <font-awesome-icon :icon="['fas', 'upload']" />
-            </label>
-          </div>
-          <div class="col">
-            <div
-              class="image-container d-flex align-items-center justify-content-center"
-            >
-              <button type="button" class="button-delete" @click="DeletePhoto">
-                <font-awesome-icon :icon="['fas', 'trash']" />
-              </button>
+            <div class="col">
               <div
-                v-if="!newNews.ImageBase64"
-                class="d-flex flex-column justify-content-center align-items-center gap-2"
+                class="image-container d-flex align-items-center justify-content-center"
               >
-                <img src="@/images/NoImageSelected.png" class="no-image" />
-                <div class="text-center">Nicio imagine selectată</div>
+                <button
+                  type="button"
+                  class="button-delete"
+                  @click="DeletePhoto"
+                >
+                  <font-awesome-icon :icon="['fas', 'trash']" />
+                </button>
+                <div
+                  v-if="!newNews.ImageBase64"
+                  class="d-flex flex-column justify-content-center align-items-center gap-2"
+                >
+                  <img src="@/images/NoImageSelected.png" class="no-image" />
+                  <div class="text-center">Nicio imagine selectată</div>
+                </div>
+
+                <div v-if="newNews.ImageBase64" class="image">
+                  <img
+                    :src="newNews.ImageBase64"
+                    alt="Imagine selectată"
+                    class="image"
+                  />
+                </div>
               </div>
 
-              <div v-if="newNews.ImageBase64" class="image">
-                <img
-                  :src="newNews.ImageBase64"
-                  alt="Imagine selectată"
-                  class="image"
-                />
+              <div
+                v-if="photoValidation === false"
+                ref="validation-img-type"
+                class="text-danger error-message"
+              >
+                Tipul imaginii selectate nu este valid
               </div>
+              <div
+                v-else-if="photoValidation === true"
+                ref="validation-img-type"
+                class="text-danger error-message"
+              >
+                Imaginea selectată este prea mare
+              </div>
+              <div v-else></div>
             </div>
-
-            <div
-              v-if="photoValidation === false"
-              ref="validation-img-type"
-              class="text-danger error-message"
-            >
-              Tipul imaginii selectate nu este valid
-            </div>
-            <div
-              v-else-if="photoValidation === true"
-              ref="validation-img-type"
-              class="text-danger error-message"
-            >
-              Imaginea selectată este prea mare
-            </div>
-            <div v-else></div>
           </div>
         </div>
       </div>
-    </div>
-  </Form>
+    </Form>
 
     <TextEditor v-model="newNews.Content"></TextEditor>
-
-</div>
+  </div>
 </template>
 
 <script>
@@ -213,7 +223,11 @@ export default {
   computed: {
     schema() {
       return yup.object({
-        title: yup.string().required("Acest câmp este obligatoriu"),
+        title: yup
+          .string()
+          .required("Acest câmp este obligatoriu")
+          .min(3, "Minim 3 caractere!")
+          .max(200, "Maxim 200 de caractere!"),
         datepublish: yup.string().required("Acest câmp este obligatoriu"),
       });
     },
@@ -241,39 +255,35 @@ export default {
         reader.readAsDataURL(file);
       }
     },
-    
+
     DeletePhoto() {
       this.$refs.uploadImageAddNews.reset();
       this.newNews.ImageBase64 = null;
     },
 
     AddArticle() {
-      
       this.$axios
-        .post(
-          `/api/News/createNews`,
-          this.newNews
-        )
+        .post(`/api/News/createNews`, this.newNews)
         .then((response) => {
           console.log(this.newNews);
           console.log(response);
           this.$router.push({ name: "news" });
-          if(this.newNews.IsPublished===false){
+          if (this.newNews.IsPublished === false) {
             this.$swal.fire({
-            title: "Succes",
-            text: "Știrea a fost adăugată",
-            icon: "success",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          }else{
+              title: "Succes",
+              text: "Știrea a fost adăugată",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          } else {
             this.$swal.fire({
-            title: "Succes",
-            text: "Știrea a fost publicată",
-            icon: "success",
-            showConfirmButton: false,
-            timer: 1500,
-          });
+              title: "Succes",
+              text: "Știrea a fost publicată",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 1500,
+            });
           }
         })
         .catch((error) => {
@@ -282,26 +292,22 @@ export default {
     },
 
     TogglePrimaryNews() {
-      this.newNews.IsPrimary =
-        !this.newNews.IsPrimary;
+      this.newNews.IsPrimary = !this.newNews.IsPrimary;
       console.log(this.newNews.IsPrimary);
     },
 
-    SaveSketch(){
-      this.newNews.IsPublished=false;
+    SaveSketch() {
+      this.newNews.IsPublished = false;
       this.AddArticle();
     },
   },
 
-  created() {
-  },
+  created() {},
 };
 </script>
 
 <style scoped>
-
-.button{
+.button {
   width: 155px;
 }
-
 </style>

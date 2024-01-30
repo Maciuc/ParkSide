@@ -10,9 +10,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title mt-2">
-            Editare link Social Media
-          </h5>
+          <h5 class="modal-title mt-2">Editare link Social Media</h5>
           <button
             type="button"
             class="btn-close"
@@ -31,22 +29,20 @@
             <div class="mb-3 position-relative">
               <label for="platform" class="form-label">Alege platforma</label>
               <Field
-              v-model="socialLink.Platform"
+                v-model="socialLink.Platform"
                 name="platform"
                 as="select"
                 :class="{ 'border-danger': errors.Platform }"
                 class="form-select form-control"
               >
                 <option
-                  v-for="(plat,index) in platforms"
+                  v-for="(plat, index) in platforms"
                   :key="index"
                   :value="plat.name"
                 >
                   {{ plat.name }}
                 </option>
               </Field>
-            
-              
 
               <ErrorMessage name="platform" class="text-danger error-message" />
             </div>
@@ -159,13 +155,16 @@ export default {
           });
         });
     },
-    
   },
   computed: {
     schema() {
       return yup.object({
         platform: yup.string().required("Acest câmp este obligatoriu"),
-        name: yup.string().required("Acest câmp este obligatoriu"),
+        name: yup
+          .string()
+          .required("Acest câmp este obligatoriu")
+          .min(3, "Minim 3 caractere!")
+          .max(200, "Maxim 200 de caractere!"),
         link: yup.string().required("Acest câmp este obligatoriu"),
       });
     },

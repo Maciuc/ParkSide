@@ -18,19 +18,17 @@ import { RouterLink, RouterView } from "vue-router";
 
   <div class="page d-flex">
     <aside class="d-flex flex-column">
-      <img class="logo img-fluid container align-self-center" src="@/images/logo.png" />
+      <img
+        class="logo img-fluid container align-self-center"
+        src="@/images/logo.png"
+      />
 
       <nav>
         <div class="categoryTitle">MENIU PRINCIPAL</div>
         <ul class="dashboard-menu">
-
-          <router-link
-            class="nav-link d-flex"
-            :to="{ name: 'news' }"
-            exact
-          >
-            <font-awesome-icon class="img-link" :icon="['far', 'newspaper']"  />
-            <div >Știri</div>
+          <router-link class="nav-link d-flex" :to="{ name: 'news' }" exact>
+            <font-awesome-icon class="img-link" :icon="['far', 'newspaper']" />
+            <div>Știri</div>
           </router-link>
 
           <router-link
@@ -39,7 +37,7 @@ import { RouterLink, RouterView } from "vue-router";
             :to="{ name: 'sponsors' }"
             exact
           >
-            <font-awesome-icon class="img-link" :icon="['far', 'handshake']"  />
+            <font-awesome-icon class="img-link" :icon="['far', 'handshake']" />
             <div>Sponsori</div>
           </router-link>
 
@@ -49,7 +47,7 @@ import { RouterLink, RouterView } from "vue-router";
             :to="{ name: 'socialMedia' }"
             exact
           >
-            <font-awesome-icon class="img-link" :icon="['far', 'thumbs-up']"  />
+            <font-awesome-icon class="img-link" :icon="['far', 'thumbs-up']" />
             <div>Social media</div>
           </router-link>
 
@@ -59,7 +57,10 @@ import { RouterLink, RouterView } from "vue-router";
             :to="{ name: 'players' }"
             exact
           >
-            <font-awesome-icon class="img-link" :icon="['fas', 'people-group']"  />
+            <font-awesome-icon
+              class="img-link"
+              :icon="['fas', 'people-group']"
+            />
             <div>Jucatori</div>
           </router-link>
 
@@ -69,7 +70,10 @@ import { RouterLink, RouterView } from "vue-router";
             :to="{ name: 'stuff' }"
             exact
           >
-            <font-awesome-icon class="img-link" :icon="['fas', 'staff-snake']"  />
+            <font-awesome-icon
+              class="img-link"
+              :icon="['fas', 'staff-snake']"
+            />
             <div>Staff</div>
           </router-link>
 
@@ -79,7 +83,10 @@ import { RouterLink, RouterView } from "vue-router";
             :to="{ name: 'teams' }"
             exact
           >
-            <font-awesome-icon class="img-link" :icon="['fas', 'users-between-lines']"  />
+            <font-awesome-icon
+              class="img-link"
+              :icon="['fas', 'users-between-lines']"
+            />
             <div>Echipe</div>
           </router-link>
 
@@ -89,7 +96,7 @@ import { RouterLink, RouterView } from "vue-router";
             :to="{ name: 'championships' }"
             exact
           >
-            <font-awesome-icon class="img-link" :icon="['fas', 'trophy']"  />
+            <font-awesome-icon class="img-link" :icon="['fas', 'trophy']" />
             <div>Campionate</div>
           </router-link>
 
@@ -99,62 +106,68 @@ import { RouterLink, RouterView } from "vue-router";
             :to="{ name: 'matches' }"
             exact
           >
-            <font-awesome-icon class="img-link" :icon="['fas', 'calendar']"  />
+            <font-awesome-icon class="img-link" :icon="['fas', 'calendar']" />
             <div>Meciuri</div>
           </router-link>
 
           <router-link
-              tag="li"
-              class="nav-link d-flex"
-              :to="{ name: 'trofees' }"
-              exact
-            >
-              <font-awesome-icon class="img-link" :icon="['fas', 'award']"  />
-              <div>Trofee</div>
-            </router-link>
+            tag="li"
+            class="nav-link d-flex"
+            :to="{ name: 'trofees' }"
+            exact
+          >
+            <font-awesome-icon class="img-link" :icon="['fas', 'award']" />
+            <div>Trofee</div>
+          </router-link>
 
-            <router-link
-                tag="li"
-                class="nav-link d-flex"
-                :to="{ name: 'playerHistory' }"
-                exact
-              >
-                <font-awesome-icon class="img-link" :icon="['fas', 'network-wired']"  />
-                <div>Participari jucatori</div>
-              </router-link>
+          <router-link
+            tag="li"
+            class="nav-link d-flex"
+            :to="{ name: 'playerHistory' }"
+            exact
+          >
+            <font-awesome-icon
+              class="img-link"
+              :icon="['fas', 'network-wired']"
+            />
+            <div>Participari jucatori</div>
+          </router-link>
 
-              <router-link
-                  tag="li"
-                  class="nav-link d-flex"
-                  :to="{ name: 'stuffHistory' }"
-                  exact
-                >
-                  <font-awesome-icon class="img-link" :icon="['fas', 'network-wired']"  />
-                  <div>Participari staff</div>
-                </router-link>
+          <router-link
+            tag="li"
+            class="nav-link d-flex"
+            :to="{ name: 'stuffHistory' }"
+            exact
+          >
+            <font-awesome-icon
+              class="img-link"
+              :icon="['fas', 'network-wired']"
+            />
+            <div>Participari staff</div>
+          </router-link>
 
-                <router-link
-                    tag="li"
-                    class="nav-link d-flex"
-                    :to="{ name: 'playersTrofees' }"
-                    exact
-                  >
-                    <font-awesome-icon class="img-link" :icon="['fas', 'medal']"  />
-                    <div>Trofee jucatori</div>
-                  </router-link>
+          <router-link
+            tag="li"
+            class="nav-link d-flex"
+            :to="{ name: 'playersTrofees' }"
+            exact
+          >
+            <font-awesome-icon class="img-link" :icon="['fas', 'medal']" />
+            <div>Trofee jucatori</div>
+          </router-link>
 
-                  <router-link
-                      tag="li"
-                      class="nav-link d-flex"
-                      :to="{ name: 'ranking' }"
-                      exact
-                      
-                    >
-                      <font-awesome-icon class="img-link" :icon="['fas', 'calendar-days']"  />
-                      <div 
-                      >Actualizare clasament</div>
-                      
-                    </router-link>
+          <router-link
+            tag="li"
+            class="nav-link d-flex"
+            :to="{ name: 'ranking' }"
+            exact
+          >
+            <font-awesome-icon
+              class="img-link"
+              :icon="['fas', 'calendar-days']"
+            />
+            <div>Actualizare clasament</div>
+          </router-link>
 
           <router-link
             tag="li"
@@ -162,19 +175,9 @@ import { RouterLink, RouterView } from "vue-router";
             :to="{ name: 'Users' }"
             exact
           >
-            <font-awesome-icon class="img-link" :icon="['fas', 'user-gear']"  />
+            <font-awesome-icon class="img-link" :icon="['fas', 'user-gear']" />
             <div>Utilizatori</div>
           </router-link>
-
-          <!-- <router-link
-            tag="li"
-            class="nav-link d-flex"
-            :to="{ name: 'home' }"
-            exact
-          >
-            <font-awesome-icon class="img-link" :icon="['far', 'newspaper']"  />
-            <div >Home</div>
-          </router-link>  -->
         </ul>
       </nav>
     </aside>
@@ -198,8 +201,8 @@ export default {
 </script>
 
 <style scoped>
-.page{
-  height:910px;
+.page {
+  height: 910px;
 }
 aside {
   border-right: 1px solid #0000001a;
@@ -224,13 +227,12 @@ aside {
   font-weight: 400;
   font-size: 13px;
   line-height: 18px;
-  letter-spacing: 0.6px ;
+  letter-spacing: 0.6px;
   padding-left: 10px;
   margin-right: 5px;
   justify-content: flex-start;
   align-items: center;
   height: 32px;
-  
 }
 .router-link-active {
   color: black;
@@ -239,12 +241,11 @@ aside {
   border-radius: 8px;
 }
 
-.nav-link:hover{
-  color: #3E4D52;
-  background-color: #F0F2F3;
+.nav-link:hover {
+  color: #3e4d52;
+  background-color: #f0f2f3;
   border-radius: 8px;
 }
-
 
 .dashboard-menu {
   display: flex;
@@ -255,7 +256,7 @@ aside {
   gap: 4px;
 }
 
-.img-link{
+.img-link {
   width: 20px;
   height: 20px;
   margin-right: 10px;
@@ -276,6 +277,4 @@ aside {
   margin-bottom: 2rem;
   max-width: 150px;
 }
-
-
 </style>

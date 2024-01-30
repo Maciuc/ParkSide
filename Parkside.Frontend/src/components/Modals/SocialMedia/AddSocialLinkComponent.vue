@@ -10,9 +10,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title mt-2" >
-            Adaugă link Social Media
-          </h5>
+          <h5 class="modal-title mt-2">Adaugă link Social Media</h5>
           <button
             type="button"
             class="btn-close"
@@ -27,7 +25,6 @@
           ref="addLinkFormRef"
         >
           <div class="modal-body new-form">
-    
             <div class="mb-3 position-relative">
               <label for="platform" class="form-label"
                 >Alege platformă din lista</label
@@ -97,7 +94,6 @@
 </template>
 
 <script>
-
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 
@@ -161,7 +157,11 @@ export default {
     schema() {
       return yup.object({
         platform: yup.string().required("Acest câmp este obligatoriu"),
-        name: yup.string().required("Acest câmp este obligatoriu"),
+        name: yup
+          .string()
+          .required("Acest câmp este obligatoriu")
+          .min(3, "Minim 3 caractere!")
+          .max(200, "Maxim 200 de caractere!"),
         link: yup.string().required("Acest câmp este obligatoriu"),
       });
     },

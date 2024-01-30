@@ -2,14 +2,13 @@
   <div class="breadcrumb align-items-center mt-4" aria-label="breadcrumbs">
     <ul class="d-flex flex-start align-items-center">
       <li><div>Administrare</div></li>
-      
+
       <li v-for="(crumb, index) in breadcrumbs" :key="index">
         <font-awesome-icon
           class="ms-3 me-3"
           :icon="['fas', 'sort-down']"
           rotation="270"
           style="color: #688088"
-          
         />
         <router-link :to="crumb.to">{{ crumb.label }}</router-link>
       </li>
@@ -65,7 +64,7 @@ export default {
   color: #2da017;
 }
 
-.router-link-active{
+.router-link-active {
   color: blue;
 }
 </style>

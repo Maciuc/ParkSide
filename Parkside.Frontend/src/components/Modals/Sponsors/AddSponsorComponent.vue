@@ -10,9 +10,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title mt-2" >
-            Adaugă sponsor
-          </h5>
+          <h5 class="modal-title mt-2">Adaugă sponsor</h5>
           <button
             type="button"
             class="btn-close"
@@ -77,7 +75,6 @@
                   >
                   </Field>
                 </label>
-
               </div>
 
               <div class="col-6">
@@ -116,21 +113,20 @@
                 </div>
 
                 <div
-                  v-if="photoValidation===false"
+                  v-if="photoValidation === false"
                   ref="validation-img-type"
                   class="text-danger error-message"
                 >
                   Tipul imaginii selectate nu este valid
                 </div>
                 <div
-                  v-else-if="photoValidation===true"
+                  v-else-if="photoValidation === true"
                   ref="validation-img-type"
                   class="text-danger error-message"
                 >
                   Imaginea selectată este prea mare
                 </div>
-                <div v-else>
-                </div>
+                <div v-else></div>
               </div>
             </div>
           </div>
@@ -205,7 +201,7 @@ export default {
             console.log(reader.result);
             this.newSponsor.ImageBase64 = reader.result;
             selectedFile.value = "";
-          }else{
+          } else {
             this.photoValidation = true;
           }
         } else {
@@ -225,10 +221,13 @@ export default {
   computed: {
     schema() {
       return yup.object({
-        name: yup.string().required("Denumirea nu este validă"),
+        name: yup
+          .string()
+          .required("Acest câmp este obligatoriu")
+          .min(3, "Minim 3 caractere!")
+          .max(200, "Maxim 200 de caractere!"),
       });
     },
   },
 };
 </script>
-

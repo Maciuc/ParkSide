@@ -2,7 +2,7 @@
   <!-- Modal -->
   <div
     class="modal fade custom-modal"
-    id="stuffHistory-add-modal"
+    id="stuffHistory-edit-modal"
     tabindex="-1"
     aria-labelledby="exampleModalLabel"
     :aria-hidden="true"
@@ -10,7 +10,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title mt-2">Adaugă participare</h5>
+          <h5 class="modal-title mt-2">Actualizeaza participare</h5>
           <button
             type="button"
             class="btn-close"
@@ -20,47 +20,52 @@
         </div>
 
         <Form
-          @submit="AddStaffHistory"
+          @submit="EditStaffHistory"
           :validation-schema="schema"
           v-slot="{ errors }"
-          ref="addStaffHistoryFormRef"
+          ref="editStaffHistoryFormRef"
         >
           <div class="modal-body new-form">
-            <!-- <div :class="{ 'invalid-input': errors.date }" class="col custom-date-picker mb-2">
-                            <label class="form-label">Dată meci</label>
-                            <Field v-slot="{ field }" name="date" id="date">
-                                <VueDatePicker v-bind="field" v-model="newStaffHistory.StaffHistoryDate" auto-apply utc
-                                    :enable-time-picker="false" placeholder="Dată meci"></VueDatePicker>
-                            </Field>
-                            <ErrorMessage name="date" class="text-danger error-message" />
-                        </div> -->
-
             <div class="mb-2 position-relative">
-              <label for="stuff" class="form-label">Alege staff</label>
+              <label for="staff" class="form-label">Alege staff</label>
               <Field
-                v-model="selectedStaff.Name"
-                name="stuff"
-                as="select"
-                @change="updateSelectedStaffId"
-                :class="{ 'border-danger': errors.stuff }"
-                class="form-select form-control"
+                v-slot="{ field }"
+                name="staff"
+                class="form-control"
+                v-model="editedStaffHistory.Stuff"
               >
-                <option value="" disabled>Staff</option>
-                <option
-                  v-for="(stuff, index) in stuffsList"
-                  :key="index"
-                  :value="stuff.Id"
-                >
-                  {{ stuff.Name }}
-                </option>
+                <div class="custom dropdown custom-dropdown" v-bind="field">
+                  <button
+                    class="btn btn-secondary dropdown-toggle"
+                    :class="{ 'border-danger': errors.staff }"
+                    type="button"
+                    id="dropdownPlayers"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <span>
+                      {{ editedStaffHistory.Stuff?.Name }}
+                    </span>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownPlayers">
+                    <li v-for="(staff, index) in stuffsList" :key="index">
+                      <a
+                        class="dropdown-item"
+                        @click="editedStaffHistory.Stuff = staff"
+                        >{{ staff.Name }}</a
+                      >
+                    </li>
+                  </ul>
+                </div>
               </Field>
-              <ErrorMessage name="stuff" class="text-danger error-message" />
+
+              <ErrorMessage name="staff" class="text-danger error-message" />
             </div>
 
             <div class="mb-3 position-relative">
               <label for="year" class="form-label">Alege anul</label>
               <Field
-                v-model="newStaffHistory.Year"
+                v-model="editedStaffHistory.Year"
                 name="year"
                 as="select"
                 :class="{ 'border-danger': errors.year }"
@@ -82,7 +87,7 @@
             <div class="mb-3 position-relative">
               <label for="role" class="form-label">Alege rolul</label>
               <Field
-                v-model="newStaffHistory.Role"
+                v-model="editedStaffHistory.Role"
                 name="role"
                 as="select"
                 :class="{ 'border-danger': errors.role }"
@@ -104,7 +109,7 @@
             <div class="mb-3 position-relative">
               <label for="team" class="form-label">Alege echipa</label>
               <Field
-                v-model="newStaffHistory.TeamName"
+                v-model="editedStaffHistory.TeamName"
                 name="team"
                 as="select"
                 :class="{ 'border-danger': errors.team }"
@@ -143,7 +148,7 @@ import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 
 export default {
-  name: "AddStaffHistoryComponent",
+  name: "EditStaffHistoryComponent",
   components: {
     Form,
     Field,
@@ -155,11 +160,6 @@ export default {
     return {
       stuffsList: [],
       selectedStaff: {},
-      newStaffHistory: {
-        Year: "",
-        TeamName: "",
-        Role: "",
-      },
       Years: [
         { year: "2024" },
         { year: "2023" },
@@ -179,10 +179,24 @@ export default {
     };
   },
 
+  props: {
+    editedStaffHistory: {
+      type: Object,
+      default() {
+        return {
+          Id: "",
+          Role: "",
+          Year: "",
+          TeamName: "",
+        };
+      },
+    },
+  },
+
   computed: {
     schema() {
       return yup.object({
-        stuff: yup.string().required("Acest câmp este obligatoriu"),
+        staff: yup.object().required("Acest câmp este obligatoriu"),
         year: yup.string().required("Acest câmp este obligatoriu"),
         team: yup.string().required("Acest câmp este obligatoriu"),
         role: yup.string().required("Acest câmp este obligatoriu"),
@@ -191,20 +205,20 @@ export default {
   },
 
   methods: {
-    AddStaffHistory() {
+    EditStaffHistory() {
       this.$axios
-        .post(
-          `/api/StuffHistory/createStuffHistory/${this.selectedStaff.Id}`,
-          this.newStaffHistory
+        .put(
+          `/api/StuffHistory/updateStuffHistory/${this.editedStaffHistory.Id}/${this.editedStaffHistory.Stuff.Id}`,
+          this.editedStaffHistory
         )
         .then((response) => {
           console.log(response);
-          console.log(this.newStaffHistory);
+          console.log(this.editedStaffHistory);
           this.$emit("get-list");
-          $("#stuffHistory-add-modal").modal("hide");
+          $("#stuffHistory-edit-modal").modal("hide");
           this.$swal.fire({
             title: "Succes",
-            text: "Participarea a fost adăugata",
+            text: "Participarea a fost actualizata",
             icon: "success",
             showConfirmButton: false,
             timer: 1500,
@@ -213,11 +227,11 @@ export default {
         .catch((error) => {
           console.error(error);
           console.log(this.selectedStaff.Id);
-          console.log(this.newStaffHistory);
+          console.log(this.editedStaffHistory);
         });
     },
     ClearModal() {
-      this.$refs.addStaffHistoryFormRef.resetForm();
+      this.$refs.editStaffHistoryFormRef.resetForm();
     },
     GetStaffsList() {
       this.$axios

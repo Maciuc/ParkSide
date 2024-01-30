@@ -17,8 +17,9 @@
       <div class="col-xxl col-xl-4 col-md-3 col-sm-4 col-xs-6 mb-2">
         <div class="input-group-custom">
           <div class="d-flex">
-
-            <div class="d-flex justify-content-center align-items-center search-separator">
+            <div
+              class="d-flex justify-content-center align-items-center search-separator"
+            >
               <font-awesome-icon
                 class="search_icon"
                 :icon="['fas', 'magnifying-glass']"
@@ -77,7 +78,6 @@
             </button>
           </button>
 
-          
           <ul class="dropdown-menu" aria-labelledby="dropdownNewsTypesAddNews">
             <li>
               <a
@@ -96,194 +96,201 @@
               >
             </li>
           </ul>
-
         </div>
       </div>
 
-
       <div class="col-xxl col-xl-4 col-md-3 col-sm-4 mb-2">
-          <div class="custom dropdown">
+        <div class="custom dropdown">
+          <button
+            class="btn btn-secondary justify-content-between"
+            type="button"
+            id="dropdownPrimaryStateNews"
+            aria-expanded="false"
+            @click="OpenDropdownPrimaryState"
+            :class="{ 'dropdown-toggle': !primaryNews }"
+          >
+            <div>
+              <span v-if="filter.IsPrimary === true"> Primare </span>
+              <span v-else-if="filter.IsPrimary === false"> Normale </span>
+              <span v-else>Primare, normale </span>
+            </div>
+
             <button
-              class="btn btn-secondary justify-content-between"
-              type="button"
-              id="dropdownPrimaryStateNews"
-              aria-expanded="false"
-              @click="OpenDropdownPrimaryState"
-              :class="{ 'dropdown-toggle': !primaryNews }"
+              v-if="primaryNews"
+              @click="CloseAndResetDropdownPrimaryState"
+              class="button-close justify-content-end"
             >
-              <div>
-                <span v-if="filter.IsPrimary === true"> Primare </span>
-                <span v-else-if="filter.IsPrimary === false"> Normale </span>
-                <span v-else>Primare, normale </span>
-              </div>
-
-              <button
-                v-if="primaryNews"
-                @click="CloseAndResetDropdownPrimaryState"
-                class="button-close justify-content-end"
-              >
-                <font-awesome-icon :icon="['fas', 'xmark']" />
-              </button>
+              <font-awesome-icon :icon="['fas', 'xmark']" />
             </button>
+          </button>
 
-          
-            <ul class="dropdown-menu" aria-labelledby="dropdownNewsTypesAddNews">
-              <li>
-                <a
-                  class="dropdown-item"
-                  href="#"
-                  @click="SelectPrimaryStateNews('Primare')"
-                  >Primare</a
-                >
-              </li>
-              <li>
-                <a
-                  class="dropdown-item"
-                  href="#"
-                  @click="SelectPrimaryStateNews('Normale')"
-                  >Normale</a
-                >
-              </li>
-            </ul>
-          
-          </div>
+          <ul class="dropdown-menu" aria-labelledby="dropdownNewsTypesAddNews">
+            <li>
+              <a
+                class="dropdown-item"
+                href="#"
+                @click="SelectPrimaryStateNews('Primare')"
+                >Primare</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                href="#"
+                @click="SelectPrimaryStateNews('Normale')"
+                >Normale</a
+              >
+            </li>
+          </ul>
         </div>
+      </div>
 
-    <div style="overflow-x: auto">
-      <table class="table table-custom">
-        <thead>
-          <tr>
-            <th width="15%" @click="OrderBy('name')" class="cursor-pointer">
-              <font-awesome-icon
-                v-if="filter.OrderBy === 'name'"
-                :icon="['fas', 'arrow-up-wide-short']"
-                style="color: #29be00"
-                rotation="180"
-                size="xl"
-                class="me-2"
-              />
+      <div style="overflow-x: auto">
+        <table class="table table-custom">
+          <thead>
+            <tr>
+              <th width="15%" @click="OrderBy('name')" class="cursor-pointer">
+                <font-awesome-icon
+                  v-if="filter.OrderBy === 'name'"
+                  :icon="['fas', 'arrow-up-wide-short']"
+                  style="color: #29be00"
+                  rotation="180"
+                  size="xl"
+                  class="me-2"
+                />
 
-              <font-awesome-icon
-                v-else-if="filter.OrderBy === 'name_desc'"
-                :icon="['fas', 'arrow-up-short-wide']"
-                rotation="180"
-                style="color: #29be00"
-                size="xl"
-                class="me-2"
-              />
-              <font-awesome-icon
-                v-else
-                :icon="['fas', 'arrow-up-wide-short']"
-                rotation="180"
-                size="xl"
-                class="me-2"
-              />
-              <span v-if="filter.OrderBy === 'name' || filter.OrderBy === 'name_desc'">Titlu știre</span>
-              <span v-else class="span-inactive">Titlu știre</span>
-            </th>
-            <th scope="25" width="15%">Descriere</th>
-            <th
-              scope="25"
-              width="15%"
-              @click="OrderBy('PublishedDate')"
-              class="cursor-pointer"
-            >
-              <font-awesome-icon
-                v-if="filter.OrderBy === 'PublishedDate'"
-                :icon="['fas', 'arrow-up-wide-short']"
-                style="color: #29be00"
-                rotation="180"
-                size="xl"
-                class="me-2"
-              />
-
-              <font-awesome-icon
-                v-else-if="filter.OrderBy === 'PublishedDate_desc'"
-                :icon="['fas', 'arrow-up-short-wide']"
-                rotation="180"
-                style="color: #29be00"
-                size="xl"
-                class="me-2"
-              />
-              <font-awesome-icon
-                v-else
-                :icon="['fas', 'arrow-up-wide-short']"
-                rotation="180"
-                size="xl"
-                class="me-2"
-              />
-              <span v-if="filter.OrderBy === 'PublishedDate' || filter.OrderBy === 'PublishedDate_desc'">Data publicării</span>
-              <span v-else class="span-inactive">Data publicării</span>
-            </th>
-            <th scope="25" width="15%">Importanta</th>
-            <th width="10%"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(news, index) in NewsList.Items" :key="index">
-            <td>
-              <div class="d-flex align-items-center">
-                <div class="img-container-avatar me-2">
-                  <img
-                    :src="ShowDynamicImage(news.ImageBase64)"
-                    class="me-2 icon-avatar"
-                  />
-                </div>
-                <div class="d-flex flex-column">
-                  <span>{{
-                    news.Name.length > 30
-                      ? news.Name.substring(0, 20) + "..."
-                      : news.Name
-                  }}</span>
-                  <span v-if="news.IsPublished === false" class="draft"
-                    >Draft</span
-                  >
-                  <span v-if="news.IsPublished === true" class="published"
-                    >Published</span
-                  >
-                </div>
-              </div>
-            </td>
-            <td>
-              {{
-                news.Description.length > 30
-                  ? news.Description.substring(0, 30) + "..."
-                  : news.Description
-              }}
-            </td>
-
-            <td>{{ news.PublishedDate }}</td>
-            <td>
-                  <span v-if="news.IsPrimary === false" class="draft"
-                      >Normala</span
-                    >
-                    <span v-if="news.IsPrimary === true" class="published"
-                      >Primara</span
-                    >
-            </td>
-
-            <td>
-              <div class="editButtons">
-                <router-link
-                  :to="{ name: 'edit-news', params: { id: news.Id } }"
-                  class="button-edit"
+                <font-awesome-icon
+                  v-else-if="filter.OrderBy === 'name_desc'"
+                  :icon="['fas', 'arrow-up-short-wide']"
+                  rotation="180"
+                  style="color: #29be00"
+                  size="xl"
+                  class="me-2"
+                />
+                <font-awesome-icon
+                  v-else
+                  :icon="['fas', 'arrow-up-wide-short']"
+                  rotation="180"
+                  size="xl"
+                  class="me-2"
+                />
+                <span
+                  v-if="
+                    filter.OrderBy === 'name' || filter.OrderBy === 'name_desc'
+                  "
+                  >Titlu știre</span
                 >
-                  <font-awesome-icon :icon="['far', 'pen-to-square']" />
-                </router-link>
+                <span v-else class="span-inactive">Titlu știre</span>
+              </th>
+              <th scope="25" width="15%">Descriere</th>
+              <th
+                scope="25"
+                width="15%"
+                @click="OrderBy('PublishedDate')"
+                class="cursor-pointer"
+              >
+                <font-awesome-icon
+                  v-if="filter.OrderBy === 'PublishedDate'"
+                  :icon="['fas', 'arrow-up-wide-short']"
+                  style="color: #29be00"
+                  rotation="180"
+                  size="xl"
+                  class="me-2"
+                />
 
-                <button
-                  type="button"
-                  class="button-delete"
-                  @click="DeleteNews(news.Id)"
+                <font-awesome-icon
+                  v-else-if="filter.OrderBy === 'PublishedDate_desc'"
+                  :icon="['fas', 'arrow-up-short-wide']"
+                  rotation="180"
+                  style="color: #29be00"
+                  size="xl"
+                  class="me-2"
+                />
+                <font-awesome-icon
+                  v-else
+                  :icon="['fas', 'arrow-up-wide-short']"
+                  rotation="180"
+                  size="xl"
+                  class="me-2"
+                />
+                <span
+                  v-if="
+                    filter.OrderBy === 'PublishedDate' ||
+                    filter.OrderBy === 'PublishedDate_desc'
+                  "
+                  >Data publicării</span
                 >
-                  <font-awesome-icon :icon="['fas', 'trash']" />
-                </button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+                <span v-else class="span-inactive">Data publicării</span>
+              </th>
+              <th scope="25" width="15%">Importanta</th>
+              <th width="10%"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(news, index) in NewsList.Items" :key="index">
+              <td>
+                <div class="d-flex align-items-center">
+                  <div class="img-container-avatar me-2">
+                    <img
+                      :src="ShowDynamicImage(news.ImageBase64)"
+                      class="me-2 icon-avatar"
+                    />
+                  </div>
+                  <div class="d-flex flex-column">
+                    <span>{{
+                      news.Name.length > 30
+                        ? news.Name.substring(0, 20) + "..."
+                        : news.Name
+                    }}</span>
+                    <span v-if="news.IsPublished === false" class="draft"
+                      >Draft</span
+                    >
+                    <span v-if="news.IsPublished === true" class="published"
+                      >Published</span
+                    >
+                  </div>
+                </div>
+              </td>
+              <td>
+                {{
+                  news.Description.length > 30
+                    ? news.Description.substring(0, 30) + "..."
+                    : news.Description
+                }}
+              </td>
+
+              <td>{{ news.PublishedDate }}</td>
+              <td>
+                <span v-if="news.IsPrimary === false" class="draft"
+                  >Normala</span
+                >
+                <span v-if="news.IsPrimary === true" class="published"
+                  >Primara</span
+                >
+              </td>
+
+              <td>
+                <div class="editButtons">
+                  <router-link
+                    :to="{ name: 'edit-news', params: { id: news.Id } }"
+                    class="button-edit"
+                  >
+                    <font-awesome-icon :icon="['far', 'pen-to-square']" />
+                  </router-link>
+
+                  <button
+                    type="button"
+                    class="button-delete"
+                    @click="DeleteNews(news.Id)"
+                  >
+                    <font-awesome-icon :icon="['fas', 'trash']" />
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <Pagination
@@ -291,15 +298,13 @@
       :currentPage="filter.PageNumber"
       @pagechanged="GetAllNews"
     />
-</div>
+  </div>
 </template>
 
 <script>
 import Pagination from "../../components/Pagination.vue";
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
-import { date } from "yup";
-import moment from "moment";
 
 export default {
   name: "News",
@@ -343,7 +348,7 @@ export default {
       const searchParams = {
         OrderBy: this.filter.OrderBy,
         PageNumber: this.filter.PageNumber,
-        PublishedDate :this.filter.PublishedDate,
+        PublishedDate: this.filter.PublishedDate,
         PageSize: 6,
         NameSearch: this.filter.SearchText,
         IsPublished: this.filter.IsPublished,
@@ -353,7 +358,7 @@ export default {
         .get(`/api/News/getNewses?${new URLSearchParams(searchParams)}`)
         .then((response) => {
           console.log(searchParams);
-          console.log(this.filter.PublishedDate)
+          console.log(this.filter.PublishedDate);
           this.NewsList = response.data;
         })
         .catch((error) => {
@@ -434,9 +439,4 @@ export default {
 };
 </script>
 
-<style>
-
-
-
-
-</style>
+<style></style>

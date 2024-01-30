@@ -44,16 +44,16 @@
             </div>
 
             <div class="mb-3">
-                <label for="link" class="form-label">Editeaza link</label>
-                <Field
-                  type="text"
-                  class="form-control"
-                  id="input-link-add-link"
-                  name="link"
-                  placeholder="Link"
-                  v-model="editedSponsor.Link"
-                />
-              </div>
+              <label for="link" class="form-label">Editeaza link</label>
+              <Field
+                type="text"
+                class="form-control"
+                id="input-link-add-link"
+                name="link"
+                placeholder="Link"
+                v-model="editedSponsor.Link"
+              />
+            </div>
 
             <div class="row">
               <div class="col-6 d-flex flex-column justify-content-center">
@@ -164,14 +164,17 @@ export default {
     editedSponsor: {
       type: Object,
       default() {
-        return { Name: "", ImageBase64: "", Id: ""};
+        return { Name: "", ImageBase64: "", Id: "" };
       },
     },
   },
   methods: {
     SaveEditedSponsor() {
       this.$axios
-        .put(`/api/Sponsor/updateSponsor/${this.editedSponsor.Id}`, this.editedSponsor)
+        .put(
+          `/api/Sponsor/updateSponsor/${this.editedSponsor.Id}`,
+          this.editedSponsor
+        )
         .then((response) => {
           console.log(response);
           this.$emit("get-list");
@@ -226,10 +229,13 @@ export default {
   computed: {
     schema() {
       return yup.object({
-        name: yup.string().required("Denumirea nu este validă"),
+        name: yup
+          .string()
+          .required("Acest câmp este obligatoriu")
+          .min(3, "Minim 3 caractere!")
+          .max(200, "Maxim 200 de caractere!"),
       });
     },
   },
 };
 </script>
-
