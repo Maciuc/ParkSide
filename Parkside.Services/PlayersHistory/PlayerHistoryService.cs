@@ -41,7 +41,7 @@ namespace Parkside.Services.PlayerHistory
                 Player = new PlayerBasicViewModel
                 {
                     Id = playerHistory.Player.Id,
-
+                    Name = playerHistory.Player.LastName + " " + playerHistory.Player.FirstName,
 
                 },
                 Championship = new ChampionshipViewModel
@@ -216,7 +216,7 @@ namespace Parkside.Services.PlayerHistory
             }
 
             var championshipExist = await _playerHistoryRepo.GetAllPlayersHistories().FirstOrDefaultAsync(
-                x => x.ChampionshipId == championshipId && x.PlayerId == playerId && x.Year == model.Year);
+                x => x.ChampionshipId == championshipId && x.PlayerId == playerId && x.Year == model.Year && x.Id != playerHistoryId);
             if (championshipExist != null)
             {
                 throw new Exception("Championship already used!");

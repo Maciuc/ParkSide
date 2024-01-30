@@ -146,13 +146,13 @@ import { RouterLink, RouterView } from "vue-router";
                   <router-link
                       tag="li"
                       class="nav-link d-flex"
-                      :to="{ name: 'playersTrofees' }"
+                      :to="{ name: 'ranking' }"
                       exact
                       
                     >
-                      <font-awesome-icon class="img-link" :icon="['fas', 'medal']"  />
+                      <font-awesome-icon class="img-link" :icon="['fas', 'calendar-days']"  />
                       <div 
-                      >Trofee jucatori</div>
+                      >Actualizare clasament</div>
                       
                     </router-link>
 
@@ -208,8 +208,8 @@ aside {
   justify-content: flex-start;
   background-color: #fafafe;
   width: 14%;
-  min-width: 140px;
-  max-width: 190px;
+  min-width: 170px;
+  max-width: 215px;
 }
 
 .main-section {

@@ -14,15 +14,6 @@
                 <Form @submit="AddPlayerHistory" :validation-schema="schema" v-slot="{ errors }" ref="addPlayerHistoryFormRef">
                     <div class="modal-body new-form">
 
-                        <!-- <div :class="{ 'invalid-input': errors.date }" class="col custom-date-picker mb-2">
-                            <label class="form-label">Dată meci</label>
-                            <Field v-slot="{ field }" name="date" id="date">
-                                <VueDatePicker v-bind="field" v-model="newPlayerHistory.PlayerHistoryDate" auto-apply utc
-                                    :enable-time-picker="false" placeholder="Dată meci"></VueDatePicker>
-                            </Field>
-                            <ErrorMessage name="date" class="text-danger error-message" />
-                        </div> -->
-
                         <div class="mb-2 position-relative">
                                 <label for="player" class="form-label">Alege jucator</label>
                                 <Field v-model="selectedPlayer.Name" name="player" as="select" @change="updateSelectedPlayerId"

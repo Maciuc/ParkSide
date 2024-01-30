@@ -124,13 +124,13 @@
 
         <Pagination :totalPages="playerHistories.NumberOfPages" :currentPage="filter.PageNumber" @pagechanged="GetAllPlayerHistories" />
 
-        <!-- <EditPlayerHistoryComponent :editedPlayerHistory="selectedPlayerHistoryForEdit" @get-list="GetAllPlayerHistories" /> -->
+        <EditPlayerHistoryComponent :editedPlayerHistory="selectedPlayerHistoryForEdit" @get-list="GetAllPlayerHistories" />
     </section>
 </template>
   
 <script>
 import AddPlayerHistoryComponent from "../components/Modals/PlayersHistory/AddPlayerHistoryComponent.vue";
-//import EditPlayerHistoryComponent from "../components/Modals/PlayersHistory/EditPlayerHistoryComponent.vue";
+import EditPlayerHistoryComponent from "../components/Modals/PlayersHistory/EditPlayerHistoryComponent.vue";
 import Pagination from "../components/Pagination.vue";
 import { Form, Field, ErrorMessage } from "vee-validate";
 
@@ -138,7 +138,7 @@ export default {
     name: "PlayerHistories",
     components: {
         AddPlayerHistoryComponent,
-        // EditPlayerHistoryComponent,
+        EditPlayerHistoryComponent,
         Pagination,
         Field
     },

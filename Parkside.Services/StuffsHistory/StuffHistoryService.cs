@@ -186,7 +186,7 @@ namespace Parkside.Services.StuffHistory
             }
 
             var stuffExist = await _stuffHistoryRepo.GetAllStuffsHistories().FirstOrDefaultAsync(
-                x => x.StuffId == stuffId && x.Year == model.Year);
+                x => x.StuffId == stuffId && x.Year == model.Year && x.Id != stuffHistoryId);
             if (stuffExist != null)
             {
                 throw new Exception("Staff already used!");
