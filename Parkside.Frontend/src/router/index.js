@@ -132,7 +132,22 @@ const router = createRouter({
       children: [
       ],
     },
-    
+    {
+      path: '/playersTrofees',
+      name: 'playersTrofees',
+      component: () => import('../views/PlayersTrofeesView.vue'),
+      meta: { breadcrumb: 'Trofee jucatori' },
+      children: [
+      ],
+    },
+    {
+      path: '/ranking',
+      name: 'ranking',
+      component: () => import('../views/RankingView.vue'),
+      meta: { breadcrumb: 'Actualizare clasament' },
+      children: [
+      ],
+    },
     // {
     //   path: '/home',
     //   name: 'home',

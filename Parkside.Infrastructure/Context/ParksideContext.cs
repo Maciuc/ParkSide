@@ -29,6 +29,7 @@ namespace Parkside.Infrastructure.Context
         public virtual DbSet<Player> Players { get; set; } = null!;
         public virtual DbSet<PlayersHistory> PlayersHistories { get; set; } = null!;
         public virtual DbSet<PlayersTrofee> PlayersTrofees { get; set; } = null!;
+        public virtual DbSet<Ranking> Rankings { get; set; } = null!;
         public virtual DbSet<SocialMedia> SocialMedias { get; set; } = null!;
         public virtual DbSet<Sponsor> Sponsors { get; set; } = null!;
         public virtual DbSet<Stuff> Stuffs { get; set; } = null!;
@@ -244,6 +245,57 @@ namespace Parkside.Infrastructure.Context
                     .HasConstraintName("FK__PlayersTr__Trofe__59904A2C");
             });
 
+            modelBuilder.Entity<Ranking>(entity =>
+            {
+                entity.ToTable("Ranking");
+
+                entity.Property(e => e.E).HasMaxLength(10);
+
+                entity.Property(e => e.Ea)
+                    .HasMaxLength(10)
+                    .HasColumnName("EA");
+
+                entity.Property(e => e.Echipa).HasMaxLength(100);
+
+                entity.Property(e => e.Ed)
+                    .HasMaxLength(10)
+                    .HasColumnName("ED");
+
+                entity.Property(e => e.Gdif)
+                    .HasMaxLength(10)
+                    .HasColumnName("GDif");
+
+                entity.Property(e => e.Gm)
+                    .HasMaxLength(10)
+                    .HasColumnName("GM");
+
+                entity.Property(e => e.Gp)
+                    .HasMaxLength(10)
+                    .HasColumnName("GP");
+
+                entity.Property(e => e.Juc).HasMaxLength(10);
+
+                entity.Property(e => e.P).HasMaxLength(10);
+
+                entity.Property(e => e.Pos).HasMaxLength(10);
+
+                entity.Property(e => e.Pts).HasMaxLength(10);
+
+                entity.Property(e => e.PtsA).HasMaxLength(10);
+
+                entity.Property(e => e.PtsD).HasMaxLength(10);
+
+                entity.Property(e => e.V).HasMaxLength(10);
+
+                entity.Property(e => e.Va)
+                    .HasMaxLength(10)
+                    .HasColumnName("VA");
+
+                entity.Property(e => e.Vd)
+                    .HasMaxLength(10)
+                    .HasColumnName("VD");
+            });
+
             modelBuilder.Entity<SocialMedia>(entity =>
             {
                 entity.Property(e => e.Link).HasMaxLength(500);
@@ -297,17 +349,11 @@ namespace Parkside.Infrastructure.Context
 
                 entity.Property(e => e.Year).HasMaxLength(5);
 
-                entity.HasOne(d => d.Championship)
-                    .WithMany(p => p.StuffHistories)
-                    .HasForeignKey(d => d.ChampionshipId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__StuffHist__Champ__68D28DBC");
-
                 entity.HasOne(d => d.Stuff)
                     .WithMany(p => p.StuffHistories)
                     .HasForeignKey(d => d.StuffId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__StuffHist__Stuff__67DE6983");
+                    .HasConstraintName("FK__StuffHist__Stuff__7AF13DF7");
             });
 
             modelBuilder.Entity<Team>(entity =>

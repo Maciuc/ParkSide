@@ -9,7 +9,6 @@ namespace Parkside.Infrastructure.Entities
         {
             Matches = new HashSet<Match>();
             PlayersHistories = new HashSet<PlayersHistory>();
-            StuffHistories = new HashSet<StuffHistory>();
         }
 
         public int Id { get; set; }
@@ -19,6 +18,5 @@ namespace Parkside.Infrastructure.Entities
 
         public virtual ICollection<Match> Matches { get; set; }
         public virtual ICollection<PlayersHistory> PlayersHistories { get; set; }
-        public virtual ICollection<StuffHistory> StuffHistories { get; set; }
     }
 }

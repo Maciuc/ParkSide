@@ -36,19 +36,6 @@
                             <ErrorMessage name="stuff" class="text-danger error-message" />
                         </div>
 
-                        <div class="mb-2 position-relative">
-                            <label for="championship" class="form-label">Alege campionat</label>
-                            <Field v-model="selectedChampionship.Name" name="championship" as="select"
-                                @change="updateSelectedChampionshipId" :class="{ 'border-danger': errors.championship }"
-                                class="form-select form-control">
-                                <option value="" disabled>Campionate</option>
-                                <option v-for="(champ, index) in championshipsList" :key="index" :value="champ.Id">
-                                    {{ champ.Name }}
-                                </option>
-                            </Field>
-                            <ErrorMessage name="championship" class="text-danger error-message" />
-                        </div>
-
                         <div class="mb-3 position-relative">
                             <label for="year" class="form-label">Alege anul</label>
                             <Field v-model="newStaffHistory.Year" name="year" as="select"
@@ -99,10 +86,7 @@
 
                             <ErrorMessage name="team" class="text-danger error-message" />
                         </div>
-
                     </div>
-
-
 
 
                     <div class="modal-footer justify-content-between">
@@ -134,9 +118,7 @@ export default {
     emits: ["get-list"],
     data() {
         return {
-            championshipsList: [],
             stuffsList: [],
-            selectedChampionship: {},
             selectedStaff: {},
             newStaffHistory: {
                 Year: "",
@@ -168,7 +150,6 @@ export default {
     computed: {
         schema() {
             return yup.object({
-                championship: yup.string().required("Acest câmp este obligatoriu"),
                 stuff: yup.string().required("Acest câmp este obligatoriu"),
                 year: yup.string().required("Acest câmp este obligatoriu"),
                 team: yup.string().required("Acest câmp este obligatoriu"),
@@ -180,7 +161,7 @@ export default {
     methods: {
         AddStaffHistory() {
             this.$axios
-                .post(`/api/StuffHistory/createStuffHistory/${this.selectedStaff.Id}/${this.selectedChampionship.Id}`, this.newStaffHistory)
+                .post(`/api/StuffHistory/createStuffHistory/${this.selectedStaff.Id}`, this.newStaffHistory)
                 .then((response) => {
                     console.log(response);
                     console.log(this.newStaffHistory);
@@ -196,21 +177,12 @@ export default {
                 })
                 .catch((error) => {
                     console.error(error);
+                    console.log(this.selectedStaff.Id);
+                    console.log(this.newStaffHistory);
                 });
         },
         ClearModal() {
             this.$refs.addStaffHistoryFormRef.resetForm();
-        },
-        GetChampionshipsList() {
-            this.$axios
-                .get("/api/Championship/getChampionshipsDropDown")
-                .then((response) => {
-                    this.championshipsList = response.data;
-                    console.log(response.data);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
         },
         GetStaffsList() {
             this.$axios
@@ -223,12 +195,6 @@ export default {
                     console.log(error);
                 });
         },
-        updateSelectedChampionshipId() {
-            const selectedChamp = this.championshipsList.find(
-                (champ) => champ.Id === this.selectedChampionship.Name
-            );
-            this.selectedChampionship.Id = selectedChamp ? selectedChamp.Id : null;
-        },
         updateSelectedStaffId() {
             const selectedPlay = this.stuffsList.find(
                 (champ) => champ.Id === this.selectedStaff.Name
@@ -237,7 +203,6 @@ export default {
         },
     },
     created() {
-        this.GetChampionshipsList();
         this.GetStaffsList();
     },
 };

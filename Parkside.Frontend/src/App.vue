@@ -119,7 +119,7 @@ import { RouterLink, RouterView } from "vue-router";
                 :to="{ name: 'playerHistory' }"
                 exact
               >
-                <font-awesome-icon class="img-link" :icon="['fas', 'newspaper']"  />
+                <font-awesome-icon class="img-link" :icon="['fas', 'network-wired']"  />
                 <div>Participari jucatori</div>
               </router-link>
 
@@ -129,9 +129,32 @@ import { RouterLink, RouterView } from "vue-router";
                   :to="{ name: 'stuffHistory' }"
                   exact
                 >
-                  <font-awesome-icon class="img-link" :icon="['fas', 'newspaper']"  />
+                  <font-awesome-icon class="img-link" :icon="['fas', 'network-wired']"  />
                   <div>Participari staff</div>
                 </router-link>
+
+                <router-link
+                    tag="li"
+                    class="nav-link d-flex"
+                    :to="{ name: 'playersTrofees' }"
+                    exact
+                  >
+                    <font-awesome-icon class="img-link" :icon="['fas', 'medal']"  />
+                    <div>Trofee jucatori</div>
+                  </router-link>
+
+                  <router-link
+                      tag="li"
+                      class="nav-link d-flex"
+                      :to="{ name: 'playersTrofees' }"
+                      exact
+                      
+                    >
+                      <font-awesome-icon class="img-link" :icon="['fas', 'medal']"  />
+                      <div 
+                      >Trofee jucatori</div>
+                      
+                    </router-link>
 
           <router-link
             tag="li"

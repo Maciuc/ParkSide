@@ -1,8 +1,11 @@
-﻿namespace exp.NET6.Services.DBServices
+﻿using Parkside.Models.ViewModels;
+
+namespace exp.NET6.Services.DBServices
 {
     public interface IGenericService
     {
-        string GetRankings();
+        Task UpdateRankings();
+        IQueryable<RankingsViewModel> GetRankings();
         string? GetImagePath(string? newImgBase64, string? oldImgUrl, string folderName);
         string? GetImgBase64(string? filePath);
         bool ValidateEmail(string emailAddress);

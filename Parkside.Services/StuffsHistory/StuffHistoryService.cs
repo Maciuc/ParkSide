@@ -1,7 +1,6 @@
 ﻿using exp.NET6.Services.DBServices;
 using Microsoft.EntityFrameworkCore;
 using Parkside.Infrastructure.Entities;
-using Parkside.Infrastructure.Repositories.ChampionShips;
 using Parkside.Infrastructure.Repositories.Stuffs;
 using Parkside.Infrastructure.Repositories.StuffsHistories;
 using Parkside.Models.Helpers;
@@ -13,17 +12,14 @@ namespace Parkside.Services.StuffHistory
     public class StuffHistoryService : IStuffHistoryService
     {
         private readonly IStuffsHistoryRepo _stuffHistoryRepo;
-        private readonly IChampionshipRepo _championshipRepo;
         private readonly IStuffRepo _stuffRepo;
         private readonly IGenericService _genericService;
         public StuffHistoryService(IStuffsHistoryRepo stuffHistoryRepo,
             IStuffRepo stuffRepo,
-            IChampionshipRepo championshipRepo,
             IGenericService genericService)
         {
             _stuffHistoryRepo = stuffHistoryRepo;
             _stuffRepo = stuffRepo;
-            _championshipRepo = championshipRepo;
             _genericService = genericService;
         }
 
@@ -41,12 +37,6 @@ namespace Parkside.Services.StuffHistory
                 Stuff = new StuffBasicViewModel
                 {
                     Id = stuffHistory.Stuff.Id,
-
-                },
-                Championship = new ChampionshipViewModel
-                {
-                    Id = stuffHistory.Championship.Id,
-                    Name = stuffHistory.Championship.Name,
 
                 },
                 TeamName = stuffHistory.TeamName,
@@ -67,7 +57,7 @@ namespace Parkside.Services.StuffHistory
             {
                 NameSearch = NameSearch.Trim().ToLower();
                 stuffHistories = stuffHistories.Where(c => c.Stuff.FirstName.ToLower().Contains(NameSearch)
-                || c.Stuff.LastName.ToLower().Contains(NameSearch) || c.Championship.Name.ToLower().Contains(NameSearch));
+                || c.Stuff.LastName.ToLower().Contains(NameSearch));
             }
 
             if (!string.IsNullOrWhiteSpace(Year))
@@ -115,7 +105,6 @@ namespace Parkside.Services.StuffHistory
                   StuffId = stuffHistory.Stuff.Id,
                   StuffFirstName = stuffHistory.Stuff.FirstName,
                   StuffLastName = stuffHistory.Stuff.LastName,
-                  ChampionshipName = stuffHistory.Championship.Name,
                   Year = stuffHistory.Year,
                   TeamName = stuffHistory.TeamName,
                   Role = stuffHistory.Role,
@@ -124,7 +113,6 @@ namespace Parkside.Services.StuffHistory
                   Nationality = stuffHistory.Stuff.Nationality,
                   BirthDate = stuffHistory.Stuff.BirthDate.HasValue ? stuffHistory.Stuff.BirthDate.Value.ToString("dd/MM/yyyy") : null,
                   StuffImageBase64 = _genericService.GetImgBase64(stuffHistory.Stuff.ImageUrl),
-                  ChampionshipImageBase64 = _genericService.GetImgBase64(stuffHistory.Championship.ImageUrl),
               })
               .ToList();
 
@@ -138,28 +126,23 @@ namespace Parkside.Services.StuffHistory
             return paginingList;
         }
 
-        public async Task AddStuffHistory(int stuffId, int championshipId, StuffHistoryCreateViewModel model)
+        public async Task AddStuffHistory(int stuffId, StuffHistoryCreateViewModel model)
         {
             if (await _stuffRepo.GetAsync(stuffId) == null)
             {
-                throw new Exception("Stuff not found!");
-            }
-            if (await _championshipRepo.GetAsync(championshipId) == null)
-            {
-                throw new Exception("Championship not found!");
+                throw new Exception("Staff not found!");
             }
 
-            var championshipExist = await _stuffHistoryRepo.GetAllStuffsHistories().FirstOrDefaultAsync(
-                x => x.ChampionshipId == championshipId && x.StuffId == stuffId && x.Year == model.Year);
-            if (championshipExist != null)
+            var stuffExist = await _stuffHistoryRepo.GetAllStuffsHistories().FirstOrDefaultAsync(
+                x => x.StuffId == stuffId && x.Year == model.Year);
+            if (stuffExist != null)
             {
-                throw new Exception("Championship already used!");
+                throw new Exception("Staff already used!");
             }
 
             var finalStuffHistory = new Infrastructure.Entities.StuffHistory()
             {
                 StuffId = stuffId,
-                ChampionshipId = championshipId,
                 TeamName = model.TeamName,
                 Year = model.Year,
                 Role = model.Role,
@@ -187,7 +170,7 @@ namespace Parkside.Services.StuffHistory
             await _stuffHistoryRepo.Update(stuffHistory);
         }
 
-        public async Task UpdateStuffHistory(int stuffHistoryId, int stuffId, int championshipId,
+        public async Task UpdateStuffHistory(int stuffHistoryId, int stuffId,
             StuffHistoryUpdateViewModel model)
         {
             var stuffHistory = await _stuffHistoryRepo.GetAsync(stuffHistoryId);
@@ -202,20 +185,14 @@ namespace Parkside.Services.StuffHistory
                 throw new Exception("Stuff not found!");
             }
 
-            if (await _championshipRepo.GetAsync(championshipId) == null)
+            var stuffExist = await _stuffHistoryRepo.GetAllStuffsHistories().FirstOrDefaultAsync(
+                x => x.StuffId == stuffId && x.Year == model.Year);
+            if (stuffExist != null)
             {
-                throw new Exception("Championship not found!");
-            }
-
-            var championshipExist = await _stuffHistoryRepo.GetAllStuffsHistories().FirstOrDefaultAsync(
-                x => x.ChampionshipId == championshipId && x.StuffId == stuffId && x.Year == model.Year);
-            if (championshipExist != null)
-            {
-                throw new Exception("Championship already used!");
+                throw new Exception("Staff already used!");
             }
 
             stuffHistory.StuffId = stuffId;
-            stuffHistory.ChampionshipId = championshipId;
             stuffHistory.TeamName = model.TeamName;
             stuffHistory.Year = model.Year;
             stuffHistory.Role = model.Role;
@@ -229,11 +206,9 @@ namespace Parkside.Services.StuffHistory
 
             var finalStuffHistorys = stuffHistories.Select(stuffHistory => new StuffHistoryChampionshipsViewModel
             {
-                ChampionshipName = stuffHistory.Championship.Name,
                 Year = stuffHistory.Year,
                 TeamName = stuffHistory.TeamName,
                 Role = stuffHistory.Role,
-                ChampionshipImageBase64 = _genericService.GetImgBase64(stuffHistory.Championship.ImageUrl),
             });
 
             return finalStuffHistorys;
@@ -246,7 +221,7 @@ namespace Parkside.Services.StuffHistory
             {
                 Id = stuffHistory.Id,
                 StuffHistoryName = stuffHistory.Stuff.LastName + " " + stuffHistory.Stuff.FirstName
-                + " - " + stuffHistory.Championship.Name + " - " + stuffHistory.Year
+                + " - " + stuffHistory.Year
             });
 
             return finalStuffHistorys;

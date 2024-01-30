@@ -24,10 +24,10 @@ namespace Parkside.Backend.Controller
         }*/
 
         [HttpGet("getPlayerTrofees")]
-        public IActionResult GetPlayerTrofees(string? NameSearch, string? OrderBy,
+        public IActionResult GetPlayerTrofees(string? NameSearch, string? OrderBy, string? Year,
             int PageNumber = 1, int PageSize = 10)
         {
-            var playerTrofees = _playerTrofeeService.GetPlayerTrofees(NameSearch, OrderBy,
+            var playerTrofees = _playerTrofeeService.GetPlayerTrofees(NameSearch, OrderBy, Year,
                 PageNumber, PageSize);
             return Ok(playerTrofees);
         }

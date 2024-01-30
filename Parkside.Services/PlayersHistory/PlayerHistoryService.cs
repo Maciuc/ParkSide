@@ -254,7 +254,7 @@ namespace Parkside.Services.PlayerHistory
             {
                 Id = playerHistory.Id,
                 PlayerHistoryName = playerHistory.Player.LastName + " " + playerHistory.Player.FirstName
-                + " - " + playerHistory.Championship.Name + " - " + playerHistory.Year
+                + " - " + playerHistory.Championship.Name + " - " + playerHistory.PlayerRole + " - " + playerHistory.Year
             });
 
             return finalPlayerHistorys;

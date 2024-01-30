@@ -7,8 +7,6 @@
         public string? StuffImageBase64 { get; set; }
         public string? StuffFirstName { get; set; }
         public string? StuffLastName { get; set; }
-        public string? ChampionshipImageBase64 { get; set; }
-        public string? ChampionshipName { get; set; }
         public string? TeamName { get; set; }
         public string? Year { get; set; }
         public string? Role { get; set; }
@@ -37,7 +35,6 @@
     {
         public int Id { get; set; }
         public StuffBasicViewModel? Stuff { get; set; }
-        public ChampionshipViewModel? Championship { get; set; }
         public string? TeamName { get; set; }
         public string? Year { get; set; }
         public string? Role { get; set; }
@@ -45,8 +42,6 @@
     }
     public class StuffHistoryChampionshipsViewModel
     {
-        public string? ChampionshipImageBase64 { get; set; }
-        public string? ChampionshipName { get; set; }
         public string? TeamName { get; set; }
         public string? Year { get; set; }
         public string? Role { get; set; }

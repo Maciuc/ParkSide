@@ -51,14 +51,22 @@ namespace Parkside.Services.PlayerTrofees
         }*/
 
         public PagingViewModel<PlayerTrofeeViewModel> GetPlayerTrofees(
-            string? NameSearch, string? OrderBy, int PageNumber, int PageSize)
+            string? NameSearch, string? OrderBy, string? Year, int PageNumber, int PageSize)
         {
             var playerTrofeees = _playerTrofeeRepo.GetAllPlayersTrofees();
 
             if (!string.IsNullOrWhiteSpace(NameSearch))
             {
                 NameSearch = NameSearch.Trim();
-                playerTrofeees = playerTrofeees.Where(c => c.Trofee.Name.Contains(NameSearch));
+                playerTrofeees = playerTrofeees.Where(c => c.Trofee.Name.Contains(NameSearch) || 
+                c.PlayerHistory.Championship.Name.Contains(NameSearch) || c.PlayerHistory.Player.FirstName.Contains(NameSearch) ||
+                c.PlayerHistory.Player.LastName.Contains(NameSearch));
+            }
+
+            if (!string.IsNullOrWhiteSpace(Year))
+            {
+                Year = Year.Trim().ToLower();
+                playerTrofeees = playerTrofeees.Where(c => c.PlayerHistory.Year.Contains(Year));
             }
 
             switch (OrderBy)
@@ -96,6 +104,7 @@ namespace Parkside.Services.PlayerTrofees
                   ChampionshipName = playerTrofee.PlayerHistory.Championship.Name,
                   PlayerRole = playerTrofee.PlayerHistory.PlayerRole,
                   Year = playerTrofee.PlayerHistory.Year,
+                  TeamName = playerTrofee.PlayerHistory.TeamName,
                   TrofeeImageBase64 = _genericService.GetImgBase64(playerTrofee.Trofee.ImageUrl),
                   PlayerImageBase64 = _genericService.GetImgBase64(playerTrofee.PlayerHistory.Player.ImageUrl),
                   ChampionshipImageBase64 = _genericService.GetImgBase64(playerTrofee.PlayerHistory.Championship.ImageUrl),
@@ -194,6 +203,7 @@ namespace Parkside.Services.PlayerTrofees
                 ChampionshipName = playerTrofee.PlayerHistory.Championship.Name,
                 PlayerRole = playerTrofee.PlayerHistory.PlayerRole,
                 Year = playerTrofee.PlayerHistory.Year,
+                TeamName = playerTrofee.PlayerHistory.TeamName,
                 TrofeeImageBase64 = _genericService.GetImgBase64(playerTrofee.Trofee.ImageUrl),
                 ChampionshipImageBase64 = _genericService.GetImgBase64(playerTrofee.PlayerHistory.Championship.ImageUrl),
             });

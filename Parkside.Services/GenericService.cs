@@ -1,15 +1,27 @@
 ﻿using HtmlAgilityPack;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System.Data;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Parkside.Infrastructure.Context;
+using Parkside.Infrastructure.Entities;
+using Parkside.Infrastructure.Repositories.Rankings;
+using Parkside.Infrastructure.Repositories.Stuffs;
+using Parkside.Infrastructure.Repositories.StuffsHistories;
+using Parkside.Models.ViewModels;
+using System.Data;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
-using Newtonsoft.Json.Linq;
 
 namespace exp.NET6.Services.DBServices
 {
     public class GenericService : IGenericService
     {
+        private readonly IRankingRepo _rankingRepo;
+        public GenericService(IRankingRepo rankingRepo)
+        {
+            _rankingRepo = rankingRepo;
+        }
         static string GetColumnName(int index)
         {
             switch (index)
@@ -34,12 +46,14 @@ namespace exp.NET6.Services.DBServices
             }
         }
 
-        public string GetRankings()
+        public async Task UpdateRankings()
         {
             string url = "https://frh.ro/clasament.php?id=927";
 
             HtmlWeb web = new HtmlWeb();
             HtmlDocument doc = web.Load(url);
+            _rankingRepo.DeleteAll();
+
 
             // Assuming the table you want to scrape is the first table on the page
             HtmlNode table = doc.DocumentNode.SelectSingleNode("//table");
@@ -66,26 +80,72 @@ namespace exp.NET6.Services.DBServices
                             for (int j = 0; j < cells.Count; j++)
                             {
                                 rowData[GetColumnName(j)] = cells[j].InnerText.Trim();
+
                             }
 
                             tableData.Add(rowData);
+
+                            var rank = new Ranking()
+                            {
+                                Pos = rowData["Pos"].ToString(),
+                                Echipa = rowData["Echipa"].ToString(),
+                                Juc = rowData["Juc"].ToString(),
+                                V = rowData["V"].ToString(),
+                                E = rowData["E"].ToString(),
+                                P = rowData["P"].ToString(),
+                                Gm = rowData["GM"].ToString(),
+                                Gp = rowData["GP"].ToString(),
+                                Gdif = rowData["GDif"].ToString(),
+                                Va = rowData["VA"].ToString(),
+                                Ea = rowData["EA"].ToString(),
+                                Vd = rowData["VD"].ToString(),
+                                Ed = rowData["ED"].ToString(),
+                                PtsA = rowData["PtsA"].ToString(),
+                                PtsD = rowData["PtsD"].ToString(),
+                                Pts = rowData["Pts"].ToString()
+                            };
+
+                            await _rankingRepo.Add(rank);
+
                         }
                     }
 
-                    // Convert the data to JSON
-                    string json = JsonConvert.SerializeObject(tableData, Formatting.Indented);
-
-                    return json;
                 }
                 else
                 {
-                    return null;
                 }
             }
             else
             {
-                return null;
+
             }
+        }
+
+        public IQueryable<RankingsViewModel> GetRankings()
+        {
+            var ranks = _rankingRepo.GetAllQuerable();
+
+            var rank = ranks.Select(rank => new RankingsViewModel
+            {
+                Pos = rank.Pos,
+                Echipa = rank.Echipa,
+                Juc = rank.Juc,
+                V = rank.V,
+                E = rank.E,
+                P = rank.P,
+                GM = rank.Gm,
+                GP = rank.Gp,
+                GDif = rank.Gdif,
+                VA = rank.Va,
+                EA = rank.Ea,
+                VD = rank.Vd,
+                ED = rank.Ed,
+                PtsA = rank.PtsA,
+                PtsD = rank.PtsD,
+                Pts = rank.Pts,
+            });
+
+            return rank;
         }
 
         private (string, string) ExtrageImagBase64(string dataUri)
@@ -138,7 +198,7 @@ namespace exp.NET6.Services.DBServices
 
                 string pattern = Regex.Escape(Directory.GetCurrentDirectory());
                 Regex regex = new Regex(pattern);
-                Match match = regex.Match(input);
+                System.Text.RegularExpressions.Match match = regex.Match(input);
 
                 if (match.Success)
                 {
@@ -185,7 +245,7 @@ namespace exp.NET6.Services.DBServices
                 string pattern = Regex.Escape(Directory.GetCurrentDirectory());
 
                 Regex regex = new Regex(pattern);
-                Match match = regex.Match(input);
+                System.Text.RegularExpressions.Match match = regex.Match(input);
 
                 if (match.Success)
                 {

@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using HtmlAgilityPack;
-using System.Reflection.Metadata;
-using exp.NET6.Services.DBServices;
-using Parkside.Services.Newss;
+﻿using exp.NET6.Services.DBServices;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Parkside.Backend.Controller
 {
@@ -15,6 +12,14 @@ namespace Parkside.Backend.Controller
         public RankingController(IGenericService genericService)
         {
             _genericService = genericService;
+        }
+
+        [HttpPut("updateRankings")]
+        public async Task<IActionResult> UpdateRankings()
+        {
+            await _genericService.UpdateRankings();
+
+            return Ok("Updated succesfully");
         }
 
         [HttpGet("getRankings")]

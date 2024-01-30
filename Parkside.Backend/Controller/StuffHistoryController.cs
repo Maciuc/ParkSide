@@ -47,10 +47,10 @@ namespace Parkside.Backend.Controller
             return Ok(stuffHistories);
         }
 
-        [HttpPost("createStuffHistory/{stuffId}/{championshipId}")]
-        public async Task<IActionResult> AddStuffHistory(int stuffId, int championshipId, StuffHistoryCreateViewModel stuffHistory)
+        [HttpPost("createStuffHistory/{stuffId}")]
+        public async Task<IActionResult> AddStuffHistory(int stuffId, StuffHistoryCreateViewModel stuffHistory)
         {
-            await _stuffHistoryService.AddStuffHistory(stuffId, championshipId, stuffHistory);
+            await _stuffHistoryService.AddStuffHistory(stuffId, stuffHistory);
             return Ok(stuffHistory);
         }
 
@@ -68,11 +68,11 @@ namespace Parkside.Backend.Controller
             return Ok("StuffHistory deleted successfully");
         }
 
-        [HttpPut("updateStuffHistory/{stuffHistoryId}/{stuffId}/{championshipId}")]
-        public async Task<IActionResult> UpdateStuffHistory(int stuffHistoryId, int stuffId, int championshipId,
+        [HttpPut("updateStuffHistory/{stuffHistoryId}/{stuffId}")]
+        public async Task<IActionResult> UpdateStuffHistory(int stuffHistoryId, int stuffId,
             StuffHistoryUpdateViewModel stuffHistory)
         {
-            await _stuffHistoryService.UpdateStuffHistory(stuffHistoryId, stuffId, championshipId, stuffHistory);
+            await _stuffHistoryService.UpdateStuffHistory(stuffHistoryId, stuffId, stuffHistory);
             return Ok(stuffHistory);
         }
     }

@@ -13,6 +13,7 @@ using Parkside.Infrastructure.Repositories.Newses;
 using Parkside.Infrastructure.Repositories.Players;
 using Parkside.Infrastructure.Repositories.PlayersHistories;
 using Parkside.Infrastructure.Repositories.PlayersTrofees;
+using Parkside.Infrastructure.Repositories.Rankings;
 using Parkside.Infrastructure.Repositories.SocialMedias;
 using Parkside.Infrastructure.Repositories.Sponsors;
 using Parkside.Infrastructure.Repositories.Stuffs;
@@ -156,6 +157,7 @@ builder.Services.AddScoped<IPlayerHistoryService, PlayerHistoryService>();
 builder.Services.AddScoped<IPlayerTrofeeRepo, PlayerTrofeeRepo>();
 builder.Services.AddScoped<IPlayerTrofeeService, PlayerTrofeeService>();
 
+builder.Services.AddScoped<IRankingRepo, RankingRepo>();
 builder.Services.AddScoped<IGenericService, GenericService>();
 
 Log.Logger = new LoggerConfiguration()

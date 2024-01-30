@@ -60,10 +60,6 @@
                             <span>Nume staff</span>
                         </th>
 
-
-                        <th scope="20" width="22%">Campionat</th>
-
-
                         <th width="20%" @click="OrderBy('year')" class="cursor-pointer">
                             <font-awesome-icon v-if="filter.OrderBy === 'year'" :icon="['fas', 'arrow-up-wide-short']"
                                 style="color: #29be00" rotation="180" size="xl" class="me-2" />
@@ -90,15 +86,6 @@
                                         class="me-2 icon-avatar" />
                                 </div>
                                 <span>{{ stuffHistory.StuffLastName + " " + stuffHistory.StuffFirstName }}</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <div class="img-container-avatar me-3">
-                                    <img :src="ShowDynamicImage(stuffHistory.ChampionshipImageBase64)"
-                                        class="me-2 icon-avatar" />
-                                </div>
-                                <span>{{ stuffHistory.ChampionshipName }}</span>
                             </div>
                         </td>
                         <td>{{ stuffHistory.Year }}</td>
@@ -215,7 +202,7 @@ export default {
                 Year: this.filter.Year,
                 Role : this.filter.Role,
                 TeamName: this.filter.TeamName,
-            };
+            }
             this.$axios
                 .get(
                     `api/StuffHistory/getStuffHistories?${new URLSearchParams(

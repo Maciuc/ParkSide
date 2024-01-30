@@ -10,6 +10,7 @@
         public string? TrofeeName { get; set; }
         public string? ChampionshipImageBase64 { get; set; }
         public string? ChampionshipName { get; set; }
+        public string? TeamName { get; set; }
         public string? PlayerRole { get; set; }
         public string? Year { get; set; }
     }
@@ -20,6 +21,7 @@
         public string? TrofeeName { get; set; }
         public string? ChampionshipImageBase64 { get; set; }
         public string? ChampionshipName { get; set; }
+        public string? TeamName { get; set; }
         public string? PlayerRole { get; set; }
         public string? Year { get; set; }
     }

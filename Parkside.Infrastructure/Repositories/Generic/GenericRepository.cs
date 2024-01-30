@@ -19,6 +19,13 @@ namespace Parkside.Infrastructure.Repositories.Generic
             return entity;
         }
 
+        public TEntity AddSync(TEntity entity)
+        {
+            context.Set<TEntity>().Add(entity);
+            context.SaveChanges();
+            return entity;
+        }
+
         public async Task<int> AddRangeAsync(ICollection<TEntity> t)
         {
             context.Set<TEntity>().AddRange(t);
@@ -74,6 +81,22 @@ namespace Parkside.Infrastructure.Repositories.Generic
             context.Entry(entity).State = EntityState.Modified;
             await context.SaveChangesAsync();
             return entity;
+        }
+
+        public TEntity UpdateSync(TEntity entity)
+        {
+            context.Entry(entity).State = EntityState.Modified;
+            context.SaveChanges();
+            return entity;
+        }
+
+        public IQueryable<TEntity> DeleteAll()
+        {
+            var entities = context.Set<TEntity>().AsNoTracking().AsQueryable();
+            context.Set<TEntity>().RemoveRange(entities);
+            context.SaveChanges();
+
+            return entities;
         }
     }
 }

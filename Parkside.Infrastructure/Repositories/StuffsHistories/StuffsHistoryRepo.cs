@@ -14,7 +14,7 @@ namespace Parkside.Infrastructure.Repositories.StuffsHistories
         }
         public IQueryable<StuffHistory> GetAllStuffsHistories()
         {
-            var stuffsHistories = _parksideContext.StuffHistories.Include(x => x.Stuff).Include(y => y.Championship);
+            var stuffsHistories = _parksideContext.StuffHistories.Include(x => x.Stuff);
             return stuffsHistories;
         }
 

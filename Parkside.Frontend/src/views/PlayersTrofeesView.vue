@@ -2,15 +2,16 @@
     <section>
         <div class="row header-section align-items-center">
             <div class="col">
-                <div class="title-page">Meciuri</div>
+                <div class="title-page">Trofee jucatori</div>
             </div>
 
             <div class="col-auto">
-                <button class="button green" @click="OpenModalAddMatch">
+                <button class="button green" @click="OpenModalAddPlayerTrofee">
                     <font-awesome-icon :icon="['fas', 'plus']" style="color: #ffffff" />
                     Adaugă
                 </button>
-                <AddMatchComponent @get-list="GetAllMatches()" ref="addMatchModal"></AddMatchComponent>
+                <AddPlayerTrofeeComponent @get-list="GetAllPlayerTrofees()" ref="addPlayerTrofeeModal">
+                </AddPlayerTrofeeComponent>
             </div>
         </div>
 
@@ -21,15 +22,23 @@
                         <font-awesome-icon class="search_icon" :icon="['fas', 'magnifying-glass']" style="color: #688088" />
                         <div class="separator"></div>
                     </div>
-                    <input type="text" class="form-control search" placeholder="Caută echipa adversa" aria-label="Username"
-                        aria-describedby="basic-addon1" v-model="filter.SearchText" v-on:keyup.enter="GetAllMatches()" />
+                    <input type="text" class="form-control search" placeholder="Caută" aria-label="Username"
+                        aria-describedby="basic-addon1" v-model="filter.SearchText"
+                        v-on:keyup.enter="GetAllPlayerTrofees()" />
                 </div>
             </div>
 
             <div class="col-xl-4 col-md-3 col-sm-4 mb-2 custom-date-picker">
-                <VueDatePicker v-model="filter.MatchDate" format="dd/MM/yyyy" auto-apply utc :enable-time-picker="false"
-                    @update:model-value="GetAllMatches()" placeholder="Dată meci"></VueDatePicker>
+                <select class="form-select form-control" aria-label="Default select example" placeholder="An"
+                    v-model="filter.Year" @change="GetAllPlayerTrofees()">
+                    <option selected value="">An</option>
+                    <option v-for="(year, index) in Years" :key="index">
+                        {{ year.year }}
+                    </option>
+                </select>
             </div>
+
+
         </div>
 
 
@@ -37,113 +46,123 @@
             <table class="table table-custom">
                 <thead>
                     <tr>
-                        <th width="20%" @click="OrderBy('name')" class="cursor-pointer">
-                            <font-awesome-icon v-if="filter.OrderBy === 'name'" :icon="['fas', 'arrow-up-wide-short']"
+                        <th width="20%" @click="OrderBy('playerName')" class="cursor-pointer">
+                            <font-awesome-icon v-if="filter.OrderBy === 'playerName'" :icon="['fas', 'arrow-up-wide-short']"
                                 style="color: #29be00" rotation="180" size="xl" class="me-2" />
 
-                            <font-awesome-icon v-else-if="filter.OrderBy === 'name_desc'"
+                            <font-awesome-icon v-else-if="filter.OrderBy === 'playerName_desc'"
                                 :icon="['fas', 'arrow-up-short-wide']" rotation="180" style="color: #29be00" size="xl"
                                 class="me-2" />
                             <font-awesome-icon v-else :icon="['fas', 'arrow-up-wide-short']" rotation="180" size="xl"
                                 class="me-2" />
-                            <span>Nume echipa adversa</span>
+                            <span>Nume jucator</span>
                         </th>
-
 
                         <th scope="20" width="20%">Campionat</th>
+                        <th scope="20" width="20%">Trofeu</th>
 
-
-                        <th width="20%" @click="OrderBy('matchdate')" class="cursor-pointer">
-                            <font-awesome-icon v-if="filter.OrderBy === 'matchdate'" :icon="['fas', 'arrow-up-wide-short']"
+                        <th width="10%" @click="OrderBy('year')" class="cursor-pointer">
+                            <font-awesome-icon v-if="filter.OrderBy === 'year'" :icon="['fas', 'arrow-up-wide-short']"
                                 style="color: #29be00" rotation="180" size="xl" class="me-2" />
 
-                            <font-awesome-icon v-else-if="filter.OrderBy === 'matchdate_desc'"
+                            <font-awesome-icon v-else-if="filter.OrderBy === 'year_desc'"
                                 :icon="['fas', 'arrow-up-short-wide']" rotation="180" style="color: #29be00" size="xl"
                                 class="me-2" />
                             <font-awesome-icon v-else :icon="['fas', 'arrow-up-wide-short']" rotation="180" size="xl"
                                 class="me-2" />
-                            <span>Data</span>
+                            <span>An</span>
                         </th>
-                        <th scope="20" width="20%">Ora</th>
-                        <th scope="20" width="20%">Locatia</th>
+                        <th scope="20" width="15%">Echipa</th>
+                        <th scope="20" width="15%">Rol</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(match, index) in matches.Items" :key="index">
+                    <tr v-for="(playerTrofee, index) in playerTrofees.Items" :key="index">
 
                         <td>
                             <div class="d-flex align-items-center">
                                 <div class="img-container-avatar me-3">
-                                    <img :src="ShowDynamicImage(match.EnemyTeamImageBase64)" class="me-2 icon-avatar" />
+                                    <img :src="ShowDynamicImage(playerTrofee.PlayerImageBase64)"
+                                        class="me-2 icon-avatar" />
                                 </div>
-                                <span>{{ match.EnemyTeamName }}</span>
+                                <span>{{ playerTrofee.PlayerLastName + " " + playerTrofee.PlayerFirstName }}</span>
                             </div>
                         </td>
                         <td>
                             <div class="d-flex align-items-center">
                                 <div class="img-container-avatar me-3">
-                                    <img :src="ShowDynamicImage(match.ChampionshipImageBase64)" class="me-2 icon-avatar" />
+                                    <img :src="ShowDynamicImage(playerTrofee.ChampionshipImageBase64)"
+                                        class="me-2 icon-avatar" />
                                 </div>
-                                <span>{{ match.ChampionshipName }}</span>
+                                <span>{{ playerTrofee.ChampionshipName }}</span>
                             </div>
                         </td>
-                        <td>{{ match.MatchDate }}</td>
-                        <td>{{ match.MatchHour }}</td>
-                        <td>{{ match.Location }}</td>
                         <td>
-                            <div class="editButtons">
-                                <button class="button-edit" data-bs-toggle="modal" type="button"
-                                    data-bs-target="#match-edit-modal" @click="GetMatchForEdit(match.Id)">
-                                    <font-awesome-icon :icon="['far', 'pen-to-square']" />
-                                </button>
-
-                                <button type="button" class="button-delete" @click="DeleteMatch(match.Id)">
-                                    <font-awesome-icon :icon="['fas', 'trash']" />
-                                </button>
-                            </div>
-                        </td>
+                                <div class="d-flex align-items-center">
+                                    <div class="img-container-avatar me-3">
+                                        <img :src="ShowDynamicImage(playerTrofee.TrofeeImageBase64)"
+                                            class="me-2 icon-avatar" />
+                                    </div>
+                                    <span>{{ playerTrofee.TrofeeName }}</span>
+                                </div>
+                            </td>
+                        <td>{{ playerTrofee.Year }}</td>
+                        <td>{{ playerTrofee.TeamName }}</td>
+                        <td>{{ playerTrofee.PlayerRole }}</td>
+                        <td>
+                                <div class="editButtons">
+                                    <button type="button" class="button-delete" @click="DeletePlayerTrofee(playerTrofee.Id)">
+                                        <font-awesome-icon :icon="['fas', 'trash']" />
+                                    </button>
+                                </div>
+                            </td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <Pagination :totalPages="matches.NumberOfPages" :currentPage="filter.PageNumber" @pagechanged="GetAllMatches" />
+        <Pagination :totalPages="playerTrofees.NumberOfPages" :currentPage="filter.PageNumber"
+            @pagechanged="GetAllPlayerTrofees" />
 
-        <EditMatchComponent :event="selectedMatchForEdit" @get-list="GetAllMatches" />
     </section>
 </template>
   
 <script>
-import AddMatchComponent from "../components/Modals/Matches/AddMatchComponent.vue";
-import EditMatchComponent from "../components/Modals/Matches/EditMatchComponent.vue";
+import AddPlayerTrofeeComponent from "../components/Modals/PlayersTrofees/AddPlayerTrofeeComponent.vue";
 import Pagination from "../components/Pagination.vue";
+import { Form, Field, ErrorMessage } from "vee-validate";
 
 export default {
-    name: "Matches",
+    name: "PlayerTrofees",
     components: {
-        AddMatchComponent,
-        EditMatchComponent,
+        AddPlayerTrofeeComponent,
         Pagination,
+        Field
     },
     data() {
         return {
-            selectedMatchForEdit: {
-                Id: 0,
-                Name: "",
-                ImageBase64: "",
-            },
-
             filter: {
                 SearchText: "",
                 PageNumber: 1,
-                OrderBy: "matchdate_desc",
-                MatchDate: "",
+                OrderBy: "year_desc",
+                Year: ""
             },
-            matches: {
+            playerTrofees: {
                 Items: [],
                 NumberOfPages: 1,
             },
+                Years: [
+                { year: "2024" },
+                { year: "2023" },
+                { year: "2022" },
+                { year: "2021" },
+                { year: "2020" },
+                { year: "2019" },
+                { year: "2018" },
+                { year: "2017" },
+                { year: "2016" },
+            ],
         };
     },
     methods: {
@@ -153,24 +172,12 @@ export default {
             }
             return imagePath;
         },
-        OpenModalAddMatch() {
-            $("#match-add-modal").modal("show");
-            this.$refs.addMatchModal.ClearModal();
+        OpenModalAddPlayerTrofee() {
+            $("#playerTrofee-add-modal").modal("show");
+            this.$refs.addPlayerTrofeeModal.ClearModal();
         },
 
-        GetMatchForEdit(id) {
-            this.$axios
-                .get(`/api/Match/getMatch/${id}`)
-                .then((response) => {
-                    this.selectedMatchForEdit = response.data;
-                    console.log(this.selectedMatchForEdit);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        },
-
-        GetAllMatches(page) {
+        GetAllPlayerTrofees(page) {
             this.filter.PageNumber = 1;
             if (page) {
                 this.filter.PageNumber = page;
@@ -178,31 +185,31 @@ export default {
             const searchParams = {
                 OrderBy: this.filter.OrderBy,
                 PageNumber: this.filter.PageNumber,
-                MatchDate: this.filter.MatchDate,
                 PageSize: 6,
                 NameSearch: this.filter.SearchText,
+                Year: this.filter.Year,
             };
             this.$axios
                 .get(
-                    `api/Match/getMatches?${new URLSearchParams(
+                    `api/PlayerTrofee/getPlayerTrofees?${new URLSearchParams(
                         searchParams
                     )}`
                 )
                 .then((response) => {
                     console.log(searchParams);
-                    this.matches = response.data;
+                    this.playerTrofees = response.data;
                 })
                 .catch((error) => {
                     console.log(error);
                 });
         },
 
-        DeleteMatch(id) {
+        DeletePlayerTrofee(id) {
             this.$axios
-                .delete(`/api/Match/deleteMatch/${id}`)
+                .delete(`/api/PlayerTrofee/deletePlayerTrofee/${id}`)
                 .then((response) => {
-                    this.GetAllMatches();
-                    console.log(`Deleted match with ID ${id}`);
+                    this.GetAllPlayerTrofees();
+                    console.log(`Deleted playerTrofee with ID ${id}`);
                 })
                 .catch((error) => {
                     console.error(error);
@@ -216,12 +223,12 @@ export default {
                 this.filter.OrderBy = orderBy + "_desc";
             }
 
-            this.GetAllMatches();
+            this.GetAllPlayerTrofees();
         },
     },
 
     created() {
-        this.GetAllMatches();
+        this.GetAllPlayerTrofees();
     },
 };
 </script>

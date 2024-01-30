@@ -10,10 +10,10 @@ namespace Parkside.Services.StuffHistory
             int PageNumber, int PageSize);
         IQueryable<StuffHistoryChampionshipsViewModel> GetHomePageStuffHistory(int stuffId);
         IQueryable<StuffHistoryDropDownViewModel> GetStuffHistoryDropDown();
-        Task AddStuffHistory(int stuffId, int championshipId, StuffHistoryCreateViewModel model);
+        Task AddStuffHistory(int stuffId, StuffHistoryCreateViewModel model);
         Task DeleteStuffHistory(int id);
         Task VirtualDeleteStuffHistory(int id);
-        Task UpdateStuffHistory(int stuffHistoryId, int stuffId, int championshipId,
+        Task UpdateStuffHistory(int stuffHistoryId, int stuffId,
             StuffHistoryUpdateViewModel model);
 
     }
